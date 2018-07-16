@@ -4,10 +4,6 @@ open Fable.Helpers.React.Props
 open Fable.Import.React
 module R = Fable.Helpers.React
 
-type Props = Props of IHTMLProp list
-
-type Children = Children of ReactElement list
-
 type BtnKind =
 | Default
 | Primary
@@ -30,23 +26,29 @@ type BtnFormat =
 | SquaredAction
 | RoundAction
 
-type LocalProps =
+type SpectreProp =
 | Kind of BtnKind
 | Color of BtnColor
 | Size of BtnSize
 | State of BtnState
 | Format of BtnFormat
 
+type SpectreProps = SpectreProps of SpectreProp list
+
+type HTMLProps = | HTMLProps of IHTMLProp list
+
+type Children = Children of ReactElement list
+
 let htmlAttr (prop: IHTMLProp) =
     match prop with
     | :? HTMLAttr as attr -> Some attr
     | _ -> None
 
-let className = function
+let htmlClassName = function
     | ClassName name -> Some name
     | _ -> None
 
-let classFromProps =
+let spectreClassNames =
     function
     | Kind (Default) -> "btn-default"
     | Kind (Primary) -> "btn-primary"
@@ -55,11 +57,20 @@ let classFromProps =
     | Color (Error) -> "btn-error"
     | Size (Small) -> "btn-sm"
     | Size (Large) -> "btn-lg"
+    | State (Disabled) -> "disabled"
+    | State (Loading) -> "loading"
+    | Format (SquaredAction) -> "btn-action"
+    | Format (RoundAction) -> "btn-action circle"
     | _ -> ""
 
-let button (Props props) (Children children) =
-    let styleList = List.map classFromProps [Kind Default; Size Small]
-    let styles = styleList |> List.fold (fun r s -> r + " " + s) ""
-    let className = List.tryPick className <| List.choose htmlAttr props
-    let styledProps = props @ [ClassName <| "btn" + styles + Option.defaultValue "" className ]
+let spectreClasses (SpectreProps props) =
+    "btn " + (List.map spectreClassNames props |> String.concat " ")
+
+let htmlClasses (HTMLProps props) =
+    List.tryPick htmlClassName <| List.choose htmlAttr props |> Option.defaultValue "" 
+
+let button (SpectreProps spectreProps) (HTMLProps htmlProps) (Children children) =
+    let htmlClass = htmlClasses <| HTMLProps htmlProps
+    let spectreClass = spectreClasses <| SpectreProps spectreProps
+    let styledProps = htmlProps @ [ClassName <| spectreClass + " " + htmlClass]
     R.button styledProps children

@@ -26,7 +26,8 @@ module R = Fable.Helpers.React
 let view (model: Model) (dispatch: Dispatch<'a>) =
     R.div []
       [ button
-            (Props [OnClick (fun event -> event.target |> console.log)])
+            (SpectreProps [Size Small; Kind Primary;])
+            (HTMLProps [OnClick (fun event -> event.target |> console.log)])
             (Children [R.str "TEXT"])
       ]
 
