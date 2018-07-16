@@ -27,7 +27,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
     R.div []
       [ button
             (Props [OnClick (fun event -> event.target |> console.log)])
-            (Children [R.str "Text"])
+            (Children [R.str "TEXT"])
       ]
 
 open Elmish.React
