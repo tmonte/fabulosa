@@ -1,7 +1,6 @@
 module Button
 
 open Utils
-open Fable.Import.React
 module R = Fable.Helpers.React
 
 type BtnKind =
@@ -26,16 +25,12 @@ type BtnFormat =
 | SquaredAction
 | RoundAction
 
-type SpectreProp =
+type ButtonProp =
 | Kind of BtnKind
 | Color of BtnColor
 | Size of BtnSize
 | State of BtnState
 | Format of BtnFormat
-
-type SpectreProps = SpectreProps of SpectreProp list
-
-type Children = Children of ReactElement list
 
 let spectreClassNames =
     function
@@ -52,11 +47,9 @@ let spectreClassNames =
     | Format (RoundAction) -> "btn-action circle"
     | _ -> ""
 
-let spectreClasses (SpectreProps props) =
-    "btn " + (List.map spectreClassNames props |> String.concat " ")
-
-let button (SpectreProps spectreProps) (HTMLProps htmlProps) (Children children) =
-    let htmlClass = htmlClasses <| HTMLProps htmlProps
-    let spectreClass = spectreClasses <| SpectreProps spectreProps
-    let styledProps = htmlProps @ [className <| spectreClass + " " + htmlClass]
-    R.button styledProps children
+let button spectreProps htmlProps children =
+    let props =
+        mergeComponentClasses
+        <| HTMLProps htmlProps
+        <| ["btn"] @ List.map spectreClassNames spectreProps
+    R.button props children

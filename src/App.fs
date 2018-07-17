@@ -8,7 +8,7 @@ importAll "./styles.scss"
 
 open Elmish
 open Button
-open Utils
+open Grid
 
 type Model = int
 
@@ -25,12 +25,18 @@ let update (msg: Message) (model: Model): ModelAction =
 module R = Fable.Helpers.React
 
 let view (model: Model) (dispatch: Dispatch<'a>) =
-    R.div []
-      [ button
-            (SpectreProps [Size Small; Kind Primary;])
-            (HTMLProps [OnClick (fun event -> event.target |> console.log)])
-            (Children [R.str "TEXT"])
-      ]
+    R.div [] [
+        button
+            [Size Small; Kind Primary]
+            [OnClick (fun event -> event.target |> console.log)]
+            [R.str "TEXT"]
+        grid [] [
+            columns [] [
+                column 1 [] [R.str "Column 1"]
+                column 11 [] [R.str "Column 11"]
+            ]
+        ]
+    ]
 
 open Elmish.React
 
