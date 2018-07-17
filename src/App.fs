@@ -8,6 +8,7 @@ importAll "./styles.scss"
 
 open Elmish
 open Button
+open Utils
 
 type Model = int
 
