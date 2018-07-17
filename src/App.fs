@@ -9,6 +9,7 @@ importAll "./styles.scss"
 open Elmish
 open Button
 open Grid
+open Responsive
 
 type Model = int
 
@@ -26,7 +27,7 @@ module R = Fable.Helpers.React
 
 let view (model: Model) (dispatch: Dispatch<'a>) =
     R.div [] [
-        button
+        responsive [Hide SM] button
             [ButtonSize Small; ButtonKind Primary]
             [OnClick (fun event -> event.target |> console.log)]
             [R.str "TEXT"]

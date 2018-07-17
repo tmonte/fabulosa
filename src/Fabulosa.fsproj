@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
+    <Compile Include="Responsive.fs" />
     <Compile Include="Grid.fs" />
     <Compile Include="Button.fs" />
     <Compile Include="App.fs" />
