@@ -3,7 +3,7 @@ module Utils
 open Fable.Helpers.React.Props
 open Fable.Import.React
 
-type HTMLProps = | HTMLProps of IHTMLProp list
+type HTMLProps = IHTMLProp list
 
 let className = ClassName
 
@@ -17,12 +17,12 @@ let htmlClassName =
     | ClassName name -> Some name
     | _ -> None
 
-let htmlClasses (HTMLProps props) =
+let htmlClasses props =
     List.choose htmlAttr props
     |> List.choose htmlClassName
 
-let mergeComponentClasses (HTMLProps htmlProps) (componentClasses: string list) =
-    let userClasses = htmlClasses <| HTMLProps htmlProps
+let mergeClasses (htmlProps: HTMLProps) componentClasses =
+    let userClasses = htmlClasses <| htmlProps
     let merged = userClasses @ componentClasses |> String.concat " "
     htmlProps @ [ClassName merged]
 

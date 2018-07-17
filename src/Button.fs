@@ -48,8 +48,5 @@ let spectreClassNames =
     | _ -> ""
 
 let button spectreProps htmlProps children =
-    let props =
-        mergeComponentClasses
-        <| HTMLProps htmlProps
-        <| ["btn"] @ List.map spectreClassNames spectreProps
+    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map spectreClassNames spectreProps
     R.button props children
