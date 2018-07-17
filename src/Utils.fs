@@ -1,7 +1,6 @@
 module Utils
 
 open Fable.Helpers.React.Props
-open Fable.Import.React
 
 type HTMLProps = IHTMLProp list
 
@@ -25,5 +24,3 @@ let mergeClasses (htmlProps: HTMLProps) componentClasses =
     let userClasses = htmlClasses <| htmlProps
     let merged = userClasses @ componentClasses |> String.concat " "
     htmlProps @ [ClassName merged]
-
-type Children = Children of ReactElement list
