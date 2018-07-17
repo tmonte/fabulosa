@@ -18,11 +18,9 @@ let columns htmlProps children =
         <| ["columns"]
     R.div props children
 
-type ColumnSize = ColumnSize of int
-
-let column columnSize htmlProps children =
+let column (size: int) htmlProps children =
     let props =
         mergeComponentClasses
         <| HTMLProps htmlProps
-        <| ["column col-" + columnSize.ToString()]
+        <| ["column col-" + size.ToString()]
     R.div props children
