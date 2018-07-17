@@ -26,6 +26,6 @@ let hideOrShowClasses =
     | Show LG -> "show-lg"
     | Show XL -> "show-xl"
 
-let responsive hideOrShowProps element elementProps htmlProps children: Fable.Import.React.ReactElement =
+let responsive hideOrShowProps element elementProps htmlProps children =
     let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map hideOrShowClasses hideOrShowProps
     element elementProps props children
