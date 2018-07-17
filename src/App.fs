@@ -27,13 +27,13 @@ module R = Fable.Helpers.React
 let view (model: Model) (dispatch: Dispatch<'a>) =
     R.div [] [
         button
-            [Size Small; Kind Primary]
+            [ButtonSize Small; ButtonKind Primary]
             [OnClick (fun event -> event.target |> console.log)]
             [R.str "TEXT"]
         grid [] [
-            columns [] [
-                column 1 [] [R.str "Column 1"]
-                column 11 [] [R.str "Column 11"]
+            columns [ColumnsKind Gapless] [] [
+                column [ColumnSize 1] [] [R.str "Column 1"]
+                column [ColumnSize 11] [] [R.str "Column 11"]
             ]
         ]
     ]

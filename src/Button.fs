@@ -3,50 +3,50 @@ module Button
 open Utils
 module R = Fable.Helpers.React
 
-type BtnKind =
+type ButtonKind =
 | Default
 | Primary
 | Link
 
-type BtnColor =
+type ButtonColor =
 | Success
 | Error
 
-type BtnSize =
+type ButtonSize =
 | Small
 | Large
 
-type BtnState =
+type ButtonState =
 | Disabled
 | Active
 | Loading
 
-type BtnFormat =
+type ButtonFormat =
 | SquaredAction
 | RoundAction
 
 type ButtonProp =
-| Kind of BtnKind
-| Color of BtnColor
-| Size of BtnSize
-| State of BtnState
-| Format of BtnFormat
+| ButtonKind of ButtonKind
+| ButtonColor of ButtonColor
+| ButtonSize of ButtonSize
+| ButtonState of ButtonState
+| ButtonFormat of ButtonFormat
 
-let spectreClassNames =
+let buttonClasses =
     function
-    | Kind (Default) -> "btn-default"
-    | Kind (Primary) -> "btn-primary"
-    | Kind (Link) -> "btn-link"
-    | Color (Success) -> "btn-success"
-    | Color (Error) -> "btn-error"
-    | Size (Small) -> "btn-sm"
-    | Size (Large) -> "btn-lg"
-    | State (Disabled) -> "disabled"
-    | State (Loading) -> "loading"
-    | Format (SquaredAction) -> "btn-action"
-    | Format (RoundAction) -> "btn-action circle"
+    | ButtonKind Default -> "btn-default"
+    | ButtonKind Primary -> "btn-primary"
+    | ButtonKind Link -> "btn-link"
+    | ButtonColor Success -> "btn-success"
+    | ButtonColor Error -> "btn-error"
+    | ButtonSize Small -> "btn-sm"
+    | ButtonSize Large -> "btn-lg"
+    | ButtonState Disabled -> "disabled"
+    | ButtonState Loading -> "loading"
+    | ButtonFormat SquaredAction -> "btn-action"
+    | ButtonFormat RoundAction -> "btn-action circle"
     | _ -> ""
 
-let button spectreProps htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map spectreClassNames spectreProps
+let button buttonProps htmlProps children =
+    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map buttonClasses buttonProps
     R.button props children
