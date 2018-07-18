@@ -6,6 +6,10 @@ Spectre CSS components built in Fable
 
 `npm install`
 
+## Test
+
+`npm test`
+
 ## Build
 
 `npm run build`
