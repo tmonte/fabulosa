@@ -28,7 +28,7 @@ module R = Fable.Helpers.React
 let view (model: Model) (dispatch: Dispatch<'a>) =
     R.div [] [
         responsive [Hide SM] button
-            [ButtonSize Small; ButtonKind Primary]
+            [ButtonSize ButtonSmall; ButtonKind ButtonPrimary]
             [OnClick (fun event -> event.target |> console.log)]
             [R.str "TEXT"]
         grid [] [

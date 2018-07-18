@@ -6,3 +6,8 @@ nuget Fable.Core
 nuget Fable.Elmish
 nuget Fable.Elmish.React
 nuget Fable.Import.Browser
+
+nuget Expecto
+nuget Expecto.BenchmarkDotNet
+nuget Expecto.FsCheck
+nuget Logary.Adapters.Facade prerelease

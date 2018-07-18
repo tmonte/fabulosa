@@ -4,26 +4,26 @@ open Utils
 module R = Fable.Helpers.React
 
 type ButtonKind =
-| Default
-| Primary
-| Link
+| ButtonDefault
+| ButtonPrimary
+| ButtonLink
 
 type ButtonColor =
-| Success
-| Error
+| ButtonSuccess
+| ButtonError
 
 type ButtonSize =
-| Small
-| Large
+| ButtonSmall
+| ButtonLarge
 
 type ButtonState =
-| Disabled
-| Active
-| Loading
+| ButtonDisabled
+| ButtonActive
+| ButtonLoading
 
 type ButtonFormat =
-| SquaredAction
-| RoundAction
+| ButtonSquaredAction
+| ButtonRoundAction
 
 type ButtonProp =
 | ButtonKind of ButtonKind
@@ -34,17 +34,17 @@ type ButtonProp =
 
 let buttonClasses =
     function
-    | ButtonKind Default -> "btn-default"
-    | ButtonKind Primary -> "btn-primary"
-    | ButtonKind Link -> "btn-link"
-    | ButtonColor Success -> "btn-success"
-    | ButtonColor Error -> "btn-error"
-    | ButtonSize Small -> "btn-sm"
-    | ButtonSize Large -> "btn-lg"
-    | ButtonState Disabled -> "disabled"
-    | ButtonState Loading -> "loading"
-    | ButtonFormat SquaredAction -> "btn-action"
-    | ButtonFormat RoundAction -> "btn-action circle"
+    | ButtonKind ButtonDefault -> "btn-default"
+    | ButtonKind ButtonPrimary -> "btn-primary"
+    | ButtonKind ButtonLink -> "btn-link"
+    | ButtonColor ButtonSuccess -> "btn-success"
+    | ButtonColor ButtonError -> "btn-error"
+    | ButtonSize ButtonSmall -> "btn-sm"
+    | ButtonSize ButtonLarge -> "btn-lg"
+    | ButtonState ButtonDisabled -> "disabled"
+    | ButtonState ButtonLoading -> "loading"
+    | ButtonFormat ButtonSquaredAction -> "btn-action"
+    | ButtonFormat ButtonRoundAction -> "btn-action circle"
     | _ -> ""
 
 let button buttonProps htmlProps children =
