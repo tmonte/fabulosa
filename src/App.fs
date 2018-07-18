@@ -10,38 +10,59 @@ open Elmish
 open Button
 open Grid
 open Responsive
+open Elmish.Browser.UrlParser
+open Elmish.Browser.Navigation
 
-type Model = int
+type Page =
+  | ButtonPage
+  | HomePage
 
-type Message = None
+type Model = {
+    currentPage: Page
+}
 
-type ModelAction = Model * Cmd<Message>
+type Message = int
 
-let init (): ModelAction = 0, []
+let toHash page =
+  match page with
+  | ButtonPage -> "#button"
+  | HomePage -> "#home"
 
-let update (msg: Message) (model: Model): ModelAction =
+let pageParser: Parser<Page->Page,Page> =
+  oneOf [
+    map ButtonPage (s "button")
+    map HomePage (s "home")
+  ]
+
+let urlUpdate (result: Option<Page>) model =
+  match result with
+  | None ->
+    console.error("Error parsing url")
+    model,Navigation.modifyUrl (toHash model.currentPage)
+  | Some page ->
+      { model with currentPage = page }, []
+
+let init result =
+    let (model, cmd) =
+        urlUpdate result { currentPage = HomePage }
+    model, Cmd.batch [ cmd ]
+
+let update (msg: Message) (model: Model): Model * Cmd<Message> =
     match msg with
-    | None -> model, []
+    | _ -> model, []
 
 module R = Fable.Helpers.React
 
 let view (model: Model) (dispatch: Dispatch<'a>) =
-    R.div [] [
-        responsive [Hide SM] button
-            [ButtonSize ButtonSmall; ButtonKind ButtonPrimary]
-            [OnClick (fun event -> event.target |> console.log)]
-            [R.str "TEXT"]
-        grid [] [
-            columns [ColumnsKind Gapless] [] [
-                column [ColumnSize 1] [] [R.str "Column 1"]
-                column [ColumnSize 11] [] [R.str "Column 11"]
-            ]
-        ]
-    ]
+    let pageHtml =
+        function
+        | ButtonPage -> ButtonPage.view ()
+        | HomePage -> Home.view ()
+    R.div [] [ pageHtml model.currentPage]
 
 open Elmish.React
 
 Program.mkProgram init update view
+|> Program.toNavigable (parseHash pageParser) urlUpdate
 |> Program.withReact "elmish-app"
-|> Program.withConsoleTrace
 |> Program.run

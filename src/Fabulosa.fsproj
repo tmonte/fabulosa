@@ -5,8 +5,11 @@
   <ItemGroup>
     <Compile Include="Utils.fs" />
     <Compile Include="Responsive.fs" />
-    <Compile Include="Grid.fs" />
-    <Compile Include="Button.fs" />
+    <Compile Include="Components/Responsive.fs" />
+    <Compile Include="Components/Grid.fs" />
+    <Compile Include="Components/Button.fs" />
+    <Compile Include="Pages/ButtonPage.fs" />
+    <Compile Include="Pages/Home.fs" />
     <Compile Include="App.fs" />
     <None Include="paket.references" />
   </ItemGroup>
