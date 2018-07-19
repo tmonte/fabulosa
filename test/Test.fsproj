@@ -7,6 +7,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile  Include="ReactNode.fs" />
+    <Compile  Include="ResponsiveTests.fs" />
     <Compile  Include="GridTests.fs" />
     <Compile  Include="ButtonTests.fs" />
     <Compile  Include="Main.fs" />
