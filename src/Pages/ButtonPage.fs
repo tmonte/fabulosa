@@ -2,7 +2,6 @@ module ButtonPage
 
 open Responsive
 open Button
-open Grid
 open Fable.Helpers.React.Props
 open Fable.Import.Browser
 
