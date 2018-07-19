@@ -1,4 +1,7 @@
 {
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.insertSpaces": true,
     "files.exclude": {
         "public/bundle.js*": true,
         "**/node_modules/": true,

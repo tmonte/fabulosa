@@ -6,6 +6,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile  Include="ReactNode.fs" />
+    <Compile  Include="GridTests.fs" />
     <Compile  Include="ButtonTests.fs" />
     <Compile  Include="Main.fs" />
     <None Include="paket.references" />
