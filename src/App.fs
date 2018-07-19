@@ -2,18 +2,18 @@ module App
 
 open Fable.Import.Browser
 open Fable.Core.JsInterop
-open Fable.Helpers.React.Props
 
 importAll "./styles.scss"
 
 open Elmish
-open Button
 open Grid
-open Responsive
 open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
+open Fable.Helpers.React.Props
+module R = Fable.Helpers.React
 
 type Page =
+  | GridPage
   | ButtonPage
   | HomePage
 
@@ -24,23 +24,40 @@ type Model = {
 type Message = int
 
 let toHash page =
-  match page with
-  | ButtonPage -> "#button"
-  | HomePage -> "#home"
+    match page with
+    | GridPage -> "#grid"
+    | ButtonPage -> "#button"
+    | HomePage -> "#home"
 
 let pageParser: Parser<Page->Page,Page> =
-  oneOf [
-    map ButtonPage (s "button")
-    map HomePage (s "home")
-  ]
+    oneOf [
+        map GridPage (s "grid")
+        map ButtonPage (s "button")
+        map HomePage (s "home")
+    ]
+
+let menuItem label page currentPage =
+    R.li
+      [ ClassName "nav-item" ]
+      [ R.a
+          [ R.classList [ "is-active", page = currentPage ]
+            Href (toHash page) ]
+          [ R.str label ] ]
+
+let menu currentPage =
+    R.ul [ ClassName "nav" ] [
+        menuItem "Home" HomePage currentPage
+        menuItem "Button" ButtonPage currentPage
+        menuItem "Grid" GridPage currentPage
+    ]
 
 let urlUpdate (result: Option<Page>) model =
-  match result with
-  | None ->
-    console.error("Error parsing url")
-    model,Navigation.modifyUrl (toHash model.currentPage)
-  | Some page ->
-      { model with currentPage = page }, []
+    match result with
+    | None ->
+        console.error("Error parsing url")
+        model, Navigation.modifyUrl (toHash model.currentPage)
+    | Some page ->
+        { model with currentPage = page }, []
 
 let init result =
     let (model, cmd) =
@@ -51,14 +68,24 @@ let update (msg: Message) (model: Model): Model * Cmd<Message> =
     match msg with
     | _ -> model, []
 
-module R = Fable.Helpers.React
-
 let view (model: Model) (dispatch: Dispatch<'a>) =
     let pageHtml =
         function
+        | GridPage -> GridPage.view ()
         | ButtonPage -> ButtonPage.view ()
         | HomePage -> Home.view ()
-    R.div [] [ pageHtml model.currentPage]
+    R.div [] [
+        grid [] [
+            columns [] [] [
+                column [ColumnSize 2] [] [
+                    menu model.currentPage
+                ]
+                column [ColumnSize 10] [] [
+                    pageHtml model.currentPage
+                ]
+            ]
+        ]
+    ]
 
 open Elmish.React
 

@@ -4,10 +4,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Utils.fs" />
-    <Compile Include="Responsive.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Button.fs" />
+    <Compile Include="Pages/GridPage.fs" />
     <Compile Include="Pages/ButtonPage.fs" />
     <Compile Include="Pages/Home.fs" />
     <Compile Include="App.fs" />

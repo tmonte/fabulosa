@@ -14,10 +14,4 @@ let view () =
             [ButtonSize ButtonSmall; ButtonKind ButtonPrimary]
             [OnClick (fun event -> event.target |> console.log)]
             [R.str "TEXT"]
-        grid [] [
-            columns [ColumnsKind Gapless] [] [
-                column [ColumnSize 1] [] [R.str "Column 1"]
-                column [ColumnSize 11] [] [R.str "Column 11"]
-            ]
-        ]
     ]
