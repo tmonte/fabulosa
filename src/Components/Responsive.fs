@@ -1,6 +1,6 @@
 module Responsive
 
-open Utils
+open ClassNames
 
 type ResponsiveSize =
 | XS

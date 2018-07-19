@@ -2,6 +2,11 @@ module ButtonTests
 
 open Button
 open Expecto
+open Fable.Helpers.React.Props
+
+let extract = function
+  | Fable.Helpers.React.HTMLNode.Node (a, b, c) -> (a, b, c)
+  | _ -> ("", seq [], seq [])
 
 [<Tests>]
 let tests =
@@ -15,9 +20,14 @@ let tests =
       }
 
       test "Button should be a react html node" {
-        let node = Fable.Helpers.React.HTMLNode.Node ("", [], [])
+        let node = Fable.Helpers.React.HTMLNode.Node ("button", [ClassName "btn"], [])
         let subject = button [] [] []
+        let nodeName, nodeProps, nodeChildren = extract node
+        let subName, subProps, subChildren = extract (subject :?> Fable.Helpers.React.HTMLNode)
         Expect.equal (subject.GetType()) (node.GetType()) "Should have a type of react html node"
+        Expect.equal nodeName subName "Should have equal names"
+        Expect.sequenceEqual nodeProps subProps "Should have equal props"
+        Expect.sequenceEqual nodeChildren subChildren "Should have equal children"
       }
 
     ]

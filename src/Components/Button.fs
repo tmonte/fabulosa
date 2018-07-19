@@ -1,6 +1,6 @@
 module Button
 
-open Utils
+open ClassNames
 module R = Fable.Helpers.React
 
 type ButtonKind =

@@ -2,7 +2,7 @@ module Grid
 
 module R = Fable.Helpers.React
 
-open Utils
+open ClassNames
 
 let grid htmlProps children =
     let props = mergeClasses <| htmlProps <| ["container"]
