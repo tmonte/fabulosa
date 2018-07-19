@@ -5,6 +5,7 @@
   <ItemGroup>
     <Compile Include="ClassNames.fs" />
     <Compile Include="Components/Responsive.fs" />
+    <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Button.fs" />
     <Compile Include="Pages/GridPage.fs" />
