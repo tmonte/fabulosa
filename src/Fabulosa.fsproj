@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Utils.fs" />
+    <Compile Include="ClassNames.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Button.fs" />
