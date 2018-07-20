@@ -1,6 +1,5 @@
 
-# ![Alt text](public/logo-xs.png?raw=true "Logo") Fabulosa
-
+# <img src="https://cdn.rawgit.com/tmonte/fabulosa/master/public/logo.svg" width="48"> Fabulosa
 Spectre CSS components built in Fable
 
 ## Install dependencies
