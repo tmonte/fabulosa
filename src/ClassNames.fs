@@ -1,4 +1,4 @@
-module Utils
+module ClassNames
 
 open Fable.Helpers.React.Props
 

@@ -9,7 +9,7 @@ module R = Fable.Helpers.React
 
 let view () =
     R.div [] [
-        responsive [Hide SM] button
+        responsiveP [ResponsiveHide ResponsiveSM] button
             [ButtonSize ButtonSmall; ButtonKind ButtonPrimary]
             [OnClick (fun event -> event.target |> console.log)]
             [R.str "TEXT"]

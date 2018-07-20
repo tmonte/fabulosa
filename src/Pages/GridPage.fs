@@ -18,4 +18,4 @@ let cols = seq {
 }
 
 let view () =
-    grid [] <| Seq.toList cols
+    grid [] (Seq.toList cols)
