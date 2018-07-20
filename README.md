@@ -1,4 +1,5 @@
-![alt text](https://raw.githubusercontent.com/tmonte/fabulosa/blob/master/public/logo-xs.png)
+
+# ![Alt text](public/logo-xs.png?raw=true "Logo") Fabulosa
 
 Spectre CSS components built in Fable
 
