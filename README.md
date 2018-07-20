@@ -1,4 +1,4 @@
-# Fabulosa
+![alt text](https://raw.githubusercontent.com/tmonte/fabulosa/blob/master/public/logo-xs.png)
 
 Spectre CSS components built in Fable
 
