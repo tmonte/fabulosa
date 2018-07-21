@@ -2,8 +2,9 @@ language: csharp
 solution: Fabulosa.sln
 dotnet: 2.1.302
 mono: latest
+sudo: required
 install:
-  - sudo .paket/paket.exe install
+  - mono .paket/paket.exe install
   - npm install
 script:
   - npm run build
