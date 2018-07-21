@@ -1,9 +1,9 @@
-language: fsharp
+language: csharp
 solution: Fabulosa.sln
 mono: none
 dotnet: 2.1.301
 install:
-  - dotnet restore
+  - npm install
 script:
   - npm run build
   - npm test
