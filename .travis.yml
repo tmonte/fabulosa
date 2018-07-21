@@ -3,7 +3,7 @@ solution: Fabulosa.sln
 mono: none
 dotnet: 2.1.301
 install:
-  - npm install
+  - dotnet restore
 script:
   - npm run build
   - npm test
