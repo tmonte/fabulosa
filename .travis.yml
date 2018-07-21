@@ -1,6 +1,6 @@
 language: csharp
 solution: Fabulosa.sln
-dotnet: 2.1.301
+dotnet: 2.1.302
 mono: latest
 install:
   - npm install
