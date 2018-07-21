@@ -1,0 +1,7 @@
+language: fsharp
+solution: Fabulosa.sln
+install:
+  - npm install
+script:
+  - npm run build
+  - npm test
