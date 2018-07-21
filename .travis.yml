@@ -3,6 +3,7 @@ solution: Fabulosa.sln
 dotnet: 2.1.302
 mono: latest
 install:
+  - .paket/paket.exe install
   - npm install
 script:
   - npm run build
