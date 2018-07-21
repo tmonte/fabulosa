@@ -1,11 +1,7 @@
 language: csharp
 solution: Fabulosa.sln
-matrix:
-  include:
-    - dotnet: 2.1.301
-      mono: none
-      env: DOTNETCORE=1  # optional, can be used to take different code paths in your script
-    - mono: latest
+dotnet: 2.1.301
+mono: latest
 install:
   - npm install
 script:
