@@ -1,14 +1,22 @@
 source https://nuget.org/api/v2
 storage:none
 
-clitool dotnet-fable
 nuget Fable.Core
 nuget Fable.Elmish
 nuget Fable.Elmish.React
 nuget Fable.Elmish.Browser
 nuget Fable.Import.Browser
 
+clitool dotnet-fable
+
 nuget Expecto
 nuget Expecto.BenchmarkDotNet
 nuget Expecto.FsCheck
-nuget Logary.Adapters.Facade prerelease
+nuget Logary.Adapters.Facade
+
+// [ FAKE GROUP ]
+group Build
+    source https://api.nuget.org/v3/index.json
+    nuget Fake.DotNet.Cli
+    nuget Fake.IO.FileSystem
+    nuget Fake.Core.Target
