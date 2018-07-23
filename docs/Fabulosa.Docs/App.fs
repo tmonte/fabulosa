@@ -7,7 +7,6 @@ importAll "./styles.scss"
 
 open Elmish
 open Grid
-open Navbar
 open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
 open Fable.Helpers.React.Props
@@ -76,18 +75,18 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         | ButtonPage -> ButtonPage.view ()
         | HomePage -> Home.view ()
     R.div [] [
-        grid [] [
-            columns [] [] [
-                column [ColumnSize 2] [] [
+        Grid.grid [] [
+            Columns.columns [] [] [
+                Column.column [Column.Size 2] [] [
                     menu model.currentPage
                 ]
-                column [ColumnSize 10] [] [
-                    navbarHeader [] [
-                        navbarSection [] [
-                            navbarBrand [] [R.str "Fabulosa"]
+                Column.column [Column.Size 10] [] [
+                    Navbar.header [] [
+                        Navbar.section [] [
+                            Navbar.brand [] [R.str "Fabulosa"]
                         ]
-                        navbarCenter [] [R.str "NICE_LOGO"]
-                        navbarSection [] [R.str "Github"]
+                        Navbar.center [] [R.str "NICE_LOGO"]
+                        Navbar.section [] [R.str "Github"]
                     ]
                     pageHtml model.currentPage
                 ]

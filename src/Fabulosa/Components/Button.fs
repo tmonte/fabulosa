@@ -1,52 +1,53 @@
+[<RequireQualifiedAccess>]
 module Button
 
 open ClassNames
 module R = Fable.Helpers.React
 
-type ButtonKind =
-| ButtonDefault
-| ButtonPrimary
-| ButtonLink
+type Kind =
+| Default
+| Primary
+| Link
 
-type ButtonColor =
-| ButtonSuccess
-| ButtonError
+type Color =
+| Success
+| Error
 
-type ButtonSize =
-| ButtonSmall
-| ButtonLarge
+type Size =
+| Small
+| Large
 
-type ButtonState =
-| ButtonDisabled
-| ButtonActive
-| ButtonLoading
+type State =
+| Disabled
+| Active
+| Loading
 
-type ButtonFormat =
-| ButtonSquaredAction
-| ButtonRoundAction
+type Format =
+| SquaredAction
+| RoundAction
 
-type ButtonProp =
-| ButtonKind of ButtonKind
-| ButtonColor of ButtonColor
-| ButtonSize of ButtonSize
-| ButtonState of ButtonState
-| ButtonFormat of ButtonFormat
+type Prop =
+| Kind of Kind
+| Color of Color
+| Size of Size
+| State of State
+| Format of Format
 
-let buttonClasses =
+let classes =
     function
-    | ButtonKind ButtonDefault -> "btn-default"
-    | ButtonKind ButtonPrimary -> "btn-primary"
-    | ButtonKind ButtonLink -> "btn-link"
-    | ButtonColor ButtonSuccess -> "btn-success"
-    | ButtonColor ButtonError -> "btn-error"
-    | ButtonSize ButtonSmall -> "btn-sm"
-    | ButtonSize ButtonLarge -> "btn-lg"
-    | ButtonState ButtonDisabled -> "disabled"
-    | ButtonState ButtonLoading -> "loading"
-    | ButtonFormat ButtonSquaredAction -> "btn-action"
-    | ButtonFormat ButtonRoundAction -> "btn-action circle"
+    | Kind Default -> "btn-default"
+    | Kind Primary -> "btn-primary"
+    | Kind Link -> "btn-link"
+    | Color Success -> "btn-success"
+    | Color Error -> "btn-error"
+    | Size Small -> "btn-sm"
+    | Size Large -> "btn-lg"
+    | State Disabled -> "disabled"
+    | State Loading -> "loading"
+    | Format SquaredAction -> "btn-action"
+    | Format RoundAction -> "btn-action circle"
     | _ -> ""
 
 let button buttonProps htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map buttonClasses buttonProps
+    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map classes buttonProps
     R.button props children

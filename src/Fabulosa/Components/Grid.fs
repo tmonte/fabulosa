@@ -4,48 +4,57 @@ module R = Fable.Helpers.React
 
 open ClassNames
 
-let grid htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["container"]
-    R.div props children
+[<RequireQualifiedAccess>]
+module Grid =
 
-type ColumnsKind =
-| ColumnsGapless
-| ColumnsOneLine
+    let grid htmlProps children =
+        let props = mergeClasses <| htmlProps <| ["container"]
+        R.div props children
 
-type ColumnsProps =
-| ColumnsKind of ColumnsKind
+[<RequireQualifiedAccess>]
+module Columns =
 
-let columnsClasses =
-    function
-    | ColumnsKind ColumnsGapless -> "col-gapless"
-    | ColumnsKind ColumnsOneLine -> "col-oneline"
+    type Kind =
+    | Gapless
+    | OneLine
 
-let columns columnsProps htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["columns"] @ List.map columnsClasses columnsProps
-    R.div props children
+    type Props =
+    | Kind of Kind
 
-type ColumnKind =
-| ColumnMLAuto
-| ColumnMRAuto
-| ColumnMXAuto
+    let classes =
+        function
+        | Kind Gapless -> "col-gapless"
+        | Kind OneLine -> "col-oneline"
 
-type ColumnProp =
-| ColumnKind of ColumnKind
-| ColumnSize of int
-| ColumnSmallSize of int
-| ColumnMediumSize of int
-| ColumnLargeSize of int
+    let columns columnsProps htmlProps children =
+        let props = mergeClasses <| htmlProps <| ["columns"] @ List.map classes columnsProps
+        R.div props children
 
-let columnClasses =
-    function
-    | ColumnKind ColumnMLAuto -> "col-ml-auto"
-    | ColumnKind ColumnMRAuto -> "col-mr-auto"
-    | ColumnKind ColumnMXAuto -> "col-mx-auto"
-    | ColumnSize n -> "col-" + n.ToString()
-    | ColumnSmallSize n -> "col-sm-" + n.ToString() 
-    | ColumnMediumSize n -> "col-md-" + n.ToString() 
-    | ColumnLargeSize n -> "col-lg-" + n.ToString() 
+[<RequireQualifiedAccess>]
+module Column =
 
-let column columnProps htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["column"] @ List.map columnClasses columnProps
-    R.div props children
+    type Kind =
+    | MLAuto
+    | MRAuto
+    | MXAuto
+
+    type Prop =
+    | Kind of Kind
+    | Size of int
+    | SmallSize of int
+    | MediumSize of int
+    | LargeSize of int
+
+    let classes =
+        function
+        | Kind MLAuto -> "col-ml-auto"
+        | Kind MRAuto -> "col-mr-auto"
+        | Kind MXAuto -> "col-mx-auto"
+        | Size n -> "col-" + n.ToString()
+        | SmallSize n -> "col-sm-" + n.ToString() 
+        | MediumSize n -> "col-md-" + n.ToString() 
+        | LargeSize n -> "col-lg-" + n.ToString() 
+
+    let column columnProps htmlProps children =
+        let props = mergeClasses <| htmlProps <| ["column"] @ List.map classes columnProps
+        R.div props children

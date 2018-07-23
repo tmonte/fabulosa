@@ -8,15 +8,15 @@ open Fable.Import.React
 
 let cols: seq<ReactElement> = seq {
     for n in 1 .. 11 do
-        yield columns [] [] [
-            column [ ColumnSize n ] [] [
+        yield Columns.columns [] [] [
+            Column.column [ Column.Size n ] [] [
                 R.div [ Style [ Background "#eee" ] ] [ R.str ("c " + n.ToString()) ]
             ]
-            column [ ColumnSize (12 - n) ] [] [
+            Column.column [ Column.Size (12 - n) ] [] [
                 R.div [ Style [ Background "#eee" ] ] [ R.str ("c " + (12 - n).ToString()) ]
             ]
         ]
 }
 
 let view () =
-    grid [] (Seq.toList cols)
+    Grid.grid [] (Seq.toList cols)

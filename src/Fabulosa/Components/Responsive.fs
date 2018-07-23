@@ -1,35 +1,36 @@
+[<RequireQualifiedAccess>]
 module Responsive
 
 open ClassNames
 
-type ResponsiveSize =
-| ResponsiveXS
-| ResponsiveSM
-| ResponsiveMD
-| ResponsiveLG
-| ResponsiveXL
+type Size =
+| XS
+| SM
+| MD
+| LG
+| XL
 
 type HideOrShow =
-| ResponsiveHide of ResponsiveSize
-| ResponsiveShow of ResponsiveSize
+| Hide of Size
+| Show of Size
 
-let hideOrShowClasses =
+let classes =
     function
-    | ResponsiveHide ResponsiveXS -> "hide-xs"
-    | ResponsiveHide ResponsiveSM -> "hide-sm"
-    | ResponsiveHide ResponsiveMD -> "hide-md"
-    | ResponsiveHide ResponsiveLG -> "hide-lg"
-    | ResponsiveHide ResponsiveXL -> "hide-xl"
-    | ResponsiveShow ResponsiveXS -> "show-xs"
-    | ResponsiveShow ResponsiveSM -> "show-sm"
-    | ResponsiveShow ResponsiveMD -> "show-md"
-    | ResponsiveShow ResponsiveLG -> "show-lg"
-    | ResponsiveShow ResponsiveXL -> "show-xl"
+    | Hide XS -> "hide-xs"
+    | Hide SM -> "hide-sm"
+    | Hide MD -> "hide-md"
+    | Hide LG -> "hide-lg"
+    | Hide XL -> "hide-xl"
+    | Show XS -> "show-xs"
+    | Show SM -> "show-sm"
+    | Show MD -> "show-md"
+    | Show LG -> "show-lg"
+    | Show XL -> "show-xl"
 
 let responsiveP hideOrShowProps element elementProps htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map hideOrShowClasses hideOrShowProps
+    let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
     element elementProps props children
 
 let responsive hideOrShowProps element htmlProps children =
-    let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map hideOrShowClasses hideOrShowProps
+    let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
     element props children

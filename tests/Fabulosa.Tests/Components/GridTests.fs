@@ -12,31 +12,31 @@ let tests =
 
         test "Grid should be a react html node" {
             let node = R.Node ("div", [ClassName "container"], [])
-            let subject = grid [] []
+            let subject = Grid.grid [] []
             compareNode subject node
         }
 
         test "Columns props should map to classes" {
-            let columnsProps = [ColumnsKind ColumnsGapless]
-            let subject = List.map columnsClasses columnsProps
+            let columnsProps = [Columns.Kind Columns.Gapless]
+            let subject = List.map Columns.classes columnsProps
             Expect.contains subject "col-gapless" "Should contain columns gapless class"
         }
 
         test "Columns should be a react html node" {
             let node = R.Node ("div", [ClassName "columns"], [])
-            let subject = columns [] [] []
+            let subject = Columns.columns [] [] []
             compareNode subject node
         }
 
         test "Column props should map to classes" {
-            let columnProps = [ColumnKind ColumnMLAuto; ColumnSize 3; ColumnMediumSize 5]
-            let subject = List.map columnClasses columnProps
+            let columnProps = [Column.Kind Column.MLAuto; Column.Size 3; Column.MediumSize 5]
+            let subject = List.map Column.classes columnProps
             Expect.containsAll subject ["col-ml-auto"; "col-3"; "col-md-5"] "Should contain column classes"
         }
 
         test "Column should be a react html node" {
             let node = R.Node ("div", [ClassName "column"], [])
-            let subject = column [] [] []
+            let subject = Column.column [] [] []
             compareNode subject node
         }
 
