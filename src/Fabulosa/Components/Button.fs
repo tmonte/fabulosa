@@ -48,6 +48,6 @@ let classes =
     | Format RoundAction -> "btn-action circle"
     | _ -> ""
 
-let button buttonProps htmlProps children =
+let button buttonProps htmlProps =
     let props = mergeClasses <| htmlProps <| ["btn"] @ List.map classes buttonProps
-    R.button props children
+    R.button props

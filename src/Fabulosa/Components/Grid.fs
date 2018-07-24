@@ -24,9 +24,9 @@ module Columns =
         | Kind Gapless -> "col-gapless"
         | Kind OneLine -> "col-oneline"
 
-let columns columnsProps htmlProps children =
+let columns columnsProps htmlProps =
     let props = mergeClasses <| htmlProps <| ["columns"] @ List.map Columns.classes columnsProps
-    R.div props children
+    R.div props
 
 [<RequireQualifiedAccess>]
 module Column =
@@ -53,6 +53,6 @@ module Column =
         | MediumSize n -> "col-md-" + n.ToString() 
         | LargeSize n -> "col-lg-" + n.ToString() 
 
-let column columnProps htmlProps children =
+let column columnProps htmlProps =
     let props = mergeClasses <| htmlProps <| ["column"] @ List.map Column.classes columnProps
-    R.div props children
+    R.div props

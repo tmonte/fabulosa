@@ -27,10 +27,10 @@ let classes =
     | Show LG -> "show-lg"
     | Show XL -> "show-xl"
 
-let responsiveP hideOrShowProps element elementProps htmlProps children =
+let responsiveP hideOrShowProps element elementProps htmlProps =
     let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
-    element elementProps props children
+    element elementProps props
 
-let responsive hideOrShowProps element htmlProps children =
+let responsive hideOrShowProps element htmlProps =
     let props = mergeClasses <| htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
-    element props children
+    element props
