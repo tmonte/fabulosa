@@ -8,6 +8,7 @@
     <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Button.fs" />
+    <Compile Include="Components/Table.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />

@@ -6,7 +6,6 @@ open Fable.Core.JsInterop
 importAll "./styles.scss"
 
 open Elmish
-open Grid
 open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
 open Fable.Helpers.React.Props
@@ -76,11 +75,11 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         | HomePage -> Home.view ()
     R.div [] [
         Grid.grid [] [
-            Columns.columns [] [] [
-                Column.column [Column.Size 2] [] [
+            Grid.columns [] [] [
+                Grid.column [Grid.Column.Size 2] [] [
                     menu model.currentPage
                 ]
-                Column.column [Column.Size 10] [] [
+                Grid.column [Grid.Column.Size 10] [] [
                     Navbar.header [] [
                         Navbar.section [] [
                             Navbar.brand [] [R.str "Fabulosa"]
