@@ -47,11 +47,19 @@ let menuItem label page currentPage =
           [ R.str label ] ]
 
 let menu currentPage =
-    R.ul [ ClassName "nav" ] [
-        menuItem "Home" HomePage currentPage
-        menuItem "Button" ButtonPage currentPage
-        menuItem "Grid" GridPage currentPage
-        menuItem "Table" TablePage currentPage
+    R.div [ClassName "app-menu"] [
+        R.div [ClassName "app-brand"] [
+            R.a [ClassName "app-logo"] [
+                R.img [Src "logo.svg"; Style [Width 32; Margin 10]]
+                R.strong [] [R.str "FABULOSA"]
+            ]
+        ]
+        R.ul [ ClassName "nav" ] [
+            menuItem "Home" HomePage currentPage
+            menuItem "Button" ButtonPage currentPage
+            menuItem "Grid" GridPage currentPage
+            menuItem "Table" TablePage currentPage
+        ]
     ]
 
 let urlUpdate (result: Option<Page>) model =
@@ -78,25 +86,20 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         | ButtonPage -> ButtonPage.view ()
         | TablePage -> TablePage.view ()
         | HomePage -> Home.view ()
-    R.div [] [
-        Grid.grid [] [
-            Grid.columns [] [] [
-                Grid.column [Grid.Column.Size 2] [] [
-                    menu model.currentPage
-                ]
-                Grid.column [Grid.Column.Size 10] [] [
-                    Navbar.header [] [
-                        Navbar.section [] [
-                            Navbar.brand [] [R.str "Fabulosa"]
-                        ]
-                        Navbar.center [] [
-                            R.img [Src "logo.svg"; Style [Width 30]]
-                        ]
-                        Navbar.section [] [Button.button [Button.Kind Button.Primary] [] [R.str "GitHub"]]
-                    ]
-                    pageHtml model.currentPage
-                ]
+    R.div [ClassName "off-canvas off-canvas-sidebar-show"] [
+        R.div [Id "sidebar-id"; ClassName "off-canvas-sidebar"] [
+            menu model.currentPage
+        ]
+        R.a [ClassName "off-canvas-toggle btn btn-primary btn-action"; Href "#sidebar-id"] [
+            R.i [ClassName "icon icon-menu"] []
+        ]
+        R.a [ClassName "off-canvas-overlay"; Href "#close"] []
+        R.div [ClassName "off-canvas-content app-page"] [
+            Navbar.header [] [
+                Navbar.section [] []
+                Navbar.section [] [Button.button [Button.Kind Button.Primary] [] [R.str "GitHub"]]
             ]
+            pageHtml model.currentPage
         ]
     ]
 

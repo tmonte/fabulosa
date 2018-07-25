@@ -49,5 +49,5 @@ let classes =
     | _ -> ""
 
 let button buttonProps htmlProps =
-    let props = mergeClasses <| htmlProps <| ["btn"] @ List.map classes buttonProps
+    let props = mergeClasses htmlProps <| ["btn"] @ List.map classes buttonProps
     R.button props

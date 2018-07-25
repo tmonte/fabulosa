@@ -9,10 +9,10 @@ let cols: seq<ReactElement> = seq {
     for n in 1 .. 11 do
         yield Grid.columns [] [] [
             Grid.column [ Grid.Column.Size n ] [] [
-                R.div [ Style [ Background "#eee" ] ] [ R.str ("c " + n.ToString()) ]
+                R.div [ Style [ Background "#f8f9fa" ] ] [ R.str ("c " + n.ToString()) ]
             ]
             Grid.column [ Grid.Column.Size (12 - n) ] [] [
-                R.div [ Style [ Background "#eee" ] ] [ R.str ("c " + (12 - n).ToString()) ]
+                R.div [ Style [ Background "#f8f9fa" ] ] [ R.str ("c " + (12 - n).ToString()) ]
             ]
         ]
 }

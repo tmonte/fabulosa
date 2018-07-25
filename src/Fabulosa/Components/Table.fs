@@ -17,7 +17,7 @@ let classes =
     | Kind Hover -> "table-hover"
 
 let table tableProps htmlProps =
-    let props = mergeClasses <| htmlProps <| ["table"] @ List.map classes tableProps
+    let props = mergeClasses htmlProps <| ["table"] @ List.map classes tableProps
     R.table props
 
 let thead = R.thead
@@ -38,7 +38,7 @@ module Row =
         | Kind Active -> "active"
 
 let tr rowProps htmlProps =
-    let props = mergeClasses <| htmlProps <| List.map Row.classes rowProps
+    let props = mergeClasses htmlProps <| List.map Row.classes rowProps
     R.tr props
 
 let td = R.td
