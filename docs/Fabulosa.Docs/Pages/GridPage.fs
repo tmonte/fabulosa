@@ -1,7 +1,7 @@
 module GridPage
 
 module R = Fable.Helpers.React
-open Fable.Helpers.React.Props
+open R.Props
 
 open Fable.Import.React
 
@@ -18,4 +18,8 @@ let cols: seq<ReactElement> = seq {
 }
 
 let view () =
-    Grid.grid [] (Seq.toList cols)
+    R.div [] [
+        R.h2 [] [R.str "Grid"]
+        R.p [] [R.str "Layout includes flexbox based responsive grid system with 12 columns."]
+        Grid.grid [] (Seq.toList cols)
+    ]

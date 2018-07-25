@@ -8,12 +8,13 @@ importAll "./styles.scss"
 open Elmish
 open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
-open Fable.Helpers.React.Props
 module R = Fable.Helpers.React
+open R.Props
 
 type Page =
   | GridPage
   | ButtonPage
+  | TablePage
   | HomePage
 
 type Model = {
@@ -26,12 +27,14 @@ let toHash page =
     match page with
     | GridPage -> "#grid"
     | ButtonPage -> "#button"
+    | TablePage -> "#table"
     | HomePage -> "#home"
 
 let pageParser: Parser<Page->Page,Page> =
     oneOf [
         map GridPage (s "grid")
         map ButtonPage (s "button")
+        map TablePage (s "table")
         map HomePage (s "home")
     ]
 
@@ -48,6 +51,7 @@ let menu currentPage =
         menuItem "Home" HomePage currentPage
         menuItem "Button" ButtonPage currentPage
         menuItem "Grid" GridPage currentPage
+        menuItem "Table" TablePage currentPage
     ]
 
 let urlUpdate (result: Option<Page>) model =
@@ -72,6 +76,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         function
         | GridPage -> GridPage.view ()
         | ButtonPage -> ButtonPage.view ()
+        | TablePage -> TablePage.view ()
         | HomePage -> Home.view ()
     R.div [] [
         Grid.grid [] [
@@ -84,8 +89,10 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
                         Navbar.section [] [
                             Navbar.brand [] [R.str "Fabulosa"]
                         ]
-                        Navbar.center [] [R.str "NICE_LOGO"]
-                        Navbar.section [] [R.str "Github"]
+                        Navbar.center [] [
+                            R.img [Src "logo.svg"; Style [Width 30]]
+                        ]
+                        Navbar.section [] [Button.button [Button.Kind Button.Primary] [] [R.str "GitHub"]]
                     ]
                     pageHtml model.currentPage
                 ]

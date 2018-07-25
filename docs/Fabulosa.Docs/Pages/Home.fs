@@ -2,9 +2,10 @@ module Home
 
 module R = Fable.Helpers.React
 
-open Fable.Helpers.React.Props
+open R.Props
 
 let view () =
     R.div [ClassName "container"] [
-        R.h1 [] [R.str "Home"]
+        R.h2 [] [R.str "Home"]
+        R.p [] [R.str "Spectre CSS components for fable."]
     ]
