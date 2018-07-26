@@ -4,7 +4,7 @@
     "entry": "docs/Fabulosa.Docs/Fabulosa.Docs.fsproj"
   },
   "scripts": {
-    "preinstall": "cd .paket && paket.exe install",
+    "preinstall": "node build.js",
     "postinstall": "dotnet restore",
     "build": "cd tools && dotnet fable webpack -- -p --config webpack.config.prod.js",
     "start": "cd tools && dotnet fable webpack-dev-server -- --config webpack.config.dev.js",
