@@ -12,10 +12,11 @@ module R = Fable.Helpers.React
 open R.Props
 
 type Page =
-  | GridPage
-  | ButtonPage
-  | TablePage
-  | HomePage
+    | ButtonPage
+    | FormPage
+    | GridPage
+    | HomePage
+    | TablePage
 
 type Model = {
     currentPage: Page
@@ -25,17 +26,19 @@ type Message = int
 
 let toHash page =
     match page with
-    | GridPage -> "#grid"
     | ButtonPage -> "#button"
-    | TablePage -> "#table"
+    | FormPage -> "#form"
+    | GridPage -> "#grid"
     | HomePage -> "#home"
+    | TablePage -> "#table"
 
 let pageParser: Parser<Page->Page,Page> =
     oneOf [
-        map GridPage (s "grid")
         map ButtonPage (s "button")
-        map TablePage (s "table")
+        map GridPage (s "grid")
+        map FormPage (s "form")
         map HomePage (s "home")
+        map TablePage (s "table")
     ]
 
 let menuItem label page currentPage =
@@ -57,6 +60,7 @@ let menu currentPage =
         R.ul [ ClassName "nav" ] [
             menuItem "Home" HomePage currentPage
             menuItem "Button" ButtonPage currentPage
+            menuItem "Form" FormPage currentPage
             menuItem "Grid" GridPage currentPage
             menuItem "Table" TablePage currentPage
         ]
@@ -82,10 +86,11 @@ let update (msg: Message) (model: Model): Model * Cmd<Message> =
 let view (model: Model) (dispatch: Dispatch<'a>) =
     let pageHtml =
         function
-        | GridPage -> GridPage.view ()
         | ButtonPage -> ButtonPage.view ()
-        | TablePage -> TablePage.view ()
+        | FormPage -> FormPage.view()
+        | GridPage -> GridPage.view ()
         | HomePage -> Home.view ()
+        | TablePage -> TablePage.view ()
     R.div [ClassName "off-canvas off-canvas-sidebar-show"] [
         R.div [Id "sidebar-id"; ClassName "off-canvas-sidebar"] [
             menu model.currentPage

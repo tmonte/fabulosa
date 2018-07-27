@@ -11,53 +11,6 @@ let group =
     |> addClassesToProps
     >> R.div
 
-module Input =
-
-    type Icon =
-    | Left
-    | Right
-
-    type Size =
-    | Small
-    | Large
-
-    type Props =
-    | Size of Size
-    | LeftIcon of Icon.Type
-    | RightIcon of Icon.Type
-
-    let containerClasses =
-        function
-        | LeftIcon _ -> "has-icon-left"
-        | RightIcon _ -> "has-icon-right"
-        | _ -> ""
-
-    let getIconProps =
-        function
-        | LeftIcon icon -> Some <| Icon.Type icon
-        | RightIcon icon -> Some <| Icon.Type icon
-        | _ -> None
-
-    let classes =
-        function
-        | Size Small -> "input-sm"
-        | Size Large -> "input-lg"
-        | _ -> ""
-
-let input inputProps htmlProps =
-    let combineProps = ["form-input"] @ List.map Input.classes inputProps |> addClassesToProps
-    let props = combineProps htmlProps
-    let containerClasses = List.map Input.containerClasses inputProps
-    if containerClasses.Length > 0 then
-        let iconProps = List.choose Input.getIconProps inputProps
-        let containerClass = String.concat " " containerClasses
-        R.div [ClassName containerClass] [
-            R.input props
-            Icon.i iconProps [ClassName "form-icon"] []
-        ]
-    else
-        R.input props
-
 let label =
     ["form-label"]
     |> addClassesToProps
@@ -94,3 +47,5 @@ let checkbox htmlProps label =
         R.i [ClassName "form-icon"] []
         R.str label
     ]
+
+let input = Input.input

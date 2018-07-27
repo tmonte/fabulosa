@@ -3,10 +3,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Pages/GridPage.fs" />
     <Compile Include="Pages/ButtonPage.fs" />
-    <Compile Include="Pages/TablePage.fs" />
+    <Compile Include="Pages/GridPage.fs" />
+    <Compile Include="Pages/FormPage.fs" />
     <Compile Include="Pages/Home.fs" />
+    <Compile Include="Pages/TablePage.fs" />
     <Compile Include="App.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="..\..\src\Fabulosa\Fabulosa.fsproj" />
