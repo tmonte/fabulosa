@@ -17,15 +17,15 @@ let tests =
 
         test "Columns props should map to classes" {
             let columnsProps = [
-                Grid.Columns.Kind Grid.Columns.Gapless
+                Grid.Row.Kind Grid.Row.Gapless
             ]
-            let subject = List.map Grid.Columns.propToClass columnsProps
+            let subject = List.map Grid.Row.propToClass columnsProps
             Expect.contains subject "col-gapless" "Should contain columns gapless class"
         }
 
         test "Columns should be a react html node" {
             let node = R.Node ("div", [ClassName "columns"], [])
-            let subject = Grid.columns [] [] []
+            let subject = Grid.row [] [] []
             compareNode subject node
         }
 

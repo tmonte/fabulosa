@@ -11,7 +11,7 @@ let grid =
     >> R.div
 
 [<RequireQualifiedAccess>]
-module Columns =
+module Row =
 
     type Kind =
     | Gapless
@@ -25,8 +25,8 @@ module Columns =
         | Kind Gapless -> "col-gapless"
         | Kind OneLine -> "col-oneline"
 
-let columns columnsProps =
-    ["columns"] @ List.map Columns.propToClass columnsProps
+let row props =
+    ["columns"] @ List.map Row.propToClass props
     |> addClassesToProps
     >> R.div
 

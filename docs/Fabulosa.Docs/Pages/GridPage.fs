@@ -7,7 +7,7 @@ open Fable.Import.React
 
 let cols: seq<ReactElement> = seq {
     for n in 1 .. 11 do
-        yield Grid.columns [] [] [
+        yield Grid.row [] [] [
             Grid.column [ Grid.Column.Size n ] [] [
                 R.div [ Style [ Background "#f8f9fa" ] ] [ R.str ("c " + n.ToString()) ]
             ]
