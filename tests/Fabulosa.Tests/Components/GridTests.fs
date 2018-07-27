@@ -19,7 +19,7 @@ let tests =
             let columnsProps = [
                 Grid.Columns.Kind Grid.Columns.Gapless
             ]
-            let subject = List.map Grid.Columns.classes columnsProps
+            let subject = List.map Grid.Columns.propToClass columnsProps
             Expect.contains subject "col-gapless" "Should contain columns gapless class"
         }
 
@@ -35,7 +35,7 @@ let tests =
                 Grid.Column.Size 3;
                 Grid.Column.MediumSize 5
             ]
-            let subject = List.map Grid.Column.classes columnProps
+            let subject = List.map Grid.Column.propToClass columnProps
             Expect.containsAll subject ["col-ml-auto"; "col-3"; "col-md-5"] "Should contain column classes"
         }
 

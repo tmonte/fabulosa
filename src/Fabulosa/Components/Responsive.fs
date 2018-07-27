@@ -14,7 +14,7 @@ type HideOrShow =
 | Hide of Size
 | Show of Size
 
-let classes =
+let propToClass =
     function
     | Hide XS -> "hide-xs"
     | Hide SM -> "hide-sm"
@@ -27,10 +27,12 @@ let classes =
     | Show LG -> "show-lg"
     | Show XL -> "show-xl"
 
-let responsiveP hideOrShowProps element elementProps htmlProps =
-    let props = mergeClasses htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
-    element elementProps props
+let responsiveP hideOrShowProps element elementProps =
+    ["responsive"] @ List.map propToClass hideOrShowProps
+    |> addClassesToProps
+    >> element elementProps
 
-let responsive hideOrShowProps element htmlProps =
-    let props = mergeClasses htmlProps <| ["responsive"] @ List.map classes hideOrShowProps
-    element props
+let responsive hideOrShowProps element =
+    ["responsive"] @ List.map propToClass hideOrShowProps
+    |> addClassesToProps
+    >> element

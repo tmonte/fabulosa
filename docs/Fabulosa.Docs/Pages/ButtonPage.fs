@@ -1,9 +1,8 @@
 module ButtonPage
 
-open Fable.Helpers.React.Props
-open Fable.Import.Browser
-
 module R = Fable.Helpers.React
+open R.Props
+open Fable.Import.Browser
 
 let view () =
     R.div [ClassName "buttons"] [

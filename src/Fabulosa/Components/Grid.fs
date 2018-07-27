@@ -5,9 +5,10 @@ module R = Fable.Helpers.React
 
 open ClassNames
 
-let grid htmlProps children =
-    let props = mergeClasses htmlProps ["container"]
-    R.div props children
+let grid =
+    ["container"]
+    |> addClassesToProps
+    >> R.div
 
 [<RequireQualifiedAccess>]
 module Columns =
@@ -19,14 +20,15 @@ module Columns =
     type Props =
     | Kind of Kind
 
-    let classes =
+    let propToClass =
         function
         | Kind Gapless -> "col-gapless"
         | Kind OneLine -> "col-oneline"
 
-let columns columnsProps htmlProps =
-    let props = mergeClasses htmlProps <| ["columns"] @ List.map Columns.classes columnsProps
-    R.div props
+let columns columnsProps =
+    ["columns"] @ List.map Columns.propToClass columnsProps
+    |> addClassesToProps
+    >> R.div
 
 [<RequireQualifiedAccess>]
 module Column =
@@ -43,7 +45,7 @@ module Column =
     | MediumSize of int
     | LargeSize of int
 
-    let classes =
+    let propToClass =
         function
         | Kind MLAuto -> "col-ml-auto"
         | Kind MRAuto -> "col-mr-auto"
@@ -53,6 +55,7 @@ module Column =
         | MediumSize n -> "col-md-" + n.ToString() 
         | LargeSize n -> "col-lg-" + n.ToString() 
 
-let column columnProps htmlProps =
-    let props = mergeClasses htmlProps <| ["column"] @ List.map Column.classes columnProps
-    R.div props
+let column columnProps =
+    ["column"] @ List.map Column.propToClass columnProps
+    |> addClassesToProps
+    >> R.div 

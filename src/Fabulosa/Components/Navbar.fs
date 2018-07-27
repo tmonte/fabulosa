@@ -5,18 +5,22 @@ module R = Fable.Helpers.React
 
 open ClassNames
 
-let header htmlProps =
-    let props = mergeClasses htmlProps ["navbar"]
-    R.header props
+let header =
+    ["navbar"]
+    |> addClassesToProps
+    >> R.header
 
-let section htmlProps =
-    let props = mergeClasses htmlProps ["navbar-section"]
-    R.section props
+let section =
+    ["navbar-section"]
+    |> addClassesToProps
+    >> R.section
 
-let center htmlProps =
-    let props = mergeClasses htmlProps ["navbar-center"]
-    R.section props
+let center =
+    ["navbar-center"]
+    |> addClassesToProps
+    >> R.section
 
-let brand htmlProps =
-    let props = mergeClasses htmlProps ["navbar-brand"]
-    R.a props
+let brand  =
+    ["navbar-brand"]
+    |> addClassesToProps
+    >> R.a

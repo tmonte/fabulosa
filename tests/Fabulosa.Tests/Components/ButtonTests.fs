@@ -11,7 +11,7 @@ let tests =
 
         test "Button props should map to classes" {
             let buttonProps = [Button.Kind Button.Default; Button.Format Button.SquaredAction]
-            let subject = List.map Button.classes buttonProps
+            let subject = List.map Button.propToClass buttonProps
             Expect.containsAll subject ["btn-default"; "btn-action"] "Should contain default button class"
         }
 

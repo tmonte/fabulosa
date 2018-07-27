@@ -3,6 +3,7 @@ module Button
 
 open ClassNames
 module R = Fable.Helpers.React
+open R.Props
 
 type Kind =
 | Default
@@ -33,7 +34,7 @@ type Prop =
 | State of State
 | Format of Format
 
-let classes =
+let propToClass =
     function
     | Kind Default -> "btn-default"
     | Kind Primary -> "btn-primary"
@@ -47,7 +48,13 @@ let classes =
     | Format SquaredAction -> "btn-action"
     | Format RoundAction -> "btn-action circle"
     | _ -> ""
+  
+let button anchorProps =
+    ["btn"] @ List.map propToClass anchorProps
+    |> addClassesToProps
+    >> R.button
 
-let button buttonProps htmlProps =
-    let props = mergeClasses htmlProps <| ["btn"] @ List.map classes buttonProps
-    R.button props
+let anchor anchorProps =
+    ["btn"] @ List.map propToClass anchorProps
+    |> addClassesToProps
+    >> R.a

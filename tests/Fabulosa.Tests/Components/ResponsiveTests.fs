@@ -11,7 +11,7 @@ let tests =
 
         test "Responsive props should map to classes" {
             let responsiveProps = [Responsive.Hide Responsive.XS; Responsive.Show Responsive.LG]
-            let subject = List.map Responsive.classes responsiveProps
+            let subject = List.map Responsive.propToClass responsiveProps
             Expect.containsAll subject ["hide-xs"; "show-lg"] "Should contain show and hide class"
         }
 

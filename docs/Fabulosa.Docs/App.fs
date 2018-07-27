@@ -50,7 +50,7 @@ let menu currentPage =
     R.div [ClassName "app-menu"] [
         R.div [ClassName "app-brand"] [
             R.a [ClassName "app-logo"] [
-                R.img [Src "logo.svg"; Style [Width 32; Margin 10]]
+                R.img [Src "logo_64.svg"; Style [Width 32; Margin 10]]
                 R.strong [] [R.str "FABULOSA"]
             ]
         ]

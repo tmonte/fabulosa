@@ -17,7 +17,7 @@ let tests =
 
         test "Table props should map to classes" {
             let tableProps = [Table.Kind Table.Striped]
-            let subject = List.map Table.classes tableProps
+            let subject = List.map Table.propToClass tableProps
             Expect.contains subject "table-striped" "Should contain striped class"
         }
 
@@ -35,7 +35,7 @@ let tests =
 
         test "Row props should map to classes" {
             let rowProps = [Table.Row.Kind Table.Row.Active]
-            let subject = List.map Table.Row.classes rowProps
+            let subject = List.map Table.Row.propToClass rowProps
             Expect.contains subject "active" "Should contain active class"
         }
 

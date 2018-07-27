@@ -11,14 +11,13 @@ type Kind =
 type Prop =
 | Kind of Kind
 
-let classes =
+let propToClass =
     function
     | Kind Striped -> "table-striped"
     | Kind Hover -> "table-hover"
 
-let table tableProps htmlProps =
-    let props = mergeClasses htmlProps <| ["table"] @ List.map classes tableProps
-    R.table props
+let table tableProps =
+    ["table"] @ List.map propToClass tableProps |> addClassesToProps >> R.table
 
 let thead = R.thead
 
@@ -33,14 +32,14 @@ module Row =
     type Prop =
     | Kind of Kind
 
-    let classes =
+    let propToClass =
         function
         | Kind Active -> "active"
 
-let tr rowProps htmlProps =
-    let props = mergeClasses htmlProps <| List.map Row.classes rowProps
-    R.tr props
-
+let tr rowProps =
+    List.map Row.propToClass rowProps
+    |> addClassesToProps >>
+    R.tr
 let td = R.td
 
 let th = R.th
