@@ -11,8 +11,25 @@ let h4 = R.h4
 let h5 = R.h5
 let h6 = R.h6
 
-
 let p = R.p
-let code = R.code
 
+let abbr = R.abbr
+let cite = R.cite
+let del = R.del
+let i = R.i
+let kbd = R.kbd
+let ruby = R.ruby
+let samp = R.samp
+let sup = R.sup
+let u = R.u
+let strong = R.strong
+let b = strong
+let code = R.code
+let em = R.em
+let ins = R.ins
+let mark = R.mark
+let s = R.s
+let sub = R.sub
+let time = R.time
+let var = R.var
 
