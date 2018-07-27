@@ -16,8 +16,10 @@ let propToClass =
     | Kind Striped -> "table-striped"
     | Kind Hover -> "table-hover"
 
-let table tableProps =
-    ["table"] @ List.map propToClass tableProps |> addClassesToProps >> R.table
+let table props =
+    ["table"] @ List.map propToClass props
+    |> addClassesToProps
+    >> R.table
 
 let thead = R.thead
 
@@ -36,10 +38,10 @@ module Row =
         function
         | Kind Active -> "active"
 
-let tr rowProps =
-    List.map Row.propToClass rowProps
-    |> addClassesToProps >>
-    R.tr
+let tr props =
+    List.map Row.propToClass props
+    |> addClassesToProps
+    >> R.tr
 let td = R.td
 
 let th = R.th

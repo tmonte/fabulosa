@@ -49,12 +49,12 @@ let propToClass =
     | Format RoundAction -> "btn-action circle"
     | _ -> ""
   
-let button anchorProps =
-    ["btn"] @ List.map propToClass anchorProps
+let button props =
+    ["btn"] @ List.map propToClass props
     |> addClassesToProps
     >> R.button
 
-let anchor anchorProps =
-    ["btn"] @ List.map propToClass anchorProps
+let anchor props =
+    ["btn"] @ List.map propToClass props
     |> addClassesToProps
     >> R.a

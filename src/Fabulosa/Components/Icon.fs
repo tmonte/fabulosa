@@ -98,7 +98,7 @@ let propToClass =
     | Size X3 -> "icon-3x"
     | Size X4 -> "icon-4x"
 
-let i iconProps =
-    ["icon"] @ List.map propToClass iconProps
+let i props =
+    ["icon"] @ List.map propToClass props
     |> addClassesToProps
     >> R.i

@@ -10,7 +10,7 @@ type Size =
 | LG
 | XL
 
-type HideOrShow =
+type Props =
 | Hide of Size
 | Show of Size
 
@@ -27,12 +27,12 @@ let propToClass =
     | Show LG -> "show-lg"
     | Show XL -> "show-xl"
 
-let responsiveP hideOrShowProps element elementProps =
-    ["responsive"] @ List.map propToClass hideOrShowProps
+let responsiveP props element elementProps =
+    ["responsive"] @ List.map propToClass props
     |> addClassesToProps
     >> element elementProps
 
-let responsive hideOrShowProps element =
-    ["responsive"] @ List.map propToClass hideOrShowProps
+let responsive props element =
+    ["responsive"] @ List.map propToClass props
     |> addClassesToProps
     >> element

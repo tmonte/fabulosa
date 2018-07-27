@@ -55,7 +55,7 @@ module Column =
         | MediumSize n -> "col-md-" + n.ToString() 
         | LargeSize n -> "col-lg-" + n.ToString() 
 
-let column columnProps =
-    ["column"] @ List.map Column.propToClass columnProps
+let column props =
+    ["column"] @ List.map Column.propToClass props
     |> addClassesToProps
     >> R.div 

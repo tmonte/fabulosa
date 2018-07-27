@@ -15,11 +15,11 @@ let htmlClassName =
     | ClassName name -> Some name
     | _ -> None
 
-let htmlClasses: IHTMLProp list -> string list =
+let htmlClasses =
     List.choose htmlAttr
     >> List.choose htmlClassName
 
-let concatStrings: string list -> string = String.concat " "
+let concatStrings = String.concat " "
 
 let className x = ClassName x :> IHTMLProp
 
