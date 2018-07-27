@@ -107,7 +107,12 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         R.div [ClassName "off-canvas-content app-page"] [
             Navbar.header [] [
                 Navbar.section [] []
-                Navbar.section [] [Button.button [Button.Kind Button.Primary] [] [R.str "GitHub"]]
+                Navbar.section [] [
+                    Button.anchor
+                        [Button.Kind Button.Primary] 
+                        [Href "https://github.com/tmonte/fabulosa.git"; Target "_blank"]
+                        [R.str "GitHub"]
+                ]
             ]
             pageHtml model.currentPage
         ]

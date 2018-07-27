@@ -9,7 +9,6 @@
     <Compile Include="Pages/TablePage.fs" />
     <Compile Include="Pages/TypographyPage.fs" />
     <Compile Include="Pages/Home.fs" />
-    <Compile Include="Pages/TablePage.fs" />
     <Compile Include="App.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="..\..\src\Fabulosa\Fabulosa.fsproj" />
