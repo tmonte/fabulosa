@@ -15,8 +15,9 @@ type Page =
     | ButtonPage
     | FormPage
     | GridPage
-    | HomePage
     | TablePage
+    | TypographyPage
+    | HomePage
 
 type Model = {
     currentPage: Page
@@ -31,6 +32,7 @@ let toHash page =
     | GridPage -> "#grid"
     | HomePage -> "#home"
     | TablePage -> "#table"
+    | TypographyPage -> "#typography"
 
 let pageParser: Parser<Page->Page,Page> =
     oneOf [
@@ -39,6 +41,7 @@ let pageParser: Parser<Page->Page,Page> =
         map FormPage (s "form")
         map HomePage (s "home")
         map TablePage (s "table")
+        map TypographyPage (s "typography")
     ]
 
 let menuItem label page currentPage =
@@ -63,6 +66,7 @@ let menu currentPage =
             menuItem "Form" FormPage currentPage
             menuItem "Grid" GridPage currentPage
             menuItem "Table" TablePage currentPage
+            menuItem "Typograpy" TypographyPage currentPage
         ]
     ]
 
@@ -91,6 +95,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
         | GridPage -> GridPage.view ()
         | HomePage -> Home.view ()
         | TablePage -> TablePage.view ()
+        | TypographyPage -> TypographyPage.view ()
     R.div [ClassName "off-canvas off-canvas-sidebar-show"] [
         R.div [Id "sidebar-id"; ClassName "off-canvas-sidebar"] [
             menu model.currentPage

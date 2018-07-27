@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -6,6 +6,8 @@
     <Compile Include="Pages/ButtonPage.fs" />
     <Compile Include="Pages/GridPage.fs" />
     <Compile Include="Pages/FormPage.fs" />
+    <Compile Include="Pages/TablePage.fs" />
+    <Compile Include="Pages/TypographyPage.fs" />
     <Compile Include="Pages/Home.fs" />
     <Compile Include="Pages/TablePage.fs" />
     <Compile Include="App.fs" />

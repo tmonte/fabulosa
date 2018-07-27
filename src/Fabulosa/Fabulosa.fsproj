@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ReactElementStringExtensions.fs" />
     <Compile Include="ClassNames.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Navbar.fs" />
@@ -12,6 +13,7 @@
     <Compile Include="Components/Button.fs" />
     <Compile Include="Components/Form.fs" />
     <Compile Include="Components/Table.fs" />
+    <Compile Include="Components/Typography.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
