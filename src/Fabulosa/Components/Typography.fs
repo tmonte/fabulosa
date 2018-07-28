@@ -28,8 +28,11 @@ let code = R.code
 let em = R.em
 let ins = R.ins
 let mark = R.mark
+let rp = R.rp
+let rt = R.rt
 let s = R.s
 let sub = R.sub
 let time = R.time
 let var = R.var
 
+let blockquote = R.blockquote

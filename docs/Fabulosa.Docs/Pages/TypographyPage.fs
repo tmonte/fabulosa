@@ -52,26 +52,26 @@ let headingsBlock =
 
 let paragraphsBlock = 
     block 
-           "Paragraphs" 
-           """
-               Typography.p []
-                   [
-                       R.str "Lorem ipsum dolor sit amet, consectetur "
-                       R.a [] [R.str "adipiscing elit"]
-                       R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
-                   ]
-               ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
-           """ 
-           <| R.div [] 
+        "Paragraphs" 
+        """
+           Typography.p []
                [
-                   Typography.p []
-                        [
-                            R.str "Lorem ipsum dolor sit amet, consectetur "
-                            R.a [] [R.str "adipiscing elit"]
-                            R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
-                        ]
-                   ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
-               ]       
+                   R.str "Lorem ipsum dolor sit amet, consectetur "
+                   R.a [] [R.str "adipiscing elit"]
+                   R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
+               ]
+           ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
+        """ 
+        <| R.div [] 
+           [
+               Typography.p []
+                    [
+                        R.str "Lorem ipsum dolor sit amet, consectetur "
+                        R.a [] [R.str "adipiscing elit"]
+                        R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
+                    ]
+               ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
+           ]       
         
 let columnOfElement element = 
     Grid.column [ Grid.Column.Size 6 ] [] [ element ]
@@ -113,19 +113,21 @@ let i = semancticTextDisplay "Italic" Typography.i "i"
 let ins = semancticTextDisplay "Inserted" Typography.ins "ins"
 let kbd = semancticTextDisplay "Ctrl + S" Typography.kbd "kbd"
 let highlighted = semancticTextDisplay "Highlighted" Typography.mark "mark"
-let ruby = R.span []
-               [
-                   Typography.ruby [] 
-                        [
-                            R.str "漢"
-                            R.rt [] [R.str "kan"]
-                            R.str "字"
-                            R.rt [] [R.str "ji"] 
-                                              
-                        ]
-                   space
-                   ofString Typography.code "ruby"
-               ]  
+
+let ruby = 
+    R.span []
+        [
+            Typography.ruby [] 
+                [
+                    R.str "漢"
+                    ofString Typography.rt "kan"
+                    R.str "字"
+                    ofString Typography.rt "ji"
+                                      
+                ]
+            space
+            ofString Typography.code "ruby"
+        ]  
 let s = semancticTextDisplay "Strikethrough" Typography.s "s"
 let samp = semancticTextDisplay "Sample" Typography.samp "samp"
 let sub = semancticTextDisplay "Subscripted" Typography.sub "sub"
@@ -133,33 +135,42 @@ let sup = semancticTextDisplay "Superscripted" Typography.sup "sup"
 let time = semancticTextDisplay "20:00" Typography.time "time"
 let u = semancticTextDisplay "Underline" Typography.u "u"
 let var = semancticTextDisplay "x = y + 2" Typography.var "var"
-          
         
 let semanticTextElementsBlock = 
-    block 
-        "Semantic text elements" 
-        """""" 
-        <| Grid.row [] []
-                [
-                    abbr |> columnOfElement
-                    bold |> columnOfElement
-                    cite |> columnOfElement
-                    code |> columnOfElement
-                    del |> columnOfElement
-                    i |> columnOfElement
-                    ins |> columnOfElement
-                    kbd |> columnOfElement
-                    highlighted |> columnOfElement
-                    ruby |> columnOfElement
-                    s |> columnOfElement
-                    samp |> columnOfElement
-                    sub |> columnOfElement
-                    sup |> columnOfElement
-                    time |> columnOfElement
-                    u |> columnOfElement
-                    var |> columnOfElement
-                    
-                ]
+    [
+        abbr
+        bold
+        cite
+        code
+        del
+        i
+        ins
+        kbd
+        highlighted
+        ruby
+        s
+        samp
+        sub
+        sup
+        time
+        u
+        var
+    ] 
+    |> List.map columnOfElement 
+    |> Grid.row [] [] 
+    |> block "Semantic text elements" """""" 
+    
+let blockquoteBlock =
+    [
+        ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
+        ofString Typography.cite " - Linus Torvalds"
+    ] 
+    |> Typography.blockquote []
+    |> block "Blockquote" 
+        """ 
+            ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
+            ofString Typography.cite " - Linus Torvalds"
+        """
     
 let typographyPage = 
     R.div []
@@ -167,7 +178,9 @@ let typographyPage =
             headingsBlock
             paragraphsBlock
             semanticTextElementsBlock
+            blockquoteBlock
         ]
     
-
-let view () = typographyPage |> page "Typography" "Typography sets default styles for headings, paragraphs, semantic text, blockquote and lists elements." 
+let view () = 
+    typographyPage 
+    |> page "Typography" "Typography sets default styles for headings, paragraphs, semantic text, blockquote and lists elements." 
