@@ -3,6 +3,9 @@
 @import "../node_modules/spectre.css/src/spectre-exp";
 @import "../node_modules/spectre.css/dist/spectre-icons";
 
+//Import docs only for the purposes of the component library
+@import "../node_modules/spectre.css/docs/dist/docs";
+
 html, body {
     height: 100vh;
 }
