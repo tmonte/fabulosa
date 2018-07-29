@@ -72,8 +72,10 @@ let paragraphsBlock =
                ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
            ]       
         
-let columnOfElement element = 
-    Grid.column [ Grid.Column.Size 6 ] [] [ element ]
+let columnOfElement n element = 
+    Grid.column [ Grid.Column.Size n ] [] [ element ]
+let halfColumn = columnOfElement 6
+let thirdColumn = columnOfElement 4
     
 let space = R.span [Style [PaddingRight "0.5rem"]] []
 
@@ -155,7 +157,7 @@ let semanticTextElementsBlock =
         u
         var
     ] 
-    |> List.map columnOfElement 
+    |> List.map halfColumn 
     |> Grid.row [] [] 
     |> block "Semantic text elements" """""" 
     
@@ -169,8 +171,51 @@ let blockquoteBlock =
         """ 
             ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
             ofString Typography.cite " - Linus Torvalds"
-        """
+        """    
     
+let getList listConstructor listItemConstructor =
+    [
+        ofString listItemConstructor "list item 1"
+        ofString listItemConstructor "list item 2"
+        listConstructor []
+            [
+                ofString listItemConstructor "list item 2.1"    
+                ofString listItemConstructor "list item 2.2"    
+                ofString listItemConstructor "list item 2.3"    
+            ]
+        ofString listItemConstructor "list item 3"    
+    ] 
+    |> listConstructor []
+    |> thirdColumn
+
+let descriptionListItem label value =
+    [
+        ofString Typography.dt label
+        ofString Typography.dd value
+    ]
+    
+module List = 
+    let flatMap list = List.collect (fun x -> x) list
+
+let descriptionList =
+    [
+        descriptionListItem "Coffee" "Black hot drink"
+        descriptionListItem "Milk" "White cold drink"
+        descriptionListItem "Orange juice" "100% from fruit"
+    ] 
+    |> List.flatMap
+    |> Typography.dl []
+    |> thirdColumn
+
+let listBlock =
+    [
+        getList Typography.ul Typography.li
+        getList Typography.ol Typography.li   
+        descriptionList     
+    ]
+    |> Grid.row [] []
+    |> block "Lists" "" 
+   
 let typographyPage = 
     R.div []
         [
@@ -178,6 +223,7 @@ let typographyPage =
             paragraphsBlock
             semanticTextElementsBlock
             blockquoteBlock
+            listBlock
         ]
     
 let view () = 

@@ -37,4 +37,15 @@ module Typography =
     let time = R.time
     let var = R.var
 
+<<<<<<< HEAD
     let blockquote = R.blockquote
+=======
+let blockquote = R.blockquote
+
+let ul = R.ul
+let ol = R.ol
+let li = R.li
+let dl = R.dl
+let dt = R.dt
+let dd = R.dd
+>>>>>>> 770775e4752247a1d8ad0edf02ff3e1f9c126731
