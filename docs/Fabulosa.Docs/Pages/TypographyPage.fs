@@ -1,9 +1,8 @@
 module TypographyPage
 open Fable.Helpers
-open Fable.PowerPack.Keyboard
 open Fable.Helpers.React.Props
+open Fabulosa
 open ReactElementStringExtensions
-open System
 
 module R = Fable.Helpers.React
 

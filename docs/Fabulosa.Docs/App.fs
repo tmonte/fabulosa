@@ -9,6 +9,7 @@ open Elmish
 open Elmish.Browser.UrlParser
 open Elmish.Browser.Navigation
 module R = Fable.Helpers.React
+open Fabulosa
 open R.Props
 
 type Page =

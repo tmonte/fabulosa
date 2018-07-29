@@ -1,29 +1,31 @@
-module ClassNames
+namespace Fabulosa
 
-open Fable.Helpers.React.Props
-open Fable
+module ClassNames =
 
-type HTMLProps = IHTMLProp list
+    open Fable.Helpers.React.Props
+    open Fable
 
-let htmlAttr: IHTMLProp -> HTMLAttr option =
-    function
-    | :? HTMLAttr as attr -> Some attr
-    | _ -> None
+    type HTMLProps = IHTMLProp list
 
-let htmlClassName =
-    function
-    | ClassName name -> Some name
-    | _ -> None
+    let htmlAttr: IHTMLProp -> HTMLAttr option =
+        function
+        | :? HTMLAttr as attr -> Some attr
+        | _ -> None
 
-let htmlClasses =
-    List.choose htmlAttr
-    >> List.choose htmlClassName
+    let htmlClassName =
+        function
+        | ClassName name -> Some name
+        | _ -> None
 
-let concatStrings = String.concat " "
+    let htmlClasses =
+        List.choose htmlAttr
+        >> List.choose htmlClassName
 
-let className x = ClassName x :> IHTMLProp
+    let concatStrings = String.concat " "
 
-let addClassesToProps componentClasses htmlProps =
-    let htmlClass = concatStrings <| htmlClasses htmlProps
-    let componentClass = concatStrings componentClasses
-    htmlProps @ [className <| htmlClass + componentClass ]
+    let className x = ClassName x :> IHTMLProp
+
+    let addClassesToProps componentClasses htmlProps =
+        let htmlClass = concatStrings <| htmlClasses htmlProps
+        let componentClass = concatStrings componentClasses
+        htmlProps @ [className <| htmlClass + componentClass ]

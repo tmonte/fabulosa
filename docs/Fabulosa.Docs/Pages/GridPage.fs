@@ -2,6 +2,7 @@ module GridPage
 
 module R = Fable.Helpers.React
 open R.Props
+open Fabulosa
 
 open Fable.Import.React
 

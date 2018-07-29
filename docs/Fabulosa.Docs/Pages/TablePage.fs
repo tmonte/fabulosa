@@ -1,6 +1,7 @@
 module TablePage
 
 module R = Fable.Helpers.React
+open Fabulosa
 
 let view () =
     R.div [] [

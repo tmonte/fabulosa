@@ -1,64 +1,75 @@
+namespace Fabulosa
+
 [<RequireQualifiedAccess>]
-module Input
+module Input =
 
-open ClassNames
-module R = Fable.Helpers.React
-open R.Props
+    open ClassNames
+    module R = Fable.Helpers.React
 
-type Icon =
-| Left
-| Right
+    type Size =
+    | Small
+    | Large
 
-type Size =
-| Small
-| Large
+    type Prop =
+    | Size of Size
 
-type Props =
-| Size of Size
-| LeftIcon of Icon.Type
-| RightIcon of Icon.Type
+    let propToClass =
+        function
+        | Size Small -> "input-sm"
+        | Size Large -> "input-lg"
 
-let containerPropToClass =
-    function
-    | LeftIcon _ -> Some "has-icon-left"
-    | RightIcon _ -> Some "has-icon-right"
-    | _ -> None
+    let mapsAny mapping =
+        List.choose mapping
+        >> List.length
+        >> (<) 0
 
-let iconPropToIcon =
-    function
-    | LeftIcon icon -> Some <| Icon.Type icon
-    | RightIcon icon -> Some <| Icon.Type icon
-    | _ -> None
+    let input inputProps =
+        ["form-input"]
+        @ List.map propToClass inputProps
+        |> addClassesToProps
+        >> R.input
 
-let propToClass =
-    function
-    | Size Small -> "input-sm"
-    | Size Large -> "input-lg"
-    | _ -> ""
+module IconInput =
+    
+    open Fable.Import.React
+    module R = Fable.Helpers.React
+    open R.Props
 
-let mapsAny mapping =
-    List.choose mapping
-    >> List.length
-    >> (<) 0
+    type Prop =
+    | LeftIcon of ReactElement
+    | RightIcon of ReactElement
+    | InputProps of Input.Prop list
+    | InputHtmlProps of IHTMLProp list
 
-let withIcon input props =
-    let containerClass =
-        String.concat " "
-        <| List.choose containerPropToClass props
-    let iconProps = List.choose iconPropToIcon props
-    R.div [ClassName containerClass] [
-        input
-        Icon.i iconProps [ClassName "form-icon"] []
-    ]
+    let propToClass =
+        function
+        | LeftIcon _ -> "has-icon-left"
+        | RightIcon _ -> "has-icon-right"
+        | _ -> ""
 
-let private create inputProps =
-    ["form-input"]
-    @ List.map propToClass inputProps
-    |> addClassesToProps
-    >> R.input
+    let propToinputProps =
+        function
+        | InputProps props -> Some props
+        | _ -> None
 
-let input inputProps htmlProps =
-    let element = create inputProps htmlProps
-    match inputProps |> mapsAny containerPropToClass with
-    | true -> withIcon element inputProps
-    | false -> element
+    let propToInputHtmlProps =
+        function
+        | InputHtmlProps props -> Some props
+        | _ -> None
+
+    let icon =
+        function
+        | LeftIcon icon -> Some icon
+        | RightIcon icon -> Some icon
+        | _ -> None
+
+    let iconInput props =
+        let containerClass = List.map propToClass props |> String.concat " "
+        let icon = List.choose icon props |> List.head
+        let inputProps = List.choose propToinputProps props |> List.head
+        let inputHtmlProps = List.choose propToInputHtmlProps props |> List.head
+        R.div [ClassName containerClass] [
+            Input.input inputProps inputHtmlProps
+            icon
+        ]
+

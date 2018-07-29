@@ -1,26 +1,28 @@
+namespace Fabulosa
+
 [<RequireQualifiedAccess>]
-module Navbar
+module Navbar =
 
-module R = Fable.Helpers.React
+    module R = Fable.Helpers.React
 
-open ClassNames
+    open ClassNames
 
-let header =
-    ["navbar"]
-    |> addClassesToProps
-    >> R.header
+    let header =
+        ["navbar"]
+        |> addClassesToProps
+        >> R.header
 
-let section =
-    ["navbar-section"]
-    |> addClassesToProps
-    >> R.section
+    let section =
+        ["navbar-section"]
+        |> addClassesToProps
+        >> R.section
 
-let center =
-    ["navbar-center"]
-    |> addClassesToProps
-    >> R.section
+    let center =
+        ["navbar-center"]
+        |> addClassesToProps
+        >> R.section
 
-let brand  =
-    ["navbar-brand"]
-    |> addClassesToProps
-    >> R.a
+    let brand  =
+        ["navbar-brand"]
+        |> addClassesToProps
+        >> R.a

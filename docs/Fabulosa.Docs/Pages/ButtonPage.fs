@@ -3,6 +3,7 @@ module ButtonPage
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.Browser
+open Fabulosa
 
 let view () =
     R.div [ClassName "buttons"] [

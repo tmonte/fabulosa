@@ -1,5 +1,7 @@
-module ReactElementStringExtensions
+namespace Fabulosa
 
-module R = Fable.Helpers.React
+module ReactElementStringExtensions =
 
-let ofString element str = element [] [R.str str] 
+    module R = Fable.Helpers.React
+
+    let ofString element str = element [] [R.str str] 

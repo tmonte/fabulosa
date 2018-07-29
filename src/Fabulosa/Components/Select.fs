@@ -1,13 +1,17 @@
 namespace Fabulosa
 
 [<RequireQualifiedAccess>]
-module Form =
+module Select =
 
     open ClassNames
 
     module R = Fable.Helpers.React
 
-    let group =
-        ["form-group"]
+    let select =
+        ["form-select"]
         |> addClassesToProps
-        >> R.div
+        >> R.select
+
+    let option = R.option
+
+    let optGroup = R.optgroup

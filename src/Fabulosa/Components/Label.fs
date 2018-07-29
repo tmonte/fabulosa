@@ -1,13 +1,13 @@
 namespace Fabulosa
 
 [<RequireQualifiedAccess>]
-module Form =
+module Label =
 
     open ClassNames
 
     module R = Fable.Helpers.React
 
-    let group =
-        ["form-group"]
+    let label =
+        ["form-label"]
         |> addClassesToProps
-        >> R.div
+        >> R.label

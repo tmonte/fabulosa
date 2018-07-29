@@ -1,13 +1,13 @@
 namespace Fabulosa
 
 [<RequireQualifiedAccess>]
-module Form =
+module Textarea =
 
     open ClassNames
 
     module R = Fable.Helpers.React
 
-    let group =
-        ["form-group"]
+    let textarea =
+        ["form-input"]
         |> addClassesToProps
-        >> R.div
+        >> R.textarea

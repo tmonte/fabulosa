@@ -1,61 +1,63 @@
-[<RequireQualifiedAccess>]
-module Grid
-
-module R = Fable.Helpers.React
-
-open ClassNames
-
-let grid =
-    ["container"]
-    |> addClassesToProps
-    >> R.div
+namespace Fabulosa
 
 [<RequireQualifiedAccess>]
-module Row =
+module Grid =
 
-    type Kind =
-    | Gapless
-    | OneLine
+    module R = Fable.Helpers.React
 
-    type Props =
-    | Kind of Kind
+    open ClassNames
 
-    let propToClass =
-        function
-        | Kind Gapless -> "col-gapless"
-        | Kind OneLine -> "col-oneline"
+    let grid =
+        ["container"]
+        |> addClassesToProps
+        >> R.div
 
-let row props =
-    ["columns"] @ List.map Row.propToClass props
-    |> addClassesToProps
-    >> R.div
+    [<RequireQualifiedAccess>]
+    module Row =
 
-[<RequireQualifiedAccess>]
-module Column =
+        type Kind =
+        | Gapless
+        | OneLine
 
-    type Kind =
-    | MLAuto
-    | MRAuto
-    | MXAuto
+        type Props =
+        | Kind of Kind
 
-    type Prop =
-    | Kind of Kind
-    | Size of int
-    | SmallSize of int
-    | MediumSize of int
-    | LargeSize of int
+        let propToClass =
+            function
+            | Kind Gapless -> "col-gapless"
+            | Kind OneLine -> "col-oneline"
 
-    let propToClass =
-        function
-        | Kind MLAuto -> "col-ml-auto"
-        | Kind MRAuto -> "col-mr-auto"
-        | Kind MXAuto -> "col-mx-auto"
-        | Size n -> "col-" + n.ToString()
-        | SmallSize n -> "col-sm-" + n.ToString() 
-        | MediumSize n -> "col-md-" + n.ToString() 
-        | LargeSize n -> "col-lg-" + n.ToString() 
+    let row props =
+        ["columns"] @ List.map Row.propToClass props
+        |> addClassesToProps
+        >> R.div
 
-let column props =
-    ["column"] @ List.map Column.propToClass props
-    |> addClassesToProps
-    >> R.div 
+    [<RequireQualifiedAccess>]
+    module Column =
+
+        type Kind =
+        | MLAuto
+        | MRAuto
+        | MXAuto
+
+        type Prop =
+        | Kind of Kind
+        | Size of int
+        | SmallSize of int
+        | MediumSize of int
+        | LargeSize of int
+
+        let propToClass =
+            function
+            | Kind MLAuto -> "col-ml-auto"
+            | Kind MRAuto -> "col-mr-auto"
+            | Kind MXAuto -> "col-mx-auto"
+            | Size n -> "col-" + n.ToString()
+            | SmallSize n -> "col-sm-" + n.ToString() 
+            | MediumSize n -> "col-md-" + n.ToString() 
+            | LargeSize n -> "col-lg-" + n.ToString() 
+
+    let column props =
+        ["column"] @ List.map Column.propToClass props
+        |> addClassesToProps
+        >> R.div 

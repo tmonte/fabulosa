@@ -3,6 +3,7 @@ module ResponsiveTests
 open Expecto
 open ReactNode
 open Fable.Helpers.React.Props
+open Fabulosa
 module R = Fable.Helpers.React
 
 [<Tests>]
