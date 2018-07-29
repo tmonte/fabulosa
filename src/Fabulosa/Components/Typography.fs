@@ -36,3 +36,10 @@ let time = R.time
 let var = R.var
 
 let blockquote = R.blockquote
+
+let ul = R.ul
+let ol = R.ol
+let li = R.li
+let dl = R.dl
+let dt = R.dt
+let dd = R.dd
