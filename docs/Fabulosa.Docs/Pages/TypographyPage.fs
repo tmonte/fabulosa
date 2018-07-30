@@ -2,6 +2,9 @@ module TypographyPage
 open Fable.Helpers
 open Fable.Helpers.React.Props
 open Fabulosa
+open System
+
+open Fabulosa.Docs.ListFlatMapExtension
 open ReactElementStringExtensions
 
 module R = Fable.Helpers.React
@@ -193,9 +196,6 @@ let descriptionListItem label value =
         ofString Typography.dt label
         ofString Typography.dd value
     ]
-    
-module List = 
-    let flatMap list = List.collect (fun x -> x) list
 
 let descriptionList =
     [
@@ -211,7 +211,7 @@ let listBlock =
     [
         getList Typography.ul Typography.li
         getList Typography.ol Typography.li   
-        descriptionList     
+        descriptionList
     ]
     |> Grid.row [] []
     |> block "Lists" "" 
