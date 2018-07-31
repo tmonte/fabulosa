@@ -3,6 +3,7 @@ module FormPage
 module R = Fable.Helpers.React
 open R.Props
 open Fabulosa
+open Fabulosa
 
 let view () =
     Fable.Helpers.React.div [] [
@@ -21,17 +22,27 @@ let view () =
                             Input.input [] [Placeholder "Please enter your phone number"; Type "tel"]
                         ]
                         Form.group [] [
+                            Label.label [] [Fable.Helpers.React.str "Something"]
+                            IconInput.iconInput [IconInput.Position IconInput.Left] [] [
+                                Input.input [] [Placeholder "Please enter something"]
+                                Icon.i [Icon.Type Icon.Time] [] []
+                            ]
+                        ]
+                        Form.group [] [
                             Label.label [] [R.str "Profile description"]
                             Textarea.textarea [Placeholder "Please enter a description"] []
                         ]
                         Form.group [] [
                             Label.label [] [R.str "Contact preferences"]
-                            Checkbox.input [] "Call me"
-                            Checkbox.input [] "Text me"
+                            Radio.input [Name "contact-prefs"] "Call me"
+                            Radio.input [Name "contact-prefs"] "Text me"
                         ]
                         Form.group [] [
                             Label.label [] [R.str "Profile preferences"]
                             Switch.input [] "Link my github account"
+                        ]
+                        Form.group [] [
+                            Checkbox.input [] "Remember me"
                         ]
                         Button.anchor [Button.Kind Button.Primary] [Style [MarginTop 10]] [R.str "Submit"]
                     ]
