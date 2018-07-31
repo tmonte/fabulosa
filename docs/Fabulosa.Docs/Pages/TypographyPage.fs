@@ -2,40 +2,17 @@ module TypographyPage
 open Fable.Helpers
 open Fable.Helpers.React.Props
 open Fabulosa
-open System
-open Fable.Core.JsInterop
-open Fable.Core
-open Fable.Import.React
 open Fabulosa.Docs.ListFlatMapExtension
 open ReactElementStringExtensions
 open Fabulosa.Docs.JavascriptMapping
-open Fabulosa.Docs.JavascriptMapping
-module R = Fable.Helpers.React
+open Fabulosa.Docs.Services
 
-let page header subheader body = 
-    R.div [] [
-        R.h1 [] [R.str header]
-        R.p [] [R.str subheader]
-        body
-    ]
+module R = Fable.Helpers.React
+module Column =        
+    let ofElement n element = Grid.column [ Grid.Column.Size n ] [] [ element ]
+    let half = ofElement 6
+    let third = ofElement 4
     
-let block title stringfiedCode pageBlock =
-    R.div [] 
-        [
-            ofString Typography.h4 title
-            R.div [ClassName "component-view-container"] 
-                [
-                    pageBlock
-                ]
-            R.div [ClassName "code-container"]
-                [
-                    [
-                        R.code [ClassName "prism-code-reset"; DangerouslySetInnerHTML <| Prism.highlight stringfiedCode] []
-                    ]
-                    |> R.pre [ClassName "language-fsharp"] 
-                ]
-        ]
-        
 let headingsCode = """ofString Typography.h1 "H1 Heading"
 ofString Typography.h2 "H2 Heading"
 ofString Typography.h3 "H3 Heading"
@@ -43,19 +20,17 @@ ofString Typography.h4 "H4 Heading"
 ofString Typography.h5 "H5 Heading"
 ofString Typography.h6 "H6 Heading"
 """        
-let headingsBlock =  
-    block 
-       "Headings" 
-       headingsCode 
-       <| R.div [] 
-           [
-               ofString Typography.h1 "H1 Heading"
-               ofString Typography.h2 "H2 Heading"
-               ofString Typography.h3 "H3 Heading"
-               ofString Typography.h4 "H4 Heading"
-               ofString Typography.h5 "H5 Heading"
-               ofString Typography.h6 "H6 Heading"
-           ]       
+let headingsBlock =
+    [
+     ofString Typography.h1 "H1 Heading"
+     ofString Typography.h2 "H2 Heading"
+     ofString Typography.h3 "H3 Heading"
+     ofString Typography.h4 "H4 Heading"
+     ofString Typography.h5 "H5 Heading"
+     ofString Typography.h6 "H6 Heading"
+    ] 
+    |> R.div []
+    |> Page.block "Headings" headingsCode        
 
 let paragraphCode = """ Typography.p []
     [
@@ -66,25 +41,18 @@ let paragraphCode = """ Typography.p []
 ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
 """
 let paragraphsBlock = 
-    block 
-        "Paragraphs" 
-        paragraphCode
-        <| R.div [] 
-           [
-               Typography.p []
-                    [
-                        R.str "Lorem ipsum dolor sit amet, consectetur "
-                        R.a [] [R.str "adipiscing elit"]
-                        R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
-                    ]
-               ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
-           ]       
-        
-let columnOfElement n element = 
-    Grid.column [ Grid.Column.Size n ] [] [ element ]
-let halfColumn = columnOfElement 6
-let thirdColumn = columnOfElement 4
-    
+    [
+       Typography.p []
+            [
+                R.str "Lorem ipsum dolor sit amet, consectetur "
+                R.a [] [R.str "adipiscing elit"]
+                R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
+            ]
+       ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
+    ]
+    |> R.div []
+    |> Page.block "Paragraphs" paragraphCode
+           
 let space = R.span [Style [PaddingRight "0.5rem"]] []
 
 let semancticTextDisplay displayText element codeText = 
@@ -165,9 +133,9 @@ let semanticTextElementsBlock =
         u
         var
     ] 
-    |> List.map halfColumn 
+    |> List.map Column.half 
     |> Grid.row [] [] 
-    |> block "Semantic text elements" """""" 
+    |> Page.block "Semantic text elements" """""" 
     
 let blockquoteBlock =
     [
@@ -175,7 +143,7 @@ let blockquoteBlock =
         ofString Typography.cite " - Linus Torvalds"
     ] 
     |> Typography.blockquote []
-    |> block "Blockquote" 
+    |> Page.block "Blockquote" 
         """ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
 ofString Typography.cite " - Linus Torvalds"
 """    
@@ -193,7 +161,7 @@ let getList listConstructor listItemConstructor =
         ofString listItemConstructor "list item 3"    
     ] 
     |> listConstructor []
-    |> thirdColumn
+    |> Column.third
 
 let descriptionListItem label value =
     [
@@ -209,7 +177,7 @@ let descriptionList =
     ] 
     |> List.flatMap
     |> Typography.dl []
-    |> thirdColumn
+    |> Column.third
 
 let listBlock =
     [
@@ -218,7 +186,7 @@ let listBlock =
         descriptionList
     ]
     |> Grid.row [] []
-    |> block "Lists" "" 
+    |> Page.block "Lists" "" 
    
 let typographyPage = 
     R.div []
@@ -232,4 +200,4 @@ let typographyPage =
     
 let view () = 
     typographyPage 
-    |> page "Typography" "Typography sets default styles for headings, paragraphs, semantic text, blockquote and lists elements." 
+    |> Page.block "Typography" "Typography sets default styles for headings, paragraphs, semantic text, blockquote and lists elements." 

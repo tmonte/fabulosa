@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="JavascriptMappings/PrismJS.fs" />
+    <Compile Include="Domain/Page.fs" />
     <Compile Include="Extensions/ListFlatMapExtension.fs" />
     <Compile Include="Pages/ButtonPage.fs" />
     <Compile Include="Pages/GridPage.fs" />
@@ -14,6 +15,9 @@
     <Compile Include="App.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="..\..\src\Fabulosa\Fabulosa.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Typography" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
