@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="docs" t="Include">
+        <e p="Fabulosa.Docs" t="IncludeRecursive">
+          <e p="App.fs" t="Include" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Domain" t="Include">
+            <e p="Page.fs" t="Include" />
+          </e>
+          <e p="Extensions" t="Include">
+            <e p="ListFlatMapExtension.fs" t="Include" />
+          </e>
+          <e p="Fabulosa.Docs.fsproj" t="IncludeRecursive" />
+          <e p="JavascriptMappings" t="Include">
+            <e p="PrismJS.fs" t="Include" />
+          </e>
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Pages" t="Include">
+            <e p="ButtonPage.fs" t="Include" />
+            <e p="FormPage.fs" t="Include" />
+            <e p="GridPage.fs" t="Include" />
+            <e p="Home.fs" t="Include" />
+            <e p="TablePage.fs" t="Include" />
+            <e p="Typography" t="Include" />
+            <e p="TypographyPage.fs" t="Include" />
+          </e>
+          <e p="paket.references" t="Include" />
+        </e>
+      </e>
+      <e p="Fabulosa.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="src" t="Include">
+        <e p="fabulosa" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="ClassNames.fs" t="Include" />
+          <e p="Components" t="Include">
+            <e p="Button.fs" t="Include" />
+            <e p="Checkbox.fs" t="Include" />
+            <e p="Form.fs" t="Include" />
+            <e p="Grid.fs" t="Include" />
+            <e p="Icon.fs" t="Include" />
+            <e p="Input.fs" t="Include" />
+            <e p="Label.fs" t="Include" />
+            <e p="Navbar.fs" t="Include" />
+            <e p="Radio.fs" t="Include" />
+            <e p="Responsive.fs" t="Include" />
+            <e p="Select.fs" t="Include" />
+            <e p="Switch.fs" t="Include" />
+            <e p="Table.fs" t="Include" />
+            <e p="Textarea.fs" t="Include" />
+            <e p="Typography.fs" t="Include" />
+          </e>
+          <e p="Fabulosa.fsproj" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="paket.references" t="Include" />
+          <e p="ReactAPIExtensions.fs" t="Include" />
+          <e p="ReactElementStringExtensions.fs" t="Include" />
+        </e>
+      </e>
+      <e p="tests" t="Include">
+        <e p="Fabulosa.Tests" t="IncludeRecursive">
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="Components" t="Include">
+            <e p="ButtonTests.fs" t="Include" />
+            <e p="GridTests.fs" t="Include" />
+            <e p="NavbarTests.fs" t="Include" />
+            <e p="ResponsiveTests.fs" t="Include" />
+            <e p="TableTests.fs" t="Include" />
+          </e>
+          <e p="Fabulosa.Tests.fsproj" t="IncludeRecursive" />
+          <e p="Main.fs" t="Include" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="paket.references" t="Include" />
+          <e p="ReactNode.fs" t="Include" />
+        </e>
+      </e>
+      <e p="tools" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DotnetCLI.fsproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+      </e>
+    </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2018.1/resharper-host/local/Transient/ReSharperHost/v12/SolutionCaches/_Fabulosa.1557592789.00" t="ExcludeRecursive" />
+  </component>
+</project>

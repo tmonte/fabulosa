@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d67de447-cd83-4231-8679-6d624ef8cbac" name="Default" comment="Adding code highlight with prism">
+      <change afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Typography.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+              <folding>
+                <marker date="1533048643383" expanded="true" signature="64:814" ph=" = ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Fabulosa.Docs.fsproj" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logo_64.svg" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/public/logo_64.svg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file leaf-file-name="PrismJS.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TypographyPage.fs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="135" column="26" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="26" />
+              <folding>
+                <marker date="1533069391184" expanded="true" signature="21:6726" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="27:224" ph="..." />
+                <marker date="1533069391184" expanded="true" signature="270:415" ph=" =         ..." />
+                <marker date="1533069391184" expanded="true" signature="437:662" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
+                <marker date="1533069391184" expanded="true" signature="688:1007" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="696:947" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="1034:1488" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
+                <marker date="1533069391184" expanded="true" signature="1508:2085" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="1517:2023" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="1554:1835" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="2206:2348" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="2233:2347" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="2364:2599" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="2391:2598" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="2608:2809" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="2635:2808" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="3280:3643" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="3307:3642" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="3357:3570" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="4129:4459" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="4138:4356" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="4485:5235" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="4493:4834" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="5292:5759" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="5300:5712" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="5443:5651" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="5796:5884" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="5804:5883" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="5905:6153" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="5913:6088" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="6168:6348" ph=" = ..." />
+                <marker date="1533069391184" expanded="true" signature="6176:6296" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="6372:6550" ph=" =  ..." />
+                <marker date="1533069391184" expanded="true" signature="6398:6549" ph=" ..." />
+                <marker date="1533069391184" expanded="true" signature="6567:6726" ph=" =  ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ReactElementStringExtensions.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Fabulosa/ReactElementStringExtensions.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+              <folding>
+                <marker date="1532922268143" expanded="true" signature="55:148" ph=" = ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ListFlatMapExtension.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Page.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="18" selection-start-column="18" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TablePage.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>ClassName</find>
+      <find>off</find>
+      <find>off-</find>
+      <find>columnOfElement</find>
+      <find>prism</find>
+      <find>resolve</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/ReactElementStringExtensions.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/Fabulosa.Tests/ReactNode.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Home.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/GridPage.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Icon.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Form.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/ClassNames.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Table.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5B476AC0-56A9-AB3E-A745-0383C06A475B/be/afcdc3c7/React.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/tests/Fabulosa.Tests/Components/TableTests.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Responsive.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Navbar.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Button.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Grid.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5AF40A75-B5E6-35A2-A745-0383750AF45A/7c/23b19943/JsInterop.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Input.fs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Fabulosa.fsproj" />
+        <option value="$PROJECT_DIR$/src/Pages/Typography.fs" />
+        <option value="$PROJECT_DIR$/src/App.fs" />
+        <option value="$PROJECT_DIR$/src/Pages/TypographyPage.fs" />
+        <option value="$PROJECT_DIR$/src/Components/Typography.fs" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Typography.fs" />
+        <option value="$PROJECT_DIR$/fake.sh" />
+        <option value="$PROJECT_DIR$/tools/webpack.config.dev.js" />
+        <option value="$PROJECT_DIR$/src/Fabulosa/Fabulosa.fsproj" />
+        <option value="$PROJECT_DIR$/src/Fabulosa/ReactElementStringExtensions.fs" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/index.html" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/styles.scss" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs" />
+        <option value="$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Services/PageService.fs" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="1680" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="SolutionExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="docs" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="docs" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Fabulosa.Docs" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="docs" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Fabulosa.Docs" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Pages" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="src" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="src" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Fabulosa" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="src" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Fabulosa" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Components" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-file-system" value="false" />
+      </pane>
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="webpack&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/tools/webpack.config.common.js&#10;web&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/tools/webpack.config.common.js&#10;webpa&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/tools/webpack.config.dev.js&#10;we&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/tools/webpack.config.dev.js&#10;fsproj&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj&#10;fake&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/fake.sh&#10;.fsproj&#9;FILE&#9;file:///Users/leo/Developer/fabulosa/src/Fabulosa.fsproj" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="PROJECT_PATH" value="" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d67de447-cd83-4231-8679-6d624ef8cbac" name="Default" comment="" />
+      <created>1532094908752</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1532094908752</updated>
+      <workItem from="1532094910825" duration="7693000" />
+      <workItem from="1532614280564" duration="13806000" />
+      <workItem from="1532704556092" duration="13173000" />
+      <workItem from="1532810275727" duration="12019000" />
+      <workItem from="1532963482519" duration="7924000" />
+      <workItem from="1533068989800" duration="401000" />
+    </task>
+    <task id="LOCAL-00001" summary="Heading &amp; Paragraph blocks. ofString ReactElement helper. Typography page(WIP). Changing port number to 4200.">
+      <created>1532702479584</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1532702479584</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Semantic Text">
+      <created>1532734092173</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1532734092174</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding docs.css to component library">
+      <created>1532758541782</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1532758541782</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Block quotes. Minor code cosmetic changes.">
+      <created>1532810724186</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1532810724186</updated>
+    </task>
+    <task id="LOCAL-00005" summary="List types to typography.">
+      <created>1532844407449</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532844407449</updated>
+    </task>
+    <task id="LOCAL-00006" summary="List flatMap extension">
+      <created>1532922251494</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1532922251494</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adding code highlight with prism">
+      <created>1533047776219</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1533047776219</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="55016000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1680" y="0" width="2560" height="1440" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Errors In Solution" order="3" weight="0.2783883" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Unit Tests" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31428573" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.123907864" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="TypeScript" order="8" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection Results" order="7" weight="0.32967034" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.32967034" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Heading &amp; Paragraph blocks. ofString ReactElement helper. Typography page(WIP). Changing port number to 4200." />
+    <MESSAGE value="Semantic Text" />
+    <MESSAGE value="Adding docs.css to component library" />
+    <MESSAGE value="Block quotes. Minor code cosmetic changes." />
+    <MESSAGE value="List types to typography." />
+    <MESSAGE value="List flatMap extension" />
+    <MESSAGE value="Adding code highlight with prism" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding code highlight with prism" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs</url>
+          <line>9</line>
+          <properties documentPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs" initialLine="8">
+            <startOffsets>
+              <startOffset value="214" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="1160" />
+            </endOffsets>
+          </properties>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Home.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/webpack.config.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="4" lean-forward="true" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/Grid.fs" />
+    <entry file="file://$PROJECT_DIR$/src/ClassNames.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Pages/Home.fs" />
+    <entry file="file://$PROJECT_DIR$/src/App.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa.fsproj" />
+    <entry file="file://$PROJECT_DIR$/src/Pages/GridPage.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Pages/ButtonPage.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Components/Button.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Pages/TypographyPage.fs" />
+    <entry file="file://$PROJECT_DIR$/src/Components/Typography.fs" />
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Typography.fs" />
+    <entry file="file://$PROJECT_DIR$/fake.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/paket.references">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Fabulosa.fsproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/ClassNames.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Table.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Button.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Icon.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Form.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Navbar.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Responsive.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/Fabulosa.Tests/Components/TableTests.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="58" column="5" selection-start-line="58" selection-start-column="5" selection-end-line="58" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/GridPage.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="9" selection-start-line="9" selection-start-column="14" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Grid.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="26" selection-start-line="32" selection-start-column="26" selection-end-line="32" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5B476AC0-56A9-AB3E-A745-0383C06A475B/be/afcdc3c7/React.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="652">
+          <caret line="2411" column="25" lean-forward="true" selection-start-line="2411" selection-end-line="2412" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/spectre.css/docs/dist/docs.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/paket.references">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/prism/src/index.ts" />
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/private/private.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1526" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/webpack.config.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/prismjs/components.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/prismjs/README.md">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5AF40A75-B5E6-35A2-A745-0383750AF45A/7c/23b19943/JsInterop.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="147" column="5" lean-forward="true" selection-start-line="147" selection-start-column="5" selection-end-line="147" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/webpack.config.common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Home.fs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/styles.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="715">
+          <caret line="64" column="1" lean-forward="true" selection-start-line="64" selection-start-column="1" selection-end-line="64" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+          <folding>
+            <marker date="1533048643383" expanded="true" signature="64:814" ph=" = ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="14" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Fabulosa/ReactElementStringExtensions.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+          <folding>
+            <marker date="1532922268143" expanded="true" signature="55:148" ph=" = ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" selection-start-column="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/public/logo_64.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="135" column="26" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="26" />
+          <folding>
+            <marker date="1533069391184" expanded="true" signature="21:6726" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="27:224" ph="..." />
+            <marker date="1533069391184" expanded="true" signature="270:415" ph=" =         ..." />
+            <marker date="1533069391184" expanded="true" signature="437:662" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
+            <marker date="1533069391184" expanded="true" signature="688:1007" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="696:947" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="1034:1488" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
+            <marker date="1533069391184" expanded="true" signature="1508:2085" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="1517:2023" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="1554:1835" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="2206:2348" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="2233:2347" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="2364:2599" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="2391:2598" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="2608:2809" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="2635:2808" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="3280:3643" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="3307:3642" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="3357:3570" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="4129:4459" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="4138:4356" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="4485:5235" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="4493:4834" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="5292:5759" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="5300:5712" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="5443:5651" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="5796:5884" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="5804:5883" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="5905:6153" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="5913:6088" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="6168:6348" ph=" = ..." />
+            <marker date="1533069391184" expanded="true" signature="6176:6296" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="6372:6550" ph=" =  ..." />
+            <marker date="1533069391184" expanded="true" signature="6398:6549" ph=" ..." />
+            <marker date="1533069391184" expanded="true" signature="6567:6726" ph=" =  ..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
