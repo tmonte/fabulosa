@@ -3,10 +3,13 @@ open Fable.Helpers
 open Fable.Helpers.React.Props
 open Fabulosa
 open System
-
+open Fable.Core.JsInterop
+open Fable.Core
+open Fable.Import.React
 open Fabulosa.Docs.ListFlatMapExtension
 open ReactElementStringExtensions
-
+open Fabulosa.Docs.JavascriptMapping
+open Fabulosa.Docs.JavascriptMapping
 module R = Fable.Helpers.React
 
 let page header subheader body = 
@@ -26,22 +29,24 @@ let block title stringfiedCode pageBlock =
                 ]
             R.div [ClassName "code-container"]
                 [
-                    R.pre [] [R.str stringfiedCode]
+                    [
+                        R.code [ClassName "prism-code-reset"; DangerouslySetInnerHTML <| Prism.highlight stringfiedCode] []
+                    ]
+                    |> R.pre [ClassName "language-fsharp"] 
                 ]
         ]
         
-        
+let headingsCode = """ofString Typography.h1 "H1 Heading"
+ofString Typography.h2 "H2 Heading"
+ofString Typography.h3 "H3 Heading"
+ofString Typography.h4 "H4 Heading"
+ofString Typography.h5 "H5 Heading"
+ofString Typography.h6 "H6 Heading"
+"""        
 let headingsBlock =  
     block 
        "Headings" 
-       """
-           ofString Typography.h1 "H1 Heading"
-           ofString Typography.h2 "H2 Heading"
-           ofString Typography.h3 "H3 Heading"
-           ofString Typography.h4 "H4 Heading"
-           ofString Typography.h5 "H5 Heading"
-           ofString Typography.h6 "H6 Heading"
-       """ 
+       headingsCode 
        <| R.div [] 
            [
                ofString Typography.h1 "H1 Heading"
@@ -52,18 +57,18 @@ let headingsBlock =
                ofString Typography.h6 "H6 Heading"
            ]       
 
+let paragraphCode = """ Typography.p []
+    [
+       R.str "Lorem ipsum dolor sit amet, consectetur "
+       R.a [] [R.str "adipiscing elit"]
+       R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
+    ]
+ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
+"""
 let paragraphsBlock = 
     block 
         "Paragraphs" 
-        """
-           Typography.p []
-               [
-                   R.str "Lorem ipsum dolor sit amet, consectetur "
-                   R.a [] [R.str "adipiscing elit"]
-                   R.str ". Praesent risus leo, dictum in vehicula sit amet, feugiat tempus tellus. Duis quis sodales risus. Etiam euismod ornare consequat"
-               ]
-           ofString Typography.p "limb leg rub face on everything give attitude nap all day for under the bed. Chase mice attack feet but rub face on everything hopped up on goofballs."
-        """ 
+        paragraphCode
         <| R.div [] 
            [
                Typography.p []
@@ -171,10 +176,9 @@ let blockquoteBlock =
     ] 
     |> Typography.blockquote []
     |> block "Blockquote" 
-        """ 
-            ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
-            ofString Typography.cite " - Linus Torvalds"
-        """    
+        """ofString Typography.p "Some people have told me they don't think a fat penguin really embodies the grace of Linux, which just tells me they have never seen an angry penguin charging at them in excess of 100 mph. They'd be a lot more careful about what they say if they had."
+ofString Typography.cite " - Linus Torvalds"
+"""    
     
 let getList listConstructor listItemConstructor =
     [
