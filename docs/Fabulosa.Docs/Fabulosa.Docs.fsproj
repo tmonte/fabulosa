@@ -16,8 +16,5 @@
     <None Include="paket.references" />
     <ProjectReference Include="..\..\src\Fabulosa\Fabulosa.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\Typography" />
-  </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

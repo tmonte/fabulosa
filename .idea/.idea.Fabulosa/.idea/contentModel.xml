@@ -23,7 +23,6 @@
             <e p="GridPage.fs" t="Include" />
             <e p="Home.fs" t="Include" />
             <e p="TablePage.fs" t="Include" />
-            <e p="Typography" t="Include" />
             <e p="TypographyPage.fs" t="Include" />
           </e>
           <e p="paket.references" t="Include" />

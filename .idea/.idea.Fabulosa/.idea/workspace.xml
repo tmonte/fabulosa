@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" line="46" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d67de447-cd83-4231-8679-6d624ef8cbac" name="Default" comment="Adding code highlight with prism">
-      <change afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Fabulosa/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Fabulosa/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" afterDir="false" />
     </list>
@@ -18,10 +22,29 @@
       <file leaf-file-name="Typography.fs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+            <state relative-caret-position="255">
+              <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
               <folding>
-                <marker date="1533048643383" expanded="true" signature="64:814" ph=" = ..." />
+                <marker date="1533070099063" expanded="true" signature="64:822" ph=" = ..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Page.fs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="30" selection-start-column="30" selection-end-column="30" />
+              <folding>
+                <marker date="1533070413965" expanded="true" signature="43:987" ph=" = ..." />
+                <marker date="1533070413965" expanded="false" signature="56:178" ph="..." />
+                <marker date="1533070413965" expanded="true" signature="253:402" ph=" =  ..." />
+                <marker date="1533070413965" expanded="true" signature="266:378" ph=" ..." />
+                <marker date="1533070413965" expanded="true" signature="457:987" ph=" = ..." />
+                <marker date="1533070413965" expanded="true" signature="491:986" ph=" ..." />
+                <marker date="1533070413965" expanded="true" signature="707:972" ph=" ..." />
+                <marker date="1533070413965" expanded="true" signature="733:886" ph=" ..." />
               </folding>
             </state>
           </provider>
@@ -39,8 +62,8 @@
       <file leaf-file-name="Fabulosa.Docs.fsproj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            <state relative-caret-position="105">
+              <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -63,43 +86,43 @@
         <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="135" column="26" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="26" />
+              <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding>
-                <marker date="1533069391184" expanded="true" signature="21:6726" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="27:224" ph="..." />
-                <marker date="1533069391184" expanded="true" signature="270:415" ph=" =         ..." />
-                <marker date="1533069391184" expanded="true" signature="437:662" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
-                <marker date="1533069391184" expanded="true" signature="688:1007" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="696:947" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="1034:1488" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
-                <marker date="1533069391184" expanded="true" signature="1508:2085" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="1517:2023" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="1554:1835" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="2206:2348" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="2233:2347" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="2364:2599" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="2391:2598" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="2608:2809" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="2635:2808" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="3280:3643" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="3307:3642" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="3357:3570" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="4129:4459" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="4138:4356" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="4485:5235" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="4493:4834" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="5292:5759" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="5300:5712" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="5443:5651" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="5796:5884" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="5804:5883" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="5905:6153" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="5913:6088" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="6168:6348" ph=" = ..." />
-                <marker date="1533069391184" expanded="true" signature="6176:6296" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="6372:6550" ph=" =  ..." />
-                <marker date="1533069391184" expanded="true" signature="6398:6549" ph=" ..." />
-                <marker date="1533069391184" expanded="true" signature="6567:6726" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="21:6727" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="27:222" ph="..." />
+                <marker date="1533070422428" expanded="true" signature="268:413" ph=" =         ..." />
+                <marker date="1533070422428" expanded="true" signature="435:660" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
+                <marker date="1533070422428" expanded="true" signature="686:1005" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="694:945" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="1032:1486" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
+                <marker date="1533070422428" expanded="true" signature="1506:2083" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="1515:2021" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="1552:1833" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="2204:2346" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="2231:2345" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="2362:2597" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="2389:2596" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="2606:2807" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="2633:2806" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="3278:3641" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="3305:3640" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="3355:3568" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="4127:4458" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="4136:4354" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="4484:5234" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="4492:4833" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="5291:5759" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="5299:5711" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="5442:5650" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="5796:5884" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="5804:5883" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="5905:6154" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="5913:6088" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="6169:6349" ph=" = ..." />
+                <marker date="1533070422428" expanded="true" signature="6177:6297" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="6373:6551" ph=" =  ..." />
+                <marker date="1533070422428" expanded="true" signature="6399:6550" ph=" ..." />
+                <marker date="1533070422428" expanded="true" signature="6568:6727" ph=" =  ..." />
               </folding>
             </state>
           </provider>
@@ -126,15 +149,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Page.fs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="18" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TablePage.fs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs">
           <provider selected="true" editor-type-id="text-editor">
@@ -154,21 +168,25 @@
       <find>columnOfElement</find>
       <find>prism</find>
       <find>resolve</find>
+      <find>thirdColumn</find>
     </findStrings>
+    <replaceStrings>
+      <replace>Column.third</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/ReactElementStringExtensions.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/tests/Fabulosa.Tests/ReactNode.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/Home.fs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TablePage.fs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Extensions/ListFlatMapExtension.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/GridPage.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Icon.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Form.fs" root0="FORCE_HIGHLIGHTING" />
@@ -178,7 +196,7 @@
     <setting file="file://$PROJECT_DIR$/tests/Fabulosa.Tests/Components/TableTests.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Responsive.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Navbar.fs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Button.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Grid.fs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" root0="SKIP_HIGHLIGHTING" />
@@ -205,9 +223,10 @@
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/App.fs" />
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/styles.scss" />
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/JavascriptMappings/PrismJS.fs" />
-        <option value="$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" />
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Services/PageService.fs" />
+        <option value="$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs" />
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj" />
+        <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs" />
         <option value="$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs" />
       </list>
     </option>
@@ -255,6 +274,13 @@
               <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="docs" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="Fabulosa.Docs" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="Fabulosa (4 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="docs" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Fabulosa.Docs" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Domain" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
@@ -393,7 +419,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55016000" />
+    <option name="totallyTimeSpent" value="55385000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -414,7 +440,7 @@
       <window_info anchor="bottom" id="Unit Tests" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32967034" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31428573" />
       <window_info anchor="bottom" id="NuGet" order="7" />
@@ -425,16 +451,32 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="TypeScript" order="8" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.123907864" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Inspection Results" order="7" weight="0.32967034" />
+      <window_info anchor="bottom" id="Unit Tests" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Errors In Solution" order="3" weight="0.2783883" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Build" order="7" weight="0.32967034" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31428573" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,10 +682,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Fabulosa/Components/Typography.fs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+        <state relative-caret-position="255">
+          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
           <folding>
-            <marker date="1533048643383" expanded="true" signature="64:814" ph=" = ..." />
+            <marker date="1533070099063" expanded="true" signature="64:822" ph=" = ..." />
           </folding>
         </state>
       </provider>
@@ -686,63 +728,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="18" selection-end-column="18" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/public/logo_64.svg">
+      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Fabulosa.Docs.fsproj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+        <state relative-caret-position="105">
+          <caret line="7" column="51" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="51" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/public/logo_64.svg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Domain/Page.fs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="30" selection-start-column="30" selection-end-column="30" />
+          <folding>
+            <marker date="1533070413965" expanded="true" signature="43:987" ph=" = ..." />
+            <marker date="1533070413965" expanded="false" signature="56:178" ph="..." />
+            <marker date="1533070413965" expanded="true" signature="253:402" ph=" =  ..." />
+            <marker date="1533070413965" expanded="true" signature="266:378" ph=" ..." />
+            <marker date="1533070413965" expanded="true" signature="457:987" ph=" = ..." />
+            <marker date="1533070413965" expanded="true" signature="491:986" ph=" ..." />
+            <marker date="1533070413965" expanded="true" signature="707:972" ph=" ..." />
+            <marker date="1533070413965" expanded="true" signature="733:886" ph=" ..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/Fabulosa.Docs/Pages/TypographyPage.fs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="135" column="26" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="26" />
+          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
           <folding>
-            <marker date="1533069391184" expanded="true" signature="21:6726" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="27:224" ph="..." />
-            <marker date="1533069391184" expanded="true" signature="270:415" ph=" =         ..." />
-            <marker date="1533069391184" expanded="true" signature="437:662" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
-            <marker date="1533069391184" expanded="true" signature="688:1007" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="696:947" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="1034:1488" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
-            <marker date="1533069391184" expanded="true" signature="1508:2085" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="1517:2023" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="1554:1835" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="2206:2348" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="2233:2347" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="2364:2599" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="2391:2598" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="2608:2809" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="2635:2808" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="3280:3643" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="3307:3642" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="3357:3570" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="4129:4459" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="4138:4356" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="4485:5235" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="4493:4834" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="5292:5759" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="5300:5712" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="5443:5651" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="5796:5884" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="5804:5883" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="5905:6153" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="5913:6088" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="6168:6348" ph=" = ..." />
-            <marker date="1533069391184" expanded="true" signature="6176:6296" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="6372:6550" ph=" =  ..." />
-            <marker date="1533069391184" expanded="true" signature="6398:6549" ph=" ..." />
-            <marker date="1533069391184" expanded="true" signature="6567:6726" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="21:6727" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="27:222" ph="..." />
+            <marker date="1533070422428" expanded="true" signature="268:413" ph=" =         ..." />
+            <marker date="1533070422428" expanded="true" signature="435:660" ph=" = &quot;&quot;&quot;ofString Typography.h1 &quot;H1 Heading&quot; ..." />
+            <marker date="1533070422428" expanded="true" signature="686:1005" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="694:945" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="1032:1486" ph=" = &quot;&quot;&quot; Typography.p [] ..." />
+            <marker date="1533070422428" expanded="true" signature="1506:2083" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="1515:2021" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="1552:1833" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="2204:2346" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="2231:2345" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="2362:2597" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="2389:2596" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="2606:2807" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="2633:2806" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="3278:3641" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="3305:3640" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="3355:3568" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="4127:4458" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="4136:4354" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="4484:5234" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="4492:4833" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="5291:5759" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="5299:5711" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="5442:5650" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="5796:5884" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="5804:5883" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="5905:6154" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="5913:6088" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="6169:6349" ph=" = ..." />
+            <marker date="1533070422428" expanded="true" signature="6177:6297" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="6373:6551" ph=" =  ..." />
+            <marker date="1533070422428" expanded="true" signature="6399:6550" ph=" ..." />
+            <marker date="1533070422428" expanded="true" signature="6568:6727" ph=" =  ..." />
           </folding>
         </state>
       </provider>

@@ -1,4 +1,4 @@
-namespace Fabulosa.Docs.Services
+namespace Fabulosa.Docs.Domain
 
 module Page =
 

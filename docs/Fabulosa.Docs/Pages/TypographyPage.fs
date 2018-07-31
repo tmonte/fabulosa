@@ -5,7 +5,7 @@ open Fabulosa
 open Fabulosa.Docs.ListFlatMapExtension
 open ReactElementStringExtensions
 open Fabulosa.Docs.JavascriptMapping
-open Fabulosa.Docs.Services
+open Fabulosa.Docs.Domain
 
 module R = Fable.Helpers.React
 module Column =        
