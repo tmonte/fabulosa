@@ -2,40 +2,35 @@ namespace Fabulosa
 
 module ReactAPIExtensions =
 
+    open Fable.Core
     open Fable.Import.React
+    module R = Fable.Helpers.React
 
-    type Children =
-    | Single of ReactElement
-    | Multiple of array<ReactElement>
-
+    [<Pojo>]
     type NativeProps = {
-        children: Children option
-        className: string option
+        children: obj option
+        className: string
     }
 
+    [<Pojo>]
     type NativeReactElement = {
         ``type``: string
-        props: NativeProps;
+        props: NativeProps
     }
 
-    let getClasses element =
-        match element.props.className with
-        | Some className -> className
-        | None -> ""
+    let getChildren =
+        function
+        | Some object -> object
+        | None -> [] :> obj
 
-    let getChildren element =
-        match element.props.children with
-        | Some element ->
-            match element with
-            | Single child -> [child]
-            | Multiple children  -> Array.toList children
-        | None -> []
-
-    let extract (element: ReactElement) =
+    let extractProps (element: ReactElement) =
         let native = unbox<NativeReactElement> element
-        (native.``type``, getClasses native, getChildren native)
-    
+        (native.``type``, native.props, getChildren <| native.props.children)
 
-
-
-        
+    let transform mapping props element =
+        let (elType, elProps, elChilren) = extractProps element
+        let appended =
+            [elProps.className]
+            @ List.map mapping props
+            |> String.concat " "
+        R.createElement (elType, {elProps with className = appended}, elChilren)

@@ -1,6 +1,5 @@
 namespace Fabulosa
 
-open Fable.Helpers
 [<RequireQualifiedAccess>]
 module Input =
 
@@ -19,10 +18,10 @@ module Input =
         | Size Small -> "input-sm"
         | Size Large -> "input-lg"
 
-    let input inputProps =
+    let input props =
         ["form-input"]
-        @ List.map propToClass inputProps
-        |> addClassesToProps
+        @ List.map propToClass props
+        |> combineProps
         >> R.input
 
 [<RequireQualifiedAccess>]
@@ -45,13 +44,16 @@ module IconInput =
         | Position Left -> "has-icon-left"
         | Position Right -> "has-icon-right"
 
-    let makeIcon icon =
-        let (element, classes, children) = extract icon
-        React.domEl element [className <| classes + " form-icon"] children
-        
+    let iconPropToClass =
+        function
+        | _ -> "form-icon"
+
+    let makeIcon =
+        transform (fun _ -> "form-icon") [""]
+
     let iconInput props htmlProps (children: ReactElement list) =
         let newProps =
-            addClassesToProps
+            combineProps
             <| List.map propToClass props
             <| htmlProps
         R.div newProps [

@@ -7,10 +7,23 @@ module Select =
 
     module R = Fable.Helpers.React
 
-    let select =
+    type Size =
+    | Small
+    | Large
+
+    type Prop =
+    | Size of Size
+
+    let propToClass =
+        function
+        | Size Small -> "select-sm"
+        | Size Large -> "select-lg"
+
+    let select props =
         ["form-select"]
-        |> addClassesToProps
-        >> R.select
+        @ List.map propToClass props
+        |> combineProps
+        >> R.input
 
     let option = R.option
 
