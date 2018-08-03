@@ -7,6 +7,7 @@
     <Compile Include="ReactAPIExtensions.fs" />
     <Compile Include="ReactElementStringExtensions.fs" />
     <Compile Include="ClassNames.fs" />
+    <Compile Include="Components/Code.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/Grid.fs" />
