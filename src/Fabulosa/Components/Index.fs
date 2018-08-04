@@ -1,6 +1,7 @@
-module Index
+namespace Fabulosa
 
-    open Fabulosa
+module Index =
+
     open Fable.Import.React
     module R = Fable.Helpers.React
 
