@@ -6,13 +6,13 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile  Include="ReactNode.fs" />
-    <Compile  Include="Components/ResponsiveTests.fs" />
-    <Compile  Include="Components/NavbarTests.fs" />
-    <Compile  Include="Components/GridTests.fs" />
-    <Compile  Include="Components/ButtonTests.fs" />
-    <Compile  Include="Components/TableTests.fs" />
-    <Compile  Include="Main.fs" />
+    <Compile Include="ReactNode.fs" />
+    <Compile Include="Components/ResponsiveTests.fs" />
+    <Compile Include="Components/NavbarTests.fs" />
+    <Compile Include="Components/GridTests.fs" />
+    <Compile Include="Components/ButtonTests.fs" />
+    <Compile Include="Components/TableTests.fs" />
+    <Compile Include="Main.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="..\..\src\Fabulosa\Fabulosa.fsproj" />
   </ItemGroup>

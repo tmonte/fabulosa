@@ -1,25 +1,29 @@
 namespace Fabulosa
 
+[<RequireQualifiedAccess>]
 module Radio =
 
     module R = Fable.Helpers.React
     open R.Props
 
-    type Props =
-    | Inline
+    [<RequireQualifiedAccess>]
+    type Inline = bool
 
-    let propToClass =
+    type props = {
+        Inline: Inline
+        HTMLProps: IHTMLProp list
+    }
+
+    let inlineRadio =
         function
-        | Inline -> "form-inline"
+        | true -> "form-inline"
+        | false -> ""
 
     let input props htmlProps label =
-        let containerClass =
-            ["form-checkbox"]
-            @ List.map propToClass props
-            |> String.concat " "
-        let inputProps: IHTMLProp list = [Type "checkbox"] @ htmlProps
+        let containerClass = ["form-radio";
+            inlineRadio props.Inline] |> String.concat " "
         R.label [ClassName containerClass] [
-            R.input inputProps
+            R.input <| [Type "radio"] @ htmlProps
             R.i [ClassName "form-icon"] []
             R.str label
         ]

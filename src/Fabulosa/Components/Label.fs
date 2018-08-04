@@ -4,27 +4,36 @@ namespace Fabulosa
 module Label =
 
     open ClassNames
-
     module R = Fable.Helpers.React
+    open R.Props
 
+    [<RequireQualifiedAccess>]
     type Size =
     | Small
     | Large
+    | Unset
 
-    type Prop =
-    | Size of Size
+    type Prop = {
+        Size: Size
+        HTMLProps: IHTMLProp list
+    }
 
-    let propToClass =
+    let defaults = {
+        Size = Unset
+        HTMLProps = []
+    }
+
+    let size =
         function
-        | Size Small -> "input-sm"
-        | Size Large -> "input-lg"
+        | Size.Small -> "input-sm"
+        | Size.Large -> "input-lg"
+        | Size.Unset -> ""
 
-    let create props htmlProps str =
-        let labelProps =
-            combineProps
-            <| ["form-label"] @ List.map propToClass props
-            <| htmlProps
-        R.label labelProps [R.str str]
+    let ƒ props label =
+        props.HTMLProps
+        |> combineProps["form-label";
+            size props.Size]
+        |> R.label
+        <| [R.str label]
 
-    let label text =
-        create [] [] text
+    let label = ƒ
