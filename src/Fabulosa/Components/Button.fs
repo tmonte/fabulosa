@@ -103,6 +103,27 @@ module Button =
     let button = ƒ
 
 [<RequireQualifiedAccess>]
+module Pacoquinha =
+    open ClassNames
+    module R = Fable.Helpers.React
+    open R.Props
+    
+    type Sabor =
+    | Doce
+    | Salgada
+    
+    type Props = {
+        Sabor: Sabor
+    }
+        
+    let defaults = {
+        Sabor = Sabor.Doce
+    }
+
+
+    let pacoquinha (props: Props) = R.span []
+
+[<RequireQualifiedAccess>]
 module Anchor =
 
     open ClassNames

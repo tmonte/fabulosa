@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Components\Index.fs" />
     <Compile Include="ReactAPIExtensions.fs" />
     <Compile Include="ReactElementStringExtensions.fs" />
     <Compile Include="ClassNames.fs" />
