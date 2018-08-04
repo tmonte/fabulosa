@@ -14,16 +14,21 @@ module Radio =
         HTMLProps: IHTMLProp list
     }
 
+    let defaults = {
+        Inline = false
+        HTMLProps = []
+    }
+
     let inlineRadio =
         function
         | true -> "form-inline"
         | false -> ""
 
-    let input props htmlProps label =
+    let ƒ props label =
         let containerClass = ["form-radio";
             inlineRadio props.Inline] |> String.concat " "
         R.label [ClassName containerClass] [
-            R.input <| [Type "radio"] @ htmlProps
+            R.input <| [Type "radio"] @ props.HTMLProps
             R.i [ClassName "form-icon"] []
             R.str label
         ]

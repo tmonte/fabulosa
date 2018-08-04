@@ -23,7 +23,7 @@ let tests =
         }
 
         test "Column should be a react html node" {
-            let node = R.Node ("div", [ClassName "column col-12 col-sm-12 col-md-12 col-lg-12"], [])
+            let node = R.Node ("div", [ClassName "column col-12 col-xs-0 col-sm-0 col-md-0 col-lg-0 col-lg-0"], [])
             let subject = Grid.Column.ƒ Grid.Column.defaults []
             compareNode subject node
         }

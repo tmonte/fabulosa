@@ -7,25 +7,25 @@ module ReactAPIExtensions =
     module R = Fable.Helpers.React
 
     [<Pojo>]
-    type NativeProps = {
-        children: obj option
-        className: string
+    type Elem<'a> = {
+        ``type``: string
+        props: 'a
     }
 
     [<Pojo>]
-    type NativeReactElement = {
-        ``type``: string
-        props: NativeProps
+    type NativeProps = {
+        children: Elem<NativeProps> list
+        className: string
     }
 
     let getChildren =
         function
         | Some object -> object
-        | None -> [] :> obj
+        | None -> []
 
     let extractProps (element: ReactElement) =
-        let native = unbox<NativeReactElement> element
-        (native.``type``, native.props, getChildren <| native.props.children)
+        let native = unbox<Elem<NativeProps>> element
+        (native.``type``, native.props, native.props.children)
 
     let transform mapping props element =
         let (elType, elProps, elChilren) = extractProps element

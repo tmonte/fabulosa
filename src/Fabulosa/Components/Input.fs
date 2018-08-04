@@ -5,24 +5,37 @@ module Input =
 
     open ClassNames
     module R = Fable.Helpers.React
+    open R.Props
 
+    [<RequireQualifiedAccess>]
     type Size =
     | Small
     | Large
+    | Unset
 
-    type Prop =
-    | Size of Size
+    type Prop = {
+        Size: Size
+        HTMLProps: IHTMLProp list
+    }
 
-    let propToClass =
+    let defaults = {
+        Size = Size.Unset
+        HTMLProps = []
+    }
+
+    let size =
         function
-        | Size Small -> "input-sm"
-        | Size Large -> "input-lg"
+        | Size.Small -> "input-sm"
+        | Size.Large -> "input-lg"
+        | Size.Unset -> ""
 
-    let input props =
-        ["form-input"]
-        @ List.map propToClass props
-        |> combineProps
-        >> R.input
+    let ƒ props =
+        props.HTMLProps
+        |> combineProps ["form-input";
+            size props.Size]
+        |> R.input
+
+    let input = ƒ
 
 [<RequireQualifiedAccess>]
 module IconInput =
@@ -31,32 +44,36 @@ module IconInput =
     open ReactAPIExtensions
     open Fable.Import.React
     module R = Fable.Helpers.React
-    
+
+    [<RequireQualifiedAccess>]
     type Position =
     | Left
     | Right
 
-    type Prop =
-    | Position of Position
+    type Props = {
+        Position: Position
+    }
 
-    let propToClass =
+    let defaults = {
+        Position = Position.Left
+    }
+
+    let position =
         function
-        | Position Left -> "has-icon-left"
-        | Position Right -> "has-icon-right"
+        | Position.Left -> "has-icon-left"
+        | Position.Right -> "has-icon-right"
 
-    let iconPropToClass =
+    let icon =
         function
         | _ -> "form-icon"
 
-    let makeIcon =
-        transform (fun _ -> "form-icon") [""]
+    //let makeIcon =
+        //transform (fun _ -> "form-icon") [""]
 
     let iconInput props htmlProps (children: ReactElement list) =
-        let newProps =
-            combineProps
-            <| List.map propToClass props
-            <| htmlProps
-        R.div newProps [
+        let t = extractProps <| R.div [] [R.p [] []]
+        Fable.Import.Browser.console.log t
+        R.div [] [
             children.[0]
-            makeIcon children.[1]
+            children.[1]
         ]

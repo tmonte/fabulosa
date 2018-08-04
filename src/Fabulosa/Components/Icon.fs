@@ -48,17 +48,25 @@ module Icon =
     | Link
     | Emoji
     | Loading
+    | Unset
 
     [<RequireQualifiedAccess>]
     type Size =
     | X2
     | X3
     | X4
+    | Unset
 
     type Props = {
         Kind: Kind
         Size: Size
         HTMLProps: IHTMLProp list
+    }
+
+    let defaults = {
+        Kind = Kind.Unset
+        Size = Size.Unset
+        HTMLProps = []
     }
 
     let kind =
@@ -102,12 +110,14 @@ module Icon =
         | Kind.Link -> "icon-link"
         | Kind.Emoji -> "icon-emoji"
         | Kind.Loading -> "loading"
+        | Kind.Unset -> ""
 
     let size = 
         function
         | Size.X2 -> "icon-2x"
         | Size.X3 -> "icon-3x"
         | Size.X4 -> "icon-4x"
+        | Size.Unset -> ""
 
     let ƒ props =
         props.HTMLProps

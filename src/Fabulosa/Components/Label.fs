@@ -19,7 +19,7 @@ module Label =
     }
 
     let defaults = {
-        Size = Unset
+        Size = Size.Unset
         HTMLProps = []
     }
 

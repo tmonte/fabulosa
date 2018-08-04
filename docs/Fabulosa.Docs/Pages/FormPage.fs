@@ -14,17 +14,24 @@ let view () =
                     Fable.Helpers.React.form [] [
                         Form.group [] [
                             Label.ƒ Label.defaults "Name"
-                            Input.input [] [Placeholder "Please enter your name"]
+                            Input.ƒ
+                                { Input.defaults with
+                                    HTMLProps = [Placeholder "Please enter your name"] }
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Phone"
-                            Input.input [] [Placeholder "Please enter your phone number"; Type "tel"]
+                            Input.ƒ
+                                { Input.defaults with
+                                    HTMLProps = [Placeholder "Please enter your phone number";
+                                        Type "tel"] }
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Time"
-                            IconInput.iconInput [IconInput.Position IconInput.Left] [] [
-                                Input.input [] [Placeholder "Please enter something"]
-                                Icon.i [Icon.Type Icon.Time] [] []
+                            IconInput.iconInput [] [] [
+                                Input.ƒ
+                                    { Input.defaults with
+                                        HTMLProps = [Placeholder "Please enter something"] }
+                                Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Time } []
                             ]
                         ]
                         Form.group [] [
@@ -33,8 +40,14 @@ let view () =
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Contact preferences"
-                            Radio.input [] [Name "contact-prefs"] "Call me"
-                            Radio.input [] [Name "contact-prefs"] "Text me"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Call me"
+                            Radio.ƒ
+                                { Radio.defaults with
+                                    HTMLProps = [Name "contact-prefs"] }
+                                "Text me"
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Profile preferences"

@@ -64,12 +64,12 @@ let view () =
                     Format = Button.Format.SquaredAction
                     Kind = Button.Kind.Primary
                     HTMLProps = [OnClick (fun e -> e |> console.log)] }
-                [Icon.i [Icon.Type Icon.Plus] [] []]
+                [ Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Plus } [] ]
             Button.ƒ
                 { Button.defaults with
                     Format = Button.Format.RoundAction
                     HTMLProps = [OnClick (fun e -> e |> console.log)] }
-                [Icon.i [Icon.Type Icon.Plus] [] []]
+                [ Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Plus } [] ]
         ]
         R.div [] [
             R.h4 [] [R.str "States"]
