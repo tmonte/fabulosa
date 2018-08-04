@@ -5,8 +5,10 @@ module Icon =
 
     open ClassNames
     module R = Fable.Helpers.React
+    open R.Props
 
-    type Type =
+    [<RequireQualifiedAccess>]
+    type Kind =
     | ArrowUp
     | ArrowRight
     | ArrowDown
@@ -47,63 +49,69 @@ module Icon =
     | Emoji
     | Loading
 
+    [<RequireQualifiedAccess>]
     type Size =
     | X2
     | X3
     | X4
 
-    type Props =
-    | Type of Type
-    | Size of Size
+    type Props = {
+        Kind: Kind
+        Size: Size
+        HTMLProps: IHTMLProp list
+    }
 
-    let propToClass =
+    let kind =
         function
-        | Type ArrowUp -> "icon-arrow-up"
-        | Type ArrowRight -> "icon-arrow-right"
-        | Type ArrowDown -> "icon-arrow-down"
-        | Type ArrowLeft -> "icon-arrow-left"
-        | Type Upward -> "icon-upward"
-        | Type Forward -> "icon-forward"
-        | Type Downward -> "icon-downward"
-        | Type Back -> "icon-back"
-        | Type Caret -> "icon-caret"
-        | Type Menu -> "icon-menu"
-        | Type Apps -> "icon-apps"
-        | Type MoreHoriz -> "icon-more-horiz"
-        | Type MoreVert -> "icon-more-vert"
-        | Type ResizeHoriz -> "icon-resize-horiz"
-        | Type ResizeVert -> "icon-resize-vert"
-        | Type Plus -> "icon-plus"
-        | Type Minus -> "icon-minus"
-        | Type Cross -> "icon-cross"
-        | Type Check -> "icon-check"
-        | Type Stop -> "icon-stop"
-        | Type Shutdown -> "icon-shutdown"
-        | Type Refresh -> "icon-refresh"
-        | Type Search -> "icon-search"
-        | Type Flag -> "icon-flag"
-        | Type Bookmark -> "icon-bookmark"
-        | Type Edit -> "icon-edit"
-        | Type Delete -> "icon-delete"
-        | Type Share -> "icon-share"
-        | Type Download -> "icon-download"
-        | Type Upload -> "icon-upload"
-        | Type Mail -> "icon-mail"
-        | Type People -> "icon-people"
-        | Type Message -> "icon-message"
-        | Type Photo -> "icon-photo"
-        | Type Time -> "icon-time"
-        | Type Location -> "icon-location"
-        | Type Link -> "icon-link"
-        | Type Emoji -> "icon-emoji"
-        | Type Loading -> "loading"
-        | Size X2 -> "icon-2x"
-        | Size X3 -> "icon-3x"
-        | Size X4 -> "icon-4x"
+        | Kind.ArrowUp -> "icon-arrow-up"
+        | Kind.ArrowRight -> "icon-arrow-right"
+        | Kind.ArrowDown -> "icon-arrow-down"
+        | Kind.ArrowLeft -> "icon-arrow-left"
+        | Kind.Upward -> "icon-upward"
+        | Kind.Forward -> "icon-forward"
+        | Kind.Downward -> "icon-downward"
+        | Kind.Back -> "icon-back"
+        | Kind.Caret -> "icon-caret"
+        | Kind.Menu -> "icon-menu"
+        | Kind.Apps -> "icon-apps"
+        | Kind.MoreHoriz -> "icon-more-horiz"
+        | Kind.MoreVert -> "icon-more-vert"
+        | Kind.ResizeHoriz -> "icon-resize-horiz"
+        | Kind.ResizeVert -> "icon-resize-vert"
+        | Kind.Plus -> "icon-plus"
+        | Kind.Minus -> "icon-minus"
+        | Kind.Cross -> "icon-cross"
+        | Kind.Check -> "icon-check"
+        | Kind.Stop -> "icon-stop"
+        | Kind.Shutdown -> "icon-shutdown"
+        | Kind.Refresh -> "icon-refresh"
+        | Kind.Search -> "icon-search"
+        | Kind.Flag -> "icon-flag"
+        | Kind.Bookmark -> "icon-bookmark"
+        | Kind.Edit -> "icon-edit"
+        | Kind.Delete -> "icon-delete"
+        | Kind.Share -> "icon-share"
+        | Kind.Download -> "icon-download"
+        | Kind.Upload -> "icon-upload"
+        | Kind.Mail -> "icon-mail"
+        | Kind.People -> "icon-people"
+        | Kind.Message -> "icon-message"
+        | Kind.Photo -> "icon-photo"
+        | Kind.Time -> "icon-time"
+        | Kind.Location -> "icon-location"
+        | Kind.Link -> "icon-link"
+        | Kind.Emoji -> "icon-emoji"
+        | Kind.Loading -> "loading"
 
-    let i props =
-        ["icon"] @ List.map propToClass props
-        |> combineProps
-        >> R.i
+    let size = 
+        function
+        | Size.X2 -> "icon-2x"
+        | Size.X3 -> "icon-3x"
+        | Size.X4 -> "icon-4x"
 
-    // [ClassName "form-icon"]
+    let ƒ props =
+        props.HTMLProps
+        |> combineProps ["icon";
+            kind props.Kind;
+            size props.Size]
+        |> R.i

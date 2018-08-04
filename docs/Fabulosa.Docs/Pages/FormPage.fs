@@ -13,31 +13,31 @@ let view () =
                 Grid.Column.ƒ { Grid.Column.defaults with Size = 4 } [
                     Fable.Helpers.React.form [] [
                         Form.group [] [
-                            Label.label "Name"
+                            Label.ƒ Label.defaults "Name"
                             Input.input [] [Placeholder "Please enter your name"]
                         ]
                         Form.group [] [
-                            Label.label "Phone"
+                            Label.ƒ Label.defaults "Phone"
                             Input.input [] [Placeholder "Please enter your phone number"; Type "tel"]
                         ]
                         Form.group [] [
-                            Label.label "Time"
+                            Label.ƒ Label.defaults "Time"
                             IconInput.iconInput [IconInput.Position IconInput.Left] [] [
                                 Input.input [] [Placeholder "Please enter something"]
                                 Icon.i [Icon.Type Icon.Time] [] []
                             ]
                         ]
                         Form.group [] [
-                            Label.label "Profile description"
+                            Label.ƒ Label.defaults "Profile description"
                             Textarea.textarea [Placeholder "Please enter a description"] []
                         ]
                         Form.group [] [
-                            Label.label "Contact preferences"
+                            Label.ƒ Label.defaults "Contact preferences"
                             Radio.input [] [Name "contact-prefs"] "Call me"
                             Radio.input [] [Name "contact-prefs"] "Text me"
                         ]
                         Form.group [] [
-                            Label.label "Profile preferences"
+                            Label.ƒ Label.defaults "Profile preferences"
                             Switch.input [] "Link my github account"
                         ]
                         Form.group [] [

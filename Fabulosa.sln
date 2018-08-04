@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DotnetCLI", "tools\DotnetCLI.fsproj", "{B91D03C1-3A0F-43B0-8411-927C682BCC84}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "DotnetCLI", "tools\DotnetCLI.fsproj", "{B91D03C1-3A0F-43B0-8411-927C682BCC84}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF680163-A688-4792-A199-20791095446B}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulosa", "src\Fabulosa\Fabulosa.fsproj", "{3D1882F9-6E6A-4F79-80DD-84613D5544F7}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fabulosa", "src\Fabulosa\Fabulosa.fsproj", "{3D1882F9-6E6A-4F79-80DD-84613D5544F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AF4D50DD-CEDD-4FBF-81B7-36B44CC7336D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulosa.Tests", "tests\Fabulosa.Tests\Fabulosa.Tests.fsproj", "{79A96F5C-9FE8-4EC3-8948-31D58F415BC2}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fabulosa.Tests", "tests\Fabulosa.Tests\Fabulosa.Tests.fsproj", "{79A96F5C-9FE8-4EC3-8948-31D58F415BC2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9833F434-25F5-4BDB-803F-806632F5D995}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fabulosa.Docs", "docs\Fabulosa.Docs\Fabulosa.Docs.fsproj", "{4E3C616C-9B12-46CE-B71B-B8B76863BE51}"
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Fabulosa.Docs", "docs\Fabulosa.Docs\Fabulosa.Docs.fsproj", "{4E3C616C-9B12-46CE-B71B-B8B76863BE51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
