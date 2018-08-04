@@ -8,11 +8,12 @@ open Fable.Import.React
 
 let cols: seq<ReactElement> = seq {
     for n in 1 .. 11 do
-        yield Grid.row [] [] [
-            Grid.column [ Grid.Column.Size n ] [] [
+        yield Grid.Row.ƒ
+            { Grid.Row.defaults with Gapless = true } [
+            Grid.Column.ƒ { Grid.Column.defaults with Size = n } [
                 R.div [ Style [ Background "#f8f9fa" ] ] [ R.str ("c " + n.ToString()) ]
             ]
-            Grid.column [ Grid.Column.Size (12 - n) ] [] [
+            Grid.Column.ƒ { Grid.Column.defaults with Size = (12 - n) } [
                 R.div [ Style [ Background "#f8f9fa" ] ] [ R.str ("c " + (12 - n).ToString()) ]
             ]
         ]
@@ -22,5 +23,5 @@ let view () =
     R.div [] [
         R.h2 [] [R.str "Grid"]
         R.p [] [R.str "Layout includes flexbox based responsive grid system with 12 columns."]
-        Grid.grid [] (Seq.toList cols)
+        Grid.ƒ Grid.defaults (Seq.toList cols)
     ]

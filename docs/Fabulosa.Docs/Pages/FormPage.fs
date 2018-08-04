@@ -8,9 +8,9 @@ let view () =
     Fable.Helpers.React.div [] [
         R.h2 [] [R.str "Forms"]
         R.p [] [R.str "Forms provide the most common control styles used in forms, including input, textarea, select, checkbox, radio and switch."]
-        Grid.grid [] [
-            Grid.row [] [] [
-                Grid.column [Grid.Column.Size 4] [] [
+        Grid.ƒ Grid.defaults [
+            Grid.Row.ƒ Grid.Row.defaults [
+                Grid.Column.ƒ { Grid.Column.defaults with Size = 4 } [
                     Fable.Helpers.React.form [] [
                         Form.group [] [
                             Label.label "Name"
@@ -41,10 +41,10 @@ let view () =
                             Switch.input [] "Link my github account"
                         ]
                         Form.group [] [
-                            Checkbox.create [] [] "Remember me"
-                            Checkbox.create [] [] "Forget me"
+                            Checkbox.ƒ Checkbox.defaults "Remember me"
+                            Checkbox.ƒ Checkbox.defaults "Forget me"
                         ]
-                        Anchor.anchor Anchor.defaults [R.str "Submit"]
+                        Anchor.ƒ Anchor.defaults [R.str "Submit"]
                     ]
                 ]
             ]

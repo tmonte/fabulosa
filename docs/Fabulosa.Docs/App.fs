@@ -110,7 +110,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
                 Navbar.header [] [
                     Navbar.section [] []
                     Navbar.section [] [
-                        Anchor.anchor Anchor.defaults [R.str "hello"]
+                        Anchor.ƒ Anchor.defaults [R.str "hello"]
                     ]
                 ]
                 pageHtml model.currentPage

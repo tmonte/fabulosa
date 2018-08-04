@@ -1,36 +1,65 @@
 namespace Fabulosa
 
+open Fable.Import.React
 [<RequireQualifiedAccess>]
 module Grid =
 
     module R = Fable.Helpers.React
-
+    open R.Props
     open ClassNames
 
-    let grid =
-        ["container"]
-        |> combineProps
-        >> R.div
+    type Props = {
+        HTMLProps: IHTMLProp list
+    }
+
+    let defaults = {
+        HTMLProps = []
+    }
+
+    let ƒ props =
+        props.HTMLProps
+        |> combineProps ["container"]
+        |> R.div
+
+    let grid = ƒ
 
     [<RequireQualifiedAccess>]
     module Row =
 
-        type Kind =
-        | Gapless
-        | OneLine
+        type Gapless = bool
 
-        type Props =
-        | Kind of Kind
+        type OneLine = bool
 
-        let propToClass =
+        type Props = {
+            Gapless: Gapless
+            OneLine: OneLine
+            HTMLProps: IHTMLProp list
+        }
+
+        let defaults = {
+            Gapless = false
+            OneLine = false
+            HTMLProps = []
+        }
+
+        let gapless =
             function
-            | Kind Gapless -> "col-gapless"
-            | Kind OneLine -> "col-oneline"
+            | true -> "col-gapless"
+            | false -> ""
 
-    let row props =
-        ["columns"] @ List.map Row.propToClass props
-        |> combineProps
-        >> R.div
+        let oneLine =
+            function
+            | true -> "col-oneline"
+            | false -> ""
+
+        let ƒ props =
+            props.HTMLProps
+            |> combineProps ["columns";
+                gapless props.Gapless;
+                oneLine props.OneLine]
+            |> R.div
+
+    let row = Row.ƒ
 
     [<RequireQualifiedAccess>]
     module Column =
@@ -39,25 +68,64 @@ module Grid =
         | MLAuto
         | MRAuto
         | MXAuto
+        | Unset
 
-        type Prop =
-        | Kind of Kind
-        | Size of int
-        | SmallSize of int
-        | MediumSize of int
-        | LargeSize of int
+        type ColSize = int
 
-        let propToClass =
+        type SmallSize = ColSize
+
+        type MediumSize = ColSize
+
+        type LargeSize = ColSize
+
+        type Props = {
+            Kind: Kind
+            Size: ColSize
+            SmallSize: ColSize
+            MediumSize: ColSize
+            LargeSize: ColSize
+            HTMLProps: IHTMLProp list
+        }
+
+        let kind =
             function
-            | Kind MLAuto -> "col-ml-auto"
-            | Kind MRAuto -> "col-mr-auto"
-            | Kind MXAuto -> "col-mx-auto"
-            | Size n -> "col-" + n.ToString()
-            | SmallSize n -> "col-sm-" + n.ToString() 
-            | MediumSize n -> "col-md-" + n.ToString() 
-            | LargeSize n -> "col-lg-" + n.ToString() 
+            | MLAuto -> "col-ml-auto"
+            | MRAuto -> "col-mr-auto"
+            | MXAuto -> "col-mx-auto"
+            | Unset -> ""
 
-    let column props =
-        ["column"] @ List.map Column.propToClass props
-        |> combineProps
-        >> R.div 
+        let size (size: ColSize) =
+            match size with
+            | n -> "col-" + string n
+
+        let smallSize (size: SmallSize) =
+            match size with
+            | n -> "col-sm-" + string n
+
+        let mediumSize (size: MediumSize) =
+            match size with
+            | n -> "col-md-" + string n
+
+        let largeSize (size: LargeSize) =
+            match size with
+            | n -> "col-lg-" + string n
+
+        let defaults = {
+            Kind = Kind.Unset
+            Size = 12
+            SmallSize = 0
+            MediumSize = 0
+            LargeSize = 0
+            HTMLProps = []
+        }
+
+        let ƒ props =
+            props.HTMLProps
+            |> combineProps ["column";
+                kind props.Kind;
+                size props.Size;
+                smallSize props.SmallSize;
+                mediumSize props.MediumSize;
+                largeSize props.LargeSize]
+            |> R.div
+    let column = ƒ

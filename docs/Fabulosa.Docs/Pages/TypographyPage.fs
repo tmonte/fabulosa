@@ -4,12 +4,11 @@ open Fable.Helpers.React.Props
 open Fabulosa
 open Fabulosa.Docs.ListFlatMapExtension
 open ReactElementStringExtensions
-open Fabulosa.Docs.JavascriptMapping
 open Fabulosa.Docs.Domain
 
 module R = Fable.Helpers.React
 module Column =        
-    let ofElement n element = Grid.column [ Grid.Column.Size n ] [] [ element ]
+    let ofElement n element = Grid.Column.ƒ { Grid.Column.defaults with Size = n } [ element ]
     let half = ofElement 6
     let third = ofElement 4
     
@@ -134,7 +133,7 @@ let semanticTextElementsBlock =
         var
     ] 
     |> List.map Column.half 
-    |> Grid.row [] [] 
+    |> Grid.Row.ƒ Grid.Row.defaults
     |> Page.block "Semantic text elements" """""" 
     
 let blockquoteBlock =
@@ -185,7 +184,7 @@ let listBlock =
         getList Typography.ol Typography.li   
         descriptionList
     ]
-    |> Grid.row [] []
+    |> Grid.Row.ƒ Grid.Row.defaults
     |> Page.block "Lists" "" 
    
 let typographyPage = 

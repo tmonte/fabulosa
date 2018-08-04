@@ -90,7 +90,7 @@ module Button =
         Props.HTMLProps = []
     }
 
-    let button (props: Props) =
+    let ƒ (props: Props) =
         let buttonProps = [ "btn";
             kind props.Kind;
             color props.Color;
@@ -99,7 +99,10 @@ module Button =
             format props.Format ]
         combineProps buttonProps props.HTMLProps
         |> R.button
+    
+    let button = ƒ
 
+[<RequireQualifiedAccess>]
 module Anchor =
 
     open ClassNames
@@ -108,17 +111,19 @@ module Anchor =
 
     type Props = {
         props: Button.Props list
-        htmlProps: IHTMLProp list
+        HTMLProps: IHTMLProp list
     }
 
     let defaults = Button.defaults
 
-    let anchor (props: Button.Props) =
-        let buttonProps = [ "btn";
+    let ƒ (props: Button.Props) =
+        props.HTMLProps
+        |> combineProps [ "btn";
             Button.kind props.Kind;
             Button.color props.Color;
             Button.size props.Size;
             Button.state props.State;
             Button.format props.Format ]
-        combineProps buttonProps props.HTMLProps
         |> R.a
+    
+    let anchor = ƒ
