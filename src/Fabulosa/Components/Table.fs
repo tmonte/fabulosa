@@ -36,27 +36,93 @@ module Table =
             kind props.Kind]
         |> R.table
 
-    let thead = R.thead
+    [<RequireQualifiedAccess>]
+    module Head =
 
-    let tbody = R.tbody
+        [<RequireQualifiedAccess>]
+        type Props = {
+            HTMLProps: IHTMLProp list
+        }
+
+        let defaults = {
+            Props.HTMLProps = []
+        }
+
+        let ƒ (props: Props) =
+            props.HTMLProps
+            |> R.thead
+
+    [<RequireQualifiedAccess>]
+    module Body =
+
+        [<RequireQualifiedAccess>]
+        type Props = {
+            HTMLProps: IHTMLProp list
+        }
+
+        let defaults = {
+            Props.HTMLProps = []
+        }
+
+        let ƒ (props: Props) =
+            props.HTMLProps
+            |> R.tbody
 
     [<RequireQualifiedAccess>]
     module Row =
 
-        type Kind =
-        | Active
+        [<RequireQualifiedAccess>]
+        type Active = bool
 
-        type Prop =
-        | Kind of Kind
+        [<RequireQualifiedAccess>]
+        type Props = {
+            Active: Active
+            HTMLProps: IHTMLProp list
+        }
 
-        let propToClass =
+        let defaults = {
+            Props.Active = false
+            Props.HTMLProps = []
+        }
+
+        let active =
             function
-            | Kind Active -> "active"
+            | true -> "active"
+            | false -> ""
 
-    let tr props =
-        List.map Row.propToClass props
-        |> combineProps
-        >> R.tr
-    let td = R.td
+        let ƒ (props: Props) =
+            props.HTMLProps
+            |> combineProps [active props.Active]
+            |> R.tr
 
-    let th = R.th
+    [<RequireQualifiedAccess>]
+    module Column =
+
+        [<RequireQualifiedAccess>]
+        type Props = {
+            HTMLProps: IHTMLProp list
+        }
+
+        let defaults = {
+            Props.HTMLProps = []
+        }
+
+        let ƒ (props: Props) =
+            props.HTMLProps
+            |> R.td
+
+    [<RequireQualifiedAccess>]
+    module TitleColumn =
+
+        [<RequireQualifiedAccess>]
+        type Props = {
+            HTMLProps: IHTMLProp list
+        }
+
+        let defaults = {
+            Props.HTMLProps = []
+        }
+
+        let ƒ (props: Props) =
+            props.HTMLProps
+            |> R.th

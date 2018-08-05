@@ -12,20 +12,20 @@ let view () =
             Grid.Row.ƒ Grid.Row.defaults [
                 Grid.Column.ƒ { Grid.Column.defaults with Size = 4 } [
                     R.form [] [
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Name" }
                             Input.ƒ
                                 { Input.defaults with
                                     HTMLProps = [Placeholder "Please enter your name"] }
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Phone" }
                             Input.ƒ
                                 { Input.defaults with
                                     HTMLProps = [Placeholder "Please enter your phone number";
                                         Type "tel"] }
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Time" }
                             IconInput.ƒ IconInput.defaults [
                                 Input.ƒ
@@ -34,13 +34,13 @@ let view () =
                                 Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Time } []
                             ]
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Profile description" }
                             Textarea.ƒ
                                 { Textarea.defaults with
                                     HTMLProps = [Placeholder "Please enter a description"] } []
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Contact preferences" }
                             Radio.ƒ
                                 { Radio.defaults with
@@ -52,11 +52,11 @@ let view () =
                                     HTMLProps = [Name "contact-prefs"];
                                     Text = "Text me" }
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Profile preferences" }
                             Switch.ƒ { Switch.defaults with Text = "Link my github account" }
                         ]
-                        Group.ƒ Group.defaults [
+                        Form.Group.ƒ Form.Group.defaults [
                             Checkbox.ƒ { Checkbox.defaults with Text = "Remember me" }
                             Checkbox.ƒ { Checkbox.defaults with Text = "Forget me" }
                         ]

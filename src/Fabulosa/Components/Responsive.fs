@@ -3,38 +3,51 @@ namespace Fabulosa
 [<RequireQualifiedAccess>]
 module Responsive =
 
-    open ClassNames
+    open ReactAPIExtensions
+    open Fable.Import.React
 
+    [<RequireQualifiedAccess>]
     type Size =
     | XS
     | SM
     | MD
     | LG
     | XL
+    | Unset
 
-    type Props =
-    | Hide of Size
-    | Show of Size
+    [<RequireQualifiedAccess>]
+    type Props = {
+        Hide: Size
+        Show: Size
+    }
 
-    let propToClass =
+    let defaults = {
+        Props.Hide = Size.Unset
+        Props.Show = Size.Unset
+    }
+
+    let hide =
         function
-        | Hide XS -> "hide-xs"
-        | Hide SM -> "hide-sm"
-        | Hide MD -> "hide-md"
-        | Hide LG -> "hide-lg"
-        | Hide XL -> "hide-xl"
-        | Show XS -> "show-xs"
-        | Show SM -> "show-sm"
-        | Show MD -> "show-md"
-        | Show LG -> "show-lg"
-        | Show XL -> "show-xl"
+        | Size.XS -> "hide-xs"
+        | Size.SM -> "hide-sm"
+        | Size.MD -> "hide-md"
+        | Size.LG -> "hide-lg"
+        | Size.XL -> "hide-xl"
+        | Size.Unset -> ""
 
-    let responsiveP props element elementProps =
-        ["responsive"] @ List.map propToClass props
-        |> combineProps
-        >> element elementProps
+    let show =
+        function
+        | Size.XS -> "show-xs"
+        | Size.SM -> "show-sm"
+        | Size.MD -> "show-md"
+        | Size.LG -> "show-lg"
+        | Size.XL -> "show-xl"
+        | Size.Unset -> ""
 
-    let responsive props element =
-        ["responsive"] @ List.map propToClass props
-        |> combineProps
-        >> element
+    let ƒ (props: Props) (element: ReactElement) =
+        let responsiveProps = ["responsive"; hide props.Hide; show props.Show]
+        let el = element |> appendClass responsiveProps
+        Fable.Import.Browser.console.log el
+        el
+
+

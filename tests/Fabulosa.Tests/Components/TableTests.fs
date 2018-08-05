@@ -18,37 +18,31 @@ let tests =
 
         test "Head should be a react html node" {
             let node = R.Node ("thead", [], [])
-            let subject = Table.thead [] []
+            let subject = Table.Head.ƒ Table.Head.defaults []
             compareNode subject node
         }
         
         test "Body should be a react html node" {
             let node = R.Node ("tbody", [], [])
-            let subject = Table.tbody [] []
+            let subject = Table.Body.ƒ Table.Body.defaults []
             compareNode subject node
-        }
-
-        test "Row props should map to classes" {
-            let rowProps = [Table.Row.Kind Table.Row.Active]
-            let subject = List.map Table.Row.propToClass rowProps
-            Expect.contains subject "active" "Should contain active class"
         }
 
         test "Row should be a react html node" {
             let node = R.Node ("tr", [ClassName ""], [])
-            let subject = Table.tr [] [] []
+            let subject = Table.Row.ƒ Table.Row.defaults []
             compareNode subject node
         }
 
         test "Cell should be a react html node" {
             let node = R.Node ("td", [], [])
-            let subject = Table.td [] []
+            let subject = Table.Column.ƒ Table.Column.defaults []
             compareNode subject node
         }
 
         test "Header cell should be a react html node" {
             let node = R.Node ("th", [], [])
-            let subject = Table.th [] []
+            let subject = Table.TitleColumn.ƒ Table.TitleColumn.defaults []
             compareNode subject node
         }
     ]
