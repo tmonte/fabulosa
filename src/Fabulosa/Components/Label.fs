@@ -13,14 +13,17 @@ module Label =
     | Large
     | Unset
 
-    type Prop = {
+    [<RequireQualifiedAccess>]
+    type Props = {
         Size: Size
+        Text: string
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        Size = Size.Unset
-        HTMLProps = []
+        Props.Size = Size.Unset
+        Props.Text = "Checkbox"
+        Props.HTMLProps = []
     }
 
     let size =
@@ -29,11 +32,11 @@ module Label =
         | Size.Large -> "input-lg"
         | Size.Unset -> ""
 
-    let ƒ props label =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> combineProps["form-label";
             size props.Size]
         |> R.label
-        <| [R.str label]
+        <| [R.str props.Text]
 
     let label = ƒ

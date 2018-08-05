@@ -5,23 +5,36 @@ module Table =
 
     open ClassNames
     module R = Fable.Helpers.React
+    open R.Props
 
+    [<RequireQualifiedAccess>]
     type Kind =
     | Striped
     | Hover
+    | Unset
 
-    type Prop =
-    | Kind of Kind
+    [<RequireQualifiedAccess>]
+    type Props = {
+        Kind: Kind
+        HTMLProps: IHTMLProp list
+    }
 
-    let propToClass =
+    let defaults = {
+        Props.Kind = Kind.Unset
+        Props.HTMLProps = []
+    }
+
+    let kind =
         function
-        | Kind Striped -> "table-striped"
-        | Kind Hover -> "table-hover"
+        | Kind.Striped -> "table-striped"
+        | Kind.Hover -> "table-hover"
+        | Kind.Unset -> ""
 
-    let table props =
-        ["table"] @ List.map propToClass props
-        |> combineProps
-        >> R.table
+    let ƒ (props: Props) =
+        props.HTMLProps
+        |> combineProps ["table";
+            kind props.Kind]
+        |> R.table
 
     let thead = R.thead
 

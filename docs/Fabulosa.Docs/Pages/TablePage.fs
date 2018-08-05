@@ -7,7 +7,7 @@ let view () =
     R.div [] [
         R.h2 [] [R.str "Table"]
         R.p [] [R.str "Tables include default styles for tables and data sets."]
-        Table.table [Table.Kind Table.Striped] [] [
+        Table.ƒ { Table.defaults with Kind = Table.Kind.Striped } [
             Table.thead [] [
                 Table.tr [] [] [
                     Table.th [] [R.str "Column 1"]

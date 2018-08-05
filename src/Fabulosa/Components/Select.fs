@@ -13,14 +13,15 @@ module Select =
     | Large
     | Unset
 
+    [<RequireQualifiedAccess>]
     type Props = {
         Size: Size
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        Size = Size.Unset
-        HTMLProps = []
+        Props.Size = Size.Unset
+        Props.HTMLProps = []
     }
 
     let size =
@@ -29,7 +30,7 @@ module Select =
         | Size.Large -> "select-lg"
         | Size.Unset -> ""
 
-    let ƒ props =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> combineProps ["form-select";
             size props.Size]
@@ -40,15 +41,16 @@ module Option =
     module R = Fable.Helpers.React
     open R.Props
 
+    [<RequireQualifiedAccess>]
     type Props = {
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        HTMLProps = []
+        Props.HTMLProps = []
     }
 
-    let ƒ props =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> R.option
 
@@ -57,14 +59,15 @@ module OptionGroup =
     module R = Fable.Helpers.React
     open R.Props
 
+    [<RequireQualifiedAccess>]
     type Props = {
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        HTMLProps = []
+        Props.HTMLProps = []
     }
 
-    let ƒ props =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> R.optgroup

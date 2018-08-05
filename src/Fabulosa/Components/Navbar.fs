@@ -7,18 +7,19 @@ module Navbar =
     open R.Props
     open ClassNames
 
+    [<RequireQualifiedAccess>]
     type Props = {
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        HTMLProps = []
+        Props.HTMLProps = []
     }
 
     [<RequireQualifiedAccess>]
     module Header =
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["navbar"]
             |> R.header
@@ -28,7 +29,7 @@ module Navbar =
     [<RequireQualifiedAccess>]
     module Section =
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["navbar-section"]
             |> R.section
@@ -38,7 +39,7 @@ module Navbar =
     [<RequireQualifiedAccess>]
     module Center =
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["navbar-center"]
             |> R.section
@@ -48,7 +49,7 @@ module Navbar =
     [<RequireQualifiedAccess>]
     module Brand =
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["navbar-brand"]
             |> R.a

@@ -13,14 +13,15 @@ module Input =
     | Large
     | Unset
 
-    type Prop = {
+    [<RequireQualifiedAccess>]
+    type Props = {
         Size: Size
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        Size = Size.Unset
-        HTMLProps = []
+        Props.Size = Size.Unset
+        Props.HTMLProps = []
     }
 
     let size =
@@ -29,7 +30,7 @@ module Input =
         | Size.Large -> "input-lg"
         | Size.Unset -> ""
 
-    let ƒ props =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> combineProps ["form-input";
             size props.Size]
@@ -50,12 +51,13 @@ module IconInput =
     | Left
     | Right
 
+    [<RequireQualifiedAccess>]
     type Props = {
         Position: Position
     }
 
     let defaults = {
-        Position = Position.Left
+        Props.Position = Position.Left
     }
 
     let position =
@@ -63,7 +65,7 @@ module IconInput =
         | Position.Left -> "has-icon-left"
         | Position.Right -> "has-icon-right"
 
-    let ƒ props (children: ReactElement list) =
+    let ƒ (props: Props) (children: ReactElement list) =
         let containerClasses =
             [ position props.Position ]
             |> String.concat " "

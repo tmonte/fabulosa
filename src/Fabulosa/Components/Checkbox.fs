@@ -7,32 +7,33 @@ module Checkbox =
     open R.Props
 
     [<RequireQualifiedAccess>]
-    type Alignment =
-    | Inline
-    | Unset
+    type Inline = bool
 
+    [<RequireQualifiedAccess>]
     type Props = {
-        Alignment: Alignment
+        Inline: Inline
+        Text: string
         HTMLProps: IHTMLProp list
     }
-   
-    let alignment =
+
+    let inlineCheckbox =
         function
-        | Alignment.Inline -> "form-inline"
-        | Alignment.Unset -> ""
+        | true -> "form-inline"
+        | false -> ""
 
     let defaults = {
-        Alignment = Alignment.Unset
-        HTMLProps = []
+        Props.Inline = false
+        Props.Text = "Label"
+        Props.HTMLProps = []
     }
 
-    let ƒ props label =
+    let ƒ (props: Props) =
         let containerClasses = ["form-checkbox";
-            alignment props.Alignment ] |> String.concat " "
+            inlineCheckbox props.Inline ] |> String.concat " "
         R.label [ClassName containerClasses] [
             R.input props.HTMLProps
             R.i [ClassName "form-icon"] []
-            R.str label
+            R.str props.Text
         ]
 
     let checkbox = ƒ

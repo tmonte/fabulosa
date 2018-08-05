@@ -57,6 +57,7 @@ module Icon =
     | X4
     | Unset
 
+    [<RequireQualifiedAccess>]
     type Props = {
         Kind: Kind
         Size: Size
@@ -64,9 +65,9 @@ module Icon =
     }
 
     let defaults = {
-        Kind = Kind.Unset
-        Size = Size.Unset
-        HTMLProps = []
+        Props.Kind = Kind.Unset
+        Props.Size = Size.Unset
+        Props.HTMLProps = []
     }
 
     let kind =
@@ -119,7 +120,7 @@ module Icon =
         | Size.X4 -> "icon-4x"
         | Size.Unset -> ""
 
-    let ƒ props =
+    let ƒ (props: Props) =
         props.HTMLProps
         |> combineProps ["icon";
             kind props.Kind;

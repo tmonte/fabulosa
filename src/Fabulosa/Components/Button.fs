@@ -99,29 +99,8 @@ module Button =
             format props.Format ]
         combineProps buttonProps props.HTMLProps
         |> R.button
-    
+
     let button = ƒ
-
-[<RequireQualifiedAccess>]
-module Pacoquinha =
-    open ClassNames
-    module R = Fable.Helpers.React
-    open R.Props
-    
-    type Sabor =
-    | Doce
-    | Salgada
-    
-    type Props = {
-        Sabor: Sabor
-    }
-        
-    let defaults = {
-        Sabor = Sabor.Doce
-    }
-
-
-    let pacoquinha (props: Props) = R.span []
 
 [<RequireQualifiedAccess>]
 module Anchor =

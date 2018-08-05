@@ -31,6 +31,7 @@ module Grid =
         [<RequireQualifiedAccess>]
         type OneLine = bool
 
+        [<RequireQualifiedAccess>]
         type Props = {
             Gapless: Gapless
             OneLine: OneLine
@@ -38,9 +39,9 @@ module Grid =
         }
 
         let defaults = {
-            Gapless = false
-            OneLine = false
-            HTMLProps = []
+            Props.Gapless = false
+            Props.OneLine = false
+            Props.HTMLProps = []
         }
 
         let gapless =
@@ -53,7 +54,7 @@ module Grid =
             | true -> "col-oneline"
             | false -> ""
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["columns";
                 gapless props.Gapless;
@@ -90,6 +91,7 @@ module Grid =
         [<RequireQualifiedAccess>]
         type XLSize = ColSize
 
+        [<RequireQualifiedAccess>]
         type Props = {
             Kind: Kind
             Size: ColSize
@@ -133,17 +135,17 @@ module Grid =
              | n -> "col-lg-" + string n
 
         let defaults = {
-            Kind = Kind.Unset
-            Size = 12
-            XSSize = 0
-            SMSize = 0
-            MDSize = 0
-            LGSize = 0
-            XLSize = 0
-            HTMLProps = []
+            Props.Kind = Kind.Unset
+            Props.Size = 12
+            Props.XSSize = 0
+            Props.SMSize = 0
+            Props.MDSize = 0
+            Props.LGSize = 0
+            Props.XLSize = 0
+            Props.HTMLProps = []
         }
 
-        let ƒ props =
+        let ƒ (props: Props) =
             props.HTMLProps
             |> combineProps ["column";
                 kind props.Kind;
