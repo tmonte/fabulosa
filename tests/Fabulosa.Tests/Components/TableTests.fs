@@ -12,14 +12,8 @@ let tests =
 
         test "Table should be a react html node" {
             let node = R.Node ("table", [ClassName "table"], [])
-            let subject = Table.table [] [] []
+            let subject = Table.ƒ Table.defaults []
             compareNode subject node
-        }
-
-        test "Table props should map to classes" {
-            let tableProps = [Table.Kind Table.Striped]
-            let subject = List.map Table.propToClass tableProps
-            Expect.contains subject "table-striped" "Should contain striped class"
         }
 
         test "Head should be a react html node" {

@@ -12,7 +12,7 @@ let tests =
 
         test "Button should be a react html node" {
             let node = R.Node ("button", [ClassName "btn"], [])
-            let subject = Button.button Button.defaults []
+            let subject = Button.ƒ Button.defaults []
             printfn "%A" subject
             compareNode subject node
         }
