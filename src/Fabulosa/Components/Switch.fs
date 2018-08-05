@@ -6,11 +6,17 @@ module Switch =
     module R = Fable.Helpers.React
     open R.Props
 
-    let input htmlProps label =
-        let inputProps: IHTMLProp list = [Type "checkbox"]
-        let props = htmlProps @ inputProps
+    type Props = {
+        HTMLProps: IHTMLProp list
+    }
+
+    let defaults = {
+        HTMLProps = []
+    }
+
+    let ƒ props text =
         R.label [ClassName "form-switch"] [
-            R.input props
+            R.input <| props.HTMLProps @ [Type "checkbox"]
             R.i [ClassName "form-icon"] []
-            R.str label
+            R.str text
         ]

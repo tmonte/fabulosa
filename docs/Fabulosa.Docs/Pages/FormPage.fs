@@ -27,7 +27,7 @@ let view () =
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Time"
-                            IconInput.iconInput [] [] [
+                            IconInput.ƒ IconInput.defaults [
                                 Input.ƒ
                                     { Input.defaults with
                                         HTMLProps = [Placeholder "Please enter something"] }
@@ -36,7 +36,9 @@ let view () =
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Profile description"
-                            Textarea.textarea [Placeholder "Please enter a description"] []
+                            Textarea.ƒ
+                                { Textarea.defaults with
+                                    HTMLProps = [Placeholder "Please enter a description"] } []
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Contact preferences"
@@ -51,7 +53,7 @@ let view () =
                         ]
                         Form.group [] [
                             Label.ƒ Label.defaults "Profile preferences"
-                            Switch.input [] "Link my github account"
+                            Switch.ƒ Switch.defaults "Link my github account"
                         ]
                         Form.group [] [
                             Checkbox.ƒ Checkbox.defaults "Remember me"

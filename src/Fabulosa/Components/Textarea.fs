@@ -6,8 +6,17 @@ module Textarea =
     open ClassNames
 
     module R = Fable.Helpers.React
+    open R.Props
 
-    let textarea =
-        ["form-input"]
-        |> combineProps
-        >> R.textarea
+    type Props = {
+        HTMLProps: IHTMLProp list
+    }
+
+    let defaults = {
+        HTMLProps = []
+    }
+
+    let ƒ props =
+        props.HTMLProps
+        |> combineProps ["form-input"]
+        |> R.textarea

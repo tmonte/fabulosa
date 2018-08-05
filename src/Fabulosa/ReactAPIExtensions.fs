@@ -5,32 +5,44 @@ module ReactAPIExtensions =
     open Fable.Core
     open Fable.Import.React
     module R = Fable.Helpers.React
+    open Fable.Core.JsInterop
 
-    [<Pojo>]
-    type Elem<'a> = {
-        ``type``: string
-        props: 'a
-    }
+    [<Emit("$0 === undefined")>]
+    let isUndefined (x: 'a) : bool = jsNative
+
+    [<Emit("undefined")>]
+    let undefined : obj = jsNative
 
     [<Pojo>]
     type NativeProps = {
-        children: Elem<NativeProps> list
+        children: obj
         className: string
     }
 
-    let getChildren =
-        function
-        | Some object -> object
-        | None -> []
+    [<Pojo>]
+    type NativeElement = {
+        ``type``: string
+        props: NativeProps
+    }
+
+    let toReactElement element =
+        if isUndefined element.props.children then
+            R.createElement (element.``type``, element.props, [] :> obj)
+        else
+            R.createElement (element.``type``, element.props, element.props.children)
 
     let extractProps (element: ReactElement) =
-        let native = unbox<Elem<NativeProps>> element
+        let native = unbox<NativeElement> element
         (native.``type``, native.props, native.props.children)
 
-    let transform mapping props element =
+    let appendClass classes element =
         let (elType, elProps, elChilren) = extractProps element
+        let originalClasses = if isUndefined elProps.className then "" else elProps.className
         let appended =
-            [elProps.className]
-            @ List.map mapping props
+            [originalClasses]
+            @ classes
             |> String.concat " "
-        R.createElement (elType, {elProps with className = appended}, elChilren)
+        toReactElement {
+            ``type`` = elType;
+            props = {elProps with className = appended}
+        }

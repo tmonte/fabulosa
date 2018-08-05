@@ -40,10 +40,10 @@ module Input =
 [<RequireQualifiedAccess>]
 module IconInput =
 
-    open ClassNames
     open ReactAPIExtensions
     open Fable.Import.React
     module R = Fable.Helpers.React
+    open R.Props
 
     [<RequireQualifiedAccess>]
     type Position =
@@ -63,17 +63,11 @@ module IconInput =
         | Position.Left -> "has-icon-left"
         | Position.Right -> "has-icon-right"
 
-    let icon =
-        function
-        | _ -> "form-icon"
-
-    //let makeIcon =
-        //transform (fun _ -> "form-icon") [""]
-
-    let iconInput props htmlProps (children: ReactElement list) =
-        let t = extractProps <| R.div [] [R.p [] []]
-        Fable.Import.Browser.console.log t
-        R.div [] [
+    let ƒ props (children: ReactElement list) =
+        let containerClasses =
+            [ position props.Position ]
+            |> String.concat " "
+        R.div [ClassName containerClasses] [
             children.[0]
-            children.[1]
+            children.[1] |> appendClass ["form-icon"]
         ]
