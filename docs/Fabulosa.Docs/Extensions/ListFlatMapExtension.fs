@@ -1,4 +1,4 @@
-namespace Fabulosa.Docs.ListFlatMapExtension
+namespace Fabulosa.Docs.Extensions
 
 module List = 
     let flatMap list = List.collect (id) list

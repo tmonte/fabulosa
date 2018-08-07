@@ -9,11 +9,6 @@ open Fable.Import.React
 open ReactElementStringExtensions
 
 module Highlight =
-    importAll "highlight.js/lib/highlight.js"
-//    importAll "prismjs/components/prism-clike.js"
-//    importAll "prismjs/components/prism-fsharp.js"
-
-
     type HighlightResult = 
         {
             language: string
@@ -25,6 +20,10 @@ module Highlight =
     let private highlighJs: obj = jsNative
     
     [<Import("highlight", from="highlight.js")>] 
-    let private highlightCode(name, value, ignoreIllegals):HighlightResult = jsNative
+    let private highlightCode(name: string, value: string, ignoreIllegals):HighlightResult = jsNative
     
-    let highlight code = { __html = highlightCode("fsharp", code, true).value }
+    let highlight language code = { __html = highlightCode(language, code, true).value }
+    
+    let fsharp = highlight "fsharp"
+    let html = highlight "html"
+    
