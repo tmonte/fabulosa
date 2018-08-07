@@ -6,11 +6,13 @@
     <Compile Include="JavascriptMappings/PrismJS.fs" />
     <Compile Include="Domain/Page.fs" />
     <Compile Include="Extensions/ListFlatMapExtension.fs" />
+    <Compile Include="JavascriptMappings\HighlightJS.fs" />
     <Compile Include="Pages/ButtonPage.fs" />
     <Compile Include="Pages/GridPage.fs" />
     <Compile Include="Pages/FormPage.fs" />
     <Compile Include="Pages/TablePage.fs" />
     <Compile Include="Pages/TypographyPage.fs" />
+    <Compile Include="Pages/CodePage.fs" />
     <Compile Include="Pages/Home.fs" />
     <Compile Include="App.fs" />
     <None Include="paket.references" />

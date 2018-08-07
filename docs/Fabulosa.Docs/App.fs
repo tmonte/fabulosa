@@ -14,6 +14,7 @@ open R.Props
 
 type Page =
     | ButtonPage
+    | CodePage
     | FormPage
     | GridPage
     | TablePage
@@ -29,6 +30,7 @@ type Message = int
 let toHash page =
     match page with
     | ButtonPage -> "#button"
+    | CodePage -> "#code"
     | FormPage -> "#form"
     | GridPage -> "#grid"
     | HomePage -> "#home"
@@ -38,6 +40,7 @@ let toHash page =
 let pageParser: Parser<Page->Page,Page> =
     oneOf [
         map ButtonPage (s "button")
+        map CodePage (s "code")
         map GridPage (s "grid")
         map FormPage (s "form")
         map HomePage (s "home")
@@ -64,6 +67,7 @@ let menu currentPage =
         R.ul [ ClassName "nav" ] [
             menuItem "Home" HomePage currentPage
             menuItem "Button" ButtonPage currentPage
+            menuItem "Code" CodePage currentPage
             menuItem "Form" FormPage currentPage
             menuItem "Grid" GridPage currentPage
             menuItem "Table" TablePage currentPage
@@ -92,6 +96,7 @@ let view (model: Model) (dispatch: Dispatch<'a>) =
     let pageHtml =
         function
         | ButtonPage -> ButtonPage.view ()
+        | CodePage -> CodePage.view ()
         | FormPage -> FormPage.view()
         | GridPage -> GridPage.view ()
         | HomePage -> Home.view ()
