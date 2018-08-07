@@ -5,8 +5,8 @@
   <ItemGroup>
     <Compile Include="JavascriptMappings/PrismJS.fs" />
     <Compile Include="JavascriptMappings/HighlightJS.fs" />
-    <Compile Include="Domain/Page.fs" />
     <Compile Include="Extensions/ListFlatMapExtension.fs" />
+    <Compile Include="Domain/Page.fs" />
     <Compile Include="Pages/ButtonPage.fs" />
     <Compile Include="Pages/GridPage.fs" />
     <Compile Include="Pages/FormPage.fs" />

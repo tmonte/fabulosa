@@ -2,7 +2,7 @@ module TypographyPage
 open Fable.Helpers
 open Fable.Helpers.React.Props
 open Fabulosa
-open Fabulosa.Docs.ListFlatMapExtension
+open Fabulosa.Docs.Extensions
 open ReactElementStringExtensions
 open Fabulosa.Docs.Domain
 
