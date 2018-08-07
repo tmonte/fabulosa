@@ -40,3 +40,4 @@ module Label =
         <| [R.str props.Text]
 
     let label = ƒ
+    

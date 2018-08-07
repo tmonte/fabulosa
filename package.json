@@ -28,7 +28,6 @@
     "webpack-dev-server": "2.9.4"
   },
   "dependencies": {
-    "prismjs": "^1.15.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "spectre.css": "^0.5.3"
