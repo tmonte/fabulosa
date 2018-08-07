@@ -6,24 +6,33 @@ open Fabulosa
 open ReactElementStringExtensions
 open Fabulosa.Docs.JavascriptMapping
 open Fabulosa.Docs.Domain
+open Fabulosa.Docs.JavascriptMapping
 
 
 module R = Fable.Helpers.React
 
 let p = ofString Typography.p
   
-let htmlCode  = """
+let html = """ 
+<!-- code snippets -->
+<button class="btn">
+ Submit
+</button>
+""" 
+  
+  
+let htmlCodeExampleInFsharp  = """
 let code  = @"<!-- code snippets -->
 <button class='btn'>
  Submit
 </button>"
 
-let myCustomComponent = 
-    { 
-        Code.defaults (Highlight.html htmlCode) with 
-            Language = "HTML" 
-    }
-    |> Code.code
+let myCustomComponent = Code.ƒ {
+    Code.defaults with 
+        Code = Highlight.html html
+        Language = "HTML"
+        
+}      
 """  
 
 let fsharpCode = """
@@ -38,11 +47,11 @@ type Bam =
 | B2
 "
 
-let myCustomComponent = 
-    Highlight.fsharp fsharpCode 
-    |> Code.defaults
-    |> Code.code 
-
+let myCustomComponent = Code.ƒ {
+    Code.defaults with 
+        Code = Highlight.fsharp htmlCodeExampleInFsharp
+        
+}  
 """
   
 let codePage = 
@@ -56,14 +65,22 @@ let codePage =
                 
             "Usage" |> ofString Typography.h2
                         
-            Highlight.fsharp fsharpCode 
-            |> Code.defaults
-            |> Code.code 
+            Code.ƒ { 
+                Code.defaults with Code = Highlight.fsharp fsharpCode 
+            }                  
             
-            Highlight.fsharp htmlCode 
-            |> Code.defaults
-            |> Code.code 
-            
+            Code.ƒ {
+                Code.defaults with 
+                    Code = Highlight.fsharp htmlCodeExampleInFsharp
+                    
+            }  
+             
+            Code.ƒ {
+                Code.defaults with 
+                    Code = Highlight.html html
+                    Language = "HTML"
+                    
+            }      
         ]
 
     

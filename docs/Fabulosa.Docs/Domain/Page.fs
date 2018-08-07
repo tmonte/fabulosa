@@ -6,6 +6,8 @@ module Page =
     open Fabulosa
     open ReactElementStringExtensions
     open Fabulosa.Docs.JavascriptMapping
+    open Fabulosa.Docs.JavascriptMapping
+
     module R = Fable.Helpers.React
     
     let page header subheader body = 
@@ -25,7 +27,7 @@ module Page =
                 R.div [ClassName "code-container"]
                     [
                         [
-                            R.code [ClassName "prism-code-reset"; DangerouslySetInnerHTML <| Prism.highlight stringfiedCode] []
+                            Code.f { Code.defaults with Code = Highlight.fsharp stringfiedCode }
                         ]
                         |> R.pre [ClassName "language-fsharp"] 
                     ]

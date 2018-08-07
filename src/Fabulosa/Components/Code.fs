@@ -13,12 +13,14 @@ module Code =
         Language: string
     }
     
-    let defaults code = {
-        Code = code
+    let defaults = {
+        Code = { __html = ""}
         Language = "F#"
     }
     
-    let code props = 
+    let ƒ props = 
         R.pre [ClassName "code"; Data ("lang", props.Language)] [
             R.code [DangerouslySetInnerHTML props.Code] []            
         ]
+        
+    let f = ƒ

@@ -5,7 +5,6 @@
 
 //Import docs only for the purposes of the component library
 @import "../node_modules/spectre.css/docs/dist/docs";
-@import "../node_modules/prismjs/themes/prism-okaidia";
 
 html, body {
     height: 100vh;
@@ -60,13 +59,4 @@ html, body {
     font-size: .65rem;
     font-weight: 600;
     text-transform: uppercase;
-}
-
-.prism-code-reset {
-    border-radius: inherit;
-    line-height: inherit;
-    color: inherit;
-    background: inherit;
-    font-size: inherit;
-    padding: 0 0;
 }
