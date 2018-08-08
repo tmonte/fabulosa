@@ -14,12 +14,12 @@
     <Compile Include="Components/Label.fs" />
     <Compile Include="Components/Radio.fs" />
     <Compile Include="Components/Icon.fs" />
-    <Compile Include="Components/Input.fs" />
     <Compile Include="Components/Button.fs" />
     <Compile Include="Components/Checkbox.fs" />
     <Compile Include="Components/Switch.fs" />
     <Compile Include="Components/Select.fs" />
     <Compile Include="Components/Textarea.fs" />
+    <Compile Include="Components/Input.fs" />
     <Compile Include="Components/Form.fs" />
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Typography.fs" />
