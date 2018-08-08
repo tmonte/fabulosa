@@ -27,12 +27,12 @@ let view () =
                         ]
                         Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Time" }
-                            IconInput.ƒ IconInput.defaults [
-                                Input.ƒ
-                                    { Input.defaults with
-                                        HTMLProps = [Placeholder "Please enter something"] }
-                                Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Time } []
-                            ]
+                            IconInput.ƒ
+                                { IconInput.defaults with
+                                    InputProps =
+                                        { Input.defaults with
+                                            HTMLProps = [Placeholder "Please enter something"] };
+                                    IconProps = { Icon.defaults with Kind = Icon.Kind.Time } }
                         ]
                         Form.Group.ƒ Form.Group.defaults [
                             Label.ƒ { Label.defaults with Text = "Profile description" }
@@ -59,6 +59,9 @@ let view () =
                         Form.Group.ƒ Form.Group.defaults [
                             Checkbox.ƒ { Checkbox.defaults with Text = "Remember me" }
                             Checkbox.ƒ { Checkbox.defaults with Text = "Forget me" }
+                        ]
+                        Form.Group.ƒ Form.Group.defaults [
+                            InputGroup.ƒ InputGroup.defaults []
                         ]
                         Anchor.ƒ Anchor.defaults [R.str "Submit"]
                     ]
