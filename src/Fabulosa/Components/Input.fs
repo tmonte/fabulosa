@@ -83,15 +83,8 @@ module IconInput =
 [<RequireQualifiedAccess>]
 module InputGroup =
 
-    open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
-
-    type AddOn =
-    | Radio of Radio.Props
-    | Checkbox of Checkbox.Props
-    | Switch of Switch.Props
-    | Unset
 
     [<RequireQualifiedAccess>]
     type WithButton =
@@ -104,14 +97,12 @@ module InputGroup =
 
     [<RequireQualifiedAccess>]
     type Props = {
-        AddonProps: AddOn
         WithButton: WithButton
         WithText: WithText
         HTMLProps: IHTMLProp list
     }
 
     let defaults = {
-        Props.AddonProps = AddOn.Unset
         Props.WithButton = WithButton.Unset
         Props.WithText = WithText.Unset
         Props.HTMLProps = []
@@ -134,7 +125,7 @@ module InputGroup =
 
     let empty = R.str ""
 
-    let ƒ (props: Props) (children: ReactElement list) =
+    let ƒ (props: Props) children =
         let button = button props.WithButton
         let text = text props.WithText
         R.div [ClassName "input-group"] [
