@@ -1,10 +1,10 @@
 ﻿module SwitchTests
 
 open Expecto
+open Expect
 open Fabulosa
 module R = Fable.Helpers.React
 open R.Props
-open Fabulosa.Tests.Extensions.TestNodeExtensions
 
 [<Tests>]
 let tests =
@@ -13,24 +13,45 @@ let tests =
         test "Switch default" {
             let props = Switch.defaults
             let switch = Switch.ƒ props
-            switch |> hasClasses ["form-switch"]
-            switch |> hasDescendent (R.input [Type "checkbox"])
-            switch |> hasDescendent (R.i [ClassName "form-icon"] [])
-            switch |> hasDescendent (R.str "Label")
+            let input =
+                R.input [Type "checkbox"]
+                |> ReactNode.unit
+            let icon =
+                R.i [ClassName "form-icon"] []
+                |> ReactNode.unit
+            let label =
+                R.str "Label"
+                |> ReactNode.unit
+
+            switch
+            |> ReactNode.unit
+            >>= hasUniqueClass "form-switch"
+            >>= hasChild 1 input
+            >>= hasChild 1 icon
+            |> hasChild 1 label
         }
 
         test "Switch text" {
             let props = { Switch.defaults with Text = "custom" }
             let switch = Switch.ƒ props
-            switch |> hasClasses ["form-switch"]
-            switch |> hasDescendent (R.str "custom")
+            let label =
+                R.str "custom"
+                |> ReactNode.unit
+
+            switch
+            |> ReactNode.unit
+            >>= hasUniqueClass "form-switch"
+            |> hasChild 1 label
         }
 
         test "Switch html props" {
             let props = { Switch.defaults with HTMLProps = [ClassName "custom"] }
             let switch = Switch.ƒ props
-            switch |> hasClasses ["form-switch"]
-            switch |> hasDescendent (R.input [ClassName "custom"])
+            
+            switch
+            |> ReactNode.unit
+            >>= hasUniqueClass "form-switch"
+            |> hasDescendentClass "custom"
         }
 
     ]

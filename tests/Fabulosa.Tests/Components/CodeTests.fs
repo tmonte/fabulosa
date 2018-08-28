@@ -1,14 +1,10 @@
 module CodeTests
 
 open Expecto
-open ReactNode
+open Expect
 open Fabulosa
 module R = Fable.Helpers.React
 open R.Props
-open Fable.Import.React
-open Fabulosa.Tests.Extensions
-open Fabulosa.Tests.Extensions.Props
-open System.Reflection
 
 
 [<Tests>]
@@ -17,13 +13,15 @@ let tests =
         ptest "Code should be a react html node when defaults are provided" {
             let codeElement = Code.ƒ Code.defaults
             let data = Data ("lang", "F#")
-            let innerCodeElement = R.code [DangerouslySetInnerHTML {__html = ""}] []
+            let innerCodeElement =
+                R.code [DangerouslySetInnerHTML {__html = ""}] []
+                |> ReactNode.unit
             
             codeElement
-            |> Expect.hasUniqueClassBind "code"
-            |> Expect.containsPropBind data
-            |> Expect.containsChild 1 innerCodeElement
-            |> ignore
+            |> ReactNode.unit
+            >>= hasUniqueClass "code"
+            >>= hasProp data
+            |> Expect.hasChild 1 innerCodeElement
         }
     ]
     

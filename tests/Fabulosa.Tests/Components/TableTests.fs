@@ -1,11 +1,10 @@
 module TableTests
 
 open Expecto
-open ReactNode
+open Expect
 open Fable.Helpers.React.Props
 open Fabulosa
 module R = Fable.Helpers.React
-open Fabulosa.Tests.Extensions.TestNodeExtensions
 
 [<Tests>]
 let tests =
@@ -13,7 +12,10 @@ let tests =
 
         test "Table default" {
             let table = Table.ƒ Table.defaults []
-            table |> hasClasses ["table"]
+            
+            table
+            |> ReactNode.unit
+            |> hasUniqueClass "table"
         }
 
         test "Table kind striped" {
@@ -22,7 +24,10 @@ let tests =
                     Table.defaults with
                         Kind = Table.Kind.Striped
                 } []
-            table |> hasClasses ["table-striped"]
+            
+            table
+            |> ReactNode.unit
+            |> hasClass "table-striped"
         }
 
         test "Table kind hover" {
@@ -31,7 +36,10 @@ let tests =
                     Table.defaults with
                         Kind = Table.Kind.Hover
                 } []
-            table |> hasClasses ["table-hover"]
+            
+            table
+            |> ReactNode.unit
+            |> hasClass "table-hover"
         }
 
         test "Table children with name" {
@@ -39,8 +47,11 @@ let tests =
             let grandChild = R.span [] []
             let child = R.div [] [grandChild]
             let table = Table.ƒ props [child]
-            table |> hasDescendent child
-            table |> hasDescendent grandChild
+            
+            table
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Table children with class" {
@@ -48,8 +59,11 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let table = Table.ƒ props [child]
-            table |> hasDescendent child
-            table |> hasDescendent grandChild
+            
+            table
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Head html props" {
@@ -58,7 +72,10 @@ let tests =
                     Table.Head.defaults with
                         HTMLProps = [ClassName "custom"]
                 } []
-            head |> hasClasses ["custom"]
+            
+            head
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
         test "Head children" {
@@ -66,8 +83,11 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let head = Table.Head.ƒ props [child]
-            head |> hasDescendent child
-            head |> hasDescendent grandChild
+            
+            head
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Body html props" {
@@ -76,16 +96,22 @@ let tests =
                     Table.Body.defaults with
                         HTMLProps = [ClassName "custom"]
                 } []
-            body |> hasClasses ["custom"]
+            
+            body
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
         test "Body children" {
             let props = Table.Body.defaults
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
-            let table = Table.Body.ƒ props [child]
-            table |> hasDescendent child
-            table |> hasDescendent grandChild
+            let body = Table.Body.ƒ props [child]
+            
+            body
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Row html props" {
@@ -94,7 +120,10 @@ let tests =
                     Table.Row.defaults with
                         HTMLProps = [ClassName "custom"]
                 } []
-            row |> hasClasses ["custom"]
+            
+            row
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
         test "Row children" {
@@ -102,8 +131,11 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let row = Table.Row.ƒ props [child]
-            row |> hasDescendent child
-            row |> hasDescendent grandChild
+            
+            row
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Row active" {
@@ -112,7 +144,10 @@ let tests =
                     Table.Row.defaults with
                         Active = true
                 } []
-            row |> hasClasses ["active"]
+            
+            row
+            |> ReactNode.unit
+            |> hasClass "active"
         }
 
         test "Column html props" {
@@ -121,7 +156,10 @@ let tests =
                     Table.Column.defaults with
                         HTMLProps = [ClassName "custom"]
                 } []
-            column |> hasClasses ["custom"]
+            
+            column
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
         test "Column children" {
@@ -129,8 +167,11 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let column = Table.Column.ƒ props [child]
-            column |> hasDescendent child
-            column |> hasDescendent grandChild
+            
+            column
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
 
         test "Title column html props" {
@@ -139,7 +180,10 @@ let tests =
                     Table.TitleColumn.defaults with
                         HTMLProps = [ClassName "custom"]
                 } []
-            titleColumn |> hasClasses ["custom"]
+            
+            titleColumn
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
         test "Title column children" {
@@ -147,7 +191,10 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let titleColumn = Table.TitleColumn.ƒ props [child]
-            titleColumn |> hasDescendent child
-            titleColumn |> hasDescendent grandChild
+            
+            titleColumn
+            |> ReactNode.unit
+            >>= hasChild 1 (child |> ReactNode.unit)
+            |> hasChild 1 (grandChild |> ReactNode.unit)
         }
     ]
