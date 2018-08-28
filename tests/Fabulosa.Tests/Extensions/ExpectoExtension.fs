@@ -4,15 +4,13 @@ module Expect
     module R = Fable.Helpers.React
     open R.Props
     open Fabulosa.Extensions
-    
-    let bind f e = 
+
+    let (|>!) node func =
         try 
-            f e
-            e
+            func node
+            node
         with 
         | x -> raise x
-
-    let (|>!) m f = bind f m
 
     let hasUniqueClass expectedClasses node = 
         let actualClasses = node |> ReactNode.className
