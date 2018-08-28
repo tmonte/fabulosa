@@ -12,7 +12,7 @@ module Expect
         with 
         | x -> raise x
 
-    let (>>=) m f = bind f m
+    let (|>!) m f = bind f m
 
     let hasUniqueClass expectedClasses node = 
         let actualClasses = node |> ReactNode.className
