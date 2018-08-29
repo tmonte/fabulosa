@@ -12,6 +12,18 @@ module Expect
         with 
         | x -> raise x
 
+    let private parseDependent (expectedClassName: string) (node: ReactNode.T) =
+        let descendentClasses = node |> ReactNode.classNames
+        let actualDescendentsClasses =
+            descendentClasses.Split()
+            |> Seq.ofArray
+            |> Seq.filter (String.isNotEmpty)
+        let expectedClasses =
+            expectedClassName.Split()
+            |> Seq.ofArray
+            |> Seq.filter (String.isNotEmpty)
+        (actualDescendentsClasses, expectedClasses)
+
     let hasUniqueClass expectedClasses node = 
         let actualClasses = node |> ReactNode.className
         Expect.equal expectedClasses actualClasses
@@ -32,17 +44,14 @@ module Expect
         Expect.containsAll actualClasses expectedClasses "Classes mismatch"
 
     let hasDescendentClass (expectedClassName: string) (node: ReactNode.T) =
-        let actualDescendentsClasses =
-            Seq.collect (ReactNode.className >> (fun descendentClass ->
-                descendentClass.Split()
-                |> Seq.ofArray
-                |> Seq.filter (String.isNotEmpty))) node.Children
-        let expectedClasses =
-            expectedClassName.Split()
-            |> Seq.ofArray
-            |> Seq.filter (String.isNotEmpty)
+        let actualDescendentsClasses, expectedClasses = parseDependent expectedClassName node
         Expect.containsAll actualDescendentsClasses expectedClasses "Classes mismatch"
-        
+
+    let hasOrderedDescendentClass multiplier (expectedClassName: string) (node: ReactNode.T) =
+        let multiplied = String.replicate multiplier (expectedClassName + " ")
+        let actualDescendentsClasses, expectedClasses = parseDependent multiplied node
+        Expect.sequenceContainsOrder actualDescendentsClasses expectedClasses "Classes mismatch"
+
     let hasProp (prop: IProp) node =
         let propSequence = node |> ReactNode.props
         Expect.contains propSequence prop "Prop not found"

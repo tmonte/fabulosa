@@ -26,17 +26,17 @@ module Accordion =
         Props.HTMLProps = []
     }
 
-    let renderItem content =
+    let private renderItem content =
         R.li [ClassName "menu-item"] [content]
 
-    let renderHeader icon text =
+    let private renderHeader icon text =
         R.summary [ClassName "accordion-header"] [
             Icon.ƒ icon []
             R.RawText "\n"
             R.str text
         ]
 
-    let renderChildren children icon =
+    let private renderChildren children icon =
         children |> List.map (fun (child: Child) ->
             let items = child.Content |> List.map renderItem
             R.details [ClassName "accordion"] [

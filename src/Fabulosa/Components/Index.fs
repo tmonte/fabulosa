@@ -1,15 +1,15 @@
 namespace Fabulosa
 
-module Index =
+// module Index =
 
-    open Fable.Import.React
-    module R = Fable.Helpers.React
+//     open Fable.Import.React
+//     module R = Fable.Helpers.React
 
 
-    let Fi (props : obj) c : ReactElement = 
-         match props with 
-         | :? Button.Props as p -> R.div [] c
-         | _ -> R.span [] []
+//     let Fi (props : obj) c : ReactElement = 
+//          match props with 
+//          | :? Button.Props as p -> R.div [] c
+//          | _ -> R.span [] []
          
          
-    let ø = R.div [] [R.str "hey yo"] 
+//     let ø = R.div [] [R.str "hey yo"] 

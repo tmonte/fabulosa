@@ -61,6 +61,12 @@ module ReactNode
         |> Seq.map classes
         |> Seq.choose id
         |> Seq.join " "
+
+    let rec classNames (node: T) =
+        seq {
+            yield className node
+            yield! Seq.map classNames node.Children
+        } |> String.concat " "
             
     let find child node =
         let same x = x = child

@@ -1,8 +1,5 @@
 ﻿namespace Fabulosa
 
-module List =
-    let cast<'a> = Seq.cast<'a> >> List.ofSeq 
-
 module ClassNames =
 
     open Fable.Helpers.React.Props
