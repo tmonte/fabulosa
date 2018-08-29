@@ -93,7 +93,9 @@ module Avatar =
                   size props.Size ] props.HTMLProps
                   @ [Data ("initial", props.Initial)]
         R.figure containerProps
-            [ (if props.Source <> "" then R.img [Src props.Source] else R.ofOption None)
+            [ (if props.Source <> ""
+               then R.img [Src props.Source]
+               else R.ofOption None)
               kind props.Kind |> R.ofOption ]
               
     let render = ƒ

@@ -26,8 +26,9 @@
     <Compile Include="Components/TextareaTests.fs" />
     <Compile Include="Components/SelectTests.fs" />
     <Compile Include="Components/MediaTests.fs" />
+    <Compile Include="Components\AvatarTests.fs" />
     <Compile Include="Main.fs" />
-    <None Include="paket.references" />   
+    <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />
