@@ -1,30 +1,31 @@
 ## Docs
 
-Fabulosa docs are generated with FSharp.Formatting from F# scripts using the FSharp.Literate package.
-Each page should be located in the `pages` directory, and can include accompanying demos.
-The demos use the `React.mountById` helper to inject fabulosa components into that specific element in the generated doc page.
+Fabulosa docs are generated with FSharp.Formatting using the FSharp.Literate package.
+Each page should be located in the `pages` directory. The doc generation is done in a three step process: 
+
+Write [Component].fs page -> Generate [component].fsx page -> Generate [component].html
+
+You only need to write the <Component>.fs file that will include the code snippets, component demos, and markdown docs.
+For the demos use the `React.mountById` helper to inject the fabulosa components into specific containers in the markdown.
 
 To get add a doc page, you need to:
 
-1. Have all packages from paket installed
-2. Run `(mono) .paket/paket.exe generate-load-scripts --framekwork net46`
-3. Create the new F# script under the `pages` folder
-4. (Optional) Create any demos you may need inside `pages`
-4. Add the new page to `webpack.config.js`, inside the pages array
-5. Run `fsharpi docs/Fabulosa.Docs/Generate.fsx`
+1. Create the new F# [Component].fs file under the `pages` folder
+2. Add the new [page].html to `webpack.config.js`, inside the pages array
+3. Celebrate
 
 #### Example
 
 ```fsharp
-// newpage.fsx
+// CoolComponent.fsx
 
 (*** define: my-sample ***)
-let hello = printfn "Hello, World!"
+let coolComponent = R.div [] [R.str "I'm cool, man."]
 
 (** // Some markdown here
-## A New Page
+## A Cool Component
 
-This is a new page
+This is a very cool component
 *)
 
 (*** include: my-sample ***) // Code snippet from above appears here
@@ -32,21 +33,10 @@ This is a new page
 (**
 <span class="my-demo"></span> // Demo goes here
 *)
-```
-
-```fsharp
-// NewPageDemo.fs
-
-open Renderer 
-
-let myButton =
-    Button.ƒ
-        Button.defaults
-        [R.str "Demo Button"]
 
 (*
 tryMount is just a helper to ignore errors from mounting
 to a non-existing id, as all these will be all bundled together
 *)
-tryMount "my-demo" myButton
+tryMount "my-demo" coolComponent
 ```
