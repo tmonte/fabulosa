@@ -27,6 +27,21 @@ let runFable args =
     if not result.OK then
         failwithf "dotnet fable failed with code %i" result.ExitCode
 
+let rec deleteFiles srcPath pattern includeSubDirs =
+    
+    if not <| System.IO.Directory.Exists(srcPath) then
+        let msg = System.String.Format("Source directory does not exist or could not be found: {0}", srcPath)
+        raise (System.IO.DirectoryNotFoundException(msg))
+
+    for file in System.IO.Directory.EnumerateFiles(srcPath, pattern) do
+        let tempPath = System.IO.Path.Combine(srcPath, file)
+        System.IO.File.Delete(tempPath)
+
+    if includeSubDirs then
+        let srcDir = new System.IO.DirectoryInfo(srcPath)
+        for subdir in srcDir.GetDirectories() do
+            deleteFiles subdir.FullName pattern includeSubDirs
+
 Target.create "Clean" (fun _ ->
     !! "src/**/bin"
     ++ "src/**/obj"
@@ -36,7 +51,9 @@ Target.create "Clean" (fun _ ->
     ++ "tests/**/obj"
     ++ "output"
     |> Shell.cleanDirs
-    Shell.rm "docs/Fabulosa.Docs/*.html"
+    let docs = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs");
+    deleteFiles (Path.Combine(docs, "pages")) "*.fsx" false
+    deleteFiles docs "*.html" false
 )
 
 Target.create "DotnetRestore" (fun _ ->
@@ -89,6 +106,11 @@ Target.create "YarnInstall" (fun _ ->
 
 Target.create "Watch" (fun _ ->
     runFable "webpack-dev-server"
+    let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/pages")
+    use watcher = !! (pages + "/*.fs") |> ChangeWatcher.run (fun changes ->
+        // TODO: set this up
+    )
+    System.Console.ReadLine() |> ignore
 )
 
 Target.create "BuildTests" (fun _ ->
