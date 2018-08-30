@@ -1,16 +1,11 @@
-﻿(*** hide ***)
-#r "../../../src/Fabulosa/bin/Release/netstandard2.0/Fabulosa.dll"
-#r "../../../node_modules/fable-core/Fable.Core.dll"
-#r "../../../node_modules/fable-react/Fable.React.dll"
-#load "../../../.paket/load/netstandard2.0/Fable.React.fsx"
+module AvatarPage
 
 open Fabulosa
-open Fable.Import.React
 module R = Fable.Helpers.React
 
 (*** define: avatar-initial-sample ***)
 let avatar =
-    Avatar.ƒ {
+    Avatar.ƒ { 
         Avatar.defaults with
             Initial = "FA"
     }
@@ -20,6 +15,31 @@ let extraSmall =
         Avatar.defaults with
             Initial = "FA"
             Size = Avatar.Size.ExtraSmall
+    }
+(*** hide ***)
+let small =
+    Avatar.ƒ {
+        Avatar.defaults with
+            Initial = "FA"
+            Size = Avatar.Size.Small
+    }
+let medium =
+    Avatar.ƒ {
+        Avatar.defaults with
+            Initial = "FA"
+            Size = Avatar.Size.Medium
+    }
+let large =
+    Avatar.ƒ {
+        Avatar.defaults with
+            Initial = "FA"
+            Size = Avatar.Size.Large
+    }
+let extraLarge =
+    Avatar.ƒ {
+        Avatar.defaults with
+            Initial = "FA"
+            Size = Avatar.Size.ExtraLarge
     }
 (*** define: avatar-kinds-sample ***)
 let icon =
@@ -34,6 +54,16 @@ let presence =
             Initial = "FA"
             Kind = Avatar.Kind.Presence Avatar.Presence.Online
     }
+(*** hide ***)
+let render () =
+    Renderer.tryMount "avatar-demo" avatar
+    Renderer.tryMount "avatar-xs-demo" extraSmall
+    Renderer.tryMount "avatar-sm-demo" small
+    Renderer.tryMount "avatar-md-demo" medium
+    Renderer.tryMount "avatar-lg-demo" large
+    Renderer.tryMount "avatar-xl-demo" extraLarge
+    Renderer.tryMount "avatar-icon-demo" icon
+    Renderer.tryMount "avatar-presence-demo" presence
 (**
 <div id="avatars">
 

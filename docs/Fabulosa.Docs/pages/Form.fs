@@ -1,12 +1,6 @@
-﻿(*** hide ***)
-#r "Facades/netstandard"
-#r "../../../src/Fabulosa/bin/Release/netstandard2.0/Fabulosa.dll"
-#r "../../../node_modules/fable-core/Fable.Core.dll"
-#r "../../../node_modules/fable-react/Fable.React.dll"
-#load "../../../.paket/load/netstandard2.0/Fable.React.fsx"
+module FormPage
 
 open Fabulosa
-open Fable.Import.React
 module R = Fable.Helpers.React
 open R.Props
 
@@ -70,6 +64,7 @@ let checkbox =
         Checkbox.ƒ {
             Checkbox.defaults with
                 Text = "Remember Me"
+                HTMLProps = [Name "remember-me"]
         }
     ]
 (*** define: form-switch-sample ***)
@@ -117,16 +112,14 @@ let validation =
         Input.ƒ {
             Input.defaults with
                 HTMLProps = [Placeholder "Please enter a value"]
-        }
-        |> Validation.ƒ <| Validation.Kind.Success "This input is valid."
+        } |> Validation.ƒ <| Validation.Kind.Success "This input is valid."
         Label.ƒ {
             Label.defaults with Text = "Invalid Input"
         }
         Input.ƒ {
             Input.defaults with
                 HTMLProps = [Placeholder "Please enter a value"]
-        }
-        |> Validation.ƒ <| Validation.Kind.Error "This input is invalid."
+        } |> Validation.ƒ <| Validation.Kind.Error "This input is invalid."
     ]
 (*** define: form-input-group-sample ***)
 let inputGroup =
@@ -149,6 +142,7 @@ let inputGroup =
                 AddonRight = InputGroup.AddonRight.Button
                     ( Button.defaults, [
                         R.str "Save"
+                        R.RawText "\n"
                         Icon.ƒ { Icon.defaults with Kind = Icon.Kind.Check } []
                     ] )
         } [
@@ -158,6 +152,17 @@ let inputGroup =
             }
         ]
     ]
+(*** hide ***)
+let render () =
+    Renderer.tryMount "form-input-demo" input
+    Renderer.tryMount "form-select-demo" select
+    Renderer.tryMount "form-textarea-demo" textarea
+    Renderer.tryMount "form-radio-demo" radio
+    Renderer.tryMount "form-checkbox-demo" checkbox
+    Renderer.tryMount "form-switch-demo" switch
+    Renderer.tryMount "form-sizes-demo" sizes
+    Renderer.tryMount "form-validation-demo" validation
+    Renderer.tryMount "form-input-group-demo" inputGroup
 (**
 <div id="forms">
 

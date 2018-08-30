@@ -53,6 +53,22 @@ Target.create "Build" (fun _ ->
 Target.create "GenerateDocPages" (fun _ ->
     let source = __SOURCE_DIRECTORY__
     let docs = Path.Combine(source, "docs/Fabulosa.Docs")
+    let pages = Path.Combine(docs, "pages")
+    let hide = "(*** hide ***)\n"
+    let scriptImports = """
+#r "Facades/netstandard"
+#r "../../../src/Fabulosa/bin/Release/netstandard2.0/Fabulosa.dll"
+#r "../../../node_modules/fable-core/Fable.Core.dll"
+#r "../../../node_modules/fable-react/Fable.React.dll"
+#load "../../../.paket/load/netstandard2.0/Fable.React.fsx"
+"""
+    let files = Directory.EnumerateFiles(pages, "*.fs", SearchOption.TopDirectoryOnly)
+    Seq.iter (fun file ->
+        let moduleName = File.readLine file
+        let demo = File.ReadAllText(file).Replace(moduleName, "");
+        let fileName = Path.GetFileName(file) |> String.toLower;
+        File.WriteAllText(pages + "/" + fileName + "x", hide + moduleName + scriptImports + demo)
+    ) files
     FSFormatting.createDocs(fun _ -> {
         FSFormatting.defaultLiterateArguments with
             Source = Path.Combine(docs, "pages")

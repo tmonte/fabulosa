@@ -1,11 +1,6 @@
-(*** hide ***)
-#r "../../../src/Fabulosa/bin/Release/netstandard2.0/Fabulosa.dll"
-#r "../../../node_modules/fable-core/Fable.Core.dll"
-#r "../../../node_modules/fable-react/Fable.React.dll"
-#load "../../../.paket/load/netstandard2.0/Fable.React.fsx"
+module ButtonPage
 
 open Fabulosa
-open Fable.Import.React
 module R = Fable.Helpers.React
 
 (*** define: button-kind-sample ***)
@@ -31,12 +26,10 @@ let small =
         Button.defaults with
             Size = Button.Size.Small
     } [R.str "Small"]
-    
 let medium =
     Button.ƒ
         Button.defaults
         [R.str "Default"]
-        
 let large =
     Button.ƒ {
         Button.defaults with
@@ -71,6 +64,7 @@ let round =
     Button.ƒ {
         Button.defaults with
             Format = Button.Format.RoundAction
+            Kind = Button.Kind.Primary
     } [icon]
 (*** define: button-state-sample ***)
 let disabled =
@@ -90,6 +84,21 @@ let loading =
         Button.defaults with
             State = Button.State.Loading
     } [R.str "------"]
+(*** hide ***)
+let render () =
+    Renderer.tryMount "button-default-demo" button
+    Renderer.tryMount "button-primary-demo" primary
+    Renderer.tryMount "button-link-demo" link
+    Renderer.tryMount "button-small-demo" small
+    Renderer.tryMount "button-medium-demo" medium
+    Renderer.tryMount "button-large-demo" large
+    Renderer.tryMount "button-success-demo" success
+    Renderer.tryMount "button-error-demo" error
+    Renderer.tryMount "button-squared-demo" squared
+    Renderer.tryMount "button-round-demo" round
+    Renderer.tryMount "button-disabled-demo" disabled
+    Renderer.tryMount "button-active-demo" active
+    Renderer.tryMount "button-loading-demo" loading
 (**
 
 <div id="buttons">

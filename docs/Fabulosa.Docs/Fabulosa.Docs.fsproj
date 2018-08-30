@@ -3,18 +3,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="pages/Renderer.fs" />
-    <Compile Include="pages/AccordionDemo.fs" />
-    <Compile Include="pages/AvatarDemo.fs" />
-    <Compile Include="pages/ButtonDemo.fs" />
-    <Compile Include="pages/HomeDemo.fs" />
-    <Compile Include="pages/FormDemo.fs" />
-    <None Include="pages/button.fsx" />
-    <None Include="pages/form.fsx" />
-    <None Include="pages/graphic.fsx" />
-    <None Include="pages/index.fsx" />
-    <None Include="pages/accordion.fsx" />
-    <None Include="paket.references" />
+    <Compile Include="Renderer.fs" />
+    <Compile Include="pages\Accordion.fs" />
+    <Compile Include="pages\Avatar.fs" />
+    <Compile Include="pages\Button.fs" />
+    <Compile Include="pages\Index.fs" />
+    <Compile Include="pages\Form.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -25,6 +19,7 @@
     <None Include="assets/docs.min.css" />
     <None Include="assets/avatar-1.png" />
     <Compile Include="App.fs" />
+    <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />

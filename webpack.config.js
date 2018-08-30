@@ -40,7 +40,7 @@ var pages = [
     'button.html',
     'form.html',
     'accordion.html',
-    'graphic.html',
+    'avatar.html',
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page

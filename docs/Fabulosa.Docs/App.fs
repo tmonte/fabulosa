@@ -1,9 +1,7 @@
-namespace Fabulosa.Docs
+module App
 
-module App =
-
-    HomeDemo.render ()
-    ButtonDemo.render ()
-    FormDemo.render ()
-    AccordionDemo.render ()
-    AvatarDemo.render ()
+IndexPage.render ()
+ButtonPage.render ()
+FormPage.render ()
+AccordionPage.render ()
+AvatarPage.render ()
