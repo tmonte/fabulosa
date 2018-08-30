@@ -17,7 +17,7 @@ To get add a doc page, you need to:
 #### Example
 
 ```fsharp
-// CoolComponent.fsx
+// CoolComponent.fs
 
 (*** define: my-sample ***)
 let coolComponent = R.div [] [R.str "I'm cool, man."]
@@ -40,3 +40,5 @@ to a non-existing id, as all these will be all bundled together
 *)
 tryMount "my-demo" coolComponent
 ```
+
+This will generate coolcomponent.fsx inside the pages folder, and coolcomponent.html in the root folder.
