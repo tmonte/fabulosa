@@ -8,7 +8,6 @@
 #nowarn "52"
 
 open System
-open System.Threading.Tasks
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.IO
@@ -117,9 +116,13 @@ Target.create "Watch" (fun _ ->
     //runFable "webpack-dev-server"
     let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/pages")
     let changes (changed: FileChange seq) =
+        let status =
+            if Environment.isMacOS
+            then FileStatus.Created
+            else FileStatus.Changed
         let created =
             Seq.tryFind
-                (fun file -> file.Status = FileStatus.Created)
+                (fun file -> file.Status = status)
                 changed
         match created with
         | Some file -> generateDocs (Some file.Name)
