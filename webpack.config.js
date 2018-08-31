@@ -109,12 +109,12 @@ module.exports = {
     devServer: {
         publicPath: "/",
         contentBase: CONFIG.assetsDir,
+        watchContentBase: true,
         port: CONFIG.devServerPort,
         proxy: CONFIG.devServerProxy,
         hot: true,
-        inline: true,
         watchOptions: {
-            aggregateTimeout: 3000,
+            aggregateTimeout: 500
         },
     },
     // - fable-loader: transforms F# into JS
