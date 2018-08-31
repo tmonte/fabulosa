@@ -8,6 +8,7 @@
 #nowarn "52"
 
 open System
+open System.Threading.Tasks
 open Fake.Core
 open Fake.Core.TargetOperators
 open Fake.IO
@@ -67,7 +68,11 @@ Target.create "Build" (fun _ ->
     |> Seq.iter (DotNet.build id)
 )
 
-Target.create "GenerateDocPages" (fun _ ->
+let generateDocs file =
+    let pattern =
+        match file with
+        | Some name -> name
+        | None -> "*.fs"
     let source = __SOURCE_DIRECTORY__
     let docs = Path.Combine(source, "docs/Fabulosa.Docs")
     let pages = Path.Combine(docs, "pages")
@@ -79,7 +84,7 @@ Target.create "GenerateDocPages" (fun _ ->
 #r "../../../node_modules/fable-react/Fable.React.dll"
 #load "../../../.paket/load/netstandard2.0/Fable.React.fsx"
 """
-    let files = Directory.EnumerateFiles(pages, "*.fs", SearchOption.TopDirectoryOnly)
+    let files = Directory.EnumerateFiles(pages, pattern, SearchOption.TopDirectoryOnly)
     Seq.iter (fun file ->
         let moduleName = File.readLine file
         let demo = File.ReadAllText(file).Replace(moduleName, "");
@@ -94,6 +99,10 @@ Target.create "GenerateDocPages" (fun _ ->
             LayoutRoots = [docs]
             ProjectParameters = [("", "")]
     })
+    printfn "<<<< Successfully generated docs >>>>"
+
+Target.create "GenerateDocPages" (fun _ ->
+    generateDocs None
 )
 
 Target.create "BuildDocs" (fun _ ->
@@ -105,12 +114,21 @@ Target.create "YarnInstall" (fun _ ->
 )
 
 Target.create "Watch" (fun _ ->
-    runFable "webpack-dev-server"
+    //runFable "webpack-dev-server"
     let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/pages")
-    use watcher = !! (pages + "/*.fs") |> ChangeWatcher.run (fun changes ->
-        // TODO: set this up
-    )
-    System.Console.ReadLine() |> ignore
+    let changes (changed: FileChange seq) =
+        let created =
+            Seq.tryFind
+                (fun file -> file.Status = FileStatus.Created)
+                changed
+        match created with
+        | Some file -> generateDocs (Some file.Name)
+        | None -> ()
+    use watcher =
+        !! (pages + "/*.fs")
+        |> ChangeWatcher.run changes
+    printfn "<<<< Start watch >>>>"
+    runFable "webpack-dev-server"
 )
 
 Target.create "BuildTests" (fun _ ->
