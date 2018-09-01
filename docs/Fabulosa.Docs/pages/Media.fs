@@ -36,6 +36,29 @@ let imageCover =
             ] 
     }
 
+let propTable =
+    Table.ƒ Table.defaults [
+        Table.Head.ƒ Table.Head.defaults [
+            Table.Row.ƒ Table.Row.defaults [
+                Table.Column.ƒ Table.Column.defaults [R.str "Name"]
+                Table.Column.ƒ Table.Column.defaults [R.str "Type"]
+                Table.Column.ƒ Table.Column.defaults [R.str "Default"]
+            ]
+        ]
+        Table.Body.ƒ Table.Body.defaults [
+            Table.Row.ƒ Table.Row.defaults [
+                Table.Column.ƒ Table.Column.defaults [R.str "Kind"]
+                Table.Column.ƒ Table.Column.defaults [R.str "Responsive|Contain|Cover"]
+                Table.Column.ƒ Table.Column.defaults [R.str "Responsive"]
+            ]
+            Table.Row.ƒ Table.Row.defaults [
+                Table.Column.ƒ Table.Column.defaults [R.str "HTMLProps"]
+                Table.Column.ƒ Table.Column.defaults [R.str "IHTMLProp list"]
+                Table.Column.ƒ Table.Column.defaults [R.str "[]"]
+            ]
+        ]
+    ]
+
 (*** hide ***)
 let render () =
     Renderer.tryMount "media-img-responsive-demo-a" (image "5rem")
@@ -43,6 +66,7 @@ let render () =
     Renderer.tryMount "media-img-responsive-demo-c" (image "18rem")
     Renderer.tryMount "media-img-fit-contain-demo" imageContain
     Renderer.tryMount "media-img-fit-cover-demo" imageCover
+    Renderer.tryMount "media-img-props-table" propTable
 (**
 <div id="media">
     <h2 class="s-title">
@@ -59,7 +83,9 @@ Media includes responsive images, figures and video classes.
 </div>    
     
 Add the ```img-responsive``` class to <img> elements. The images will scale with the parent sizes.
-    
+
+<div id="media-img-props-table"></div>
+
 *)
 
 (**

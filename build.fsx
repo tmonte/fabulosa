@@ -90,14 +90,16 @@ let generateDocs file =
         let fileName = Path.GetFileName(file) |> String.toLower;
         File.WriteAllText(pages + "/" + fileName + "x", hide + moduleName + scriptImports + demo)
     ) files
-    FSFormatting.createDocs(fun _ -> {
-        FSFormatting.defaultLiterateArguments with
-            Source = Path.Combine(docs, "pages")
-            Template = Path.Combine(docs, "assets/template.html")
-            OutputDirectory = docs
-            LayoutRoots = [docs]
-            ProjectParameters = [("", "")]
-    })
+    try 
+        FSFormatting.createDocs(fun _ -> {
+            FSFormatting.defaultLiterateArguments with
+                Source = Path.Combine(docs, "pages")
+                Template = Path.Combine(docs, "assets/template.html")
+                OutputDirectory = docs
+                LayoutRoots = [docs]
+                ProjectParameters = [("", "")]
+        })
+    with |x -> printfn "%A" x
     printfn "<<<< Successfully generated docs >>>>"
 
 Target.create "GenerateDocPages" (fun _ ->
