@@ -20,6 +20,19 @@ let tests =
             |> hasChild 1 (child |> ReactNode.unit)
         }
 
+        test "Button custom class" {
+            let child = R.div [] [R.str "text"]
+            let button =
+                Button.ƒ
+                    { Button.defaults with
+                        HTMLProps = [ClassName "custom"] }
+                    [child]
+            
+            button
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
+
         test "Button kind primary" {
             let child = R.str "text"
             let button = Button.ƒ { Button.defaults with Kind = Button.Kind.Primary } [child]

@@ -4,13 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Dependencies -->
     <Compile Include="Extensions/ListExtension.fs" />
     <Compile Include="Extensions/SeqExtension.fs" />
     <Compile Include="Extensions/StringExtension.fs" />
     <Compile Include="ClassNames.fs" />
     <Compile Include="Components/Icon.fs" />
-    <!-- Components -->
     <Compile Include="Components/Accordion.fs" />
     <Compile Include="Components/Avatar.fs" />
     <Compile Include="Components/Button.fs" />
@@ -31,7 +29,7 @@
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Typography.fs" />
-    <!-- Root -->
+    <Compile Include="Components\Badge.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />

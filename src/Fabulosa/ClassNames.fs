@@ -19,21 +19,39 @@ module ClassNames =
         | :? HTMLAttr as htmlAttr -> Some htmlAttr
         | _ -> None
 
-    let appendToClassName htmlAttr newClassName =
-        match htmlAttr with
-        | ClassName className ->
-            ClassName (className + " " + newClassName)
-        | somethingElse -> somethingElse
-
-    let hasClasses =
+    let className =
         function
-        | ClassName _ -> true
-        | _ -> false
+        | ClassName name -> Some name
+        | _ -> None
 
-    let combineProps componentClasses htmlProps =
+    let withoutClassName (prop: IHTMLProp) =
+        match prop with
+        | :? HTMLAttr as htmlAttr ->
+            match htmlAttr with
+            | ClassName _ -> false
+            | _ -> true
+        | _ -> true
+        
+    let combineProps componentClasses (htmlProps: IHTMLProp list): IHTMLProp list =
         let classes = concatStrings componentClasses
-        if List.exists hasClasses (htmlProps |> List.cast<HTMLAttr>) then
-            List.map
-                (fun htmlAttr -> (classes |> appendToClassName htmlAttr) :> IHTMLProp)
-                (List.ofSeq <| Seq.cast<HTMLAttr> htmlProps)
-        else htmlProps @ [ClassName classes]
+        let htmlPropsAttrs = Seq.choose htmlAttrs htmlProps
+        let concat existing = existing + " " + classes 
+        if htmlPropsAttrs
+            |> Seq.choose className
+                |> Seq.length > 0 then
+            let merged =
+                htmlPropsAttrs
+                |> Seq.tryPick className
+                |> Option.map concat
+            let filteredHtmlProps =
+                htmlProps
+                |> Seq.filter withoutClassName
+            match merged with
+            | Some className ->
+                (filteredHtmlProps
+                |> Seq.cast<IHTMLProp>
+                |> List.ofSeq)
+                @ [ClassName className]
+            | _ -> htmlProps
+        else
+            htmlProps @ [ClassName classes]

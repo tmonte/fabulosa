@@ -9,6 +9,7 @@
     <Compile Include="pages\Button.fs" />
     <Compile Include="pages\Index.fs" />
     <Compile Include="pages\Form.fs" />
+    <Compile Include="pages\Badge.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
