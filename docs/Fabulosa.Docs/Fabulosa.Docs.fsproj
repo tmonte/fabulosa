@@ -4,12 +4,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Renderer.fs" />
-    <Compile Include="pages\Accordion.fs" />
-    <Compile Include="pages\Avatar.fs" />
-    <Compile Include="pages\Button.fs" />
-    <Compile Include="pages\Index.fs" />
-    <Compile Include="pages\Form.fs" />
-    <Compile Include="pages\Badge.fs" />
+    <Compile Include="pages/Accordion.fs" />
+    <Compile Include="pages/Avatar.fs" />
+    <Compile Include="pages/Button.fs" />
+    <Compile Include="pages/Index.fs" />
+    <Compile Include="pages/Form.fs" />
+    <Compile Include="pages/Media.fs" />
+    <Compile Include="pages/Badge.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -22,6 +23,9 @@
     <Compile Include="App.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pages\package.json" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />
 </Project>

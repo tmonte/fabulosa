@@ -12,6 +12,7 @@ To get add a doc page, you need to:
 
 1. Create the new F# [Component].fs file under the `pages` folder
 2. Add the new [page].html to `webpack.config.js`, inside the pages array
+3. Add the menu link entry to docs/assets/template where appropriate
 3. Celebrate
 
 #### Example

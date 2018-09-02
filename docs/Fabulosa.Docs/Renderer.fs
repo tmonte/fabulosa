@@ -6,4 +6,4 @@ let tryMount id elem =
     try
         R.mountById id elem
     with
-        | _ -> Fable.Import.Browser.console.log "failed to mount"
+        | _ -> ()
