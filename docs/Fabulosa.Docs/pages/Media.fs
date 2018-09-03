@@ -7,6 +7,7 @@ open System.Reflection
 open System.Reflection
 open FSharp.Reflection
 open Fabulosa
+open Fabulosa.Docs
 open R.Props
 
 (*** define: media-img-responsive-demo ***)
@@ -41,58 +42,6 @@ let imageCover =
             ] 
     }
 
-let flip f a b = f b a
-
-module SystemType =
-    let name (typ: PropertyInfo) = typ.Name
-
-let rec describeName (typeInfo: PropertyInfo) =
-    match typeInfo.PropertyType with 
-    | list when list.Name = "FSharpList`1" -> 
-        list.GenericTypeArguments
-        |> List.ofArray
-        |> List.map (fun f -> f.Name)
-        |> flip List.append ["list"]
-        |> List.reduce (fun x -> (fun y -> x + " " + y))
-    | t -> t.Name
-    
-let getImagePropFields = 
-    let typ = Media.Image.defaults.GetType()
-    let record = Media.Image.defaults
-    let recordTypeFields = FSharpType.GetRecordFields typ
-    let recordValueFields = FSharpValue.GetRecordFields record
-    let fieldNames = recordTypeFields |> Array.map SystemType.name
-    let fieldPropertyTypes = recordTypeFields |> Array.map describeName
-
-    Fable.Import.JS.console.log(recordTypeFields |> Array.map describeName)
-    
-    recordValueFields
-    |> Array.zip3 fieldNames fieldPropertyTypes
-    |> List.ofArray 
-    |> List.map (fun (x, y, z) -> x.ToString(), y, z.ToString())
-    
-
-let toTableRow rowValue =
-    let (col1, col2, col3) = rowValue
-    Table.Row.ƒ Table.Row.defaults [
-        Table.Column.ƒ Table.Column.defaults [R.str col1]
-        Table.Column.ƒ Table.Column.defaults [R.str col2]
-        Table.Column.ƒ Table.Column.defaults [R.str col3]
-    ]
-
-let propTable rowValues =
-    Table.ƒ Table.defaults [
-        Table.Head.ƒ Table.Head.defaults [
-            Table.Row.ƒ Table.Row.defaults [
-                Table.Column.ƒ Table.Column.defaults [R.str "Name"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Type"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Default"]
-            ]
-        ]
-        Table.Body.ƒ Table.Body.defaults (rowValues |> List.map toTableRow) 
-        
-    ]
-
 (*** hide ***)
 let render () =
     Renderer.tryMount "media-img-responsive-demo-a" (image "5rem")
@@ -100,7 +49,7 @@ let render () =
     Renderer.tryMount "media-img-responsive-demo-c" (image "18rem")
     Renderer.tryMount "media-img-fit-contain-demo" imageContain
     Renderer.tryMount "media-img-fit-cover-demo" imageCover
-    Renderer.tryMount "media-img-props-table" (propTable getImagePropFields)
+    Renderer.tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
 (**
 <div id="media">
     <h2 class="s-title">
