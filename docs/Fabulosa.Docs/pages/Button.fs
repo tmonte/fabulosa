@@ -1,6 +1,7 @@
 module ButtonPage
 
 open Fabulosa
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 
 (*** define: button-kind-sample ***)
@@ -99,6 +100,7 @@ let render () =
     Renderer.tryMount "button-disabled-demo" disabled
     Renderer.tryMount "button-active-demo" active
     Renderer.tryMount "button-loading-demo" loading
+    Renderer.tryMount "button-props-table" (PropTable.propTable typeof<Button.Props> Button.defaults)
 (**
 
 <div id="buttons">
@@ -109,6 +111,8 @@ let render () =
 
 Buttons include simple button styles for
 actions in different types and sizes.
+
+<div id="button-props-table"></div>
 
 </div>
 

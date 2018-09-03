@@ -20,6 +20,16 @@ module PropTable =
             |> flip List.append ["list"]
             |> List.reduce (fun x -> (fun y -> x + " " + y))
         | t -> t.Name
+
+    let rec describeType (typeInfo: PropertyInfo) =
+        if FSharpType.IsUnion(typeInfo.PropertyType) then
+            Array.map
+                (fun (x: UnionCaseInfo) -> x.Name)
+                (FSharpType.GetUnionCases(typeInfo.PropertyType))
+            |> String.concat " | "
+        else
+            SystemType.name typeInfo
+
         
     let getPropFields aType (obj: obj) = 
         let typ = aType
@@ -27,14 +37,14 @@ module PropTable =
         let recordTypeFields = FSharpType.GetRecordFields typ
         let recordValueFields = FSharpValue.GetRecordFields record
         let fieldNames = recordTypeFields |> Array.map SystemType.name
-        let fieldPropertyTypes = recordTypeFields |> Array.map describeName
-    
-        Fable.Import.JS.console.log(recordTypeFields |> Array.map describeName)
-        
+        let fieldPropertyTypes = recordTypeFields |> Array.map describeType
+
         recordValueFields
         |> Array.zip3 fieldNames fieldPropertyTypes
         |> List.ofArray 
-        |> List.map (fun (x, y, z) -> x.ToString(), y, z.ToString())
+        |> List.map (fun (x, y, z) ->
+            x.ToString(), y, z.ToString()
+        )
         
     
     let toTableRow rowValue =
@@ -49,13 +59,12 @@ module PropTable =
         Table.ƒ Table.defaults [
             Table.Head.ƒ Table.Head.defaults [
                 Table.Row.ƒ Table.Row.defaults [
-                    Table.Column.ƒ Table.Column.defaults [R.str "Name"]
-                    Table.Column.ƒ Table.Column.defaults [R.str "Type"]
-                    Table.Column.ƒ Table.Column.defaults [R.str "Default"]
+                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Name"]
+                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Type"]
+                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Default"]
                 ]
             ]
             Table.Body.ƒ Table.Body.defaults (rowValues |> List.map toTableRow) 
-            
         ]
         
     let propTable aType obj = getPropFields aType obj |> renderTable 
