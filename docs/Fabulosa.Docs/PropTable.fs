@@ -28,7 +28,7 @@ module PropTable =
                 (FSharpType.GetUnionCases(typeInfo.PropertyType))
             |> String.concat " | "
         else
-            SystemType.name typeInfo
+            describeName typeInfo
 
         
     let getPropFields aType (obj: obj) = 
