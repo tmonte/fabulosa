@@ -50,6 +50,6 @@ module Accordion =
     let ƒ (props: Props) children =
         let iconProps =
             { props.CustomIcon with
-                HTMLProps = combineProps ["mr-1"] props.CustomIcon.HTMLProps }
+                HTMLProps = addClasses ["mr-1"] props.CustomIcon.HTMLProps }
         R.div [] (renderChildren children iconProps)
         

@@ -32,7 +32,7 @@ module ClassNames =
             | _ -> true
         | _ -> true
         
-    let combineProps componentClasses (htmlProps: IHTMLProp list): IHTMLProp list =
+    let addClasses componentClasses (htmlProps: IHTMLProp list): IHTMLProp list =
         let classes = concatStrings componentClasses
         let htmlPropsAttrs = Seq.choose htmlAttrs htmlProps
         let concat existing = existing + " " + classes 

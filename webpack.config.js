@@ -41,7 +41,7 @@ var pages = [
     'form.html',
     'accordion.html',
     'avatar.html',
-    'badge.html'
+    'badge.html',
     'media.html'
 ]
 

@@ -24,8 +24,5 @@
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="pages\package.json" />
-  </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />
 </Project>

@@ -34,7 +34,7 @@ module Label =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps[
+        |> addClasses[
             "form-label"
             size props.Size ]
         |> R.label

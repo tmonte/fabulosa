@@ -40,14 +40,13 @@ module Button =
     | Unset
 
     [<RequireQualifiedAccess>]
-    type Props = {
-        Kind: Kind
-        Color: Color
-        Size: Size
-        State: State
-        Format: Format
-        HTMLProps: IHTMLProp list
-    }
+    type Props =
+        { Kind: Kind
+          Color: Color
+          Size: Size
+          State: State
+          Format: Format
+          HTMLProps: IHTMLProp list }
 
     let kind =
         function
@@ -92,7 +91,7 @@ module Button =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "btn"
             kind props.Kind
             color props.Color
@@ -119,7 +118,7 @@ module Anchor =
 
     let ƒ (props: Button.Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "btn"
             Button.kind props.Kind
             Button.color props.Color
@@ -156,5 +155,5 @@ module ButtonGroup =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps ["btn-group"]
+        |> addClasses ["btn-group"]
         |> R.div

@@ -32,7 +32,7 @@ module Table =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "table"
             kind props.Kind ]
         |> R.table
@@ -99,7 +99,7 @@ module Table =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps [active props.Active]
+            |> addClasses [active props.Active]
             |> R.tr
 
         let render = ƒ

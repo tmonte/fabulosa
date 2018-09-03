@@ -32,7 +32,7 @@ module Select =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "form-select"
             size props.Size ]
         |> R.select

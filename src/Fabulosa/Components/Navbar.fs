@@ -21,7 +21,7 @@ module Navbar =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps ["navbar"]
+            |> addClasses ["navbar"]
             |> R.header
 
         let render = ƒ
@@ -31,7 +31,7 @@ module Navbar =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps ["navbar-section"]
+            |> addClasses ["navbar-section"]
             |> R.section
 
         let render = ƒ
@@ -41,7 +41,7 @@ module Navbar =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps ["navbar-center"]
+            |> addClasses ["navbar-center"]
             |> R.section
 
     let center = Center.ƒ
@@ -51,7 +51,7 @@ module Navbar =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps ["navbar-brand"]
+            |> addClasses ["navbar-brand"]
             |> R.a
 
         let render = ƒ

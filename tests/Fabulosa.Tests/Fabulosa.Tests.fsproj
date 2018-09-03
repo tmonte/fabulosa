@@ -6,12 +6,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <!-- Dependencies -->
     <Compile Include="ReactNodeElement.fs" />
     <Compile Include="ReactNode.fs" />
     <Compile Include="ReactNodeTests.fs" />
     <Compile Include="Extensions/ExpectoExtension.fs" />
-    <!-- Components -->
     <Compile Include="Components/AccordionTests.fs" />
     <Compile Include="Components/AvatarTests.fs" />
     <Compile Include="Components/ButtonTests.fs" />
@@ -30,7 +28,7 @@
     <Compile Include="Components/TableTests.fs" />
     <Compile Include="Components/TagTests.fs" />
     <Compile Include="Components/TextareaTests.fs" />
-    <!-- Root -->
+    <Compile Include="Components\BadgeTests.fs" />
     <Compile Include="Main.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />

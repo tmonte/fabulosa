@@ -88,7 +88,7 @@ module Avatar =
 
     let ƒ (props: Props) =
         let containerProps =
-            combineProps
+            addClasses
                 [ "avatar"
                   size props.Size ] props.HTMLProps
                   @ [Data ("initial", props.Initial)]

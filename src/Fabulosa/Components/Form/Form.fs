@@ -21,7 +21,7 @@ module Form =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps ["form-group"]
+            |> addClasses ["form-group"]
             |> R.div
 
         let render = ƒ

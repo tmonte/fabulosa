@@ -122,7 +122,7 @@ module Icon =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "icon"
             kind props.Kind
             size props.Size ]

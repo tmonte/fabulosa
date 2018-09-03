@@ -35,7 +35,7 @@ module Media =
         let getClasses (props: Props) = getClassOfTextDirection props.TextDirection |> List.append ["figure-caption"] 
            
         let ƒ (props: Props) =
-            (props.HTMLProps |> combineProps (getClasses props), props.Text)
+            (props.HTMLProps |> addClasses (getClasses props), props.Text)
             ||> R.figcaption
     
         let render = ƒ
@@ -70,7 +70,7 @@ module Media =
             
         let ƒ (props: Props) =
             props.HTMLProps 
-            |> combineProps (getClassOfKind props.Kind)
+            |> addClasses (getClassOfKind props.Kind)
             |> R.img
     
         let render = ƒ
@@ -110,7 +110,7 @@ module Media =
         let ƒ (props: Props) =
             let figureComponent = 
                 props.HTMLProps
-                |> combineProps ["figure"]
+                |> addClasses ["figure"]
                 |> R.figure
         
             figureComponent [

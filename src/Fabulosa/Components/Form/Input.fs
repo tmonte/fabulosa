@@ -32,7 +32,7 @@ module Input =
 
     let ƒ (props: Props) =
         props.HTMLProps
-        |> combineProps [
+        |> addClasses [
             "form-input"
             size props.Size ]
         |> R.input
@@ -77,7 +77,7 @@ module IconInput =
             |> String.concat " "
         let iconProps =
             { props.IconProps with
-                HTMLProps = combineProps
+                HTMLProps = addClasses
                     ["form-icon"]
                     props.IconProps.HTMLProps }
         R.div [ClassName containerClasses] [
@@ -123,7 +123,7 @@ module InputGroup =
         | AddonRight.Button (props, children) ->
             Some <| Button.ƒ
                 { props with
-                    HTMLProps = combineProps
+                    HTMLProps = addClasses
                         ["input-group-btn"]
                         props.HTMLProps } children
         | AddonRight.Unset -> None
@@ -135,7 +135,7 @@ module InputGroup =
         | AddonLeft.Unset -> None
 
     let ƒ (props: Props) children =
-        let containerProps = combineProps ["input-group"] props.HTMLProps
+        let containerProps = addClasses ["input-group"] props.HTMLProps
         R.div containerProps [
             text props.AddonLeft |> R.ofOption
             R.fragment [] children

@@ -17,7 +17,7 @@ module Grid =
 
     let ƒ props =
         props.HTMLProps
-        |> combineProps ["container"]
+        |> addClasses ["container"]
         |> R.div
 
     let render = ƒ
@@ -56,7 +56,7 @@ module Grid =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps [
+            |> addClasses [
                 "columns"
                 gapless props.Gapless
                 oneLine props.OneLine ]
@@ -148,7 +148,7 @@ module Grid =
 
         let ƒ (props: Props) =
             props.HTMLProps
-            |> combineProps [
+            |> addClasses [
                 "column"
                 kind props.Kind
                 size props.Size
