@@ -2,6 +2,12 @@ module MediaPage
 
 open Fabulosa
 module R = Fable.Helpers.React
+open System.Collections
+open System.Reflection
+open System.Reflection
+open FSharp.Reflection
+open Fabulosa
+open Fabulosa.Docs
 open R.Props
 
 (*** define: media-img-responsive-demo ***)
@@ -36,29 +42,6 @@ let imageCover =
             ] 
     }
 
-let propTable =
-    Table.ƒ Table.defaults [
-        Table.Head.ƒ Table.Head.defaults [
-            Table.Row.ƒ Table.Row.defaults [
-                Table.Column.ƒ Table.Column.defaults [R.str "Name"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Type"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Default"]
-            ]
-        ]
-        Table.Body.ƒ Table.Body.defaults [
-            Table.Row.ƒ Table.Row.defaults [
-                Table.Column.ƒ Table.Column.defaults [R.str "Kind"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Responsive|Contain|Cover"]
-                Table.Column.ƒ Table.Column.defaults [R.str "Responsive"]
-            ]
-            Table.Row.ƒ Table.Row.defaults [
-                Table.Column.ƒ Table.Column.defaults [R.str "HTMLProps"]
-                Table.Column.ƒ Table.Column.defaults [R.str "IHTMLProp list"]
-                Table.Column.ƒ Table.Column.defaults [R.str "[]"]
-            ]
-        ]
-    ]
-
 (*** hide ***)
 let render () =
     Renderer.tryMount "media-img-responsive-demo-a" (image "5rem")
@@ -66,7 +49,7 @@ let render () =
     Renderer.tryMount "media-img-responsive-demo-c" (image "18rem")
     Renderer.tryMount "media-img-fit-contain-demo" imageContain
     Renderer.tryMount "media-img-fit-cover-demo" imageCover
-    Renderer.tryMount "media-img-props-table" propTable
+    Renderer.tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
 (**
 <div id="media">
     <h2 class="s-title">
