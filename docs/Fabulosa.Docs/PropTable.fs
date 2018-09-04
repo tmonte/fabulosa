@@ -4,6 +4,7 @@ module PropTable =
     open System.Reflection
     open FSharp.Reflection
     module R = Fable.Helpers.React
+    open Fable.Import.React
     open R.Props
     open Fabulosa
     
@@ -45,22 +46,33 @@ module PropTable =
         |> Array.zip3 fieldNames fieldPropertyTypes
         |> List.ofArray 
         |> List.map (fun (x, y, z) ->
-            x.ToString(), y, z.ToString().Replace(";", "")
+            let t =
+                if y.StartsWith("Fabulosa.") then
+                    let page =
+                        (y.Split ('.')).[1].ToLower()
+                    R.a
+                        [Href (page + ".html#" + page + "-props")]
+                        [R.str y]
+                else
+                    R.str y
+            R.str (x |> string),
+            t,
+            R.str (z.ToString().Replace(";", ""))
         )
-        
-    
+
+
     let toTableRow rowValue =
         let (col1, col2, col3) = rowValue
         Table.Row.ƒ Table.Row.defaults [
-            Table.Column.ƒ Table.Column.defaults [R.str col1]
+            Table.Column.ƒ Table.Column.defaults [col1]
             Table.Column.ƒ
                 { Table.Column.defaults with
                     HTMLProps = [Style [WhiteSpace "pre"]] }
-                [R.str col2]
+                [col2]
             Table.Column.ƒ
                 { Table.Column.defaults with
                     HTMLProps = [Style [WhiteSpace "pre"]] }
-                [R.str col3]
+                [col3]
         ]
     
     let renderTable rowValues =
