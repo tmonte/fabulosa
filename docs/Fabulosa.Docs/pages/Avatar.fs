@@ -1,6 +1,7 @@
 module AvatarPage
 
 open Fabulosa
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 
 (*** define: avatar-initial-sample ***)
@@ -64,6 +65,7 @@ let render () =
     Renderer.tryMount "avatar-xl-demo" extraLarge
     Renderer.tryMount "avatar-icon-demo" icon
     Renderer.tryMount "avatar-presence-demo" presence
+    Renderer.tryMount "avatar-props-table" (PropTable.propTable typeof<Avatar.Props> Avatar.defaults)
 (**
 <div id="avatars">
 
@@ -72,6 +74,16 @@ let render () =
 </h2>
 
 Avatars are user profile pictures.
+
+</div>
+
+<div id="avatar-props">
+
+<h3 class="s-title">
+    Props
+</h3>
+
+<div id="avatar-props-table"></div>
 
 </div>
 

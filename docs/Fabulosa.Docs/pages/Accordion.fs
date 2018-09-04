@@ -1,6 +1,7 @@
 module AccordionPage
 
 open Fabulosa
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 
 (*** define: accordion-sample ***)
@@ -42,6 +43,26 @@ let custom =
 
 Accordions are used to toggle sections of content.
 
+</div>
+
+<div id="accordion-props">
+
+<h3 class="s-title">
+    Props
+</h3>
+
+<div id="accordion-props-table"></div>
+
+</div>
+
+<div id="accordion-default">
+
+<h3 class="s-title">
+    Default
+</h3>
+
+The default setting for accordions
+
 <div class="demo" id="accordion-demo"></div>
 
 *)
@@ -76,3 +97,5 @@ Accordions accept icon props for a custom icon.
 let render () =
     Renderer.tryMount "accordion-demo" accordion
     Renderer.tryMount "accordion-custom-demo" custom
+    Renderer.tryMount "accordion-props-table" (PropTable.propTable typeof<Accordion.Props> Accordion.defaults)
+    

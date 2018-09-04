@@ -112,6 +112,14 @@ let render () =
 Buttons include simple button styles for
 actions in different types and sizes.
 
+</div>
+
+<div id="button-props">
+
+<h3 class="s-title">
+    Props
+</h3>
+
 <div id="button-props-table"></div>
 
 </div>

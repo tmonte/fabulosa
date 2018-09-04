@@ -4,6 +4,7 @@ module PropTable =
     open System.Reflection
     open FSharp.Reflection
     module R = Fable.Helpers.React
+    open R.Props
     open Fabulosa
     
     let flip f a b = f b a
@@ -19,7 +20,8 @@ module PropTable =
             |> List.map (fun f -> f.Name)
             |> flip List.append ["list"]
             |> List.reduce (fun x -> (fun y -> x + " " + y))
-        | t -> t.Name
+        | t ->
+            t.ToString()
 
     let rec describeType (typeInfo: PropertyInfo) =
         if FSharpType.IsUnion(typeInfo.PropertyType) then
@@ -43,7 +45,7 @@ module PropTable =
         |> Array.zip3 fieldNames fieldPropertyTypes
         |> List.ofArray 
         |> List.map (fun (x, y, z) ->
-            x.ToString(), y, z.ToString()
+            x.ToString(), y, z.ToString().Replace(";", "")
         )
         
     
@@ -51,8 +53,14 @@ module PropTable =
         let (col1, col2, col3) = rowValue
         Table.Row.ƒ Table.Row.defaults [
             Table.Column.ƒ Table.Column.defaults [R.str col1]
-            Table.Column.ƒ Table.Column.defaults [R.str col2]
-            Table.Column.ƒ Table.Column.defaults [R.str col3]
+            Table.Column.ƒ
+                { Table.Column.defaults with
+                    HTMLProps = [Style [WhiteSpace "pre"]] }
+                [R.str col2]
+            Table.Column.ƒ
+                { Table.Column.defaults with
+                    HTMLProps = [Style [WhiteSpace "pre"]] }
+                [R.str col3]
         ]
     
     let renderTable rowValues =

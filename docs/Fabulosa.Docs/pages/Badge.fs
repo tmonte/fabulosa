@@ -1,6 +1,7 @@
 ﻿module BadgePage
 
 open Fabulosa
+open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
 open R.Props
@@ -41,7 +42,7 @@ let render () =
     tryMount "badge-span-demo" spanBadge
     tryMount "badge-button-demo" buttonBadge
     tryMount "badge-avatar-demo" avatarBadge
-
+    tryMount "badge-props-table" (PropTable.propTable typeof<Badge.Props> Badge.defaults)
 (**
 <div id="badges">
 
@@ -52,6 +53,16 @@ let render () =
 Forms provide the most common control styles
 used in forms, including input, textarea,
 select, checkbox, radio and switch.
+
+</div>
+
+<div id="badge-props">
+
+<h3 class="s-title">
+    Props
+</h3>
+
+<div id="badge-props-table"></div>
 
 </div>
 
