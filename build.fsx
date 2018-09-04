@@ -49,8 +49,6 @@ Target.create "Clean" (fun _ ->
     ++ "docs/**/obj"
     ++ "tests/**/bin"
     ++ "tests/**/obj"
-    ++ "obj"
-    ++ "bin"
     ++ "output"
     |> Shell.cleanDirs
     let docs = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs");
@@ -102,7 +100,6 @@ let generateDocs file =
                 ProjectParameters = [("", "")]
         })
     with |x -> printfn "%A" x
-    printfn "<<<< Successfully generated docs >>>>"
 
 Target.create "GenerateDocPages" (fun _ ->
     generateDocs None
@@ -134,7 +131,6 @@ Target.create "Watch" (fun _ ->
     use watcher =
         !! (pages + "/*.fs")
         |> ChangeWatcher.run changes
-    printfn "<<<< Start watch >>>>"
     runFable "webpack-dev-server"
 )
 

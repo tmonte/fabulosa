@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -10,6 +11,7 @@
     <Compile Include="pages/Button.fs" />
     <Compile Include="pages/Index.fs" />
     <Compile Include="pages/Form.fs" />
+    <Compile Include="pages/Grid.fs" />
     <Compile Include="pages/Media.fs" />
     <Compile Include="pages/Badge.fs" />
     <None Include="README.md" />
@@ -25,5 +27,5 @@
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
-  <Import Project="../../.paket/Paket.Restore.targets" />
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

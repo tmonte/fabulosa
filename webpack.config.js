@@ -39,6 +39,7 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var pages = [
     'button.html',
     'form.html',
+    'grid.html',
     'accordion.html',
     'avatar.html',
     'badge.html',
