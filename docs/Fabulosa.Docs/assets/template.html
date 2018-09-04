@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
           crossorigin="anonymous">
     <script>var currentTip=null,currentTipElement=null;function hideTip(e,t,n){document.getElementById(t).style.display="none",currentTip=null}function findPos(e){if("?inapp"==window.location.search)return[e.offsetLeft+10,e.offsetTop+30];for(var t=0,n=e.offsetHeight;e;)t+=e.offsetLeft,n+=e.offsetTop,e=e.offsetParent;return[t,n]}function hideUsingEsc(e){e||(e=event),hideTip(e,currentTipElement,currentTip)}function showTip(e,t,n,o){if(document.onkeydown=hideUsingEsc,currentTip!=n){currentTip=n,currentTipElement=t;var i=findPos(o||(e.srcElement?e.srcElement:e.target)),r=i[0],l=i[1],c=document.getElementById(t);null==document.documentElement?document.body:document.documentElement;c.style.position="absolute",c.style.left=r+"px",c.style.top=l+"px",c.style.display="block"}}</script>
-    <script>document.addEventListener("DOMContentLoaded",function(){var e=window.location.pathname.split("/"),t=e[e.length-1].split(".")[0];document.getElementById(t+"-header").click()},!1);</script>
+    <script>document.addEventListener("DOMContentLoaded",function(){var e=window.location.pathname.split("/"),n=e[e.length-1];document.querySelectorAll("a[href^='"+n+"']")[0].closest("div").previousElementSibling.click()});</script>
 </head>
 <body>
     <div class="docs-container off-canvas off-canvas-sidebar-show">
@@ -43,10 +43,10 @@
             <div class="docs-nav">
                 <div class="accordion-container">
                     <details class="accordion">
-                        <summary class="accordion-header" id="index-header">
+                        <summary class="accordion-header">
                             Getting Started
                         </summary>
-                        <div class="accordion-body">
+                        <div>
                             <ul class="menu menu-nav">
                                 <li class="menu-item">
                                     <a href="index.html">Example</a>
@@ -55,10 +55,10 @@
                         </div>
                     </details>
                     <details class="accordion">
-                        <summary class="accordion-header" id="form-header">
+                        <summary class="accordion-header">
                             Forms
                         </summary>
-                        <div class="accordion-body">
+                        <div>
                             <ul class="menu menu-nav">
                                 <li class="menu-item">
                                     <a href="form.html#checkbox">Checkbox</a>
@@ -91,7 +91,7 @@
                         </div>
                     </details>
                     <details class="accordion">
-                        <summary class="accordion-header" id="button-header">
+                        <summary class="accordion-header">
                             Components
                         </summary>
                         <div class="accordion-body">

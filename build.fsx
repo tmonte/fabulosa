@@ -49,6 +49,8 @@ Target.create "Clean" (fun _ ->
     ++ "docs/**/obj"
     ++ "tests/**/bin"
     ++ "tests/**/obj"
+    ++ "obj"
+    ++ "bin"
     ++ "output"
     |> Shell.cleanDirs
     let docs = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs");
