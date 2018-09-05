@@ -19,8 +19,10 @@ To get add a doc page, you need to:
 #### Example
 
 ```fsharp
-module CoolComponentPage // The module name must be on the first line of the file
 // CoolComponent.fs
+// NOTE: The module name must be on the first line of the file
+module CoolComponentPage
+
 
 (*** define: my-sample ***)
 let coolComponent = R.div [] [R.str "I'm cool, man."]
