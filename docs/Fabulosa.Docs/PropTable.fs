@@ -26,10 +26,13 @@ module PropTable =
 
     let rec describeType (typeInfo: PropertyInfo) =
         if FSharpType.IsUnion(typeInfo.PropertyType) then
-            Array.map
-                (fun (x: UnionCaseInfo) -> x.Name)
-                (FSharpType.GetUnionCases(typeInfo.PropertyType))
-            |> String.concat " | "
+            let name (case: UnionCaseInfo) = case.Name
+            let cases = FSharpType.GetUnionCases typeInfo.PropertyType
+            let more = if Seq.length cases > 4 then " | ..." else ""
+            (cases
+            |> Array.truncate 4
+            |> Array.map name
+            |> String.concat " | ") + more
         else
             describeName typeInfo
 
