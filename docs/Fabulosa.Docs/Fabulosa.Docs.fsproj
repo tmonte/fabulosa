@@ -14,8 +14,10 @@
     <Compile Include="pages/Grid.fs" />
     <Compile Include="pages/Media.fs" />
     <Compile Include="pages/Badge.fs" />
-    <Compile Include="pages\Icon.fs" />
-    <Compile Include="pages\Navbar.fs" />
+    <Compile Include="pages/Icon.fs" />
+    <Compile Include="pages/Navbar.fs" />
+    <Compile Include="pages/Responsive.fs" />
+    <Compile Include="pages/Table.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -29,5 +31,5 @@
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="../../.paket/Paket.Restore.targets" />
 </Project>
