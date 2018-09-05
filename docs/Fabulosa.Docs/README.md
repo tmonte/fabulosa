@@ -19,6 +19,7 @@ To get add a doc page, you need to:
 #### Example
 
 ```fsharp
+module CoolComponentPage // The module name must be on the first line of the file
 // CoolComponent.fs
 
 (*** define: my-sample ***)
