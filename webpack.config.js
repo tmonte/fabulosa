@@ -44,7 +44,8 @@ var pages = [
     'avatar.html',
     'badge.html',
     'media.html',
-    'icon.html'
+    'icon.html',
+    'navbar.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page

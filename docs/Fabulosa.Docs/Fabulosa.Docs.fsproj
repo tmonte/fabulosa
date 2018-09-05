@@ -15,6 +15,7 @@
     <Compile Include="pages/Media.fs" />
     <Compile Include="pages/Badge.fs" />
     <Compile Include="pages\Icon.fs" />
+    <Compile Include="pages\Navbar.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />

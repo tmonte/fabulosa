@@ -2,13 +2,21 @@ module AvatarPage
 
 open Fabulosa
 open Fabulosa.Docs
+open Fable.Import.React
 module R = Fable.Helpers.React
+open Renderer
 
 (*** define: avatar-initial-sample ***)
 let avatar =
     Avatar.ƒ { 
         Avatar.defaults with
             Initial = "FA"
+    }
+(*** define: avatar-source-sample ***)
+let source =
+    Avatar.ƒ { 
+        Avatar.defaults with
+            Source = "assets/avatar-1.png"
     }
 (*** define: avatar-sizes-sample ***)
 let extraSmall =
@@ -57,15 +65,16 @@ let presence =
     }
 (*** hide ***)
 let render () =
-    Renderer.tryMount "avatar-demo" avatar
-    Renderer.tryMount "avatar-xs-demo" extraSmall
-    Renderer.tryMount "avatar-sm-demo" small
-    Renderer.tryMount "avatar-md-demo" medium
-    Renderer.tryMount "avatar-lg-demo" large
-    Renderer.tryMount "avatar-xl-demo" extraLarge
-    Renderer.tryMount "avatar-icon-demo" icon
-    Renderer.tryMount "avatar-presence-demo" presence
-    Renderer.tryMount "avatar-props-table" (PropTable.propTable typeof<Avatar.Props> Avatar.defaults)
+    tryMount "avatar-initial-demo" avatar
+    tryMount "avatar-source-demo" source
+    tryMount "avatar-xs-demo" extraSmall
+    tryMount "avatar-sm-demo" small
+    tryMount "avatar-md-demo" medium
+    tryMount "avatar-lg-demo" large
+    tryMount "avatar-xl-demo" extraLarge
+    tryMount "avatar-icon-demo" icon
+    tryMount "avatar-presence-demo" presence
+    tryMount "avatar-props-table" (PropTable.propTable typeof<Avatar.Props> Avatar.defaults)
 (**
 <div id="avatars">
 
@@ -83,7 +92,7 @@ Avatars are user profile pictures.
     Props
 </h3>
 
-<div id="avatar-props-table"></div>
+<div class="props-table" id="avatar-props-table"></div>
 
 </div>
 
@@ -100,6 +109,24 @@ Avatars can have an Initial prop with name initials instead of images.
 *)
 
 (*** include: avatar-initial-sample ***)
+
+(**
+
+</div>
+
+<div id="avatar-source">
+
+<h3 class="s-title">
+    Source
+</h3>
+
+Avatars can also have a source image
+
+<div class="demo" id="avatar-source-demo"></div>
+
+*)
+
+(*** include: avatar-source-sample ***)
 
 (**
 

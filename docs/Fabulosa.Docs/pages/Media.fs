@@ -2,13 +2,10 @@ module MediaPage
 
 open Fabulosa
 module R = Fable.Helpers.React
-open System.Collections
-open System.Reflection
-open System.Reflection
-open FSharp.Reflection
-open Fabulosa
 open Fabulosa.Docs
 open R.Props
+open Fable.Import.React
+open Renderer
 
 (*** define: media-img-responsive-demo ***)
 let image containerWidth =
@@ -44,12 +41,12 @@ let imageCover =
 
 (*** hide ***)
 let render () =
-    Renderer.tryMount "media-img-responsive-demo-a" (image "5rem")
-    Renderer.tryMount "media-img-responsive-demo-b" (image "12rem")
-    Renderer.tryMount "media-img-responsive-demo-c" (image "18rem")
-    Renderer.tryMount "media-img-fit-contain-demo" imageContain
-    Renderer.tryMount "media-img-fit-cover-demo" imageCover
-    Renderer.tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
+    tryMount "media-img-responsive-demo-a" (image "5rem")
+    tryMount "media-img-responsive-demo-b" (image "12rem")
+    tryMount "media-img-responsive-demo-c" (image "18rem")
+    tryMount "media-img-fit-contain-demo" imageContain
+    tryMount "media-img-fit-cover-demo" imageCover
+    tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
 (**
 <div id="media">
     <h2 class="s-title">
@@ -67,7 +64,7 @@ Media includes responsive images, figures and video classes.
     
 Add the ```img-responsive``` class to <img> elements. The images will scale with the parent sizes.
 
-<div id="media-img-props-table"></div>
+<div class="props-table" id="media-img-props-table"></div>
 
 *)
 

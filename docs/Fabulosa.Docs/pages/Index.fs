@@ -3,6 +3,8 @@ module IndexPage
 open Fabulosa
 module R = Fable.Helpers.React
 open R.Props
+open Fable.Import.React
+open Renderer
 
 (*** define: sample ***)
 let fabulousButton =
@@ -13,11 +15,14 @@ let fabulousButton =
     } [R.str "Fabulosa"]
 (*** hide ***)
 let render () =
-    Renderer.tryMount "button-demo" fabulousButton
+    tryMount "button-demo" fabulousButton
 (**
 <h2 class="s-title">
     Getting Started
 </h2>
+
+Create a fabulous button
+
 *)
 
 (*** include: sample ***)

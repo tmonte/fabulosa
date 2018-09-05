@@ -4,6 +4,8 @@ open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
+open Fable.Import.React
+open Renderer
 
 (*** define: grid-sample ***)
 let grid =
@@ -103,7 +105,7 @@ A flexbox based responsive grid system with 12 columns.
     Props
 </h3>
 
-<div id="grid-props-table"></div>
+<div class="props-table" id="grid-props-table"></div>
 
 </div>
 
@@ -133,7 +135,7 @@ The default setting for grid
 
 Rows can be Gapless and OneLine
 
-<div id="row-props-table"></div>
+<div class="props-table" id="row-props-table"></div>
 
 <div class="demo">
     <div id="row-gapless-demo"></div>
@@ -156,7 +158,7 @@ Rows can be Gapless and OneLine
 
 Columns can have different resposive sizes (Resize the page to view different sizes)
 
-<div id="column-props-table"></div>
+<div class="props-table" id="column-props-table"></div>
 
 <div class="demo">
     <div id="column-demo"></div>
@@ -174,10 +176,10 @@ Columns can have different resposive sizes (Resize the page to view different si
 
 (*** hide ***)
 let render () =
-    Renderer.tryMount "grid-demo" grid
-    Renderer.tryMount "row-gapless-demo" gapless
-    Renderer.tryMount "row-oneline-demo" oneline
-    Renderer.tryMount "column-demo" small
-    Renderer.tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> Grid.defaults)
-    Renderer.tryMount "row-props-table" (PropTable.propTable typeof<Grid.Row.Props> Grid.Row.defaults)
-    Renderer.tryMount "column-props-table" (PropTable.propTable typeof<Grid.Column.Props> Grid.Column.defaults)
+    tryMount "grid-demo" grid
+    tryMount "row-gapless-demo" gapless
+    tryMount "row-oneline-demo" oneline
+    tryMount "column-demo" small
+    tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> Grid.defaults)
+    tryMount "row-props-table" (PropTable.propTable typeof<Grid.Row.Props> Grid.Row.defaults)
+    tryMount "column-props-table" (PropTable.propTable typeof<Grid.Column.Props> Grid.Column.defaults)

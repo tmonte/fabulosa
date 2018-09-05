@@ -3,6 +3,8 @@ module ButtonPage
 open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
+open Fable.Import.React
+open Renderer
 
 (*** define: button-kind-sample ***)
 let button =
@@ -87,20 +89,20 @@ let loading =
     } [R.str "------"]
 (*** hide ***)
 let render () =
-    Renderer.tryMount "button-default-demo" button
-    Renderer.tryMount "button-primary-demo" primary
-    Renderer.tryMount "button-link-demo" link
-    Renderer.tryMount "button-small-demo" small
-    Renderer.tryMount "button-medium-demo" medium
-    Renderer.tryMount "button-large-demo" large
-    Renderer.tryMount "button-success-demo" success
-    Renderer.tryMount "button-error-demo" error
-    Renderer.tryMount "button-squared-demo" squared
-    Renderer.tryMount "button-round-demo" round
-    Renderer.tryMount "button-disabled-demo" disabled
-    Renderer.tryMount "button-active-demo" active
-    Renderer.tryMount "button-loading-demo" loading
-    Renderer.tryMount "button-props-table" (PropTable.propTable typeof<Button.Props> Button.defaults)
+    tryMount "button-default-demo" button
+    tryMount "button-primary-demo" primary
+    tryMount "button-link-demo" link
+    tryMount "button-small-demo" small
+    tryMount "button-medium-demo" medium
+    tryMount "button-large-demo" large
+    tryMount "button-success-demo" success
+    tryMount "button-error-demo" error
+    tryMount "button-squared-demo" squared
+    tryMount "button-round-demo" round
+    tryMount "button-disabled-demo" disabled
+    tryMount "button-active-demo" active
+    tryMount "button-loading-demo" loading
+    tryMount "button-props-table" (PropTable.propTable typeof<Button.Props> Button.defaults)
 (**
 
 <div id="buttons">
@@ -120,7 +122,7 @@ actions in different types and sizes.
     Props
 </h3>
 
-<div id="button-props-table"></div>
+<div class="props-table" id="button-props-table"></div>
 
 </div>
 

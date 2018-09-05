@@ -22,20 +22,22 @@ module PropTable =
             |> flip List.append ["list"]
             |> List.reduce (fun x -> (fun y -> x + " " + y))
         | t ->
-            t.ToString()
+            t |> string
 
     let rec describeType (typeInfo: PropertyInfo) =
         if FSharpType.IsUnion(typeInfo.PropertyType) then
             let name (case: UnionCaseInfo) = case.Name
             let cases = FSharpType.GetUnionCases typeInfo.PropertyType
-            let more = if Seq.length cases > 4 then " | ..." else ""
+            let more =
+                if Seq.length cases > 4
+                then " | ..."
+                else ""
             (cases
             |> Array.truncate 4
             |> Array.map name
             |> String.concat " | ") + more
         else
             describeName typeInfo
-
         
     let getPropFields aType (obj: obj) = 
         let typ = aType
@@ -62,7 +64,6 @@ module PropTable =
             t,
             R.str (z.ToString().Replace(";", ""))
         )
-
 
     let toTableRow rowValue =
         let (col1, col2, col3) = rowValue

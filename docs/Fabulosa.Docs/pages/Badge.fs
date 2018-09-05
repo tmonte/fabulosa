@@ -5,6 +5,7 @@ open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
 open R.Props
+open Fable.Import.React
 
 (*** define: badge-div-span-sample ***)
 let divBadge =
@@ -62,7 +63,7 @@ select, checkbox, radio and switch.
     Props
 </h3>
 
-<div id="badge-props-table"></div>
+<div class="props-table" id="badge-props-table"></div>
 
 </div>
 

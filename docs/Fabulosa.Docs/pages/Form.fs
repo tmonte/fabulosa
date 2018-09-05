@@ -3,6 +3,8 @@ module FormPage
 open Fabulosa
 module R = Fable.Helpers.React
 open R.Props
+open Fable.Import.React
+open Renderer
 
 (*** define: form-checkbox-sample ***)
 let checkbox =
@@ -154,15 +156,15 @@ let validation =
     ]
 (*** hide ***)
 let render () =
-    Renderer.tryMount "form-input-demo" input
-    Renderer.tryMount "form-select-demo" select
-    Renderer.tryMount "form-textarea-demo" textarea
-    Renderer.tryMount "form-radio-demo" radio
-    Renderer.tryMount "form-checkbox-demo" checkbox
-    Renderer.tryMount "form-switch-demo" switch
-    Renderer.tryMount "form-sizes-demo" sizes
-    Renderer.tryMount "form-validation-demo" validation
-    Renderer.tryMount "form-input-group-demo" inputGroup
+    tryMount "form-input-demo" input
+    tryMount "form-select-demo" select
+    tryMount "form-textarea-demo" textarea
+    tryMount "form-radio-demo" radio
+    tryMount "form-checkbox-demo" checkbox
+    tryMount "form-switch-demo" switch
+    tryMount "form-sizes-demo" sizes
+    tryMount "form-validation-demo" validation
+    tryMount "form-input-group-demo" inputGroup
 (**
 
 <div id="forms">

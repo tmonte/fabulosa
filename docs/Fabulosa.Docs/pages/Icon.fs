@@ -4,6 +4,7 @@ open Fabulosa
 open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
+open Fable.Import.React
 
 (*** define: icon-sample ***)
 let icon =
@@ -39,7 +40,7 @@ folder to your web <head> to have these CSS icons.
     Props
 </h3>
 
-<div id="icon-props-table"></div>
+<div class="props-table" id="icon-props-table"></div>
 
 </div>
 
