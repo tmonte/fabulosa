@@ -11,9 +11,10 @@ For the demos use the `React.mountById` helper to inject the fabulosa components
 To get add a doc page, you need to:
 
 1. Create the new F# [Component].fs file under the `pages` folder
-2. Add the new [page].html to `webpack.config.js`, inside the pages array
-3. Add the menu link entry to docs/assets/template where appropriate
-3. Celebrate
+2. Add the page to `App.fs` inside the docs root
+3. Add the new [page].html to `webpack.config.js`, inside the pages array
+4. Add the menu link entry to docs/assets/template where appropriate
+5. Celebrate
 
 #### Example
 
