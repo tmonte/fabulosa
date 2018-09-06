@@ -39,6 +39,22 @@ let imageCover =
             ] 
     }
 
+(*** define: figure-demo ***)
+let figure =
+    Media.Figure.ƒ { 
+        Media.Figure.defaults with
+        Image = { 
+            Media.Image.defaults with
+                Kind =  Media.Image.Cover 
+                HTMLProps = [
+                    Src "https://goo.gl/krg6x5"
+                    Style [Background "#f8f9fa"; Height "10rem"; Width "100%"]
+                ]
+        }  
+        Caption = { Media.Caption.defaults with Text = [R.str "Ciro Gomes Presidente 2018"]}    
+    }
+     
+
 (*** hide ***)
 let render () =
     tryMount "media-img-responsive-demo-a" (image "5rem")
@@ -47,6 +63,7 @@ let render () =
     tryMount "media-img-fit-contain-demo" imageContain
     tryMount "media-img-fit-cover-demo" imageCover
     tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
+    tryMount "figure-demo" figure
 (**
 <div id="media">
     <h2 class="s-title">
@@ -127,3 +144,24 @@ Add the ```img-responsive``` class to <img> elements. The images will scale with
 </div>
 *)
 (*** include: media-img-fit-cover-demo ***)
+
+(**
+
+<div id="images">
+    <h3 class="s-title">
+        Figure
+    </h3>
+</div>    
+    
+Serves as a container for reponsive images and caption.
+
+<div class="demo">
+    <div class="columns">
+        <div class="column col-6 col-mx-auto">
+             <div id="figure-demo"></div>
+        </div>
+    </div>
+</div>
+*)
+
+(*** include: figure-demo ***)
