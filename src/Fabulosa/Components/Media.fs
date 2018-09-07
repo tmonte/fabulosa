@@ -156,7 +156,7 @@ module Media =
         let ƒ (props: Props) =
             let (parent, propsOfKind, children) =
                 match props.Kind with
-                | Source source -> R.div, seq [Src source], []
+                | Source source -> R.video, seq [Src source], []
                 | Embedded element -> R.iframe, seq [], [element]
             
             propsOfKind 

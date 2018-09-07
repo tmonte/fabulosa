@@ -200,7 +200,7 @@ let figureTests =
         }
     ]
     
-[<FTests>]
+[<Tests>]
 let videoTests =
     testList "Video tests" [
         test "should display defaults" {
