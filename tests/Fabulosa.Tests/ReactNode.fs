@@ -20,7 +20,7 @@ module ReactNode
             | :? T as y ->
                 x.Kind = y.Kind &&
                 stringEquals x.Props y.Props &&
-                Seq.equals x.Children y.Children
+                Enumerable.SequenceEqual(x.Children, y.Children)
             | _ -> false
         override x.GetHashCode () =
             hash (x.Kind, x.Props, x.Children)

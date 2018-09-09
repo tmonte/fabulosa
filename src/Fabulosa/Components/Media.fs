@@ -129,7 +129,7 @@ module Media =
         let render = ƒ
 
     module Video =
-        open ClassNames
+        open Fabulosa.Extensions
         module R = Fable.Helpers.React
         open Fable.Import.React
         open Fable.Helpers
@@ -157,9 +157,10 @@ module Media =
         
         let getClassOfRatio =
             function 
-            | Ratio16x9 -> ["video-responsive-16-9"]
-            | Ratio4x3 -> ["video-responsive-4-3"]
-            | Ratio1x1 -> ["video-responsive-1-1"]
+            | Ratio16x9 -> "video-responsive-16-9"
+            | Ratio4x3 -> "video-responsive-4-3"
+            | Ratio1x1 -> "video-responsive-1-1"
+            >> ClassName
             
         let ƒ (props: Props) =
             let (parent, propsOfKind, children) =
@@ -171,7 +172,7 @@ module Media =
             |> Seq.append [ClassName "video-responsive"] 
             |> Seq.cast
             |> List.ofSeq
-            |> addClasses (getClassOfRatio props.Ratio)
+            |> addProp (getClassOfRatio props.Ratio)
             |> parent 
             <| children
             
