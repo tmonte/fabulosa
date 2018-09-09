@@ -48,6 +48,7 @@ var pages = [
     'navbar.html',
     'responsive.html',
     'table.html',
+    'bar.html'
     'tag.html'
 ]
 
