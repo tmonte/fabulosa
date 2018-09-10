@@ -12,17 +12,21 @@ let card =
     Card.ƒ
         Card.defaults
         { Header =
-            [ R.h2 [] [ R.str "Title" ]
-              R.p [] [ R.str "Sub title" ] ]
+            { Title = "Apple" 
+              SubTitle = "Hardware and software" }
           Body =
-            [ R.p [] [ R.str "A body text" ] ]
+            [ R.p [] [ R.str "To make a contribution to
+                the world by making tools for the mind
+                that advance humankind." ] ]
           Footer =
-            [ Button.ƒ Button.defaults [ R.str "Action" ] ]
-          Image = Media.Image.defaults }
-
+            [ Button.ƒ Button.defaults [ R.str "Purchase" ] ]
+          Image =
+            { Media.Image.defaults with
+                HTMLProps = [ Src "assets/macos-sierra-2.jpg" ] } }
 (*** hide ***)
+let demo = R.div [Style [MaxWidth "50%"]] [card]
 let render () =
-    tryMount "card-default-demo" card
+    tryMount "card-default-demo" demo
     tryMount "card-props-table" (PropTable.propTable typeof<Card.Props> Card.defaults)
 (**
 

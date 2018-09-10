@@ -28,8 +28,6 @@ let tests =
         }
 
         test "Card with children" {
-            let headerTitle = R.h2 [] [ R.str "Title" ]
-            let headerSubTitle = R.p [] [ R.str "Sub title" ]
             let body = R.p [] [R.str "Body" ]
             let footer = Button.ƒ Button.defaults [R.str "Footer"]
             let imageProps =
@@ -39,17 +37,15 @@ let tests =
             Card.ƒ
                 Card.defaults
                 { Header =
-                    [ headerTitle
-                      headerSubTitle ]
+                    { Title = "Title" 
+                      SubTitle = "Sub title" }
                   Body =
                     [ body ]
                   Footer =
                     [ footer ]
                   Image = imageProps }
             |> ReactNode.unit
-            |>! hasOrderedDescendentClass 1 "card-header card-image card-body card-footer"
-            |>! hasChild 1 (headerTitle |> ReactNode.unit)
-            |>! hasChild 1 (headerSubTitle |> ReactNode.unit)
+            |>! hasOrderedDescendentClass 1 "card-header card-title card-subtitle card-image card-body card-footer"
             |>! hasChild 1 image
             |>! hasChild 1 (body |> ReactNode.unit)
             |> hasChild 1 (footer |> ReactNode.unit)
