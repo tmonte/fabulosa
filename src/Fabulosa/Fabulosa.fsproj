@@ -31,6 +31,7 @@
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Typography.fs" />
+    <Compile Include="Components\Card.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />

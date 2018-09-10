@@ -49,7 +49,8 @@ var pages = [
     'responsive.html',
     'table.html',
     'bar.html',
-    'tag.html'
+    'tag.html',
+    'card.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page
