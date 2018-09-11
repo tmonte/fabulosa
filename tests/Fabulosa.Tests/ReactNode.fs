@@ -77,9 +77,8 @@ module ReactNode
         | _ ->  ""
 
     let find child =
-        let same x = x = child
         descendents
-        >> Seq.filter same
+        >> Seq.filter ((=) child)
 
     let descendentClassName =
         descendents
