@@ -43,15 +43,15 @@ let imageCover =
 let figure =
     Media.Figure.ƒ { 
         Media.Figure.defaults with
-        Image = { 
-            Media.Image.defaults with
-                Kind =  Media.Image.Cover 
-                HTMLProps = [
-                    Src "https://goo.gl/krg6x5"
-                    Style [Background "#f8f9fa"; Height "10rem"; Width "100%"]
-                ]
-        }  
-        Caption = { Media.Caption.defaults with Text = [R.str "Ciro Gomes Presidente 2018"]}    
+            Image = { 
+                Media.Image.defaults with
+                    Kind =  Media.Image.Cover 
+                    HTMLProps = [
+                        Src "https://goo.gl/krg6x5"
+                        Style [Background "#f8f9fa"; Height "10rem"; Width "100%"]
+                    ]
+            }  
+            Caption = { Media.Caption.defaults with Text = [R.str "Ciro Gomes Presidente 2018"]}    
     }
     
 (*** define: video-demo ***)

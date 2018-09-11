@@ -18,6 +18,7 @@
     <Compile Include="Components/Card.fs" />
     <Compile Include="Components/Chip.fs" />
     <Compile Include="Components/Code.fs" />
+    <Compile Include="Components/Empty.fs" />
     <Compile Include="Components/Form/Checkbox.fs" />
     <Compile Include="Components/Form/Form.fs" />
     <Compile Include="Components/Form/Input.fs" />

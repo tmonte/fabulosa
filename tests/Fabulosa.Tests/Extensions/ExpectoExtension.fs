@@ -17,7 +17,7 @@ module Expect
         |> Seq.ofArray
         |> Seq.filter (String.isNotEmpty)
 
-    let private parseDependent (expected: string) (node: ReactNode.T) =
+    let private parseDescendent (expected: string) (node: ReactNode.T) =
         let actual = node |> ReactNode.descendentClassName
         (actual |> filterEmpty, expected |> filterEmpty)
 
@@ -31,12 +31,12 @@ module Expect
         Expect.containsAll actual (expected |> filterEmpty) "Classes mismatch"
 
     let hasDescendentClass (expectedClassName: string) (node: ReactNode.T) =
-        let actualDescendentsClasses, expectedClasses = parseDependent expectedClassName node
+        let actualDescendentsClasses, expectedClasses = parseDescendent expectedClassName node
         Expect.containsAll actualDescendentsClasses expectedClasses "Classes mismatch"
 
     let hasOrderedDescendentClass multiplier (expected: string) (node: ReactNode.T) =
         let multiplied = String.replicate multiplier (expected + " ")
-        let actual, expectedClasses = parseDependent multiplied node
+        let actual, expectedClasses = parseDescendent multiplied node
         Expect.sequenceContainsOrder actual expectedClasses "Classes mismatch"
 
     let hasProp (prop: IProp) node =

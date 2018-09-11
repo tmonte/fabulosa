@@ -19,6 +19,7 @@
     <Compile Include="Components/CheckboxTests.fs" />
     <Compile Include="Components/ChipTests.fs" />
     <Compile Include="Components/CodeTests.fs" />
+    <Compile Include="Components/EmptyTests.fs" />
     <Compile Include="Components/GridTests.fs" />
     <Compile Include="Components/IconTests.fs" />
     <Compile Include="Components/InputTests.fs" />
