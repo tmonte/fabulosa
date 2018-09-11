@@ -9,6 +9,7 @@
     <Compile Include="Extensions/StringExtension.fs" />
     <Compile Include="Extensions/PropExtension.fs" />
     <Compile Include="Components/Icon.fs" />
+    <Compile Include="Components/Breadcrumbs.fs" />
     <Compile Include="Components/Button.fs" />
     <Compile Include="Components/Media.fs" />
     <Compile Include="Components/Accordion.fs" />
