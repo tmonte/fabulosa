@@ -16,7 +16,12 @@ module Breadcrumbs =
          BreadcrumbItems = []
     }
     
+    let breadcrumbItem el =
+        R.li [ClassName "breadcrumb-item"] [el]
+    
     let ƒ props = 
-        R.span [] [R.str "Die welt sing laut bis zehn"]
+        props.BreadcrumbItems
+        |> List.map breadcrumbItem 
+        |> R.ul [ClassName "breadcrumb"]
         
     let f = ƒ
