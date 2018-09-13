@@ -52,7 +52,8 @@ var pages = [
     'tag.html',
     'card.html',
     'chip.html',
-    'empty.html'
+    'empty.html',
+    'menu.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page

@@ -15,14 +15,15 @@
     <Compile Include="pages/Form.fs" />
     <Compile Include="pages/Grid.fs" />
     <Compile Include="pages/Media.fs" />
+    <Compile Include="pages/Menu.fs" />
     <Compile Include="pages/Badge.fs" />
     <Compile Include="pages/Icon.fs" />
     <Compile Include="pages/Navbar.fs" />
     <Compile Include="pages/Responsive.fs" />
     <Compile Include="pages/Table.fs" />
     <Compile Include="pages/Tag.fs" />
-    <Compile Include="pages\Card.fs" />
-    <Compile Include="pages\Chip.fs" />
+    <Compile Include="pages/Card.fs" />
+    <Compile Include="pages/Chip.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
