@@ -33,6 +33,7 @@
     <Compile Include="Components/TableTests.fs" />
     <Compile Include="Components/TagTests.fs" />
     <Compile Include="Components/TextareaTests.fs" />
+    <Compile Include="Components\MenuTests.fs" />
     <Compile Include="Main.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
