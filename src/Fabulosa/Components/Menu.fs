@@ -15,7 +15,9 @@ module Menu =
     type Props =
         { HTMLProps: HTMLProps
           Root: string
-          Trigger: Trigger }
+          Trigger: Trigger
+          Open: bool
+          Position: int * int }
 
     [<RequireQualifiedAccess>]
     type Divider =
@@ -33,7 +35,9 @@ module Menu =
     let defaults =
         { Props.HTMLProps = []
           Props.Root = "body"
-          Props.Trigger = Button.defaults, "Menu" }
+          Props.Trigger = Button.defaults, "Menu"
+          Props.Open = false
+          Props.Position = 0, 0 }
 
     let private renderItem =
         R.li [ClassName "menu-item"]
@@ -59,20 +63,26 @@ module Menu =
     let private renderTrigger (trigger: Trigger) =
         let props, children = trigger
         Anchor.ƒ
-            { props with
-                HTMLProps =
-                    [ OnClick (fun (e: MouseEvent) -> console.log e) ] }
+            props
             [ R.str children ]
 
     let ƒ (props: Props) (children: Children) =
-        // let el = Fable.Import.Browser.document.createElement "div"
-        // el.className <- "menu-container"
-        // let root = Fable.Import.Browser.document.body
-        // root.appendChild el |> ignore
-        [ renderTrigger props.Trigger;
-          props.HTMLProps
-          |> addProp (ClassName "menu")
-          |> R.ul <| renderChildren children ]
+        let existing = Fable.Import.Browser.document.getElementById "menu-container"
+        let element =
+            if existing = null then
+                let created = Fable.Import.Browser.document.createElement "div"
+                created.id <- "menu-container"
+                let root = Fable.Import.Browser.document.body
+                root.appendChild created |> ignore
+                created
+            else existing
+        let (x, y) = props.Position
+        let menu =
+            if props.Open then
+                props.HTMLProps @ [Style [Position "fixed"; Left x; Top y]]
+                |> addProp (ClassName "menu")
+                |> R.ul <| renderChildren children
+            else R.ofOption None
+        [ renderTrigger props.Trigger; Fable.Import.ReactDom.createPortal (menu, element) ]
         |> R.fragment []
-        
-        //Fable.Import.ReactDom.createPortal (menu, el)
+
