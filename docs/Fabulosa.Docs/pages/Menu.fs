@@ -50,10 +50,11 @@ let menu model dispatch =
           Menu.Child.Item [ R.a [] [ R.str "Link 1" ] ]
           Menu.Child.Item [ R.a [] [ R.str "Link 2" ] ] ]
 (*** hide ***)
-Program.mkSimple init update menu
-|> Program.withReact "menu-default-demo"
-|> Program.withConsoleTrace
-|> Program.run
+let render () =
+    Program.mkSimple init update menu
+    |> Program.withReact "menu-default-demo"
+    |> Program.withConsoleTrace
+    |> Program.run
 
 (**
 
