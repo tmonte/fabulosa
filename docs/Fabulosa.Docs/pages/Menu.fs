@@ -1,13 +1,9 @@
 module MenuPage
 
 open Fabulosa
-open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
-open Fable.Import.Browser
-open Fable.Import.JS
-open Renderer
 open Microsoft.FSharp.Core
 open Elmish
 open Elmish.React
@@ -30,23 +26,19 @@ let update (msg:Msg) (model:Model) =
             Position = x, y
             Open = not model.Open }
 
-let button dispatch = 
-    { Button.defaults with
-        HTMLProps = [ OnClick
-            (fun e ->
-                let element = e.currentTarget :?> Element
-                let rect = element.getBoundingClientRect ()
-                dispatch (Click (rect.left |> int, rect.bottom |> int))) ] }, "Menu"
-
+let updatePos dispatch pos =
+    dispatch (Click pos)
+    
 (*** define: menu-default-sample ***)
 let menu model dispatch =
     Menu.ƒ
         { Menu.defaults with
             Open = model.Open
             Position = model.Position
-            Trigger = button dispatch }
+            GetPosition = updatePos dispatch
+            Trigger = Button.defaults, "Menu" }
         [ Menu.Child.Item [ R.a [] [ R.str "Links" ] ]
-          Menu.Child.Divider <| Menu.Divider.Text "DIVIDER"
+          Menu.Child.Divider (Menu.Divider.Text "DIVIDER")
           Menu.Child.Item [ R.a [] [ R.str "Link 1" ] ]
           Menu.Child.Item [ R.a [] [ R.str "Link 2" ] ] ]
 (*** hide ***)
