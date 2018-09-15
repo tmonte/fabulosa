@@ -49,11 +49,14 @@ module Expect
 
     let hasChild expectedMatches child parent =
         let foundNodes = ReactNode.find child parent
-        Expect.equal expectedMatches (Seq.length foundNodes) "Number of children found mismatch"
+        Expect.equal (Seq.length foundNodes) expectedMatches "Number of children found mismatch"
     
     let hasNoChildren (node:ReactNode.T) =
-        Expect.isEmpty node.Children "Expect node to have 0 children."
+        Expect.isEmpty node.Children "Expect node to have 0 children"
 
     let hasText expectedText node =
         let text = node |> ReactNode.descendentText
         Expect.equal expectedText text "Text value mismatch"
+    
+    let isNull node =
+        Expect.isNull node "Node is expected to be null"
