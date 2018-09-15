@@ -9,6 +9,7 @@
     <Compile Include="pages/Accordion.fs" />
     <Compile Include="pages/Avatar.fs" />
     <Compile Include="pages/Bar.fs" />
+    <Compile Include="pages/Breadcrumbs.fs" />
     <Compile Include="pages/Button.fs" />
     <Compile Include="pages/Empty.fs" />
     <Compile Include="pages/Index.fs" />
