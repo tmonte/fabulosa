@@ -80,24 +80,21 @@ module Menu =
                     @ [ OnClick (fun e -> onClick e getPos ) ] }
             [ R.str children ]
 
-    let ƒ (props: Props) (children: Children) =
-        let existing = Fable.Import.Browser.document.getElementById "menu-container"
-        let element =
-            if existing = null then
-                let created = Fable.Import.Browser.document.createElement "div"
-                created.id <- "menu-container"
-                let root = Fable.Import.Browser.document.body
-                root.appendChild created |> ignore
-                created
-            else existing
+    let private renderMenu (props: Props) children =
         let (x, y) = props.Position
-        let menu =
-            if props.Open then
-                props.HTMLProps @ [Style [Position "fixed"; Left x; Top y]]
-                |> addProp (ClassName "menu")
-                |> R.ul <| renderChildren children
-            else R.ofOption None
+        if props.Open then
+            props.HTMLProps
+            @
+            [ Style
+                [ Position "fixed"
+                  Left x
+                  Top y ] ]
+            |> addProp (ClassName "menu")
+            |> R.ul <| renderChildren children
+        else R.ofOption None
+
+    let ƒ (props: Props) children =
         [ renderTrigger props.Trigger props.GetPosition
-          Fable.Import.ReactDom.createPortal (menu, element) ]
+          renderMenu props children |> Portal.ƒ "menu-container" ]
         |> R.fragment []
 
