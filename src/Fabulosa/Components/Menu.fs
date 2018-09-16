@@ -86,7 +86,7 @@ module Menu =
             props.HTMLProps
             @
             [ Style
-                [ Position "fixed"
+                [ Position "absolute"
                   Left x
                   Top y ] ]
             |> addProp (ClassName "menu")
