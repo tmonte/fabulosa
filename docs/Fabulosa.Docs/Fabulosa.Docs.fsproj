@@ -25,6 +25,7 @@
     <Compile Include="pages/Tag.fs" />
     <Compile Include="pages/Card.fs" />
     <Compile Include="pages/Chip.fs" />
+    <Compile Include="pages\Nav.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />

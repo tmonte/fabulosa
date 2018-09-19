@@ -54,7 +54,8 @@ var pages = [
     'chip.html',
     'empty.html',
     'menu.html',
-    'breadcrumbs.html'
+    'breadcrumbs.html',
+    'nav.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page
