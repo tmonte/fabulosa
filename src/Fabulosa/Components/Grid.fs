@@ -4,67 +4,9 @@ namespace Fabulosa
 module Grid =
 
     open Fabulosa.Extensions
+    open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
-
-    type Props = {
-        HTMLProps: IHTMLProp list
-    }
-
-    let defaults = {
-        HTMLProps = []
-    }
-
-    let ƒ props =
-        props.HTMLProps
-        |> addProp (ClassName "container")
-        |> R.div
-
-    let render = ƒ
-
-    [<RequireQualifiedAccess>]
-    module Row =
-
-        [<RequireQualifiedAccess>]
-        type Gapless = bool
-
-        [<RequireQualifiedAccess>]
-        type OneLine = bool
-
-        [<RequireQualifiedAccess>]
-        type Props = {
-            Gapless: Gapless
-            OneLine: OneLine
-            HTMLProps: IHTMLProp list
-        }
-
-        let defaults = {
-            Props.Gapless = false
-            Props.OneLine = false
-            Props.HTMLProps = []
-        }
-
-        let gapless =
-            function
-            | true -> "col-gapless"
-            | false -> ""
-            >> ClassName
-
-        let oneLine =
-            function
-            | true -> "col-oneline"
-            | false -> ""
-            >> ClassName
-
-        let ƒ (props: Props) =
-            props.HTMLProps
-            |> addProps
-                [ ClassName "columns"
-                  gapless props.Gapless
-                  oneLine props.OneLine ]
-            |> R.div
-
-        let render = ƒ
 
     [<RequireQualifiedAccess>]
     module Column =
@@ -95,18 +37,23 @@ module Grid =
         type XLSize = ColSize
 
         [<RequireQualifiedAccess>]
-        type Props = {
-            Kind: Kind
-            Size: ColSize
-            XSSize: ColSize
-            SMSize: ColSize
-            MDSize: ColSize
-            LGSize: ColSize
-            XLSize: ColSize
-            HTMLProps: IHTMLProp list
-        }
+        type Props =
+            { Kind: Kind
+              Size: ColSize
+              XSSize: ColSize
+              SMSize: ColSize
+              MDSize: ColSize
+              LGSize: ColSize
+              XLSize: ColSize
+              HTMLProps: IHTMLProp list }
 
-        let kind =
+        [<RequireQualifiedAccess>]
+        type Column = Props * ReactElement list
+
+        [<RequireQualifiedAccess>]
+        type Columns = Column list
+
+        let private kind =
             function
             | Kind.MLAuto -> "col-ml-auto"
             | Kind.MRAuto -> "col-mr-auto"
@@ -114,48 +61,47 @@ module Grid =
             | Kind.Unset -> ""
             >> ClassName
 
-        let size =
+        let private size =
             function
             | n -> "col-" + string n
             >> ClassName
 
-        let xsSize =
+        let private xsSize =
             function
             | n -> "col-xs-" + string n
             >> ClassName
 
-        let smSize =
+        let private smSize =
             function
             | n -> "col-sm-" + string n
             >> ClassName
 
-        let mdSize =
+        let private mdSize =
             function
             | n -> "col-md-" + string n
             >> ClassName
 
-        let lgSize =
+        let private lgSize =
             function
             | n -> "col-lg-" + string n
             >> ClassName
 
-        let xlSize =
+        let private xlSize =
              function
              | n -> "col-xl-" + string n
              >> ClassName
 
-        let defaults = {
-            Props.Kind = Kind.Unset
-            Props.Size = 12
-            Props.XSSize = 0
-            Props.SMSize = 0
-            Props.MDSize = 0
-            Props.LGSize = 0
-            Props.XLSize = 0
-            Props.HTMLProps = []
-        }
+        let defaults =
+            { Props.Kind = Kind.Unset
+              Props.Size = 12
+              Props.XSSize = 0
+              Props.SMSize = 0
+              Props.MDSize = 0
+              Props.LGSize = 0
+              Props.XLSize = 0
+              Props.HTMLProps = [] }
 
-        let ƒ (props: Props) =
+        let ƒ (props: Props) (children: ReactElement list) =
             props.HTMLProps
             |> addProps
                 [ ClassName "column"
@@ -166,6 +112,73 @@ module Grid =
                   mdSize props.MDSize
                   lgSize props.LGSize
                   xlSize props.XLSize ]
-            |> R.div
+            |> R.div <| children
 
-        let render = ƒ
+    [<RequireQualifiedAccess>]
+    module Row =
+
+        [<RequireQualifiedAccess>]
+        type Gapless = bool
+
+        [<RequireQualifiedAccess>]
+        type OneLine = bool
+
+        [<RequireQualifiedAccess>]
+        type Props =
+            { Gapless: Gapless
+              OneLine: OneLine
+              HTMLProps: IHTMLProp list }
+
+        [<RequireQualifiedAccess>]
+        type Row = Props * Column.Columns
+
+        [<RequireQualifiedAccess>]
+        type Rows = Row list
+
+        let defaults = {
+            Props.Gapless = false
+            Props.OneLine = false
+            Props.HTMLProps = []
+        }
+
+        let private gapless =
+            function
+            | true -> "col-gapless"
+            | false -> ""
+            >> ClassName
+
+        let private oneLine =
+            function
+            | true -> "col-oneline"
+            | false -> ""
+            >> ClassName
+
+        let ƒ (props: Props) (children: Column.Columns) =
+            props.HTMLProps
+            |> addProps
+                [ ClassName "columns"
+                  gapless props.Gapless
+                  oneLine props.OneLine ]
+            |> R.div
+            <| Seq.map
+                (fun (columnProps, columnChildren) ->
+                    Column.ƒ columnProps columnChildren) children
+
+    [<RequireQualifiedAccess>]
+    type Props = {
+        HTMLProps: HTMLProps
+    }
+
+    let defaults = {
+        Props.HTMLProps = []
+    }
+
+    let ƒ (props: Props) (children: Row.Rows) =
+        props.HTMLProps
+        |> addProp (ClassName "container")
+        |> R.div
+        <| Seq.map
+            (fun (rowProps, rowChildren) ->
+                Row.ƒ rowProps rowChildren) children
+
+    let render = ƒ

@@ -23,9 +23,10 @@ module Modal =
         }
                 
         let ƒ props children = 
-            let children = match children with 
-            | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
-            | Element e -> [R.div [ClassName "modal-title"] e]
+            let children =
+                match children with 
+                | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
+                | Element e -> [R.div [ClassName "modal-title"] e]
             
             props.HTMLProps
             |> addProp (ClassName "modal-header")
