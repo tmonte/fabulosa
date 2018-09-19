@@ -33,6 +33,10 @@ module Expect
     let hasDescendentClass (expectedClassName: string) (node: ReactNode.T) =
         let actualDescendentsClasses, expectedClasses = parseDescendent expectedClassName node
         Expect.containsAll actualDescendentsClasses expectedClasses "Classes mismatch"
+    
+    let hasNoDescendentClass (expectedClassName: string) (node: ReactNode.T) =
+        let actualDescendentsClasses, expectedClasses = parseDescendent expectedClassName node
+        Expect.isEmpty expectedClasses "Found classes when not supposed to find any"
 
     let hasOrderedDescendentClass multiplier (expected: string) (node: ReactNode.T) =
         let multiplied = String.replicate multiplier (expected + " ")

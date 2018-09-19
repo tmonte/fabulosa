@@ -32,6 +32,7 @@
     <Compile Include="Components/Form/Validation.fs" />
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Menu.fs" />
+    <Compile Include="Components/Modal.fs" />
     <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Table.fs" />
