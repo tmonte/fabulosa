@@ -25,7 +25,7 @@ let navbar =
                 [ Anchor.ƒ
                     { Anchor.defaults with
                         Kind = Button.Kind.Link }
-                [R.str "Center"] ] )
+                    [R.str "Center"] ] )
             Navbar.Child.Section
               ( Navbar.defaults,
                 [ Anchor.ƒ
