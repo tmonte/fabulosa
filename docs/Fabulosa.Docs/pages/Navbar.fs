@@ -8,30 +8,29 @@ open Renderer
 
 (*** define: navbar-sample ***)
 let navbar =
-    Navbar.Header.ƒ Navbar.defaults [
-        Navbar.Section.ƒ Navbar.defaults [
-            Anchor.ƒ {
-                Anchor.defaults with
-                    Kind = Button.Kind.Link
-            } [R.str "Left 1"]
-            Anchor.ƒ {
-                Anchor.defaults with
-                    Kind = Button.Kind.Link
-            } [R.str "Left 2"]
-        ]
-        Navbar.Center.ƒ Navbar.defaults [
-            Anchor.ƒ {
-                Anchor.defaults with
-                    Kind = Button.Kind.Link
-            } [R.str "Center"]
-        ]
-        Navbar.Section.ƒ Navbar.defaults [
-            Anchor.ƒ
-                Anchor.defaults
-                [R.str "Right"]
-        ]
-
-    ]
+    Navbar.ƒ
+        Navbar.defaults
+        [ Navbar.Child.Section
+            ( Navbar.defaults,
+              [ Anchor.ƒ
+                  { Anchor.defaults with
+                      Kind = Button.Kind.Link }
+                  [ R.str "Left 1" ]
+                Anchor.ƒ
+                  { Anchor.defaults with
+                      Kind = Button.Kind.Link }
+                  [ R.str "Left 2" ] ] )
+          Navbar.Child.Center
+            ( Navbar.defaults,
+              [ Anchor.ƒ
+                  { Anchor.defaults with
+                      Kind = Button.Kind.Link }
+                  [R.str "Center"] ] )
+          Navbar.Child.Section
+            ( Navbar.defaults,
+                [ Anchor.ƒ
+                    Anchor.defaults
+                    [R.str "Right"] ] ) ]
 (*** hide ***)
 let render () =
     tryMount "navbar-demo" navbar

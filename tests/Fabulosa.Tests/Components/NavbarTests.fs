@@ -9,7 +9,7 @@ let tests =
     testList "Navbar tests" [
 
         test "Navbar header default" {
-            let header = Navbar.Header.ƒ Navbar.defaults []
+            let header = Navbar.ƒ Navbar.defaults []
             
             header
             |> ReactNode.unit
