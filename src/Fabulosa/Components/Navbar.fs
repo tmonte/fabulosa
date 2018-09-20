@@ -15,52 +15,71 @@ module Navbar =
     [<RequireQualifiedAccess>]
     module Section =
 
-        let ƒ (props: Props) =
+        [<RequireQualifiedAccess>]
+        type T = Props * ReactElement list
+
+        let ƒ (section: T) =
+            let props, children = section
             props.HTMLProps
             |> addProp (ClassName "navbar-section")
-            |> R.section
+            |> R.section <| children
 
         let render = ƒ
 
     [<RequireQualifiedAccess>]
     module Center =
 
-        let ƒ (props: Props) =
+        [<RequireQualifiedAccess>]
+        type T = Props * ReactElement list
+
+        let ƒ (center: T) =
+            let props, children = center
             props.HTMLProps
             |> addProp (ClassName "navbar-center")
-            |> R.section
+            |> R.section <| children
 
         let render = ƒ
 
     [<RequireQualifiedAccess>]
     module Brand =
 
-        let ƒ (props: Props) =
+        [<RequireQualifiedAccess>]
+        type T = Props * ReactElement list
+
+        let ƒ (brand: T) =
+            let props, children = brand
             props.HTMLProps
             |> addProp (ClassName "navbar-brand")
-            |> R.a
+            |> R.a <| children
 
         let render = ƒ
 
     [<RequireQualifiedAccess>]
     type Child =
-    | Brand of Props * ReactElement list
-    | Section of Props * ReactElement list
-    | Center of Props * ReactElement list
+    | Brand of Brand.T
+    | Section of Section.T
+    | Center of Center.T
 
     [<RequireQualifiedAccess>]
-    type Children = Child list
+    type private Children = Child list
 
     let defaults =
         { Props.HTMLProps = [] }
 
-    let renderChild =
+    let private renderChild =
         function
-        | Child.Brand (props, children) -> Brand.ƒ props children
-        | Child.Section (props, children) -> Section.ƒ props children
-        | Child.Center (props, children) -> Center.ƒ props children
+        | Child.Brand (props, children) ->
+            Brand.ƒ (props, children)
+        | Child.Section (props, children) ->
+            Section.ƒ (props, children)
+        | Child.Center (props, children) ->
+            Center.ƒ (props, children)
 
-    let ƒ (props: Props) (children: Children) =
+    [<RequireQualifiedAccess>]
+    type T = Props * Children
+
+    let ƒ (navbar: T) =
+        let props, children = navbar
         props.HTMLProps
         |> addProp (ClassName "navbar")
         |> R.header <| Seq.map renderChild children

@@ -9,33 +9,29 @@ let tests =
     testList "Navbar tests" [
 
         test "Navbar header default" {
-            let header = Navbar.ƒ Navbar.defaults []
-            
-            header
+            Navbar.ƒ
+                ( Navbar.defaults, [] )
             |> ReactNode.unit
             |> hasUniqueClass "navbar"
         }
 
         test "Navbar section default" {
-            let section = Navbar.Section.ƒ Navbar.defaults []
-            
-            section
+            Navbar.Section.ƒ
+                ( Navbar.defaults, [] )
             |> ReactNode.unit
             |> hasUniqueClass "navbar-section"
         }
 
         test "Navbar center default" {
-            let center = Navbar.Center.ƒ Navbar.defaults []
-            
-            center
+            Navbar.Center.ƒ
+                ( Navbar.defaults, [] )
             |> ReactNode.unit
             |> hasUniqueClass "navbar-center"
         }
 
         test "Navbar brand default" {
-            let brand = Navbar.Brand.ƒ Navbar.defaults []
-            
-            brand
+            Navbar.Brand.ƒ
+                ( Navbar.defaults, [] )
             |> ReactNode.unit
             |> hasUniqueClass "navbar-brand"
         }
