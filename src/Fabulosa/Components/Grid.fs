@@ -13,28 +13,28 @@ module Grid =
 
         [<RequireQualifiedAccess>]
         type Kind =
-        | MLAuto
-        | MRAuto
-        | MXAuto
-        | Unset
+            | MLAuto
+            | MRAuto
+            | MXAuto
+            | Unset
 
         [<RequireQualifiedAccess>]
-        type ColSize = int
+        type private ColSize = int
 
         [<RequireQualifiedAccess>]
-        type XSSize = int
+        type private XSSize = int
 
         [<RequireQualifiedAccess>]
-        type SMSize = ColSize
+        type private SMSize = ColSize
 
         [<RequireQualifiedAccess>]
-        type MDSize = ColSize
+        type private MDSize = ColSize
 
         [<RequireQualifiedAccess>]
-        type LGSize = ColSize
+        type private LGSize = ColSize
 
         [<RequireQualifiedAccess>]
-        type XLSize = ColSize
+        type private XLSize = ColSize
 
         [<RequireQualifiedAccess>]
         type Props =
@@ -48,11 +48,8 @@ module Grid =
               HTMLProps: IHTMLProp list }
 
         [<RequireQualifiedAccess>]
-        type Column = Props * ReactElement list
-
-        [<RequireQualifiedAccess>]
-        type Columns = Column list
-
+        type T = Props * ReactElement list
+        
         let private kind =
             function
             | Kind.MLAuto -> "col-ml-auto"
@@ -101,7 +98,8 @@ module Grid =
               Props.XLSize = 0
               Props.HTMLProps = [] }
 
-        let ƒ (props: Props) (children: ReactElement list) =
+        let ƒ (column: T) =
+            let props, children = column
             props.HTMLProps
             |> addProps
                 [ ClassName "column"
@@ -114,14 +112,16 @@ module Grid =
                   xlSize props.XLSize ]
             |> R.div <| children
 
+        let render = ƒ
+
     [<RequireQualifiedAccess>]
     module Row =
 
         [<RequireQualifiedAccess>]
-        type Gapless = bool
+        type private Gapless = bool
 
         [<RequireQualifiedAccess>]
-        type OneLine = bool
+        type private OneLine = bool
 
         [<RequireQualifiedAccess>]
         type Props =
@@ -130,16 +130,12 @@ module Grid =
               HTMLProps: IHTMLProp list }
 
         [<RequireQualifiedAccess>]
-        type Row = Props * Column.Columns
+        type T = Props * Column.T list
 
-        [<RequireQualifiedAccess>]
-        type Rows = Row list
-
-        let defaults = {
-            Props.Gapless = false
-            Props.OneLine = false
-            Props.HTMLProps = []
-        }
+        let defaults =
+            { Props.Gapless = false
+              Props.OneLine = false
+              Props.HTMLProps = [] }
 
         let private gapless =
             function
@@ -153,32 +149,33 @@ module Grid =
             | false -> ""
             >> ClassName
 
-        let ƒ (props: Props) (children: Column.Columns) =
+        let ƒ (row: T) =
+            let props, children = row
             props.HTMLProps
             |> addProps
                 [ ClassName "columns"
                   gapless props.Gapless
                   oneLine props.OneLine ]
             |> R.div
-            <| Seq.map
-                (fun (columnProps, columnChildren) ->
-                    Column.ƒ columnProps columnChildren) children
+            <| Seq.map Column.ƒ children
+
+        let render = ƒ
 
     [<RequireQualifiedAccess>]
-    type Props = {
-        HTMLProps: HTMLProps
-    }
+    type Props =
+        { HTMLProps: HTMLProps }
 
-    let defaults = {
-        Props.HTMLProps = []
-    }
+    [<RequireQualifiedAccess>]
+    type T = Props * Row.T list
 
-    let ƒ (props: Props) (children: Row.Rows) =
+    let defaults =
+        { Props.HTMLProps = [] }
+
+    let ƒ (grid: T) =
+        let props, children = grid
         props.HTMLProps
         |> addProp (ClassName "container")
         |> R.div
-        <| Seq.map
-            (fun (rowProps, rowChildren) ->
-                Row.ƒ rowProps rowChildren) children
+        <| Seq.map Row.ƒ children
 
     let render = ƒ
