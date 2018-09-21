@@ -10,7 +10,7 @@ module Menu =
     open R.Props
 
     [<RequireQualifiedAccess>]
-    type Trigger = Button.Props * ReactElement seq
+    type Trigger = Button.T
 
     [<RequireQualifiedAccess>]
     type Divider =
@@ -50,9 +50,9 @@ module Menu =
         let withClick =
             props.HTMLProps @ [ OnClick (onClick >> dispatch) ]
         Anchor.ƒ
-            { props with
-                HTMLProps = withClick }
-            children
+            ( { props with
+                  HTMLProps = withClick },
+              children )
 
     let private renderDivider =
         function
@@ -111,10 +111,8 @@ module Menu =
         { HTMLProps = []
           Trigger =
             Button.defaults,
-            Seq.cast<ReactElement>
-                [ Icon.ƒ
-                    { Icon.defaults with Kind = Icon.Kind.Menu }
-                    [] ]
+            [ Icon.ƒ
+                { Icon.defaults with Kind = Icon.Kind.Menu } ]
           Opened = false }
 
     let ƒ props children =
