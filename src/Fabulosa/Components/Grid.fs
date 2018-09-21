@@ -13,10 +13,10 @@ module Grid =
 
         [<RequireQualifiedAccess>]
         type Kind =
-            | MLAuto
-            | MRAuto
-            | MXAuto
-            | Unset
+        | MLAuto
+        | MRAuto
+        | MXAuto
+        | Unset
 
         [<RequireQualifiedAccess>]
         type private ColSize = int
