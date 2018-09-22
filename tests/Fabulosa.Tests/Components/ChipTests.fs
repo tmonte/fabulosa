@@ -1,4 +1,4 @@
-module ChipTests
+﻿module ChipTests
 
 open Expecto
 open Fabulosa
@@ -40,7 +40,7 @@ let tests =
         test "Chip with children" {
             let avatar =
                 Avatar.ƒ
-                    { Avatar.defaults with
+                    { Avatar.props with
                         Size = Avatar.Size.Small }
                 |> ReactNode.unit
             let text =
@@ -49,7 +49,7 @@ let tests =
             Chip.ƒ
                 (Chip.props,
                  { Chip.children with
-                     Avatar = Some Avatar.defaults
+                     Avatar = Some Avatar.props
                      Text = "Text" })
             |> ReactNode.unit
             |>! hasChild 1 avatar

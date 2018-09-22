@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Grid =
@@ -88,7 +88,7 @@ module Grid =
              | n -> "col-xl-" + string n
              >> ClassName
 
-        let defaults =
+        let props =
             { Props.Kind = Kind.Unset
               Props.Size = 12
               Props.XSSize = 0
@@ -132,7 +132,7 @@ module Grid =
         [<RequireQualifiedAccess>]
         type T = Props * Column.T list
 
-        let defaults =
+        let props =
             { Props.Gapless = false
               Props.OneLine = false
               Props.HTMLProps = [] }
@@ -168,7 +168,7 @@ module Grid =
     [<RequireQualifiedAccess>]
     type T = Props * Row.T list
 
-    let defaults =
+    let props =
         { Props.HTMLProps = [] }
 
     let ƒ (grid: T) =

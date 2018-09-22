@@ -11,7 +11,7 @@ let tests =
     testList "Textarea tests" [
 
         test "Textarea default" {
-            let props = Textarea.defaults
+            let props = Textarea.props
             let textarea =
                 Textarea.ƒ
                     ( props, [] )
@@ -22,7 +22,7 @@ let tests =
         }
 
         test "Textarea html props" {
-            let props = { Textarea.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Textarea.props with HTMLProps = [ClassName "custom"] }
             let textarea =
                 Textarea.ƒ
                     ( props, [] )
@@ -33,7 +33,7 @@ let tests =
         }
 
         test "Textarea children with name" {
-            let props = Textarea.defaults
+            let props = Textarea.props
             let grandChild = R.span [] []
             let child = R.div [] [grandChild]
             let textarea =
@@ -47,7 +47,7 @@ let tests =
         }
 
         test "Textarea children with class" {
-            let props = Textarea.defaults
+            let props = Textarea.props
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             let textarea =

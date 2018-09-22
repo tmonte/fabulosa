@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 module R = Fable.Helpers.React
 open R.Props
@@ -21,7 +21,7 @@ module Tag =
         Color: Color
     }
     
-    let defaults = {
+    let props = {
         Rounded = false
         Color = Color.Default
     }

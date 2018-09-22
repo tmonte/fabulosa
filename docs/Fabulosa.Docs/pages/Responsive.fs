@@ -1,4 +1,4 @@
-module ResponsivePage
+﻿module ResponsivePage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -9,24 +9,24 @@ open Renderer
 (*** define: responsive-sample ***)
 let hideSmall =
     Responsive.ƒ
-        ( { Responsive.defaults with
+        ( { Responsive.props with
               Hide = Responsive.Size.SM },
           [ Button.ƒ
-              ( Button.defaults,
+              ( Button.props,
                 [ R.str "Hide small" ] ) ] )
 
 let showLarge =
     Responsive.ƒ
-        ( { Responsive.defaults with
+        ( { Responsive.props with
               Show = Responsive.Size.LG },
           [ Button.ƒ
-              ( Button.defaults,
+              ( Button.props,
                 [R.str "Show large"] ) ] )
 (*** hide ***)
 let render () =
     tryMount "responsive-demo-hide" hideSmall
     tryMount "responsive-demo-show" showLarge
-    tryMount "navbar-props-table" (PropTable.propTable typeof<Responsive.Props> Responsive.defaults)
+    tryMount "navbar-props-table" (PropTable.propTable typeof<Responsive.Props> Responsive.props)
 (**
 
 <div id="responsive">

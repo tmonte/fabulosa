@@ -1,4 +1,4 @@
-module AccordionPage
+﻿module AccordionPage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -9,7 +9,7 @@ open Renderer
 (*** define: accordion-sample ***)
 let accordion =
     Accordion.ƒ
-        ( Accordion.defaults,
+        ( Accordion.props,
           [ { Header = "Header One"
               Body =
                 [ R.a [] [ R.str "Item One" ]
@@ -21,9 +21,9 @@ let accordion =
 (*** define: accordion-custom-sample ***)
 let custom =
     Accordion.ƒ
-        ( { Accordion.defaults with
+        ( { Accordion.props with
               CustomIcon =
-                { Icon.defaults with
+                { Icon.props with
                     Kind = Icon.Kind.Forward } },
           [ { Header = "Header One"
               Body =
@@ -97,5 +97,5 @@ Accordions accept icon props for a custom icon.
 let render () =
     tryMount "accordion-demo" accordion
     tryMount "accordion-custom-demo" custom
-    tryMount "accordion-props-table" (PropTable.propTable typeof<Accordion.Props> Accordion.defaults)
+    tryMount "accordion-props-table" (PropTable.propTable typeof<Accordion.Props> Accordion.props)
     

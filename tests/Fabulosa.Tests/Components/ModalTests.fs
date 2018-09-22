@@ -1,4 +1,4 @@
-module ModalTests
+﻿module ModalTests
 
 open Expecto
 open Fabulosa
@@ -14,7 +14,7 @@ let tests =
         
             "Ciro 12" 
             |> Modal.Header.Children.Text
-            |> Modal.Header.ƒ Modal.Header.defaults 
+            |> Modal.Header.ƒ Modal.Header.props 
             |> ReactNode.unit
             |>! hasUniqueClass "modal-header"
             |> hasChild 1 child
@@ -26,7 +26,7 @@ let tests =
         
             [complexChildContent]
             |> Modal.Header.Children.Element
-            |> Modal.Header.ƒ Modal.Header.defaults 
+            |> Modal.Header.ƒ Modal.Header.props 
             |> ReactNode.unit
             |> hasChild 1 child
         }
@@ -34,7 +34,7 @@ let tests =
         test "renders props" {
             let complexChildContent = R.div [ClassName "h1"] [R.str  "Cirão da Massa"]
             let child = complexChildContent |> ReactNode.unit 
-            let props = { Modal.Header.defaults with HTMLProps = [Id "hello-world"] } 
+            let props = { Modal.Header.props with HTMLProps = [Id "hello-world"] } 
         
             [complexChildContent]
             |> Modal.Header.Children.Element

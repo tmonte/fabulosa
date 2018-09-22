@@ -1,4 +1,4 @@
-module BreadcrumbPage
+﻿module BreadcrumbPage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -10,17 +10,17 @@ open Renderer
 
 (*** define: breadcrumbs-demo ***)
 let breadcrumb =
-    Breadcrumbs.ƒ { Breadcrumbs.defaults with HTMLProps = [Id "breadcrumb-id"] } [
-        BreadcrumbItem.f BreadcrumbItem.defaults (BreadcrumbItem.Text "Just Text")
-        BreadcrumbItem.f BreadcrumbItem.defaults (BreadcrumbItem.Link { Href = "ubuntu.com"; Text = "Ubuntu"})
-        BreadcrumbItem.f BreadcrumbItem.defaults (BreadcrumbItem.Elements [R.str "Hey: "; R.a [] [R.str "Jude" ]])
+    Breadcrumbs.ƒ { Breadcrumbs.props with HTMLProps = [Id "breadcrumb-id"] } [
+        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Text "Just Text")
+        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Link { Href = "ubuntu.com"; Text = "Ubuntu"})
+        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Elements [R.str "Hey: "; R.a [] [R.str "Jude" ]])
     ]
 
 (*** hide ***)
 let render () =
     tryMount "breadcrumbs-demo" breadcrumb
-    tryMount "breadcrumbs-props-table" (PropTable.propTable typeof<Breadcrumbs.Props> Breadcrumbs.defaults)
-    tryMount "breadcrumb-items-props-table" (PropTable.propTable typeof<BreadcrumbItem.Props> BreadcrumbItem.defaults)
+    tryMount "breadcrumbs-props-table" (PropTable.propTable typeof<Breadcrumbs.Props> Breadcrumbs.props)
+    tryMount "breadcrumb-items-props-table" (PropTable.propTable typeof<BreadcrumbItem.Props> BreadcrumbItem.props)
 (**
 
 <div id="breadcrumbs">

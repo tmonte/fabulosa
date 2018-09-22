@@ -54,9 +54,9 @@ module Menu =
         let props _ = ()
 
         let children =
-            Button.defaults,
+            Button.props,
             [ Icon.ƒ
-                { Icon.defaults with Kind = Icon.Kind.Menu } ]
+                { Icon.props with Kind = Icon.Kind.Menu } ]
 
         let onClick (e: MouseEvent) =
             let element = e.currentTarget :?> Browser.Element
@@ -158,7 +158,7 @@ module Menu =
                  model.children)
               |> Portal.ƒ "menu-container" ]
 
-    let defaults =
+    let props =
         { HTMLProps = Container.props.HTMLProps
           Trigger = Trigger.children
           Opened = Container.props.Opened }

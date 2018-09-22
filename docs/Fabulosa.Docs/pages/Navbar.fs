@@ -9,32 +9,32 @@ open Renderer
 (*** define: navbar-sample ***)
 let navbar =
     Navbar.ƒ
-        ( Navbar.defaults,
+        ( Navbar.props,
           [ Navbar.Child.Section
-              ( Navbar.defaults,
+              ( Navbar.props,
                 [ Anchor.ƒ
-                    ( { Anchor.defaults with
+                    ( { Anchor.props with
                           Kind = Button.Kind.Link },
                       [ R.str "Left 1" ] )
                   Anchor.ƒ
-                    ( { Anchor.defaults with
+                    ( { Anchor.props with
                           Kind = Button.Kind.Link },
                       [ R.str "Left 2" ] ) ] )
             Navbar.Child.Center
-              ( Navbar.defaults,
+              ( Navbar.props,
                 [ Anchor.ƒ
-                    ( { Anchor.defaults with
+                    ( { Anchor.props with
                           Kind = Button.Kind.Link },
                       [ R.str "Center" ] ) ] )
             Navbar.Child.Section
-              ( Navbar.defaults,
+              ( Navbar.props,
                 [ Anchor.ƒ
-                    ( Anchor.defaults,
+                    ( Anchor.props,
                       [ R.str "Right" ] ) ] ) ] )
 (*** hide ***)
 let render () =
     tryMount "navbar-demo" navbar
-    tryMount "navbar-props-table" (PropTable.propTable typeof<Navbar.Props> Navbar.defaults)
+    tryMount "navbar-props-table" (PropTable.propTable typeof<Navbar.Props> Navbar.props)
 (**
 
 <div id="navbar">

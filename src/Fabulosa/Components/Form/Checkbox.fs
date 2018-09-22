@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Checkbox =
@@ -25,7 +25,7 @@ module Checkbox =
         | false -> ""
         >> ClassName
 
-    let defaults =
+    let props =
         { Props.Inline = false
           Props.Text = "Label"
           Props.HTMLProps = [] }

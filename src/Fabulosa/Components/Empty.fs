@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Empty =
@@ -14,7 +14,7 @@ module Empty =
         [<RequireQualifiedAccess>]
         type T = Icon.T
 
-        let props = Icon.defaults
+        let props = Icon.props
 
         let ƒ (icon: T) =
             R.div

@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 open Fable.Import.React
 [<RequireQualifiedAccess>]
@@ -18,7 +18,7 @@ module Chip =
         type T = Props
 
         let ƒ (remove: T) =
-            ({ Anchor.defaults with
+            ({ Anchor.props with
                  HTMLProps =
                    [ ClassName "btn btn-clear"
                      Role "button"

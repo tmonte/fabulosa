@@ -1,4 +1,4 @@
-module CodeTests
+﻿module CodeTests
 
 open Expecto
 open Expect
@@ -11,7 +11,7 @@ open R.Props
 let tests =
     testList "Code tests" [
         test "Code should be a react html node when defaults are provided" {
-            let codeElement = Code.ƒ Code.defaults
+            let codeElement = Code.ƒ Code.props
             let data = Data ("lang", "F#")
             let innerCodeElement =
                 R.code [DangerouslySetInnerHTML {__html = ""}] []

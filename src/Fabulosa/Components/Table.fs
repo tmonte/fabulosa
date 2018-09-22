@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Table =
@@ -19,7 +19,7 @@ module Table =
         HTMLProps: IHTMLProp list
     }
 
-    let defaults = {
+    let props = {
         Props.Kind = Kind.Unset
         Props.HTMLProps = []
     }
@@ -48,7 +48,7 @@ module Table =
             HTMLProps: IHTMLProp list
         }
 
-        let defaults = {
+        let props = {
             Props.HTMLProps = []
         }
 
@@ -66,7 +66,7 @@ module Table =
             HTMLProps: IHTMLProp list
         }
 
-        let defaults = {
+        let props = {
             Props.HTMLProps = []
         }
 
@@ -88,7 +88,7 @@ module Table =
             HTMLProps: IHTMLProp list
         }
 
-        let defaults = {
+        let props = {
             Props.Active = false
             Props.HTMLProps = []
         }
@@ -114,7 +114,7 @@ module Table =
             HTMLProps: IHTMLProp list
         }
 
-        let defaults = {
+        let props = {
             Props.HTMLProps = []
         }
 
@@ -132,7 +132,7 @@ module Table =
             HTMLProps: IHTMLProp list
         }
 
-        let defaults = {
+        let props = {
             Props.HTMLProps = []
         }
 

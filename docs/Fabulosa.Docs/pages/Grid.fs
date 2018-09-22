@@ -1,4 +1,4 @@
-module GridPage
+﻿module GridPage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -11,37 +11,37 @@ let style = Style [Background "#f8f9fa"]
 (*** define: grid-sample ***)
 let grid =
     Grid.ƒ
-        ( Grid.defaults,
-          [ Grid.Row.defaults,
-            [ { Grid.Column.defaults with Size = 4 },
+        ( Grid.props,
+          [ Grid.Row.props,
+            [ { Grid.Column.props with Size = 4 },
               [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.defaults with Size = 8 },
+              { Grid.Column.props with Size = 8 },
               [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
 (*** define: row-sample ***)
 let gapless =
     Grid.ƒ
-        ( Grid.defaults,
-          [ { Grid.Row.defaults with Gapless = true },
-            [ { Grid.Column.defaults with Size = 4 },
+        ( Grid.props,
+          [ { Grid.Row.props with Gapless = true },
+            [ { Grid.Column.props with Size = 4 },
               [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.defaults with Size = 8 },
+              { Grid.Column.props with Size = 8 },
               [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
 let oneline =
     Grid.ƒ
-        ( Grid.defaults,
-          [ { Grid.Row.defaults with OneLine = true },
-            [ { Grid.Column.defaults with Size = 4 },
+        ( Grid.props,
+          [ { Grid.Row.props with OneLine = true },
+            [ { Grid.Column.props with Size = 4 },
               [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.defaults with Size = 12 },
+              { Grid.Column.props with Size = 12 },
               [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
 (*** define: column-sample ***)
 let small =
     Grid.ƒ
-        ( Grid.defaults,
-          [ Grid.Row.defaults,
-            [ { Grid.Column.defaults with Size = 4; SMSize = 12 },
+        ( Grid.props,
+          [ Grid.Row.props,
+            [ { Grid.Column.props with Size = 4; SMSize = 12 },
               [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.defaults with Size = 8; SMSize = 12 },
+              { Grid.Column.props with Size = 8; SMSize = 12 },
               [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
 (**
 
@@ -136,6 +136,6 @@ let render () =
     tryMount "row-gapless-demo" gapless
     tryMount "row-oneline-demo" oneline
     tryMount "column-demo" small
-    tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> Grid.defaults)
-    tryMount "row-props-table" (PropTable.propTable typeof<Grid.Row.Props> Grid.Row.defaults)
-    tryMount "column-props-table" (PropTable.propTable typeof<Grid.Column.Props> Grid.Column.defaults)
+    tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> Grid.props)
+    tryMount "row-props-table" (PropTable.propTable typeof<Grid.Row.Props> Grid.Row.props)
+    tryMount "column-props-table" (PropTable.propTable typeof<Grid.Column.Props> Grid.Column.props)

@@ -1,4 +1,4 @@
-module ButtonTests
+﻿module ButtonTests
 
 open Expecto
 open Fabulosa
@@ -16,7 +16,7 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "text" ]
             Button.ƒ
-                ( Button.defaults, [ child ] )
+                ( Button.props, [ child ] )
             |> ReactNode.unit
             |>! hasUniqueClass "btn"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -26,7 +26,7 @@ let tests =
             let child =
                 R.div [] [ R.str "text" ]
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       HTMLProps = [ClassName "custom"] },
                   [child] )
             |> ReactNode.unit
@@ -36,7 +36,7 @@ let tests =
         test "Button kind primary" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Kind = Button.Kind.Primary },
                   [ child ] )
             |> ReactNode.unit 
@@ -47,7 +47,7 @@ let tests =
         test "Button kind link" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Kind = Button.Kind.Link },
                   [ child ] )
             |> ReactNode.unit
@@ -58,7 +58,7 @@ let tests =
         test "Button color success" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Color = Button.Color.Success },
                   [ child ] )
             |> ReactNode.unit
@@ -69,7 +69,7 @@ let tests =
         test "Button color error" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Color = Button.Color.Error },
                   [ child ] )
             |> ReactNode.unit
@@ -80,7 +80,7 @@ let tests =
         test "Button size small" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Size = Button.Size.Small },
                   [ child ] )
             |> ReactNode.unit
@@ -91,7 +91,7 @@ let tests =
         test "Button size large" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Size = Button.Size.Large },
                   [ child ] )
             |> ReactNode.unit
@@ -102,7 +102,7 @@ let tests =
         test "Button state disabled" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       State = Button.State.Disabled  },
                   [ child ] )
             |> ReactNode.unit
@@ -113,7 +113,7 @@ let tests =
         test "Button state active" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       State = Button.State.Active },
                   [ child ] )
             |> ReactNode.unit
@@ -124,7 +124,7 @@ let tests =
         test "Button state loading" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       State = Button.State.Loading },
                   [ child ] )
             |> ReactNode.unit
@@ -135,7 +135,7 @@ let tests =
         test "Button format squared action" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Format = Button.Format.SquaredAction },
                   [ child ] )
             |> ReactNode.unit
@@ -146,7 +146,7 @@ let tests =
         test "Button format round action" {
             let child = R.str "text"
             Button.ƒ
-                ( { Button.defaults with
+                ( { Button.props with
                       Format = Button.Format.RoundAction },
                   [ child ] )
             |> ReactNode.unit
@@ -158,7 +158,7 @@ let tests =
             let grandChild = R.span [] []
             let child = R.div [] [grandChild]
             Button.ƒ
-                ( Button.defaults, [ child ] )
+                ( Button.props, [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn"
             |>! hasChild 1 (child |> ReactNode.unit)
@@ -169,7 +169,7 @@ let tests =
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             Button.ƒ
-                ( { Button.defaults with Size = Button.Size.Small },
+                ( { Button.props with Size = Button.Size.Small },
                   [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-sm"

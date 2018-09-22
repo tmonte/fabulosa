@@ -11,7 +11,7 @@ let tests =
     testList "Select tests" [
 
         test "Select default" {
-            let props = Select.defaults
+            let props = Select.props
             let select = Select.ƒ (props, [])
             
             select
@@ -20,7 +20,7 @@ let tests =
         }
 
         test "Select size small" {
-            let props = { Select.defaults with Size = Select.Size.Small }
+            let props = { Select.props with Size = Select.Size.Small }
             let select = Select.ƒ (props, [])
             
             select
@@ -29,7 +29,7 @@ let tests =
         }
 
         test "Select size large" {
-            let props = { Select.defaults with Size = Select.Size.Large }
+            let props = { Select.props with Size = Select.Size.Large }
             let select = Select.ƒ (props, [])
             
             select
@@ -38,7 +38,7 @@ let tests =
         }
 
         test "Select html props" {
-            let props = { Select.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Select.props with HTMLProps = [ClassName "custom"] }
             let select = Select.ƒ (props, [])
             
             select
@@ -47,9 +47,9 @@ let tests =
         }
 
         test "Select children with name" {
-            let props = Select.defaults
+            let props = Select.props
             let grandChild = R.str "Value"
-            let optionProps = (Select.Option.defaults, [grandChild])
+            let optionProps = (Select.Option.props, [grandChild])
             let child = Select.Option.ƒ optionProps
             let select = Select.ƒ ( props, [ Select.Child.Option optionProps ] )
             
@@ -60,7 +60,7 @@ let tests =
         }
 
         test "Option default" {
-            let props = Select.Option.defaults
+            let props = Select.Option.props
             let child = R.str "Value"
             let option = Select.Option.ƒ ( props, [child] )
 
@@ -70,7 +70,7 @@ let tests =
         }
 
         test "Option html props" {
-            let props = { Select.Option.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Select.Option.props with HTMLProps = [ClassName "custom"] }
             let option = Select.Option.ƒ ( props, [] )
             
             option
@@ -79,7 +79,7 @@ let tests =
         }
 
         test "Option children with name" {
-            let props = Select.Option.defaults
+            let props = Select.Option.props
             let grandChild = R.RawText "Value"
             let child = R.span [] [grandChild]
             let option = Select.Option.ƒ ( props, [child] )
@@ -91,7 +91,7 @@ let tests =
         }
 
         test "Option children with class" {
-            let props = Select.Option.defaults
+            let props = Select.Option.props
             let grandChild = R.RawText "Value"
             let child = R.span [ClassName "custom"] [grandChild]
             let option = Select.Option.ƒ ( props, [child] )
@@ -103,8 +103,8 @@ let tests =
         }
 
         test "Option group default" {
-            let props = Select.OptionGroup.defaults
-            let optionProps = ( Select.Option.defaults, [] )
+            let props = Select.OptionGroup.props
+            let optionProps = ( Select.Option.props, [] )
             let child = Select.Option.ƒ optionProps
             let optionGroup = Select.OptionGroup.ƒ ( props, [ optionProps ] )
             
@@ -114,7 +114,7 @@ let tests =
         }
 
         test "Option group html props" {
-            let props = { Select.OptionGroup.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Select.OptionGroup.props with HTMLProps = [ClassName "custom"] }
             let optionGroup =
                 Select.OptionGroup.ƒ
                     ( props, [] )
@@ -125,9 +125,9 @@ let tests =
         }
 
         test "Option group children with name" {
-            let props = Select.OptionGroup.defaults
+            let props = Select.OptionGroup.props
             let grandChild = R.str "Value"
-            let optionProps = ( Select.Option.defaults, [grandChild] )
+            let optionProps = ( Select.Option.props, [grandChild] )
             let child = Select.Option.ƒ optionProps
             let optionGroup = Select.OptionGroup.ƒ ( props, [optionProps] )
             
@@ -138,10 +138,10 @@ let tests =
         }
 
         test "Option group children with class" {
-            let props = Select.OptionGroup.defaults
+            let props = Select.OptionGroup.props
             let grandChild = R.str "Value"
             let optionProps =
-                ( { Select.Option.defaults with
+                ( { Select.Option.props with
                       HTMLProps = [ClassName "custom"] }, [grandChild] )
             let child =
                 Select.Option.ƒ optionProps

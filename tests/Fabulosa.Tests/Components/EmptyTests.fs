@@ -1,4 +1,4 @@
-module EmptyTests
+﻿module EmptyTests
 
 open Expecto
 open Fabulosa
@@ -29,13 +29,13 @@ let tests =
 
         test "Empty with children" {
             let iconProps = 
-                { Icon.defaults with
+                { Icon.props with
                         Kind = Icon.Kind.Mail }
             let icon =
                 Icon.ƒ { iconProps with Size = Icon.Size.X3 }
                 |> ReactNode.unit
             let action =
-                Button.ƒ ( Button.defaults, [R.str "Action"] )
+                Button.ƒ ( Button.props, [R.str "Action"] )
             Empty.ƒ
                 (Empty.props,
                  { Icon = iconProps

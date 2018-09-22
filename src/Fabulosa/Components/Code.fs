@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 module R = Fable.Helpers.React
 open R.Props
@@ -11,7 +11,7 @@ module Code =
         Language: string
     }
     
-    let defaults = {
+    let props = {
         Code = { __html = ""}
         Language = "F#"
     }

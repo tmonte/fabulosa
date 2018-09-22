@@ -55,7 +55,7 @@ module Badge =
                 (combine props badge)
                 children
 
-    let defaults =
+    let props =
         { Props.Badge = 0
           Props.Kind = Kind.Div ([], []) }
 

@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Bar =
@@ -35,7 +35,7 @@ module Bar =
             HTMLProps: HTMLProps
         }
 
-        let defaults = {
+        let props = {
             Props.Value = 0
             Props.Tooltip = false
             Props.Color = Color.Unset
@@ -85,7 +85,7 @@ module Bar =
         HTMLProps: HTMLProps
     }
 
-    let defaults = {
+    let props = {
         Props.Small = false
         Props.HTMLProps = []
     }
@@ -110,12 +110,12 @@ module Bar =
     [<RequireQualifiedAccess>]
     module Slider =
 
-        let defaults = defaults
+        let props = props
 
         let private item child =
             Item.ƒ child [
                 Button.ƒ ( {
-                    Button.defaults with
+                    Button.props with
                         HTMLProps = [ClassName "bar-slider-btn"]
                 }, [] )
             ]

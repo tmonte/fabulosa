@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Responsive =
@@ -25,7 +25,7 @@ module Responsive =
     [<RequireQualifiedAccess>]
     type T = Props * ReactElement list
 
-    let defaults =
+    let props =
         { Props.Hide = Size.Unset
           Props.Show = Size.Unset }
 

@@ -11,7 +11,7 @@ let tests =
     testList "Radio tests" [
 
         test "Radio default" {
-            let props = Radio.defaults
+            let props = Radio.props
             let radio = Radio.ƒ props
             let input =
                 R.input [Type "radio"]
@@ -32,7 +32,7 @@ let tests =
         }
 
         test "Radio inline" {
-            let props = { Radio.defaults with Inline = true }
+            let props = { Radio.props with Inline = true }
             let radio = Radio.ƒ props
             
             radio
@@ -41,7 +41,7 @@ let tests =
         }
 
         test "Radio text" {
-            let props = { Radio.defaults with Text = "custom" }
+            let props = { Radio.props with Text = "custom" }
             let radio = Radio.ƒ props
             let text =
                 R.str "custom"
@@ -54,7 +54,7 @@ let tests =
         }
 
         test "Radio html props" {
-            let props = { Radio.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Radio.props with HTMLProps = [ClassName "custom"] }
             let radio = Radio.ƒ props
             
             radio

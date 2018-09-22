@@ -1,4 +1,4 @@
-module EmptyPage
+﻿module EmptyPage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -13,13 +13,13 @@ let empty =
     Empty.ƒ
         (Empty.props,
          { Icon =
-             { Icon.defaults with
+             { Icon.props with
                  Kind = Icon.Kind.Mail }
            Title = "You have no new messages" 
            SubTitle = "Click the button to start a conversation"
            Action =
              [ Button.ƒ
-                 (Button.defaults, [ R.str "Send a message" ]) ] })
+                 (Button.props, [ R.str "Send a message" ]) ] })
 (*** hide ***)
 let render () =
     tryMount "empty-default-demo" empty

@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 module R = Fable.Helpers.React
 open R.Props
@@ -13,7 +13,7 @@ module Breadcrumbs =
         HTMLProps: IHTMLProp list
     }
     
-    let defaults = {
+    let props = {
          HTMLProps = []
     }
     
@@ -44,7 +44,7 @@ module BreadcrumbItem =
         HTMLProps: IHTMLProp list
     }    
     
-    let defaults = {
+    let props = {
         HTMLProps = []
     }
     

@@ -27,7 +27,7 @@ module Card =
         Footer: ReactElement list
     }
 
-    let defaults = {
+    let props = {
         Props.HTMLProps = []
     }
 
@@ -37,7 +37,7 @@ module Card =
               Header.SubTitle = ""} 
         Body = []
         Footer = []
-        Image = Media.Image.defaults
+        Image = Media.Image.props
     }
 
     let private renderIfNotEmpty elements className =

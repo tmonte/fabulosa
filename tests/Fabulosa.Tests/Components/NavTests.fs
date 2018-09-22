@@ -12,25 +12,23 @@ let tests =
 
         test "Nav default" {
             Nav.ƒ
-                Nav.defaults 
-                []
+                (Nav.props, [])
             |> ReactNode.unit
             |> hasUniqueClass "nav"
         }
 
         test "Nav html props" {
             Nav.ƒ
-                { Nav.defaults with
-                    HTMLProps = [ ClassName "custom" ] }
-                []
+                ({ Nav.props with
+                     HTMLProps = [ ClassName "custom" ] }, [])
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
         test "Nav item defaults" {
             Nav.ƒ
-                Nav.defaults
-                [ Nav.Child.Item Nav.Item.defaults ]
+                (Nav.props,
+                  [ Nav.Child.Item Nav.Item.props ])
             |> ReactNode.unit
             |>! hasDescendentClass "nav-item"
             |>! hasDescendentProp (Href "#")
@@ -40,9 +38,9 @@ let tests =
         test "Nav item text" {
             let text = "Item"
             Nav.ƒ
-                Nav.defaults
-                [ Nav.Child.Item
-                    { Nav.Item.defaults with Text = text } ]
+                (Nav.props,
+                 [ Nav.Child.Item
+                     { Nav.Item.props with Text = text } ])
             |> ReactNode.unit
             |> hasText text
         }
@@ -50,9 +48,9 @@ let tests =
         test "Nav item href" {
             let href = "https://google.com"
             Nav.ƒ
-                Nav.defaults
-                [ Nav.Child.Item
-                    { Nav.Item.defaults with Href = href } ]
+                (Nav.props,
+                 [ Nav.Child.Item
+                     { Nav.Item.props with Href = href } ])
             |> ReactNode.unit
             |> hasDescendentProp (Href href)
         }
@@ -63,15 +61,15 @@ let tests =
             let text2 = "Item 2"
             let href2 = "https://bing.com"
             Nav.ƒ
-                Nav.defaults
-                [ Nav.Child.Item
-                    { Nav.Item.defaults with
-                        Href = href1
-                        Text = text1 }
-                  Nav.Child.Item
-                    { Nav.Item.defaults with
-                        Href = href2
-                        Text = text2 } ]
+                (Nav.props,
+                 [ Nav.Child.Item
+                     { Nav.Item.props with
+                         Href = href1
+                         Text = text1 }
+                   Nav.Child.Item
+                     { Nav.Item.props with
+                         Href = href2
+                         Text = text2 } ])
             |> ReactNode.unit
             |>! hasOrderedDescendentClass 2 "nav-item"
             |>! hasDescendentProp (Href href1)
@@ -87,21 +85,21 @@ let tests =
             let text3 = "Item 3"
             let href3 = "https://yahoo.com"
             Nav.ƒ
-                Nav.defaults
-                [ Nav.Child.Item
-                    { Nav.Item.defaults with
-                        Href = href1
-                        Text = text1 }
-                  Nav.Child.Nav
-                    ( Nav.defaults,
-                      [ Nav.Child.Item
-                            { Nav.Item.defaults with
-                                Href = href3
-                                Text = text3 } ] )
-                  Nav.Child.Item
-                    { Nav.Item.defaults with
-                        Href = href2
-                        Text = text2 } ]
+                (Nav.props,
+                 [ Nav.Child.Item
+                     { Nav.Item.props with
+                         Href = href1
+                         Text = text1 }
+                   Nav.Child.Nav
+                     ( Nav.props,
+                       [ Nav.Child.Item
+                             { Nav.Item.props with
+                                 Href = href3
+                                 Text = text3 } ] )
+                   Nav.Child.Item
+                     { Nav.Item.props with
+                         Href = href2
+                         Text = text2 } ])
             |> ReactNode.unit
             |>! hasOrderedDescendentClass 3 "nav-item"
             |>! hasDescendentProp (Href href1)

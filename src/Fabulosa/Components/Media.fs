@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 module Media =
     [<RequireQualifiedAccess>]
@@ -20,11 +20,11 @@ module Media =
             Text: ReactElement list
             HTMLProps: IHTMLProp list
         }
-    
-        let defaults: Props = {
-            TextDirection = Center
-            Text = []
-            HTMLProps = []
+
+        let props = {
+            Props.TextDirection = Center
+            Props.Text = []
+            Props.HTMLProps = []
         }
         
         let getClassOfTextDirection =
@@ -62,8 +62,8 @@ module Media =
             Kind: Kind
             HTMLProps: IHTMLProp list
         }
-    
-        let defaults: Props = {
+
+        let props = {
             Kind = Responsive
             HTMLProps = []
         }
@@ -102,10 +102,10 @@ module Media =
             Caption: Caption.Props
             HTMLProps: IHTMLProp list
         }
-        
-        let defaults: Props = {
-            Image = Image.defaults
-            Caption = Caption.defaults
+
+        let props: Props = {
+            Image = Image.props
+            Caption = Caption.props
             HTMLProps = []
         }
         
@@ -149,8 +149,8 @@ module Media =
            Ratio: Ratio
            Kind: Kind
         }
-        
-        let defaults: Props = {
+
+        let props: Props = {
             Ratio = Ratio16x9
             Kind = Source ""
         }
@@ -167,8 +167,8 @@ module Media =
                 match props.Kind with
                 | Source source -> R.video, seq [Src source], []
                 | Embedded element -> R.iframe, seq [], [element]
-            
-            propsOfKind 
+
+            propsOfKind
             |> Seq.append [ClassName "video-responsive"] 
             |> Seq.cast
             |> List.ofSeq

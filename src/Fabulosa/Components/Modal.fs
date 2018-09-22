@@ -18,7 +18,7 @@ module Modal =
         | Element of ReactElement list
         | Text of string
         
-        let defaults = {
+        let props = {
              HTMLProps = []
         }
                 
@@ -44,7 +44,7 @@ module Modal =
         | Element of ReactElement list
         | Buttons of Button.Props * ReactElement list list
         
-        let defaults = {
+        let props = {
              HTMLProps = []
         }
         
@@ -71,7 +71,7 @@ module Modal =
         Footer: Footer.Props option
     }
     
-    let defaults = {
+    let props = {
          HTMLProps = []
          OnClose = None
          Size = Size.Medium

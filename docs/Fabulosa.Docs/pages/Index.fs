@@ -1,4 +1,4 @@
-module IndexPage
+﻿module IndexPage
 
 open Fabulosa
 module R = Fable.Helpers.React
@@ -9,7 +9,7 @@ open Renderer
 (*** define: sample ***)
 let fabulousButton =
     Anchor.ƒ
-        ( { Anchor.defaults with
+        ( { Anchor.props with
               Kind = Button.Kind.Primary
               HTMLProps = [Href "button.html"] },
           [R.str "Fabulosa"] )

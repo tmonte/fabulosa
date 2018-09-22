@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Button =
@@ -92,7 +92,7 @@ module Button =
         | Format.Unset -> ""
         >> ClassName
 
-    let defaults =
+    let props =
         { Props.Kind = Kind.Unset
           Props.Color = Color.Unset
           Props.Size = Size.Unset
@@ -128,7 +128,7 @@ module Anchor =
     [<RequireQualifiedAccess>]
     type T = Button.T
 
-    let defaults = Button.defaults
+    let props = Button.props
 
     let ƒ (anchor: T) =
         let props, children = anchor
@@ -165,7 +165,7 @@ module ButtonGroup =
     [<RequireQualifiedAccess>]
     type T = Props * Button.T list
 
-    let defaults =
+    let props =
         { Props.Block = false
           Props.HTMLProps = [] }
 

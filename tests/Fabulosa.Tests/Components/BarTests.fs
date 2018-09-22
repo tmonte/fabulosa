@@ -1,4 +1,4 @@
-module BarTests
+﻿module BarTests
 
 open Expecto
 open Fabulosa
@@ -11,18 +11,18 @@ let tests =
     testList "Bar tests" [
 
         test "Bar default" {
-            Bar.ƒ Bar.defaults [Bar.Item.defaults]
+            Bar.ƒ Bar.props [Bar.Item.props]
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1
-                (Bar.Item.ƒ Bar.Item.defaults [] |> ReactNode.unit)
+                (Bar.Item.ƒ Bar.Item.props [] |> ReactNode.unit)
             |> hasDescendentClass "bar-item"
         }
 
         test "Bar multiple" {
-            let item1 = {Bar.Item.defaults with Value = 25}
-            let item2 = {Bar.Item.defaults with Value = 20}
-            Bar.ƒ Bar.defaults [item1; item2]
+            let item1 = {Bar.Item.props with Value = 25}
+            let item2 = {Bar.Item.props with Value = 20}
+            Bar.ƒ Bar.props [item1; item2]
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1
@@ -34,7 +34,7 @@ let tests =
 
         test "Bar small" {
             Bar.ƒ { 
-                Bar.defaults with
+                Bar.props with
                     Small = true
             } []
             |> ReactNode.unit
@@ -43,7 +43,7 @@ let tests =
 
         test "Bar html props" {
             Bar.ƒ {
-                Bar.defaults with 
+                Bar.props with 
                     HTMLProps = [ClassName "custom"]
             } []
             |> ReactNode.unit
@@ -51,14 +51,14 @@ let tests =
         }
 
         test "Bar item default" {
-            Bar.Item.ƒ Bar.Item.defaults []
+            Bar.Item.ƒ Bar.Item.props []
             |> ReactNode.unit
             |> hasUniqueClass "bar-item"
         }
 
         test "Bar item html props" {
             Bar.Item.ƒ {
-                Bar.Item.defaults with
+                Bar.Item.props with
                     HTMLProps = [ClassName "custom"]
             } []
             |> ReactNode.unit
@@ -67,7 +67,7 @@ let tests =
 
         test "Bar item percentage" {
             Bar.Item.ƒ {
-                Bar.Item.defaults with
+                Bar.Item.props with
                     Value = 25
             } []
             |> ReactNode.unit
@@ -76,7 +76,7 @@ let tests =
 
         test "Bar item tooltip" {
             Bar.Item.ƒ {
-                Bar.Item.defaults with
+                Bar.Item.props with
                     Value = 25
                     Tooltip = true
             } []
@@ -89,26 +89,26 @@ let tests =
         test "Bar slider default" {
             let button =
                 Button.ƒ
-                    ( { Button.defaults with
+                    ( { Button.props with
                           HTMLProps = [ ClassName "bar-slider-btn" ] },
                       [] )
-            Bar.Slider.ƒ Bar.defaults [Bar.Item.defaults]
+            Bar.Slider.ƒ Bar.props [Bar.Item.props]
             |> ReactNode.unit
             |>! hasClass "bar bar-slider"
             |>! hasChild 1
-                (Bar.Item.ƒ Bar.Item.defaults [button] |> ReactNode.unit)
+                (Bar.Item.ƒ Bar.Item.props [button] |> ReactNode.unit)
             |> hasDescendentClass "bar-item bar-slider-btn"
         }
 
         test "Bar slider multiple" {
             let button =
                 Button.ƒ
-                    ( { Button.defaults with
+                    ( { Button.props with
                           HTMLProps = [ ClassName "bar-slider-btn" ] },
                       [] )
-            let item1 = {Bar.Item.defaults with Value = 25}
-            let item2 = {Bar.Item.defaults with Value = 20}
-            Bar.Slider.ƒ Bar.Slider.defaults [item1; item2]
+            let item1 = {Bar.Item.props with Value = 25}
+            let item2 = {Bar.Item.props with Value = 20}
+            Bar.Slider.ƒ Bar.Slider.props [item1; item2]
             |> ReactNode.unit
             |>! hasClass "bar bar-slider"
             |>! hasChild 1

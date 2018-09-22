@@ -69,28 +69,28 @@ module PropTable =
 
     let toTableRow rowValue =
         let (col1, col2, col3) = rowValue
-        Table.Row.ƒ Table.Row.defaults [
-            Table.Column.ƒ Table.Column.defaults [col1]
+        Table.Row.ƒ Table.Row.props [
+            Table.Column.ƒ Table.Column.props [col1]
             Table.Column.ƒ
-                { Table.Column.defaults with
+                { Table.Column.props with
                     HTMLProps = [Style [WhiteSpace "pre"]] }
                 [col2]
             Table.Column.ƒ
-                { Table.Column.defaults with
+                { Table.Column.props with
                     HTMLProps = [Style [WhiteSpace "pre"]] }
                 [col3]
         ]
     
     let renderTable rowValues =
-        Table.ƒ { Table.defaults with Kind = Table.Kind.Striped } [
-            Table.Head.ƒ Table.Head.defaults [
-                Table.Row.ƒ Table.Row.defaults [
-                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Name"]
-                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Type"]
-                    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Default"]
+        Table.ƒ { Table.props with Kind = Table.Kind.Striped } [
+            Table.Head.ƒ Table.Head.props [
+                Table.Row.ƒ Table.Row.props [
+                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Name"]
+                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Type"]
+                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Default"]
                 ]
             ]
-            Table.Body.ƒ Table.Body.defaults (rowValues |> List.map toTableRow) 
+            Table.Body.ƒ Table.Body.props (rowValues |> List.map toTableRow) 
         ]
         
     let propTable aType obj = getPropFields aType obj |> renderTable 

@@ -11,14 +11,14 @@ let tests =
     testList "Icon tests" [
 
         test "Icon default" {
-            Icon.ƒ Icon.defaults
+            Icon.ƒ Icon.props
             |> ReactNode.unit
             |> hasUniqueClass "icon"
         }
 
         test "Icon size x2" {
             Icon.ƒ
-                { Icon.defaults with
+                { Icon.props with
                     Size = Icon.Size.X2 }
             |> ReactNode.unit
             |> hasClass "icon-2x"
@@ -26,7 +26,7 @@ let tests =
 
         test "Icon size x3" {
             Icon.ƒ
-                { Icon.defaults with
+                { Icon.props with
                     Size = Icon.Size.X3 }
             |> ReactNode.unit
             |> hasClass "icon-3x"
@@ -34,7 +34,7 @@ let tests =
 
         test "Icon size x4" {
             Icon.ƒ
-                { Icon.defaults with
+                { Icon.props with
                     Size = Icon.Size.X4 }
             |> ReactNode.unit
             |> hasClass "icon-4x"
@@ -42,7 +42,7 @@ let tests =
 
         test "Icon kind" {
             Icon.ƒ
-                { Icon.defaults with
+                { Icon.props with
                     Kind = Icon.Kind.Apps }
             |> ReactNode.unit
             |> hasClass "icon-apps"
@@ -50,7 +50,7 @@ let tests =
 
         test "Icon html props" {
             Icon.ƒ
-                { Icon.defaults with
+                { Icon.props with
                     HTMLProps = [ClassName "custom"] }
             |> ReactNode.unit
             |> hasClass "custom"

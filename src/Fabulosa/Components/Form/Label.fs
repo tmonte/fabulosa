@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Label =
@@ -22,7 +22,7 @@ module Label =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Size = Size.Unset
           Props.Text = "Checkbox"
           Props.HTMLProps = [] }

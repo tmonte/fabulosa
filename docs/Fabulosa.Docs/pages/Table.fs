@@ -1,4 +1,4 @@
-module TablePage
+﻿module TablePage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -7,60 +7,60 @@ open Fable.Import.React
 open Renderer
 
 let bolso = [
-    Table.Column.ƒ Table.Column.defaults [R.str "Jair"]
-    Table.Column.ƒ Table.Column.defaults [R.str "Bolsonaro"]
-    Table.Column.ƒ Table.Column.defaults [R.str "melhorjair@procanada.com"]
+    Table.Column.ƒ Table.Column.props [R.str "Jair"]
+    Table.Column.ƒ Table.Column.props [R.str "Bolsonaro"]
+    Table.Column.ƒ Table.Column.props [R.str "melhorjair@procanada.com"]
 ]
 let michel = [
-    Table.Column.ƒ Table.Column.defaults [R.str "Michel"]
-    Table.Column.ƒ Table.Column.defaults [R.str "Temer"]
-    Table.Column.ƒ Table.Column.defaults [R.str "temquemanterissoai@vampiro.com"]
+    Table.Column.ƒ Table.Column.props [R.str "Michel"]
+    Table.Column.ƒ Table.Column.props [R.str "Temer"]
+    Table.Column.ƒ Table.Column.props [R.str "temquemanterissoai@vampiro.com"]
 ]
 (*** define: table-columns-sample ***)
 let donald = [
-    Table.Column.ƒ Table.Column.defaults [R.str "Donald"]
-    Table.Column.ƒ Table.Column.defaults [R.str "Trump"]
-    Table.Column.ƒ Table.Column.defaults [R.str "wall@mexico.com"]
+    Table.Column.ƒ Table.Column.props [R.str "Donald"]
+    Table.Column.ƒ Table.Column.props [R.str "Trump"]
+    Table.Column.ƒ Table.Column.props [R.str "wall@mexico.com"]
 ]
 
 let titleColumns = [
-    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "First Name"]
-    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Last Name"]
-    Table.TitleColumn.ƒ Table.TitleColumn.defaults [R.str "Email"]
+    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "First Name"]
+    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Last Name"]
+    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Email"]
 ]
 (*** define: table-row-sample ***)
-let row = Table.Row.ƒ Table.Row.defaults []
+let row = Table.Row.ƒ Table.Row.props []
 (*** hide ***)
 let createRow columns =
-    Table.Row.ƒ Table.Row.defaults columns
+    Table.Row.ƒ Table.Row.props columns
 let titleRow =
-    Table.Row.ƒ Table.Row.defaults titleColumns
+    Table.Row.ƒ Table.Row.props titleColumns
 (*** define: table-row-active-sample ***)
 let active =
     Table.Row.ƒ {
-        Table.Row.defaults with
+        Table.Row.props with
             Active = true
     } []
 (*** define: table-head-sample ***)
-let head = Table.Head.ƒ Table.Head.defaults [titleRow]
+let head = Table.Head.ƒ Table.Head.props [titleRow]
 (*** define: table-body-sample ***)
-let body = Table.Body.ƒ Table.Body.defaults [
+let body = Table.Body.ƒ Table.Body.props [
     createRow bolso
     createRow michel
     createRow donald
 ]
 (*** define: table-default-sample ***)
-let table = Table.ƒ Table.defaults [head; body]
+let table = Table.ƒ Table.props [head; body]
 (*** define: table-striped-sample ***)
 let striped =
     Table.ƒ {
-        Table.defaults with
+        Table.props with
             Kind = Table.Kind.Striped
     } [ head; body]
 (*** define: table-hover-sample ***)
 let hover =
     Table.ƒ {
-        Table.defaults with
+        Table.props with
             Kind = Table.Kind.Hover
     } [head; body]
 (*** hide ***)
@@ -68,8 +68,8 @@ let render () =
     tryMount "table-default-demo" table
     tryMount "table-striped-demo" striped
     tryMount "table-hover-demo" hover
-    tryMount "table-props-table" (PropTable.propTable typeof<Table.Props> Table.defaults)
-    tryMount "table-row-props-table" (PropTable.propTable typeof<Table.Row.Props> Table.Row.defaults)
+    tryMount "table-props-table" (PropTable.propTable typeof<Table.Props> Table.props)
+    tryMount "table-row-props-table" (PropTable.propTable typeof<Table.Row.Props> Table.Row.props)
 (**
 
 <div id="table">

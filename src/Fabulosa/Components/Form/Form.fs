@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Form =
@@ -21,7 +21,7 @@ module Form =
         [<RequireQualifiedAccess>]
         type T = Props * Children
 
-        let defaults =
+        let props =
             { Props.HTMLProps = [] }
 
         let ƒ (group: T) =

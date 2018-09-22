@@ -1,10 +1,10 @@
 ﻿namespace Fabulosa
 
-module Nav =
+module rec Nav =
 
     open Fabulosa.Extensions
-    module R = Fable.Helpers.React
-    open R.Props
+    open Fable.Helpers.React.Props
+    module R =  Fable.Helpers.React
 
     module Item =
 
@@ -14,10 +14,20 @@ module Nav =
               Href: string
               Text: string }
 
-        let defaults =
+        [<RequireQualifiedAccess>]
+        type T = Props
+
+        let props =
             { Props.HTMLProps = []
               Props.Href = "#"
               Props.Text = "" }
+
+        let ƒ (item: T) =
+            R.li
+                [ ClassName "nav-item" ]
+                [ R.a
+                    [ Href item.Href ]
+                    [ R.str item.Text ] ]
 
     [<RequireQualifiedAccess>]
     type Props =
@@ -31,20 +41,21 @@ module Nav =
     [<RequireQualifiedAccess>]
     type Children = Child seq
 
-    let defaults =
+    [<RequireQualifiedAccess>]
+    type T = Props * Children
+
+    let props =
         { Props.HTMLProps = [] }
 
-    let rec ƒ (props: Props) (children: Children) =
-        let renderChildren =
-            function
-            | Child.Item props ->
-                R.li
-                    [ ClassName "nav-item" ]
-                    [ R.a
-                        [ Href props.Href ]
-                        [ R.str props.Text ] ]
-            | Child.Nav (props, children) ->
-                ƒ props children
+    let private renderChildren =
+        function
+        | Child.Item props ->
+            Item.ƒ props
+        | Child.Nav (props, children) ->
+            ƒ (props, children)
+
+    let ƒ (nav: T) =
+        let props, children = nav
         props.HTMLProps
         |> addProp (ClassName "nav")
         |> R.ul <| Seq.map renderChildren children

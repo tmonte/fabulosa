@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Textarea =
@@ -15,7 +15,7 @@ module Textarea =
     [<RequireQualifiedAccess>]
     type T = Props * ReactElement list
 
-    let defaults =
+    let props =
         { Props.HTMLProps = [] }
 
     let ƒ (textarea: T) =

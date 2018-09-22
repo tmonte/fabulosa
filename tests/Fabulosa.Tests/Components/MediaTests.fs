@@ -1,4 +1,4 @@
-module MediaTests
+﻿module MediaTests
 
 open Expecto
 open Expect
@@ -12,7 +12,7 @@ let captionTest =
     testList "Caption tests" [
 
         test "Caption should be a react html node when defaults are provided" {
-            let captionElement = Media.Caption.ƒ Media.Caption.defaults
+            let captionElement = Media.Caption.ƒ Media.Caption.props
             
             captionElement
             |> ReactNode.unit
@@ -23,7 +23,7 @@ let captionTest =
         test "Caption should have html props" {
             let captionElement =
                 Media.Caption.ƒ {
-                    Media.Caption.defaults with
+                    Media.Caption.props with
                         HTMLProps = [Id "offside-is-a-crime"]
                 }
             
@@ -36,7 +36,7 @@ let captionTest =
        
         test "Caption should have text alignment set to input" {
             let captionElement = Media.Caption.ƒ {
-                Media.Caption.defaults with
+                Media.Caption.props with
                     TextDirection = Media.Caption.Center
             }
             
@@ -46,7 +46,7 @@ let captionTest =
            
             let captionElement =
                 Media.Caption.ƒ {
-                    Media.Caption.defaults with
+                    Media.Caption.props with
                         TextDirection = Media.Caption.Left
                 }
             
@@ -56,7 +56,7 @@ let captionTest =
            
             let captionElement =
                 Media.Caption.ƒ {
-                    Media.Caption.defaults with
+                    Media.Caption.props with
                         TextDirection = Media.Caption.Right
                 }
             
@@ -69,7 +69,7 @@ let captionTest =
             let text = "Pele is the King!"
             let rootNode =
                 Media.Caption.ƒ {
-                    Media.Caption.defaults with
+                    Media.Caption.props with
                         Text = [R.str text]
                 }
             
@@ -80,7 +80,7 @@ let captionTest =
             let text = "Figueira!!!"
             let rootNode =
                 Media.Caption.ƒ {
-                    Media.Caption.defaults with
+                    Media.Caption.props with
                         Text = [R.div [ClassName "figueirense"] [R.str text]]
                     }
 
@@ -96,7 +96,7 @@ let imageTest =
     testList "Image tests" [
 
         test "Image should be a react html node when defaults are provided" {
-            let imageElement = Media.Image.ƒ Media.Image.defaults
+            let imageElement = Media.Image.ƒ Media.Image.props
             imageElement
             |> ReactNode.unit
             |> hasUniqueClass "img-responsive"
@@ -105,7 +105,7 @@ let imageTest =
         test "Image should be respond to different kinds" {
             let imageElement = 
                 Media.Image.ƒ {
-                    Media.Image.defaults with
+                    Media.Image.props with
                         Kind = Media.Image.Kind.Responsive
                 }
                
@@ -115,7 +115,7 @@ let imageTest =
             
             let imageElement = 
                 Media.Image.ƒ {
-                    Media.Image.defaults with
+                    Media.Image.props with
                         Kind = Media.Image.Kind.Contain
                 }
 
@@ -125,7 +125,7 @@ let imageTest =
             
             let imageElement = 
                 Media.Image.ƒ {
-                    Media.Image.defaults with
+                    Media.Image.props with
                         Kind = Media.Image.Kind.Cover
                 } 
             
@@ -141,15 +141,15 @@ let figureTests =
         test "Figure should display defaults" {
             let figure =
                 Media.Figure.ƒ
-                    Media.Figure.defaults
+                    Media.Figure.props
                 |> ReactNode.unit
             let caption =
                 Media.Caption.ƒ
-                    Media.Caption.defaults
+                    Media.Caption.props
                 |> ReactNode.unit
             let image =
                 Media.Image.ƒ
-                    Media.Image.defaults
+                    Media.Image.props
                 |> ReactNode.unit
             
             figure
@@ -161,7 +161,7 @@ let figureTests =
         test "Figure should have html props" {
             let figure = 
                 Media.Figure.ƒ {
-                    Media.Figure.defaults with
+                    Media.Figure.props with
                         HTMLProps = [Id "messi-argentina.jpg"]
                 } |> ReactNode.unit 
 
@@ -171,11 +171,11 @@ let figureTests =
        
         test "Figure does contain props" {
             let expectedCaptionProps = {
-                Media.Caption.defaults with
+                Media.Caption.props with
                     Text = [R.str "Ronaldo 9"]
             }
             let expectedImageProps = {
-                Media.Image.defaults with
+                Media.Image.props with
                     Kind = Media.Image.Kind.Cover
             }
             let caption =
@@ -188,7 +188,7 @@ let figureTests =
                 |> ReactNode.unit
             let figure =
                 Media.Figure.ƒ { 
-                    Media.Figure.defaults with 
+                    Media.Figure.props with 
                         Caption = expectedCaptionProps
                         Image = expectedImageProps
                 } |> ReactNode.unit
@@ -204,7 +204,7 @@ let figureTests =
 let videoTests =
     testList "Video tests" [
         test "should display defaults" {
-            let video = Media.Video.ƒ Media.Video.defaults |> ReactNode.unit
+            let video = Media.Video.ƒ Media.Video.props |> ReactNode.unit
             
             video
             |>! hasClass "video-responsive video-responsive-16-9"
@@ -212,19 +212,19 @@ let videoTests =
         }
         
         test "should display different ratios" {
-            let video = Media.Video.ƒ { Media.Video.defaults with Ratio = Media.Video.Ratio16x9} |> ReactNode.unit
+            let video = Media.Video.ƒ { Media.Video.props with Ratio = Media.Video.Ratio16x9} |> ReactNode.unit
             video |> hasClass "video-responsive video-responsive-16-9"
             
-            let video = Media.Video.ƒ { Media.Video.defaults with Ratio = Media.Video.Ratio4x3} |> ReactNode.unit
+            let video = Media.Video.ƒ { Media.Video.props with Ratio = Media.Video.Ratio4x3} |> ReactNode.unit
             video |> hasClass "video-responsive video-responsive-4-3"
             
-            let video = Media.Video.ƒ { Media.Video.defaults with Ratio = Media.Video.Ratio1x1} |> ReactNode.unit
+            let video = Media.Video.ƒ { Media.Video.props with Ratio = Media.Video.Ratio1x1} |> ReactNode.unit
             video |> hasClass "video-responsive video-responsive-1-1"
             
         }
         
         test "should render source video " {
-            let video = Media.Video.ƒ { Media.Video.defaults with Kind = Media.Video.Source "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm"} |> ReactNode.unit
+            let video = Media.Video.ƒ { Media.Video.props with Kind = Media.Video.Source "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm"} |> ReactNode.unit
             video 
             |>! hasClass "video-responsive video-responsive-16-9"
             |> hasProp (Src "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm")
@@ -232,7 +232,7 @@ let videoTests =
         
         test "should render embedded video " {
             let youtubeVideo = R.iframe [Src "https://www.youtube.com/embed/7DbslbKsQSk"; AllowFullScreen true; HTMLAttr.Width 560; HTMLAttr.Height 315] []  
-            let video = Media.Video.ƒ { Media.Video.defaults with Kind = Media.Video.Embedded youtubeVideo } |> ReactNode.unit
+            let video = Media.Video.ƒ { Media.Video.props with Kind = Media.Video.Embedded youtubeVideo } |> ReactNode.unit
             video 
             |>! hasClass "video-responsive video-responsive-16-9"
             |> hasChild 1 (youtubeVideo |> ReactNode.unit)

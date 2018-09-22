@@ -1,4 +1,4 @@
-module MediaPage
+﻿module MediaPage
 
 open Fabulosa
 module R = Fable.Helpers.React
@@ -11,7 +11,7 @@ open Renderer
 let image containerWidth =
     R.div [Style [Width containerWidth]] [
         Media.Image.ƒ { 
-            Media.Image.defaults with 
+            Media.Image.props with 
                 Kind = Media.Image.Responsive
                 HTMLProps = [Src "https://goo.gl/krg6x5 "] 
         }
@@ -20,7 +20,7 @@ let image containerWidth =
 (*** define: media-img-fit-contain-demo ***)
 let imageContain =
     Media.Image.ƒ { 
-        Media.Image.defaults with 
+        Media.Image.props with 
             Kind = Media.Image.Contain
             HTMLProps = [
                 Src "https://goo.gl/krg6x5"
@@ -31,7 +31,7 @@ let imageContain =
 (*** define: media-img-fit-cover-demo ***)
 let imageCover =
     Media.Image.ƒ {
-        Media.Image.defaults with
+        Media.Image.props with
             Kind =  Media.Image.Cover 
             HTMLProps = [
                 Src "https://goo.gl/krg6x5"
@@ -42,26 +42,26 @@ let imageCover =
 (*** define: figure-demo ***)
 let figure =
     Media.Figure.ƒ { 
-        Media.Figure.defaults with
+        Media.Figure.props with
             Image = { 
-                Media.Image.defaults with
+                Media.Image.props with
                     Kind =  Media.Image.Cover 
                     HTMLProps = [
                         Src "https://goo.gl/krg6x5"
                         Style [Background "#f8f9fa"; Height "10rem"; Width "100%"]
                     ]
             }  
-            Caption = { Media.Caption.defaults with Text = [R.str "Ciro Gomes Presidente 2018"]}    
+            Caption = { Media.Caption.props with Text = [R.str "Ciro Gomes Presidente 2018"]}    
     }
     
 (*** define: video-demo ***)
 let video =
-    Media.Video.ƒ { Media.Video.defaults with Kind = Media.Video.Kind.Source "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm" }
+    Media.Video.ƒ { Media.Video.props with Kind = Media.Video.Kind.Source "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm" }
     
 let x = R.iframe [HTMLAttr.Width 560; HTMLAttr.Height 315; Src "https://www.youtube.com/embed/6AgiQWk4kqA"; AllowFullScreen true] []
 let youtubeVideo =
     Media.Video.ƒ { 
-        Media.Video.defaults with 
+        Media.Video.props with 
             Kind = Media.Video.Kind.Embedded x
         }
 (*** hide ***)
@@ -71,12 +71,12 @@ let render () =
     tryMount "media-img-responsive-demo-c" (image "18rem")
     tryMount "media-img-fit-contain-demo" imageContain
     tryMount "media-img-fit-cover-demo" imageCover
-    tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.defaults)
-    tryMount "figure-props-table" (PropTable.propTable typeof<Media.Figure.Props> Media.Figure.defaults)
+    tryMount "media-img-props-table" (PropTable.propTable typeof<Media.Image.Props> Media.Image.props)
+    tryMount "figure-props-table" (PropTable.propTable typeof<Media.Figure.Props> Media.Figure.props)
     tryMount "figure-demo" figure
-    tryMount "caption-props-table" (PropTable.propTable typeof<Media.Caption.Props> Media.Caption.defaults)
+    tryMount "caption-props-table" (PropTable.propTable typeof<Media.Caption.Props> Media.Caption.props)
     tryMount "video-demo" video
-    tryMount "video-props-table" (PropTable.propTable typeof<Media.Video.Props> Media.Video.defaults)
+    tryMount "video-props-table" (PropTable.propTable typeof<Media.Video.Props> Media.Video.props)
 (**
 <div id="media">
     <h2 class="s-title">

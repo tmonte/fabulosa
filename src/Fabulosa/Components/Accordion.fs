@@ -75,9 +75,9 @@ module Accordion =
 
     [<RequireQualifiedAccess>]
     type T = Props * Children    
-    let defaults =
+    let props =
         { Props.CustomIcon =
-            { Icon.defaults with
+            { Icon.props with
                 Kind = Icon.Kind.ArrowRight }
           Props.HTMLProps = [] }
 

@@ -49,7 +49,7 @@ module Avatar =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Kind = Kind.Unset
           Props.Initial = ""
           Props.Size = Size.Unset

@@ -11,7 +11,7 @@ let tests =
     testList "Badge tests" [
 
         test "Badge default" {
-            let props = Badge.defaults
+            let props = Badge.props
             let badge = Badge.ƒ props
 
             badge
@@ -20,7 +20,7 @@ let tests =
         }
 
         test "Badge data" {
-            let props = { Badge.defaults with Badge = 1 }
+            let props = { Badge.props with Badge = 1 }
             let badge = Badge.ƒ props
 
             badge
@@ -31,7 +31,7 @@ let tests =
         test "Badge div" {
             let child = R.str "Text"
             let props = {
-                Badge.defaults with
+                Badge.props with
                     Kind = Badge.Kind.Div
                         ([ClassName "custom"], [child])
             }
@@ -46,7 +46,7 @@ let tests =
         test "Badge span" {
             let child = R.str "Text"
             let props = {
-                Badge.defaults with
+                Badge.props with
                     Kind = Badge.Kind.Span
                         ([ClassName "custom"], [child])
             }
@@ -61,9 +61,9 @@ let tests =
         test "Badge button" {
             let child = R.str "Text"
             let props = {
-                Badge.defaults with
+                Badge.props with
                     Kind = Badge.Kind.Button
-                        (Button.defaults, [child])
+                        (Button.props, [child])
             }
             let badge = Badge.ƒ props
 
@@ -75,9 +75,9 @@ let tests =
 
         test "Badge avatar" {
             let props = {
-                Badge.defaults with
+                Badge.props with
                     Kind = Badge.Kind.Avatar
-                        Avatar.defaults
+                        Avatar.props
             }
             let badge = Badge.ƒ props
 

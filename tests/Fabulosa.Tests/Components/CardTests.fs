@@ -12,7 +12,7 @@ let tests =
 
         test "Card default" {
             Card.ƒ
-                Card.defaults 
+                Card.props 
                 Card.children
             |> ReactNode.unit
             |> hasUniqueClass "card"
@@ -20,7 +20,7 @@ let tests =
 
         test "Card html props" {
             Card.ƒ
-                { Card.defaults with 
+                { Card.props with 
                     HTMLProps = [ClassName "custom"] }
                 Card.children
             |> ReactNode.unit
@@ -31,14 +31,14 @@ let tests =
             let body = R.p [] [R.str "Body" ]
             let footer =
                 Button.ƒ
-                    ( Button.defaults,
+                    ( Button.props,
                       [ R.str "Footer" ] )
             let imageProps =
-                { Media.Image.defaults with
+                { Media.Image.props with
                     HTMLProps = [Src "bla.png"] }
             let image = Media.Image.ƒ imageProps |> ReactNode.unit
             Card.ƒ
-                Card.defaults
+                Card.props
                 { Header =
                     { Title = "Title" 
                       SubTitle = "Sub title" }

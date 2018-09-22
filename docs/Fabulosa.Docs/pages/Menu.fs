@@ -1,4 +1,4 @@
-module MenuPage
+﻿module MenuPage
 
 open Fabulosa
 open Renderer
@@ -9,7 +9,7 @@ open Fable.Import.React
 (*** define: menu-default-sample ***)
 let menu =
     Menu.ƒ
-        (Menu.defaults,
+        (Menu.props,
          [ Menu.Child.Item [ R.a [] [ R.str "Links" ] ]
            Menu.Child.Divider (Some "DIVIDER")
            Menu.Child.Item [ R.a [] [ R.str "Link 1" ] ]

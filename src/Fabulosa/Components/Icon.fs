@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Icon =
@@ -66,7 +66,7 @@ module Icon =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Kind = Kind.Unset
           Props.Size = Size.Unset
           Props.HTMLProps = [] }

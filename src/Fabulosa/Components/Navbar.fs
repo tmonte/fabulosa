@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Navbar =
@@ -63,7 +63,7 @@ module Navbar =
     [<RequireQualifiedAccess>]
     type private Children = Child list
 
-    let defaults =
+    let props =
         { Props.HTMLProps = [] }
 
     let private renderChild =

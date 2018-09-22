@@ -29,7 +29,7 @@ let avatar =
          { Chip.children with
              Text = "Chip"
              Avatar = Some
-               { Avatar.defaults with
+               { Avatar.props with
                    Source = "assets/avatar-1.png" } })
 (*** hide ***)
 let render () =

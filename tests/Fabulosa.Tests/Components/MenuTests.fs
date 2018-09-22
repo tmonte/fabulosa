@@ -12,14 +12,14 @@ let tests =
 
         test "Menu default" {
             Menu.ƒ
-                (Menu.defaults, [])
+                (Menu.props, [])
             |> ReactNode.unit
             |> hasDescendentClass "btn icon icon-menu"
         }
 
         test "Menu opened" {
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true }, [])
             |> ReactNode.unit
             |> hasDescendentClass "menu"
@@ -27,7 +27,7 @@ let tests =
 
         test "Menu opened html props" {
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true
                      HTMLProps = [ ClassName "custom" ] }, [])
             |> ReactNode.unit
@@ -40,7 +40,7 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true },
                  [ Menu.Child.Item [ link ] ])
             |> ReactNode.unit
@@ -54,7 +54,7 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true },
                  [ Menu.Child.Item [ link ]
                    Menu.Child.Divider None ])
@@ -70,7 +70,7 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true },
                  [ Menu.Child.Item [ link ]
                    Menu.Child.Divider (Some "text") ])
@@ -91,7 +91,7 @@ let tests =
                     [ ClassName "link2" ]
                     [ R.str "link2" ]
             Menu.ƒ
-                ({ Menu.defaults with
+                ({ Menu.props with
                      Opened = true },
                  [ Menu.Child.Item [ link1 ]
                    Menu.Child.Divider (Some "text")

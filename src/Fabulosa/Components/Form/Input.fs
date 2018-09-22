@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Input =
@@ -21,7 +21,7 @@ module Input =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Size = Size.Unset
           Props.HTMLProps = [] }
 
@@ -62,10 +62,10 @@ module IconInput =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Position = Position.Left
-          Props.InputProps = Input.defaults
-          Props.IconProps = Icon.defaults
+          Props.InputProps = Input.props
+          Props.IconProps = Icon.props
           Props.HTMLProps = [] }
 
     let private position =
@@ -117,7 +117,7 @@ module InputGroup =
     [<RequireQualifiedAccess>]
     type T = Props * Children
 
-    let defaults =
+    let props =
         { Props.AddonRight = AddonRight.Unset
           Props.AddonLeft = AddonLeft.Unset
           Props.HTMLProps = [] }

@@ -1,4 +1,4 @@
-module TagPage
+﻿module TagPage
 
 open Fabulosa
 module R = Fable.Helpers.React
@@ -10,17 +10,17 @@ open Fabulosa.Docs
 open R.Props
 
 (*** define: tag-color-demo ***)
-let tl = Tag.ƒ Tag.defaults [R.str "default label"]
-let tlPrimary = Tag.ƒ { Tag.defaults with Color = Tag.Color.Primary} [R.str "primary label"]
-let tlSecondary = Tag.ƒ { Tag.defaults with Color = Tag.Color.Secondary} [R.str "secondary label"]
-let tlSuccess = Tag.ƒ { Tag.defaults with Color = Tag.Color.Success} [R.str "success label"]
-let tlWarning = Tag.ƒ { Tag.defaults with Color = Tag.Color.Warning} [R.str "warning label"]
-let tlError = Tag.ƒ { Tag.defaults with Color = Tag.Color.Error} [R.str "error label"]        
+let tl = Tag.ƒ Tag.props [R.str "default label"]
+let tlPrimary = Tag.ƒ { Tag.props with Color = Tag.Color.Primary} [R.str "primary label"]
+let tlSecondary = Tag.ƒ { Tag.props with Color = Tag.Color.Secondary} [R.str "secondary label"]
+let tlSuccess = Tag.ƒ { Tag.props with Color = Tag.Color.Success} [R.str "success label"]
+let tlWarning = Tag.ƒ { Tag.props with Color = Tag.Color.Warning} [R.str "warning label"]
+let tlError = Tag.ƒ { Tag.props with Color = Tag.Color.Error} [R.str "error label"]        
 
 (*** define: tag-rounded-demo ***)
 let tagRounded =
     R.div [ClassName "tag-container"] [
-        R.div [] [ Tag.ƒ { Tag.defaults with Rounded = true } [R.str "default label"] ]
+        R.div [] [ Tag.ƒ { Tag.props with Rounded = true } [R.str "default label"] ]
     ]
 
 (*** hide ***)
@@ -35,7 +35,7 @@ let tagColor =
     ]
 
 let render () =
-    Renderer.tryMount "tag-props-table" (PropTable.propTable typeof<Tag.Props> Tag.defaults)
+    Renderer.tryMount "tag-props-table" (PropTable.propTable typeof<Tag.Props> Tag.props)
     Renderer.tryMount "tag-color-demo" tagColor
     Renderer.tryMount "tag-rounded-demo" tagColor
 (**

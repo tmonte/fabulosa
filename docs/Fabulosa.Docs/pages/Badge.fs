@@ -10,30 +10,30 @@ open Fable.Import.React
 (*** define: badge-div-span-sample ***)
 let divBadge =
     Badge.ƒ
-        { Badge.defaults with
+        { Badge.props with
             Kind = Badge.Kind.Div
                 ([], [R.str "Text"])
             Badge = 1 }
 
 let spanBadge =
     Badge.ƒ
-        { Badge.defaults with
+        { Badge.props with
             Kind = Badge.Kind.Span
                 ([], [R.str "Text"])
             Badge = 2 }
 (*** define: badge-button-avatar-sample ***)
 let buttonBadge =
     Badge.ƒ
-        { Badge.defaults with
+        { Badge.props with
             Kind = Badge.Kind.Button
-                (Button.defaults, [R.str "Button"])
+                (Button.props, [R.str "Button"])
             Badge = 3 }
 
 let avatarBadge =
     Badge.ƒ
-        { Badge.defaults with
+        { Badge.props with
             Kind = Badge.Kind.Avatar
-                { Avatar.defaults with
+                { Avatar.props with
                     Source = "assets/avatar-1.png"
                     Size = Avatar.Size.Large }
             Badge = 4 }
@@ -43,7 +43,7 @@ let render () =
     tryMount "badge-span-demo" spanBadge
     tryMount "badge-button-demo" buttonBadge
     tryMount "badge-avatar-demo" avatarBadge
-    tryMount "badge-props-table" (PropTable.propTable typeof<Badge.Props> Badge.defaults)
+    tryMount "badge-props-table" (PropTable.propTable typeof<Badge.Props> Badge.props)
 (**
 <div id="badges">
 

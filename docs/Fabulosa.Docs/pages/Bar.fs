@@ -1,4 +1,4 @@
-module BarPage
+﻿module BarPage
 
 open Fabulosa
 open Fabulosa.Docs
@@ -8,28 +8,28 @@ open Fable.Import.React
 open Renderer
 
 (*** define: bar-default-sample ***)
-let bar = Bar.ƒ Bar.defaults [
-    { Bar.Item.defaults with Value = 25 }
+let bar = Bar.ƒ Bar.props [
+    { Bar.Item.props with Value = 25 }
 ]
 (*** define: bar-small-sample ***)
 let small =
     Bar.ƒ {
-        Bar.defaults with
+        Bar.props with
             Small = true
-    } [ { Bar.Item.defaults with Value = 25 } ]
+    } [ { Bar.Item.props with Value = 25 } ]
 (*** define: bar-item-tooltip-sample ***)
-let tooltip = Bar.ƒ Bar.defaults [
-    { Bar.Item.defaults with
+let tooltip = Bar.ƒ Bar.props [
+    { Bar.Item.props with
         Value = 25
         Tooltip = true }
 ]
 (*** define: bar-item-multiple-sample ***)
-let multiple = Bar.ƒ Bar.defaults [
-    { Bar.Item.defaults with
+let multiple = Bar.ƒ Bar.props [
+    { Bar.Item.props with
         Value = 25 }
-    { Bar.Item.defaults with
+    { Bar.Item.props with
         Value = 15 }
-    { Bar.Item.defaults with
+    { Bar.Item.props with
         Value = 5 }
 ]
 (*** hide ***)
@@ -38,7 +38,7 @@ let render () =
     tryMount "bar-small-demo" small
     tryMount "bar-item-tooltip-demo" tooltip
     tryMount "bar-item-multiple-demo" multiple
-    tryMount "bar-props-table" (PropTable.propTable typeof<Bar.Props> Bar.defaults)
+    tryMount "bar-props-table" (PropTable.propTable typeof<Bar.Props> Bar.props)
 (**
 
 <div id="bars">

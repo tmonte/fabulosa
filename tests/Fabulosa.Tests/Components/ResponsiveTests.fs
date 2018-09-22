@@ -1,4 +1,4 @@
-module ResponsiveTests
+﻿module ResponsiveTests
 
 open Expecto
 open Fabulosa
@@ -11,7 +11,7 @@ let tests =
     testList "Responsive tests" [
          test "Responsive default" {
             let child = R.str "text"
-            let props = Responsive.defaults
+            let props = Responsive.props
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit
             |>! hasClass "responsive"
@@ -19,8 +19,8 @@ let tests =
          }
 
          test "Responsive hide small" {
-            let child = Button.ƒ ( Button.defaults, [R.str "text"] )
-            let props = { Responsive.defaults with Hide = Responsive.Size.SM }
+            let child = Button.ƒ ( Button.props, [R.str "text"] )
+            let props = { Responsive.props with Hide = Responsive.Size.SM }
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit
             |>! hasClass "responsive hide-sm"
@@ -28,8 +28,8 @@ let tests =
          }
 
          test "Responsive show large" {
-            let child = Button.ƒ ( Button.defaults, [R.str "text"] )
-            let props = { Responsive.defaults with Show = Responsive.Size.LG }
+            let child = Button.ƒ ( Button.props, [R.str "text"] )
+            let props = { Responsive.props with Show = Responsive.Size.LG }
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit
             |>! hasClass "responsive show-lg"
@@ -39,7 +39,7 @@ let tests =
          test "Responsive children with name" {
             let grandChild = R.span [] []
             let child = R.div [] [grandChild]
-            let props = Responsive.defaults
+            let props = Responsive.props
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit
             |>! hasChild 1 (child |> ReactNode.unit)
@@ -47,7 +47,7 @@ let tests =
          }
 
          test "Responsive children with class" {
-            let props = Responsive.defaults
+            let props = Responsive.props
             let grandChild = R.span [ClassName "grand-child"] []
             let child = R.div [ClassName "child"] [grandChild]
             Responsive.ƒ ( props, [ child ] )

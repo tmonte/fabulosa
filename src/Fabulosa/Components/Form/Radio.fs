@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Radio =
@@ -19,7 +19,7 @@ module Radio =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Inline = false
           Props.Text = "Label"
           Props.HTMLProps = [] }

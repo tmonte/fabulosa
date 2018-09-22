@@ -10,7 +10,7 @@ open Renderer
 (*** define: card-default-sample ***)
 let card =
     Card.ƒ
-        Card.defaults
+        Card.props
         { Header =
             { Title = "Apple" 
               SubTitle = "Hardware and software" }
@@ -20,15 +20,15 @@ let card =
                 that advance humankind." ] ]
           Footer =
             [ Button.ƒ
-                ( Button.defaults, [ R.str "Purchase" ] ) ]
+                ( Button.props, [ R.str "Purchase" ] ) ]
           Image =
-            { Media.Image.defaults with
+            { Media.Image.props with
                 HTMLProps = [ Src "assets/macos-sierra-2.jpg" ] } }
 (*** hide ***)
 let demo = R.div [Style [MaxWidth "50%"]] [card]
 let render () =
     tryMount "card-default-demo" demo
-    tryMount "card-props-table" (PropTable.propTable typeof<Card.Props> Card.defaults)
+    tryMount "card-props-table" (PropTable.propTable typeof<Card.Props> Card.props)
 (**
 
 <div id="cards">

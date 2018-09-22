@@ -10,23 +10,25 @@ open Fable.Import.React
 (*** define: nav-default-sample ***)
 let nav =
     Nav.ƒ
-        Nav.defaults
-        [ Nav.Child.Item
-            { Nav.Item.defaults with
-                Text = "Item One" }
-          Nav.Child.Nav
-            ( Nav.defaults,
+        (Nav.props,
+         [ Nav.Child.Item
+             { Nav.Item.props with
+                 Text = "Item One" }
+           Nav.Child.Nav
+             (Nav.props,
               [ Nav.Child.Item
-                    { Nav.Item.defaults with
-                        Text = "Item One Nested" } ] )
-          Nav.Child.Item
-            { Nav.Item.defaults with
-                   Text = "Item Two" } ]
+                  { Nav.Item.props with
+                      Text = "Item One Nested" } ])
+           Nav.Child.Item
+             { Nav.Item.props with
+                    Text = "Item Two" } ])
 (*** hide ***)
 let render () =
     tryMount "nav-default-demo" nav
-    tryMount "nav-props-table" (PropTable.propTable typeof<Nav.Props> Nav.defaults)
-    tryMount "nav-item-props-table" (PropTable.propTable typeof<Nav.Item.Props> Nav.Item.defaults)
+    tryMount "nav-props-table"
+        (PropTable.propTable typeof<Nav.Props> Nav.props)
+    tryMount "nav-item-props-table"
+        (PropTable.propTable typeof<Nav.Item.Props> Nav.Item.props)
 (**
 
 <div id="navs">

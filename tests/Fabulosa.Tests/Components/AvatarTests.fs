@@ -11,7 +11,7 @@ let tests =
     testList "Avatar tests" [
 
         test "Avatar default" {
-            let props = Avatar.defaults
+            let props = Avatar.props
             let avatar = Avatar.ƒ props
 
             avatar
@@ -20,7 +20,7 @@ let tests =
         }
 
         test "Avatar size small" {
-            let props = { Avatar.defaults with Size = Avatar.Size.Small }
+            let props = { Avatar.props with Size = Avatar.Size.Small }
             let avatar = Avatar.ƒ props
 
             avatar
@@ -29,7 +29,7 @@ let tests =
         }
 
         test "Avatar data initial" {
-            let props = { Avatar.defaults with Initial = "FA" }
+            let props = { Avatar.props with Initial = "FA" }
             let avatar = Avatar.ƒ props
 
             avatar
@@ -38,7 +38,7 @@ let tests =
         }
 
         test "Avatar image" {
-            let props = { Avatar.defaults with Source = "source.png" }
+            let props = { Avatar.props with Source = "source.png" }
             let avatar = Avatar.ƒ props
             let image =
                 R.img [Src "source.png"]
@@ -51,7 +51,7 @@ let tests =
 
         test "Avatar image with icon" {
             let props =
-                { Avatar.defaults with
+                { Avatar.props with
                     Kind = Avatar.Kind.Icon "icon.png"}
             let avatar = Avatar.ƒ props
             let icon =
@@ -65,7 +65,7 @@ let tests =
 
         test "Avatar image with presence" {
             let props =
-                { Avatar.defaults with
+                { Avatar.props with
                     Kind = Avatar.Kind.Presence Avatar.Presence.Online}
             let avatar = Avatar.ƒ props
             let icon =
@@ -79,7 +79,7 @@ let tests =
 
         test "Avatar html props" {
             let props =
-                { Avatar.defaults with
+                { Avatar.props with
                     HTMLProps = [ClassName "custom"] }
             let avatar = Avatar.ƒ props
 

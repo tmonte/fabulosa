@@ -11,7 +11,7 @@ let tests =
     testList "Switch tests" [
 
         test "Switch default" {
-            let props = Switch.defaults
+            let props = Switch.props
             let switch = Switch.ƒ props
             let input =
                 R.input [Type "checkbox"]
@@ -32,7 +32,7 @@ let tests =
         }
 
         test "Switch text" {
-            let props = { Switch.defaults with Text = "custom" }
+            let props = { Switch.props with Text = "custom" }
             let switch = Switch.ƒ props
             let label =
                 R.str "custom"
@@ -45,7 +45,7 @@ let tests =
         }
 
         test "Switch html props" {
-            let props = { Switch.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Switch.props with HTMLProps = [ClassName "custom"] }
             let switch = Switch.ƒ props
             
             switch

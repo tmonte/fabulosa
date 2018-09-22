@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Switch =
@@ -14,7 +14,7 @@ module Switch =
     [<RequireQualifiedAccess>]
     type T = Props
 
-    let defaults =
+    let props =
         { Props.Text = "Label"
           Props.HTMLProps = [] }
 

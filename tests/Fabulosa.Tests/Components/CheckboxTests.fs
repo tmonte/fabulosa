@@ -11,7 +11,7 @@ let tests =
     testList "Checkbox tests" [
 
         test "Checkbox default" {
-            let props = Checkbox.defaults
+            let props = Checkbox.props
             let checkbox = Checkbox.ƒ props
             let input =
                 R.input [Type "checkbox"]
@@ -32,7 +32,7 @@ let tests =
         }
 
         test "Checkbox inline" {
-            let props = { Checkbox.defaults with Inline = true }
+            let props = { Checkbox.props with Inline = true }
             let checkbox = Checkbox.ƒ props
 
             checkbox
@@ -41,7 +41,7 @@ let tests =
         }
 
         test "Checkbox text" {
-            let props = { Checkbox.defaults with Text = "custom" }
+            let props = { Checkbox.props with Text = "custom" }
             let checkbox = Checkbox.ƒ props
             let label =
                 R.str "custom"
@@ -54,7 +54,7 @@ let tests =
         }
 
         test "Checkbox html props" {
-            let props = { Checkbox.defaults with HTMLProps = [ClassName "custom"] }
+            let props = { Checkbox.props with HTMLProps = [ClassName "custom"] }
             let checkbox = Checkbox.ƒ props
             let input =
                 R.input

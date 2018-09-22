@@ -1,4 +1,4 @@
-namespace Fabulosa
+﻿namespace Fabulosa
 
 [<RequireQualifiedAccess>]
 module Select =
@@ -20,7 +20,7 @@ module Select =
         [<RequireQualifiedAccess>]
         type T = Props * Children
 
-        let defaults =
+        let props =
             { Props.HTMLProps = [] }
 
         let ƒ (option: T) =
@@ -39,7 +39,7 @@ module Select =
         [<RequireQualifiedAccess>]
         type T = Props * Option.T list
 
-        let defaults =
+        let props =
             { Props.HTMLProps = [] }
 
         let ƒ (optionGroup: T) =
@@ -72,7 +72,7 @@ module Select =
     [<RequireQualifiedAccess>]
     type T = Props * Children
 
-    let defaults =
+    let props =
         { Props.Size = Size.Unset
           Props.HTMLProps = [] }
 

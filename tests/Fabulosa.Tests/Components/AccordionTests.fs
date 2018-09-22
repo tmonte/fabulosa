@@ -1,4 +1,4 @@
-module AccordionTests
+﻿module AccordionTests
 
 open Expecto
 open Fabulosa
@@ -12,7 +12,7 @@ let tests =
 
         test "Accordion default" {
             Accordion.ƒ
-                ( Accordion.defaults,
+                ( Accordion.props,
                   [ { Header = "Header One"
                       Body =
                         [ R.a [] [R.str "Item One"]
@@ -27,7 +27,7 @@ let tests =
 
         test "Accordion custom icon" {
             let iconProps =
-                { Icon.defaults with
+                { Icon.props with
                     Kind = Icon.Kind.Forward }
             let icon =
                 Icon.ƒ
@@ -35,7 +35,7 @@ let tests =
                         HTMLProps = [ ClassName "mr-1" ] }
                 |> ReactNode.unit
             Accordion.ƒ
-                ( { Accordion.defaults with
+                ( { Accordion.props with
                       CustomIcon = iconProps },
                   [ { Header = "Header One"
                       Body =
