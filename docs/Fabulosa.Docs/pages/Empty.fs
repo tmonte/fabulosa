@@ -11,15 +11,19 @@ open Microsoft.FSharp.Core
 (*** define: empty-default-sample ***)
 let empty =
     Empty.ƒ
-        Empty.defaults
-        { Icon = { Icon.defaults with Kind = Icon.Kind.Mail }
-          Title = "You have no new messages" 
-          SubTitle = "Click the button to start a conversation"
-          Action = [ Button.ƒ ( Button.defaults, [R.str "Send a message"] ) ] }
+        (Empty.props,
+         { Icon =
+             { Icon.defaults with
+                 Kind = Icon.Kind.Mail }
+           Title = "You have no new messages" 
+           SubTitle = "Click the button to start a conversation"
+           Action =
+             [ Button.ƒ
+                 (Button.defaults, [ R.str "Send a message" ]) ] })
 (*** hide ***)
 let render () =
     tryMount "empty-default-demo" empty
-    tryMount "empty-props-table" (PropTable.propTable typeof<Empty.Props> Empty.defaults)
+    tryMount "empty-props-table" (PropTable.propTable typeof<Empty.Props> Empty.props)
 (**
 
 <div id="empty">

@@ -12,17 +12,17 @@ let tests =
 
         test "Empty default" {
             Empty.ƒ
-                Empty.defaults 
-                Empty.children
+                (Empty.props,
+                 Empty.children)
             |> ReactNode.unit
             |> hasUniqueClass "empty"
         }
 
         test "Empty html props" {
             Empty.ƒ
-                { Empty.defaults with 
-                    HTMLProps = [ClassName "custom"] }
-                Empty.children
+                ({ Empty.props with 
+                     HTMLProps = [ClassName "custom"] },
+                 Empty.children)
             |> ReactNode.unit
             |> hasClass "empty custom"
         }
@@ -37,11 +37,11 @@ let tests =
             let action =
                 Button.ƒ ( Button.defaults, [R.str "Action"] )
             Empty.ƒ
-                Empty.defaults
-                { Icon = iconProps
-                  Title = "Title"
-                  SubTitle = "SubTitle"
-                  Action = [action] }
+                (Empty.props,
+                 { Icon = iconProps
+                   Title = "Title"
+                   SubTitle = "SubTitle"
+                   Action = [action] })
             |> ReactNode.unit
             |>! hasChild 1 icon
             |>! hasText "Title SubTitle Action"
