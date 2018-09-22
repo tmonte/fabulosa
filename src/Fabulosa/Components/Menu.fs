@@ -10,112 +10,161 @@ module Menu =
     open R.Props
 
     [<RequireQualifiedAccess>]
-    type Trigger = Button.T
+    module Item =
+
+        [<RequireQualifiedAccess>]
+        type T = ReactElement list
+
+        let ƒ (item: T) =
+            R.li [ ClassName "menu-item" ] item
 
     [<RequireQualifiedAccess>]
-    type Divider =
-    | Text of string
-    | Empty
+    module Divider =
+
+        [<RequireQualifiedAccess>]
+        type T = string option
+
+        let ƒ (divider: T) =
+            match divider with
+            | Some text ->
+                R.li
+                    [ ClassName "divider"
+                      Data ("content", text) ] []
+            | None ->
+                R.li
+                    [ ClassName "divider" ] []
+
+    [<RequireQualifiedAccess>]
+    module Trigger =
+
+        [<RequireQualifiedAccess>]
+        type Message =
+        | Click of int * int
+
+        [<RequireQualifiedAccess>]
+        type private Props =
+            Message -> unit
+
+        [<RequireQualifiedAccess>]
+        type private Children = Button.T
+
+        [<RequireQualifiedAccess>]
+        type T = Props * Children
+
+        let props _ = ()
+
+        let children =
+            Button.defaults,
+            [ Icon.ƒ
+                { Icon.defaults with Kind = Icon.Kind.Menu } ]
+
+        let onClick (e: MouseEvent) =
+            let element = e.currentTarget :?> Browser.Element
+            let rect = element.getBoundingClientRect ()
+            let x = (rect.left |> int) + (Browser.window.scrollX |> int)
+            let y = (rect.bottom |> int) + (Browser.window.scrollY |> int)
+            Message.Click (x, y)
+
+        let ƒ (trigger: T) =
+            let props, children = trigger
+            let cProps, cChildren = children
+            let withClick =
+                cProps.HTMLProps @ [ OnClick (onClick >> props) ]
+            Anchor.ƒ
+                ( { cProps with
+                      HTMLProps = withClick },
+                  cChildren )
+
+    [<RequireQualifiedAccess>]
+    module Container =
+
+        [<RequireQualifiedAccess>]
+        type Props =
+            { HTMLProps: HTMLProps
+              Opened: bool
+              Position: int * int }
+
+        [<RequireQualifiedAccess>]
+        type Children = ReactElement []
+
+        [<RequireQualifiedAccess>]
+        type T = Props * Children
+
+        let props =
+            { Props.HTMLProps = []
+              Props.Opened = false
+              Props.Position = 0, 0 }
+
+        let ƒ (container: T) =
+            let props, children = container
+            let (x, y) = props.Position
+            if props.Opened then
+                props.HTMLProps
+                @
+                [ Style
+                    [ Position "absolute"
+                      Left x
+                      Top y ] ]
+                |> addProp (ClassName "menu")
+                |> R.ul <| children
+            else R.ofOption None
 
     [<RequireQualifiedAccess>]
     type Child =
-    | Item of ReactElement seq
-    | Divider of Divider
+    | Item of ReactElement list
+    | Divider of Divider.T
 
     [<RequireQualifiedAccess>]
-    type Children = Child seq
-
-    [<RequireQualifiedAccess>]
-    type Message =
-    | Click of int * int
+    type Children = Child list
 
     type Props =
         { HTMLProps: HTMLProps
-          Trigger: Trigger
+          Trigger: Button.T
           Opened: bool }
+
+    [<RequireQualifiedAccess>]
+    type T = Props * Children
 
     type State =
         { Opened: bool
           Position: int * int }
-
-    let onClick (e: MouseEvent) =
-        let element = e.currentTarget :?> Browser.Element
-        let rect = element.getBoundingClientRect ()
-        let x = (rect.left |> int) + (Browser.window.scrollX |> int)
-        let y = (rect.bottom |> int) + (Browser.window.scrollY |> int)
-        Message.Click (x, y)
-
-    let private renderTrigger (trigger: Trigger) dispatch =
-        let props, children = trigger
-        let withClick =
-            props.HTMLProps @ [ OnClick (onClick >> dispatch) ]
-        Anchor.ƒ
-            ( { props with
-                  HTMLProps = withClick },
-              children )
-
-    let private renderDivider =
-        function
-        | Divider.Text text ->
-            R.li
-                [ ClassName "divider"
-                  Data ("content", text) ] []
-        | Divider.Empty ->
-            R.li
-                [ ClassName "divider" ] []
-
-    let private renderItem =
-        R.li [ ClassName "menu-item" ]
-
+                
     let private renderChild =
         function
-        | Child.Item elements -> renderItem elements
-        | Child.Divider divider -> renderDivider divider
+        | Child.Item elements -> Item.ƒ elements
+        | Child.Divider divider -> Divider.ƒ divider
 
     let private renderChildren children =
-        Seq.map renderChild children
-
-    let private renderMenu state props children =
-        let (x, y) = state.Position
-        if state.Opened then
-            props.HTMLProps
-            @
-            [ Style
-                [ Position "absolute"
-                  Left x
-                  Top y ] ]
-            |> addProp (ClassName "menu")
-            |> R.ul <| children
-        else R.ofOption None
+        List.map renderChild children
 
     let private init (props: Props) =
         { Opened = props.Opened
-          Position = 0, 0 }
+          Position = Container.props.Position }
 
     let private update message state =
         match message with
-        | Message.Click (x, y) ->
+        | Trigger.Message.Click (x, y) ->
             { state with
                 Opened = not state.Opened
                 Position = x, y }
 
     let private view model dispatch =
         R.fragment [] 
-            [ renderTrigger model.props.Trigger dispatch
-              renderMenu
-                model.state
-                model.props
-                model.children |> Portal.ƒ "menu-container" ]
+            [ Trigger.ƒ (dispatch, model.props.Trigger)
+              Container.ƒ
+                ({ Opened = model.state.Opened
+                   Position = model.state.Position
+                   HTMLProps = model.props.HTMLProps },
+                 model.children)
+              |> Portal.ƒ "menu-container" ]
 
     let defaults =
-        { HTMLProps = []
-          Trigger =
-            Button.defaults,
-            [ Icon.ƒ
-                { Icon.defaults with Kind = Icon.Kind.Menu } ]
-          Opened = false }
+        { HTMLProps = Container.props.HTMLProps
+          Trigger = Trigger.children
+          Opened = Container.props.Opened }
 
-    let ƒ props children =
+    let ƒ (menu: T) =
+        let props, children = menu
         R.reactiveCom
             init
             update

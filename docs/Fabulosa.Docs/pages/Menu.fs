@@ -9,11 +9,11 @@ open Fable.Import.React
 (*** define: menu-default-sample ***)
 let menu =
     Menu.ƒ
-        Menu.defaults
-        [ Menu.Child.Item [ R.a [] [ R.str "Links" ] ]
-          Menu.Child.Divider (Menu.Divider.Text "DIVIDER")
-          Menu.Child.Item [ R.a [] [ R.str "Link 1" ] ]
-          Menu.Child.Item [ R.a [] [ R.str "Link 2" ] ] ]
+        (Menu.defaults,
+         [ Menu.Child.Item [ R.a [] [ R.str "Links" ] ]
+           Menu.Child.Divider (Some "DIVIDER")
+           Menu.Child.Item [ R.a [] [ R.str "Link 1" ] ]
+           Menu.Child.Item [ R.a [] [ R.str "Link 2" ] ] ])
 (*** hide ***)
 let render () =
     tryMount "menu-default-demo" menu

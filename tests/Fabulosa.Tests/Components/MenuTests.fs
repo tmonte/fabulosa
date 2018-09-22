@@ -12,27 +12,24 @@ let tests =
 
         test "Menu default" {
             Menu.ƒ
-                Menu.defaults 
-                []
+                (Menu.defaults, [])
             |> ReactNode.unit
             |> hasDescendentClass "btn icon icon-menu"
         }
 
         test "Menu opened" {
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true }
-                []
+                ({ Menu.defaults with
+                     Opened = true }, [])
             |> ReactNode.unit
             |> hasDescendentClass "menu"
         }
 
         test "Menu opened html props" {
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true
-                    HTMLProps = [ ClassName "custom" ] }
-                []
+                ({ Menu.defaults with
+                     Opened = true
+                     HTMLProps = [ ClassName "custom" ] }, [])
             |> ReactNode.unit
             |> hasDescendentClass "menu custom"
         }
@@ -43,9 +40,9 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true }
-                [ Menu.Child.Item [ link ] ]
+                ({ Menu.defaults with
+                     Opened = true },
+                 [ Menu.Child.Item [ link ] ])
             |> ReactNode.unit
             |>! hasChild 1 (link |> ReactNode.unit)
             |> hasDescendentClass "menu-item"
@@ -57,10 +54,10 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true }
-                [ Menu.Child.Item [ link ]
-                  Menu.Child.Divider Menu.Divider.Empty ]
+                ({ Menu.defaults with
+                     Opened = true },
+                 [ Menu.Child.Item [ link ]
+                   Menu.Child.Divider None ])
             |> ReactNode.unit
             |>! hasChild 1 (link |> ReactNode.unit)
             |>! hasDescendentClass "menu-item"
@@ -73,10 +70,10 @@ let tests =
                     [ ClassName "custom" ]
                     [ R.str "link" ]
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true }
-                [ Menu.Child.Item [ link ]
-                  Menu.Child.Divider <| Menu.Divider.Text "text" ]
+                ({ Menu.defaults with
+                     Opened = true },
+                 [ Menu.Child.Item [ link ]
+                   Menu.Child.Divider (Some "text") ])
             |> ReactNode.unit
             |>! hasChild 1 (link |> ReactNode.unit)
             |>! hasDescendentClass "menu-item"
@@ -94,12 +91,12 @@ let tests =
                     [ ClassName "link2" ]
                     [ R.str "link2" ]
             Menu.ƒ
-                { Menu.defaults with
-                    Opened = true }
-                [ Menu.Child.Item [ link1 ]
-                  Menu.Child.Divider <| Menu.Divider.Text "text"
-                  Menu.Child.Item [ link2 ]
-                  Menu.Child.Divider Menu.Divider.Empty ]
+                ({ Menu.defaults with
+                     Opened = true },
+                 [ Menu.Child.Item [ link1 ]
+                   Menu.Child.Divider (Some "text")
+                   Menu.Child.Item [ link2 ]
+                   Menu.Child.Divider None ])
             |> ReactNode.unit
             |>! hasChild 1 (link1 |> ReactNode.unit)
             |>! hasChild 1 (link2 |>  ReactNode.unit)
