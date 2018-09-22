@@ -10,9 +10,11 @@ module Chip =
 
     module Remove =
 
+        [<RequireQualifiedAccess>]
         type Props =
             { OnRemove: MouseEvent -> unit }
 
+        [<RequireQualifiedAccess>]
         type T = Props
 
         let ƒ (remove: T) =
