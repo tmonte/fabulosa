@@ -8,74 +8,60 @@ module Chip =
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
-    type Child = 
-    | Text of string
-    | Avatar of Avatar.Props
+    module Remove =
+
+        type Props =
+            { OnRemove: MouseEvent -> unit }
+
+        type T = Props
+
+        let ƒ (remove: T) =
+            ({ Anchor.defaults with
+                 HTMLProps =
+                   [ ClassName "btn btn-clear"
+                     Role "button"
+                     OnClick remove.OnRemove ] }, [])
+            |> Anchor.ƒ
 
     [<RequireQualifiedAccess>]
-    type Children = Child seq
+    type Props =
+        { HTMLProps: HTMLProps
+          OnRemove: (MouseEvent -> unit) option }
 
     [<RequireQualifiedAccess>]
-    type OnRemove = MouseEvent -> unit
+    type Children =
+        { Text: string
+          Avatar: Avatar.T option }
 
     [<RequireQualifiedAccess>]
-    type Removable = bool
+    type T = Props * Children
 
-    [<RequireQualifiedAccess>]
-    type Props = {
-        Removable: Removable
-        OnRemove: OnRemove
-        HTMLProps: HTMLProps
-    }
+    let props =
+        { Props.HTMLProps = []
+          Props.OnRemove = None }
 
-    let defaults = {
-        Props.Removable = false
-        Props.OnRemove = ignore
-        Props.HTMLProps = []
-    }
+    let children =
+        { Children.Text = ""
+          Children.Avatar = None }
 
-    let renderRemove removable onRemove =
-        match removable, onRemove with
-        | true, _ ->
-            R.a
-                [ ClassName "btn btn-clear"
-                  Role "button"
-                  OnClick onRemove ]
-                []
-            |> Some
-        | false, _ -> None
-        |> R.ofOption
+    let private remove =
+        function
+        | Some fn -> Remove.ƒ { OnRemove = fn }
+        | None -> R.ofOption None
 
     let private avatar =
         function
-        | Child.Avatar props ->
+        | Some avatar ->
             Avatar.ƒ
-                { props with
+                { avatar with
                     Size = Avatar.Size.Small }
-            |> Some
-        | _ -> None
-        |> List.tryPick
-        >> R.ofOption
+        | None -> R.ofOption None
 
-    let private text =
-        function
-        | Child.Text text -> R.str text |> Some
-        | _ -> None
-        |> List.tryPick
-        >> R.ofOption
-
-    let renderChildren children =
-        seq {
-            yield avatar children
-            yield text children
-        }
-
-    let ƒ (props: Props) children =
+    let ƒ (chip: T) =
+        let props, children = chip
         props.HTMLProps
         |> addProp (ClassName "chip")
-        |> R.div
-        <| seq {
-            yield! renderChildren children
-            yield renderRemove props.Removable props.OnRemove
-        }
+        |> R.div <|
+        [ avatar children.Avatar
+          R.str children.Text
+          remove props.OnRemove ]

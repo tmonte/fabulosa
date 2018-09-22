@@ -12,30 +12,31 @@ open Microsoft.FSharp.Core
 (*** define: chip-default-sample ***)
 let chip =
     Chip.ƒ
-        Chip.defaults
-        [ Chip.Child.Text "Chip" ]
+        (Chip.props,
+         { Chip.children with Text = "Chip" })
 (*** define: chip-removable-sample ***)
+let fn _ = console.log "removed"
+
 let removable =
     Chip.ƒ
-        { Chip.defaults with
-            Removable = true
-            OnRemove = (fun _ -> console.log "remove" )}
-        [ Chip.Child.Text "Chip" ]
+        ({ Chip.props with
+             OnRemove = Some fn },
+         { Chip.children with Text = "Chip" })
 (*** define: chip-avatar-sample ***)
 let avatar =
     Chip.ƒ
-        { Chip.defaults with
-            Removable = true }
-        [ Chip.Child.Text "Chip"
-          Chip.Child.Avatar
-            { Avatar.defaults with
-                Source = "assets/avatar-1.png" } ]
+        (Chip.props,
+         { Chip.children with
+             Text = "Chip"
+             Avatar = Some
+               { Avatar.defaults with
+                   Source = "assets/avatar-1.png" } })
 (*** hide ***)
 let render () =
     tryMount "chip-default-demo" chip
     tryMount "chip-removable-demo" removable
     tryMount "chip-avatar-demo" avatar
-    tryMount "chip-props-table" (PropTable.propTable typeof<Chip.Props> Chip.defaults)
+    tryMount "chip-props-table" (PropTable.propTable typeof<Chip.Props> Chip.props)
 (**
 
 <div id="chips">
