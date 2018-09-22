@@ -9,49 +9,49 @@ open Renderer
 (*** define: button-kind-sample ***)
 let button =
     Button.ƒ
-        ( Button.props,
-          [ R.str "Default" ] )
+        (Button.props,
+         [ R.str "Default" ])
 
 let primary =
     Button.ƒ
-        ( { Button.props with
-              Kind = Button.Kind.Primary },
-          [ R.str "Primary" ] )
+        ({ Button.props with
+             Kind = Button.Kind.Primary },
+         [ R.str "Primary" ])
 
 let link =
     Button.ƒ
-        ( { Button.props with
-              Kind = Button.Kind.Link },
-          [ R.str "Link" ] )
+        ({ Button.props with
+             Kind = Button.Kind.Link },
+         [ R.str "Link" ])
 (*** define: button-size-sample ***)
 let small =
     Button.ƒ
-        ( { Button.props with
-              Size = Button.Size.Small },
-          [ R.str "Small" ] )
+        ({ Button.props with
+             Size = Button.Size.Small },
+         [ R.str "Small" ])
 
 let medium =
     Button.ƒ
-        ( Button.props,
-          [ R.str "Default" ] )
+        (Button.props,
+         [ R.str "Default" ])
 
 let large =
     Button.ƒ
-        ( { Button.props with
-              Size = Button.Size.Large },
-          [ R.str "Large" ] )
+        ({ Button.props with
+             Size = Button.Size.Large },
+         [ R.str "Large" ])
 (*** define: button-color-sample ***)
 let success =
     Button.ƒ
-        ( { Button.props with
-              Color = Button.Color.Success },
-          [ R.str "Success" ] )
+        ({ Button.props with
+             Color = Button.Color.Success },
+         [ R.str "Success" ])
 
 let error =
     Button.ƒ
-        ( { Button.props with
-              Color = Button.Color.Error },
-          [ R.str "Error" ] )
+        ({ Button.props with
+             Color = Button.Color.Error },
+         [ R.str "Error" ])
 (*** hide ***)
 let icon =
     Icon.ƒ
@@ -60,34 +60,34 @@ let icon =
 (*** define: button-format-sample ***)
 let squared =
     Button.ƒ
-        ( { Button.props with
-              Format = Button.Format.SquaredAction },
-          [ icon ] )
+        ({ Button.props with
+             Format = Button.Format.SquaredAction },
+         [ icon ])
 
 let round =
     Button.ƒ
-        ( { Button.props with
-              Format = Button.Format.RoundAction
-              Kind = Button.Kind.Primary },
-          [ icon ] )
+        ({ Button.props with
+             Format = Button.Format.RoundAction
+             Kind = Button.Kind.Primary },
+         [ icon ])
 (*** define: button-state-sample ***)
 let disabled =
     Button.ƒ
-        ( { Button.props with
-              State = Button.State.Disabled },
-          [ R.str "Disabled" ] )
+        ({ Button.props with
+             State = Button.State.Disabled },
+         [ R.str "Disabled" ])
 
 let active =
     Button.ƒ
-        ( { Button.props with
-              State = Button.State.Active },
-          [ R.str "Active" ] )
+        ({ Button.props with
+             State = Button.State.Active },
+         [ R.str "Active" ])
 
 let loading =
     Button.ƒ
-        ( { Button.props with
-              State = Button.State.Loading },
-          [ R.str "------" ] )
+        ({ Button.props with
+             State = Button.State.Loading },
+         [ R.str "-------" ])
 (*** hide ***)
 let render () =
     tryMount "button-default-demo" button
