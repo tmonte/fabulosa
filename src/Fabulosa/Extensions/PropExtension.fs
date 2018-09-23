@@ -7,7 +7,7 @@ module Fable =
         module React =
             module Props =
                 type HTMLProps = IHTMLProp list
-
+                
                 let nonEmpty =
                     function
                     | "" -> None
@@ -38,7 +38,8 @@ module Fable =
                     if htmlProps |> List.length > 0 then
                         let filtered =
                             htmlProps
-                            |> List.filter (combineProp prop >> Option.isNone)
+                            |> List.filter
+                                (combineProp prop >> Option.isNone)
                         let combined =
                             htmlProps
                             |> List.choose (combineProp prop)
@@ -49,4 +50,5 @@ module Fable =
                     else [prop]
 
                 let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
-                    props |> List.fold (fun acc prop -> acc |> addProp prop) htmlProps 
+                    props |> List.fold
+                        (fun acc prop -> acc |> addProp prop) htmlProps 

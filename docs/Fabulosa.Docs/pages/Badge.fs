@@ -8,41 +8,42 @@ open R.Props
 open Fable.Import.React
 
 (*** define: badge-div-span-sample ***)
-let divBadge =
+let div =
     Badge.ƒ
-        { Badge.props with
-            Kind = Badge.Kind.Div
-                ([], [R.str "Text"])
-            Badge = 1 }
+        ({ Badge.props with
+             Badge = 1 },
+         Badge.Child.Div
+           ([], [ R.str "Text" ]))
 
-let spanBadge =
+let span =
     Badge.ƒ
-        { Badge.props with
-            Kind = Badge.Kind.Span
-                ([], [R.str "Text"])
-            Badge = 2 }
+        ({ Badge.props with
+             Badge = 2 },
+         Badge.Child.Span
+           ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
-let buttonBadge =
+let button =
     Badge.ƒ
-        { Badge.props with
-            Kind = Badge.Kind.Button
-                (Button.props, [R.str "Button"])
-            Badge = 3 }
+        ({ Badge.props with
+             Badge = 3 },
+         Badge.Child.Button
+           (Button.props,
+            [ R.str "Button" ]))
 
-let avatarBadge =
+let avatar =
     Badge.ƒ
-        { Badge.props with
-            Kind = Badge.Kind.Avatar
-                { Avatar.props with
-                    Source = "assets/avatar-1.png"
-                    Size = Avatar.Size.Large }
-            Badge = 4 }
+        ({ Badge.props with
+             Badge = 4 },
+         Badge.Child.Avatar
+           { Avatar.props with
+               Source = "assets/avatar-1.png"
+               Size = Avatar.Size.Large })
 (*** hide ***)
 let render () =
-    tryMount "badge-div-demo" divBadge
-    tryMount "badge-span-demo" spanBadge
-    tryMount "badge-button-demo" buttonBadge
-    tryMount "badge-avatar-demo" avatarBadge
+    tryMount "badge-div-demo" div
+    tryMount "badge-span-demo" span
+    tryMount "badge-button-demo" button
+    tryMount "badge-avatar-demo" avatar
     tryMount "badge-props-table"
         (PropTable.propTable typeof<Badge.Props> Badge.props)
 (**

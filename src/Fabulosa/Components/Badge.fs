@@ -6,58 +6,55 @@ module Badge =
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
-
-    [<RequireQualifiedAccess>]
-    type HTMLProps = IHTMLProp list
-
-    [<RequireQualifiedAccess>]
-    type Children = ReactElement list
-
-    [<RequireQualifiedAccess>]
-    type Kind =
-    | Avatar of Avatar.Props
-    | Button of Button.Props * Children
-    | Div of HTMLProps * Children
-    | Span of HTMLProps * Children
-
+    
     [<RequireQualifiedAccess>]
     type Badge = int
 
     [<RequireQualifiedAccess>]
     type Props =
-        { Badge: Badge
-          Kind: Kind }
+        { Badge: Badge }
 
     [<RequireQualifiedAccess>]
-    type T = Props
+    type Child =
+    | Avatar of Avatar.T
+    | Button of Button.T
+    | Div of HTMLProps * ReactElement list
+    | Span of HTMLProps * ReactElement list
+        
+    [<RequireQualifiedAccess>]
+    type T = Props * Child
 
     let private combine htmlProps badge =
-        ( htmlProps |> addProp (ClassName "badge") )
+        (htmlProps
+         |> addProp (ClassName "badge"))
         @ [Data ("badge", badge)]
 
-    let private create kind badge =
-        match kind with
-        | Kind.Avatar props ->
+    let private renderChildren child badge =
+        match child with
+        | Child.Avatar props ->
             Avatar.ƒ
                 { props with
                     HTMLProps = combine props.HTMLProps badge }
-        | Kind.Button (props, children) ->
+        | Child.Button (props, children) ->
             Button.ƒ
                 ( { props with
                       HTMLProps = combine props.HTMLProps badge },
                   children )
-        | Kind.Div (props, children) ->
+        | Child.Div (props, children) ->
             R.div
                 (combine props badge)
                 children
-        | Kind.Span (props, children) ->
+        | Child.Span (props, children) ->
             R.span
                 (combine props badge)
                 children
 
     let props =
-        { Props.Badge = 0
-          Props.Kind = Kind.Div ([], []) }
+        { Props.Badge = 0 }
+
+    let children =
+        Child.Div ([], [])
 
     let ƒ (badge: T) =
-        create badge.Kind badge.Badge
+        let props, children = badge
+        renderChildren children props.Badge
