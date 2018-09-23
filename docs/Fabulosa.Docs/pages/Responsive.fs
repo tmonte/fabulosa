@@ -9,24 +9,25 @@ open Renderer
 (*** define: responsive-sample ***)
 let hideSmall =
     Responsive.ƒ
-        ( { Responsive.props with
-              Hide = Responsive.Size.SM },
-          [ Button.ƒ
-              ( Button.props,
-                [ R.str "Hide small" ] ) ] )
+        ({ Responsive.props with
+             Hide = Responsive.Size.SM },
+         [ Button.ƒ
+             (Button.props,
+              [ R.str "Hide small" ]) ])
 
 let showLarge =
     Responsive.ƒ
-        ( { Responsive.props with
-              Show = Responsive.Size.LG },
-          [ Button.ƒ
-              ( Button.props,
-                [R.str "Show large"] ) ] )
+        ({ Responsive.props with
+             Show = Responsive.Size.LG },
+         [ Button.ƒ
+             (Button.props,
+              [ R.str "Show large" ]) ])
 (*** hide ***)
 let render () =
     tryMount "responsive-demo-hide" hideSmall
     tryMount "responsive-demo-show" showLarge
-    tryMount "navbar-props-table" (PropTable.propTable typeof<Responsive.Props> Responsive.props)
+    tryMount "navbar-props-table"
+        (PropTable.propTable typeof<Responsive.Props> Responsive.props)
 (**
 
 <div id="responsive">

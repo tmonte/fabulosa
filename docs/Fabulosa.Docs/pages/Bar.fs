@@ -38,7 +38,8 @@ let render () =
     tryMount "bar-small-demo" small
     tryMount "bar-item-tooltip-demo" tooltip
     tryMount "bar-item-multiple-demo" multiple
-    tryMount "bar-props-table" (PropTable.propTable typeof<Bar.Props> Bar.props)
+    tryMount "bar-props-table"
+        (PropTable.propTable typeof<Bar.Props> Bar.props)
 (**
 
 <div id="bars">

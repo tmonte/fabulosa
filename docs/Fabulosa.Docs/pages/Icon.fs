@@ -9,14 +9,14 @@ open Fable.Import.React
 (*** define: icon-sample ***)
 let icon =
     Icon.ƒ
-        ( { Icon.props with
-              Kind = Icon.Kind.Download } )
+        ({ Icon.props with
+             Kind = Icon.Kind.Download })
 (*** define: icon-size-sample ***)
 let x4 =
     Icon.ƒ
-        ( { Icon.props with
-              Kind = Icon.Kind.Upload
-              Size = Icon.Size.X4 } )
+        ({ Icon.props with
+             Kind = Icon.Kind.Upload
+             Size = Icon.Size.X4 })
 (**
 
 <div id="icon">
@@ -84,4 +84,5 @@ Icons can have doubled, tripled, or quadrupled sizes
 let render () =
     tryMount "icon-demo" icon
     tryMount "icon-size-demo" x4
-    tryMount "icon-props-table" (PropTable.propTable typeof<Icon.Props> Icon.props)
+    tryMount "icon-props-table"
+        (PropTable.propTable typeof<Icon.Props> Icon.props)

@@ -43,7 +43,8 @@ let render () =
     tryMount "badge-span-demo" spanBadge
     tryMount "badge-button-demo" buttonBadge
     tryMount "badge-avatar-demo" avatarBadge
-    tryMount "badge-props-table" (PropTable.propTable typeof<Badge.Props> Badge.props)
+    tryMount "badge-props-table"
+        (PropTable.propTable typeof<Badge.Props> Badge.props)
 (**
 <div id="badges">
 

@@ -9,30 +9,30 @@ open Renderer
 (*** define: accordion-sample ***)
 let accordion =
     Accordion.ƒ
-        ( Accordion.props,
-          [ { Header = "Header One"
-              Body =
-                [ R.a [] [ R.str "Item One" ]
-                  R.a [] [ R.str "Item Two" ] ] }
-            { Header = "Header Two"
-              Body =
-                [ R.a [] [ R.str "Item One" ]
-                  R.a [] [ R.str "Item Two" ] ] } ] )
+        (Accordion.props,
+         [ { Header = "Header One"
+             Body =
+               [ R.a [] [ R.str "Item One" ]
+                 R.a [] [ R.str "Item Two" ] ] }
+           { Header = "Header Two"
+             Body =
+               [ R.a [] [ R.str "Item One" ]
+                 R.a [] [ R.str "Item Two" ] ] } ])
 (*** define: accordion-custom-sample ***)
 let custom =
     Accordion.ƒ
-        ( { Accordion.props with
-              CustomIcon =
-                { Icon.props with
-                    Kind = Icon.Kind.Forward } },
-          [ { Header = "Header One"
-              Body =
-                [ R.a [] [R.str "Item One"]
-                  R.a [] [R.str "Item Two"] ] }
-            { Header = "Header Two"
-              Body =
-                [ R.a [] [R.str "Item One"]
-                  R.a [] [R.str "Item Two"] ] } ] )
+        ({ Accordion.props with
+             CustomIcon =
+               { Icon.props with
+                   Kind = Icon.Kind.Forward } },
+         [ { Header = "Header One"
+             Body =
+               [ R.a [] [R.str "Item One"]
+                 R.a [] [R.str "Item Two"] ] }
+           { Header = "Header Two"
+             Body =
+               [ R.a [] [R.str "Item One"]
+                 R.a [] [R.str "Item Two"] ] } ])
 (**
 
 <div id="accordions">
@@ -97,5 +97,6 @@ Accordions accept icon props for a custom icon.
 let render () =
     tryMount "accordion-demo" accordion
     tryMount "accordion-custom-demo" custom
-    tryMount "accordion-props-table" (PropTable.propTable typeof<Accordion.Props> Accordion.props)
+    tryMount "accordion-props-table"
+        (PropTable.propTable typeof<Accordion.Props> Accordion.props)
     

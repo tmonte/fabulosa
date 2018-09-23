@@ -1,11 +1,12 @@
 ﻿namespace Fabulosa
 
-module R = Fable.Helpers.React
-open R.Props
-open Fabulosa.Extensions
-
 [<RequireQualifiedAccess>]
 module Tag =
+
+    open Fabulosa.Extensions
+    module R = Fable.Helpers.React
+    open R.Props
+    open Fabulosa.Extensions
 
     [<RequireQualifiedAccess>]
     type Color =
@@ -16,17 +17,24 @@ module Tag =
     | Warning
     | Error
 
-    type Props = {
-        Rounded: bool
-        Color: Color
-    }
-    
-    let props = {
-        Rounded = false
-        Color = Color.Default
-    }
-    
-    let private getClassOfColor =
+    [<RequireQualifiedAccess>]
+    type Props =
+        { HTMLProps: HTMLProps
+          Rounded: bool
+          Color: Color }
+
+    [<RequireQualifiedAccess>]
+    type Children = string
+
+    [<RequireQualifiedAccess>]
+    type T = Props * Children
+
+    let props =
+        { Props.HTMLProps = []
+          Props.Rounded = false
+          Props.Color = Color.Default }
+
+    let private color =
         function
         | Color.Default -> ""
         | Color.Primary -> "label-primary"
@@ -34,18 +42,21 @@ module Tag =
         | Color.Success -> "label-success"
         | Color.Warning -> "label-warning"
         | Color.Error -> "label-error"
-        
-    let private getClassOfRounded =
+        >> ClassName
+
+    let private rounded =
         function
         | true -> "label-rounded"
         | false -> ""
+        >> ClassName
         
-    let private getClasses color rounded = 
-        ([ "label"; getClassOfRounded rounded; getClassOfColor color ]
-        |> Seq.join " ").Trim()
-        
-        
-    let ƒ props = 
-        R.span [ClassName (getClasses props.Color props.Rounded)]
-        
-    let f = ƒ
+    let ƒ (tag: T) =
+        let props, children = tag
+        props.HTMLProps
+        |> addProps
+            [ ClassName "label"
+              color props.Color
+              rounded props.Rounded ]
+        |> R.span <| [ R.str children ]
+
+    let render = ƒ

@@ -23,7 +23,8 @@ let empty =
 (*** hide ***)
 let render () =
     tryMount "empty-default-demo" empty
-    tryMount "empty-props-table" (PropTable.propTable typeof<Empty.Props> Empty.props)
+    tryMount "empty-props-table"
+        (PropTable.propTable typeof<Empty.Props> Empty.props)
 (**
 
 <div id="empty">

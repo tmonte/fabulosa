@@ -8,61 +8,56 @@ open Renderer
 
 (*** define: avatar-initial-sample ***)
 let avatar =
-    Avatar.ƒ { 
-        Avatar.props with
-            Initial = "FA"
-    }
+    Avatar.ƒ
+        { Avatar.props with
+            Initial = "FA" }
 (*** define: avatar-source-sample ***)
 let source =
-    Avatar.ƒ { 
-        Avatar.props with
-            Source = "assets/avatar-1.png"
-    }
+    Avatar.ƒ
+        { Avatar.props with
+            Source = "assets/avatar-1.png" }
 (*** define: avatar-sizes-sample ***)
 let extraSmall =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Size = Avatar.Size.ExtraSmall
-    }
+            Size = Avatar.Size.ExtraSmall }
 (*** hide ***)
 let small =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Size = Avatar.Size.Small
-    }
+            Size = Avatar.Size.Small }
+
 let medium =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Size = Avatar.Size.Medium
-    }
+            Size = Avatar.Size.Medium }
+
 let large =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Size = Avatar.Size.Large
-    }
+            Size = Avatar.Size.Large }
+
 let extraLarge =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Size = Avatar.Size.ExtraLarge
-    }
+            Size = Avatar.Size.ExtraLarge }
 (*** define: avatar-kinds-sample ***)
 let icon =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Kind = Avatar.Kind.Icon "assets/avatar-1.png"
-    }
+            Kind = Avatar.Kind.Icon "assets/avatar-1.png" }
+
 let presence =
-    Avatar.ƒ {
-        Avatar.props with
+    Avatar.ƒ
+        { Avatar.props with
             Initial = "FA"
-            Kind = Avatar.Kind.Presence Avatar.Presence.Online
-    }
+            Kind = Avatar.Kind.Presence Avatar.Presence.Online }
 (*** hide ***)
 let render () =
     tryMount "avatar-initial-demo" avatar
@@ -74,7 +69,8 @@ let render () =
     tryMount "avatar-xl-demo" extraLarge
     tryMount "avatar-icon-demo" icon
     tryMount "avatar-presence-demo" presence
-    tryMount "avatar-props-table" (PropTable.propTable typeof<Avatar.Props> Avatar.props)
+    tryMount "avatar-props-table"
+        (PropTable.propTable typeof<Avatar.Props> Avatar.props)
 (**
 <div id="avatars">
 

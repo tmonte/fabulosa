@@ -9,32 +9,33 @@ open Renderer
 (*** define: navbar-sample ***)
 let navbar =
     Navbar.ƒ
-        ( Navbar.props,
-          [ Navbar.Child.Section
-              ( Navbar.props,
-                [ Anchor.ƒ
-                    ( { Anchor.props with
-                          Kind = Button.Kind.Link },
-                      [ R.str "Left 1" ] )
-                  Anchor.ƒ
-                    ( { Anchor.props with
-                          Kind = Button.Kind.Link },
-                      [ R.str "Left 2" ] ) ] )
-            Navbar.Child.Center
-              ( Navbar.props,
-                [ Anchor.ƒ
-                    ( { Anchor.props with
-                          Kind = Button.Kind.Link },
-                      [ R.str "Center" ] ) ] )
-            Navbar.Child.Section
-              ( Navbar.props,
-                [ Anchor.ƒ
-                    ( Anchor.props,
-                      [ R.str "Right" ] ) ] ) ] )
+        (Navbar.props,
+         [ Navbar.Child.Section
+             (Navbar.props,
+              [ Anchor.ƒ
+                  ({ Anchor.props with
+                       Kind = Button.Kind.Link },
+                   [ R.str "Left 1" ])
+                Anchor.ƒ
+                  ({ Anchor.props with
+                       Kind = Button.Kind.Link },
+                   [ R.str "Left 2" ]) ])
+           Navbar.Child.Center
+             (Navbar.props,
+              [ Anchor.ƒ
+                  ({ Anchor.props with
+                       Kind = Button.Kind.Link },
+                    [ R.str "Center" ]) ])
+           Navbar.Child.Section
+              (Navbar.props,
+               [ Anchor.ƒ
+                   (Anchor.props,
+                    [ R.str "Right" ]) ]) ])
 (*** hide ***)
 let render () =
     tryMount "navbar-demo" navbar
-    tryMount "navbar-props-table" (PropTable.propTable typeof<Navbar.Props> Navbar.props)
+    tryMount "navbar-props-table"
+        (PropTable.propTable typeof<Navbar.Props> Navbar.props)
 (**
 
 <div id="navbar">

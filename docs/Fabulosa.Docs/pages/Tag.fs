@@ -1,43 +1,72 @@
 ﻿module TagPage
 
 open Fabulosa
-module R = Fable.Helpers.React
-open System.Collections
-open System.Reflection
-open FSharp.Reflection
-open Fabulosa
 open Fabulosa.Docs
+module R = Fable.Helpers.React
 open R.Props
+open Fable.Import.React
+open Renderer
 
 (*** define: tag-color-demo ***)
-let tl = Tag.ƒ Tag.props [R.str "default label"]
-let tlPrimary = Tag.ƒ { Tag.props with Color = Tag.Color.Primary} [R.str "primary label"]
-let tlSecondary = Tag.ƒ { Tag.props with Color = Tag.Color.Secondary} [R.str "secondary label"]
-let tlSuccess = Tag.ƒ { Tag.props with Color = Tag.Color.Success} [R.str "success label"]
-let tlWarning = Tag.ƒ { Tag.props with Color = Tag.Color.Warning} [R.str "warning label"]
-let tlError = Tag.ƒ { Tag.props with Color = Tag.Color.Error} [R.str "error label"]        
+let tag =
+    Tag.ƒ (Tag.props, "default label")
 
+let primary =
+    Tag.ƒ
+        ({ Tag.props with
+             Color = Tag.Color.Primary },
+         "primary label")
+
+let secondary =
+    Tag.ƒ
+        ({ Tag.props with
+             Color = Tag.Color.Secondary },
+         "secondary label")
+
+let success =
+    Tag.ƒ
+        ({ Tag.props with
+             Color = Tag.Color.Success },
+         "success label")
+
+let warning =
+    Tag.ƒ
+        ({ Tag.props with
+             Color = Tag.Color.Warning },
+         "warning label")
+
+let error =
+    Tag.ƒ
+        ({ Tag.props with
+             Color = Tag.Color.Error },
+         "error label")
 (*** define: tag-rounded-demo ***)
-let tagRounded =
-    R.div [ClassName "tag-container"] [
-        R.div [] [ Tag.ƒ { Tag.props with Rounded = true } [R.str "default label"] ]
-    ]
-
+let rounded =
+    Tag.ƒ
+        ({ Tag.props with
+             Rounded = true },
+         "rounded label")
 (*** hide ***)
-let tagColor =    
-    R.div [ClassName "tag-container"] [
-        R.div [] [ tl ]
-        R.div [] [ tlPrimary ]
-        R.div [] [ tlSecondary ]
-        R.div [] [ tlSuccess ]
-        R.div [] [ tlWarning ]
-        R.div [] [ tlError ]        
-    ]
+let colorDemo =    
+    R.div
+        [ ClassName "tag-container" ]
+        [ R.div [] [ tag ]
+          R.div [] [ primary ]
+          R.div [] [ secondary ]
+          R.div [] [ success ]
+          R.div [] [ warning ]
+          R.div [] [ error ] ]
+
+let roundedDemo =
+    R.div
+        [ ClassName "tag-container" ]
+        [ R.div [] [ rounded ] ]
 
 let render () =
-    Renderer.tryMount "tag-props-table" (PropTable.propTable typeof<Tag.Props> Tag.props)
-    Renderer.tryMount "tag-color-demo" tagColor
-    Renderer.tryMount "tag-rounded-demo" tagColor
+    tryMount "tag-props-table"
+        (PropTable.propTable typeof<Tag.Props> Tag.props)
+    tryMount "tag-color-demo" colorDemo
+    tryMount "tag-rounded-demo" roundedDemo
 (**
 <div id="tags">
     <h2 class="s-title">
@@ -45,7 +74,9 @@ let render () =
     </h2>
 </div>
 
-Tags are formatted text tags for highlighted, informative information. Tags refere to Spectre.css [Labels](https://picturepan2.github.io/spectre/elements.html#labels)
+Tags are formatted text tags for highlighted,
+informative information. Tags refere to
+Spectre.css [Labels](https://picturepan2.github.io/spectre/elements.html#labels)
 
 <div id="props">
     <h3 class="s-title">

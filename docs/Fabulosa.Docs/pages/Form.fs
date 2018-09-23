@@ -9,139 +9,148 @@ open Renderer
 (*** define: form-checkbox-sample ***)
 let checkbox =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Login Preferences" }
-            Checkbox.ƒ
-              { Checkbox.props with
-                  Text = "Remember Me"
-                  HTMLProps = [Name "remember-me"] } ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with Text = "Login Preferences" }
+           Checkbox.ƒ
+             { Checkbox.props with
+                 Text = "Remember Me"
+                 HTMLProps = [Name "remember-me"] } ])
 (*** define: form-input-sample ***)
 let input =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Name" }
-            Input.ƒ
-              { Input.props with
-                  HTMLProps = [ Placeholder "Please enter your name" ] } ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with Text = "Name" }
+           Input.ƒ
+             { Input.props with
+                 HTMLProps =
+                   [ Placeholder "Please enter your name" ] } ] )
 (*** define: form-input-group-sample ***)
 let inputGroup =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Email Address" }
-            InputGroup.ƒ
-              ( InputGroup.props,
+        (Form.Group.props,
+         [ Label.ƒ { Label.props with Text = "Email Address" }
+           InputGroup.ƒ
+             (InputGroup.props,
+              [ Input.ƒ
+                  { Input.props with
+                      HTMLProps = [ Placeholder "Please enter email address" ] }
+                Select.ƒ
+                  (Select.props,
+                   [ Select.Child.Option
+                       (Select.Option.props,
+                        [ R.str "@gmail.com" ])
+                     Select.Child.Option
+                       (Select.Option.props,
+                        [ R.str "@hotmail.com" ]) ]) ])
+           Label.ƒ { Label.props with Text = "Website" }
+           InputGroup.ƒ
+             ({ InputGroup.props with
+                  AddonLeft = InputGroup.AddonLeft.Text "https://"                                        
+                  AddonRight =
+                    InputGroup.AddonRight.Button
+                      (Button.props,
+                       [ R.str "Save"
+                         R.RawText "\n"
+                         Icon.ƒ { Icon.props with Kind = Icon.Kind.Check } ]) },
                 [ Input.ƒ
-                    { Input.props with
-                        HTMLProps = [ Placeholder "Please enter email address" ] }
-                  Select.ƒ
-                    ( Select.props,
-                      [ Select.Child.Option
-                          ( Select.Option.props, [ R.str "@gmail.com" ] )
-                        Select.Child.Option
-                          ( Select.Option.props, [ R.str "@hotmail.com" ] ) ] ) ] )
-            Label.ƒ { Label.props with Text = "Website" }
-            InputGroup.ƒ
-                ( { InputGroup.props with
-                      AddonLeft = InputGroup.AddonLeft.Text "https://"                                        
-                      AddonRight = InputGroup.AddonRight.Button
-                        ( Button.props,
-                            [ R.str "Save"
-                              R.RawText "\n"
-                              Icon.ƒ { Icon.props with Kind = Icon.Kind.Check } ] ) },
-                  [ Input.ƒ
-                      ( { Input.props with
-                            HTMLProps = [Placeholder "Please enter website address"] } ) ] ) ] )
+                    ({ Input.props with
+                         HTMLProps = [Placeholder "Please enter website address"] }) ]) ])
 (*** define: form-radio-sample ***)
 let radio =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Gender" }
-            Radio.ƒ
-              { Radio.props with
-                  Text = "Male"
-                  HTMLProps = [Name "gender"] }
-            Radio.ƒ
-              { Radio.props with
-                  Text = "Female"
-                  HTMLProps = [Name "gender"] } ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with Text = "Gender" }
+           Radio.ƒ
+             { Radio.props with
+                 Text = "Male"
+                 HTMLProps = [Name "gender"] }
+           Radio.ƒ
+             { Radio.props with
+                 Text = "Female"
+                 HTMLProps = [Name "gender"] } ])
 (*** define: form-select-sample ***)
 let select =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Language" }
-            Select.ƒ
-              ( Select.props,
-                [ Select.Child.Option
-                    ( Select.Option.props,
-                      [ R.str "English" ] )
-                  Select.Child.Option
-                    ( Select.Option.props,
-                      [ R.str "Spanish" ] )
-                  Select.Child.Option
-                    ( Select.Option.props,
-                      [ R.str "Assembly" ] ) ] ) ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with Text = "Language" }
+           Select.ƒ
+             (Select.props,
+              [ Select.Child.Option
+                  (Select.Option.props,
+                   [ R.str "English" ])
+                Select.Child.Option
+                  (Select.Option.props,
+                    [ R.str "Spanish" ])
+                Select.Child.Option
+                  (Select.Option.props,
+                   [ R.str "Assembly" ]) ]) ])
 (*** define: form-sizes-sample ***)
 let sizes =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with
-                  Text = "Small"
-                  Size = Label.Size.Small }
-            Input.ƒ
-              { Input.props with
-                  HTMLProps = [Placeholder "Please enter a value"]
-                  Size = Input.Size.Small }
-            Label.ƒ
-              { Label.props with
-                  Text = "Large"
-                  Size = Label.Size.Large }
-            Select.ƒ
-              ( { Select.props with
-                    Size = Select.Size.Large },
-                [ Select.Child.Option
-                    ( Select.Option.props,
-                      [ R.str "Large" ] ) ] ) ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with
+                 Text = "Small"
+                 Size = Label.Size.Small }
+           Input.ƒ
+             { Input.props with
+                 HTMLProps =
+                    [ Placeholder "Please enter a value" ]
+                 Size = Input.Size.Small }
+           Label.ƒ
+             { Label.props with
+                 Text = "Large"
+                 Size = Label.Size.Large }
+           Select.ƒ
+             ({ Select.props with
+                  Size = Select.Size.Large },
+              [ Select.Child.Option
+                  (Select.Option.props,
+                     [ R.str "Large" ]) ]) ])
 (*** define: form-switch-sample ***)
 let switch =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Email Preferences" }
-            Switch.ƒ
-              { Switch.props with
-                  Text = "Send me promotional emails" } ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with
+                 Text = "Email Preferences" }
+           Switch.ƒ
+             { Switch.props with
+                 Text = "Send me promotional emails" } ])
 (*** define: form-textarea-sample ***)
 let textarea =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Description" }
-            Textarea.ƒ
-              ( { Textarea.props with
-                    HTMLProps = [Placeholder "Please enter a description"] },
-                [] ) ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with Text = "Description" }
+           Textarea.ƒ
+             ({ Textarea.props with
+                  HTMLProps =
+                    [ Placeholder "Please enter a description" ] },
+              []) ])
 (*** define: form-validation-sample ***)
 let validation =
     Form.Group.ƒ
-        ( Form.Group.props,
-          [ Label.ƒ
-              { Label.props with Text = "Valid Input" }
-            Input.ƒ
-              { Input.props with
-                  HTMLProps = [ Placeholder "Please enter a value" ] }
-            |> Validation.ƒ <| Validation.Kind.Success "This input is valid."
-            Label.ƒ
-              { Label.props with Text = "Invalid Input" }
-            Input.ƒ
-              { Input.props with
-                  HTMLProps = [Placeholder "Please enter a value"] }
-            |> Validation.ƒ <| Validation.Kind.Error "This input is invalid." ] )
+        (Form.Group.props,
+         [ Label.ƒ
+             { Label.props with
+                 Text = "Valid Input" }
+           Input.ƒ
+             { Input.props with
+                 HTMLProps = [ Placeholder "Please enter a value" ] }
+           |> Validation.ƒ
+            <| Validation.Kind.Success "This input is valid."
+           Label.ƒ
+             { Label.props with Text = "Invalid Input" }
+           Input.ƒ
+             { Input.props with
+                 HTMLProps = [Placeholder "Please enter a value"] }
+           |> Validation.ƒ
+            <| Validation.Kind.Error "This input is invalid." ])
 (*** hide ***)
 let render () =
     tryMount "form-input-demo" input

@@ -11,38 +11,38 @@ let style = Style [Background "#f8f9fa"]
 (*** define: grid-sample ***)
 let grid =
     Grid.ƒ
-        ( Grid.props,
-          [ Grid.Row.props,
-            [ { Grid.Column.props with Size = 4 },
-              [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.props with Size = 8 },
-              [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
+        (Grid.props,
+         [ Grid.Row.props,
+           [ { Grid.Column.props with Size = 4 },
+             [ R.div [ style ] [ R.str "First Column" ] ]
+             { Grid.Column.props with Size = 8 },
+             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
 (*** define: row-sample ***)
 let gapless =
     Grid.ƒ
-        ( Grid.props,
-          [ { Grid.Row.props with Gapless = true },
-            [ { Grid.Column.props with Size = 4 },
-              [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.props with Size = 8 },
-              [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
+        (Grid.props,
+         [ { Grid.Row.props with Gapless = true },
+           [ { Grid.Column.props with Size = 4 },
+             [ R.div [ style ] [ R.str "First Column" ] ]
+             { Grid.Column.props with Size = 8 },
+             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
 let oneline =
     Grid.ƒ
-        ( Grid.props,
-          [ { Grid.Row.props with OneLine = true },
-            [ { Grid.Column.props with Size = 4 },
-              [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.props with Size = 12 },
-              [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
+        (Grid.props,
+         [ { Grid.Row.props with OneLine = true },
+           [ { Grid.Column.props with Size = 4 },
+             [ R.div [ style ] [ R.str "First Column" ] ]
+             { Grid.Column.props with Size = 12 },
+             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
 (*** define: column-sample ***)
 let small =
     Grid.ƒ
-        ( Grid.props,
-          [ Grid.Row.props,
-            [ { Grid.Column.props with Size = 4; SMSize = 12 },
-              [ R.div [ style ] [ R.str "First Column" ] ]
-              { Grid.Column.props with Size = 8; SMSize = 12 },
-              [ R.div [ style ] [ R.str "Second Column" ] ] ] ] )
+        (Grid.props,
+         [ Grid.Row.props,
+           [ { Grid.Column.props with Size = 4; SMSize = 12 },
+             [ R.div [ style ] [ R.str "First Column" ] ]
+             { Grid.Column.props with Size = 8; SMSize = 12 },
+             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
 (**
 
 <div id="grid">
