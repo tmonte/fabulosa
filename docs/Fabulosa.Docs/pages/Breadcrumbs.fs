@@ -10,17 +10,26 @@ open Renderer
 
 (*** define: breadcrumbs-demo ***)
 let breadcrumb =
-    Breadcrumbs.ƒ { Breadcrumbs.props with HTMLProps = [Id "breadcrumb-id"] } [
-        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Text "Just Text")
-        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Link { Href = "ubuntu.com"; Text = "Ubuntu"})
-        BreadcrumbItem.f BreadcrumbItem.props (BreadcrumbItem.Elements [R.str "Hey: "; R.a [] [R.str "Jude" ]])
-    ]
+    Breadcrumb.ƒ
+        ({ Breadcrumb.props with
+             HTMLProps = [ Id "breadcrumb-id" ] },
+         [ (Breadcrumb.Item.props,
+            Breadcrumb.Item.Children.Text "Just Text")
+           (Breadcrumb.Item.props,
+            Breadcrumb.Item.Children.Link
+              { Href = "#"; Text = "Ubuntu" })
+           (Breadcrumb.Item.props,
+            Breadcrumb.Item.Children.Elements
+              [ R.str "Hey: "
+                R.a [] [ R.str "Jude" ] ]) ])
 
 (*** hide ***)
 let render () =
     tryMount "breadcrumbs-demo" breadcrumb
-    tryMount "breadcrumbs-props-table" (PropTable.propTable typeof<Breadcrumbs.Props> Breadcrumbs.props)
-    tryMount "breadcrumb-items-props-table" (PropTable.propTable typeof<BreadcrumbItem.Props> BreadcrumbItem.props)
+    tryMount "breadcrumbs-props-table"
+        (PropTable.propTable typeof<Breadcrumb.Props> Breadcrumb.props)
+    tryMount "breadcrumb-items-props-table"
+        (PropTable.propTable typeof<Breadcrumb.Item.Props> Breadcrumb.Item.props)
 (**
 
 <div id="breadcrumbs">
