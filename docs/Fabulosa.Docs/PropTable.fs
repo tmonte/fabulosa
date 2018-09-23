@@ -69,29 +69,37 @@ module PropTable =
 
     let toTableRow rowValue =
         let (col1, col2, col3) = rowValue
-        Table.Row.ƒ Table.Row.props [
-            Table.Column.ƒ Table.Column.props [col1]
-            Table.Column.ƒ
-                { Table.Column.props with
-                    HTMLProps = [Style [WhiteSpace "pre"]] }
-                [col2]
-            Table.Column.ƒ
-                { Table.Column.props with
-                    HTMLProps = [Style [WhiteSpace "pre"]] }
-                [col3]
-        ]
-    
+        (Table.Row.props,
+         [ Table.Row.Child.Column
+             (Table.Column.props, [col1])
+           Table.Row.Child.Column
+              ({ Table.Column.props with
+                   HTMLProps = [ Style [ WhiteSpace "pre" ] ] },
+                 [col2])
+           Table.Row.Child.Column
+              ({ Table.Column.props with
+                   HTMLProps = [Style [WhiteSpace "pre"]] },
+               [col3]) ])
+
     let renderTable rowValues =
-        Table.ƒ { Table.props with Kind = Table.Kind.Striped } [
-            Table.Head.ƒ Table.Head.props [
-                Table.Row.ƒ Table.Row.props [
-                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Name"]
-                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Type"]
-                    Table.TitleColumn.ƒ Table.TitleColumn.props [R.str "Default"]
-                ]
-            ]
-            Table.Body.ƒ Table.Body.props (rowValues |> List.map toTableRow) 
-        ]
+        Table.ƒ
+            ({ Table.props with
+                 Kind = Table.Kind.Striped },
+             [ Table.Child.Head
+                 (Table.Head.props,
+                  [ (Table.Row.props,
+                     [ Table.Row.Child.TitleColumn
+                         (Table.TitleColumn.props,
+                          [R.str "Name"])
+                       Table.Row.Child.TitleColumn
+                           (Table.TitleColumn.props,
+                            [R.str "Type"])
+                       Table.Row.Child.TitleColumn
+                           (Table.TitleColumn.props,
+                            [R.str "Default"]) ]) ])
+               Table.Child.Body
+                  (Table.Body.props,
+                   (rowValues |> List.map toTableRow)) ])
         
     let propTable aType obj = getPropFields aType obj |> renderTable 
         
