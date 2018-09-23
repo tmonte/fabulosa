@@ -13,7 +13,7 @@ let fabulousButton =
              Kind = Button.Kind.Primary
              HTMLProps =
                [ Href "button.html" ] },
-         [R.str "Fabulosa"])
+         [ R.str "Fabulosa" ])
 (*** hide ***)
 let render () =
     tryMount "button-demo" fabulousButton
