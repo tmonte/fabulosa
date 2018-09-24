@@ -14,7 +14,7 @@
     <Compile Include="Components/AvatarTests.fs" />
     <Compile Include="Components/BadgeTests.fs" />
     <Compile Include="Components/BarTests.fs" />
-    <Compile Include="Components\BreadcrumbTests.fs" />
+    <Compile Include="Components/BreadcrumbTests.fs" />
     <Compile Include="Components/ButtonTests.fs" />
     <Compile Include="Components/CardTests.fs" />
     <Compile Include="Components/CheckboxTests.fs" />
@@ -30,6 +30,7 @@
     <Compile Include="Components/ModalTests.fs" />
     <Compile Include="Components/NavTests.fs" />
     <Compile Include="Components/NavbarTests.fs" />
+    <Compile Include="Components/PaginationTests.fs" />
     <Compile Include="Components/RadioTests.fs" />
     <Compile Include="Components/ResponsiveTests.fs" />
     <Compile Include="Components/SelectTests.fs" />

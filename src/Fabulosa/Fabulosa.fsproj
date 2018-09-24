@@ -10,7 +10,7 @@
     <Compile Include="Extensions/PropExtension.fs" />
     <Compile Include="Components/Portal.fs" />
     <Compile Include="Components/Icon.fs" />
-    <Compile Include="Components\Breadcrumb.fs" />
+    <Compile Include="Components/Breadcrumb.fs" />
     <Compile Include="Components/Button.fs" />
     <Compile Include="Components/Media.fs" />
     <Compile Include="Components/Accordion.fs" />
@@ -34,11 +34,12 @@
     <Compile Include="Components/Menu.fs" />
     <Compile Include="Components/Modal.fs" />
     <Compile Include="Components/Navbar.fs" />
+    <Compile Include="Components/Pagination.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Typography.fs" />
-    <Compile Include="Components\Nav.fs" />
+    <Compile Include="Components/Nav.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />
