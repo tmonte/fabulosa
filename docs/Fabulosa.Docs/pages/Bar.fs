@@ -8,30 +8,33 @@ open Fable.Import.React
 open Renderer
 
 (*** define: bar-default-sample ***)
-let bar = Bar.ƒ Bar.props [
-    { Bar.Item.props with Value = 25 }
-]
+let bar =
+    Bar.ƒ
+        (Bar.props,
+         [ ({Bar.Item.props with Value = 25 }, []) ])
 (*** define: bar-small-sample ***)
 let small =
-    Bar.ƒ {
-        Bar.props with
-            Small = true
-    } [ { Bar.Item.props with Value = 25 } ]
+    Bar.ƒ
+        ({ Bar.props with
+             Small = true },
+         [ ({ Bar.Item.props with Value = 25 }, []) ])
 (*** define: bar-item-tooltip-sample ***)
-let tooltip = Bar.ƒ Bar.props [
-    { Bar.Item.props with
-        Value = 25
-        Tooltip = true }
-]
+let tooltip =
+    Bar.ƒ
+        (Bar.props,
+         [ ({ Bar.Item.props with
+               Value = 25
+               Tooltip = true }, []) ])
 (*** define: bar-item-multiple-sample ***)
-let multiple = Bar.ƒ Bar.props [
-    { Bar.Item.props with
-        Value = 25 }
-    { Bar.Item.props with
-        Value = 15 }
-    { Bar.Item.props with
-        Value = 5 }
-]
+let multiple =
+    Bar.ƒ
+        (Bar.props,
+         [ ({ Bar.Item.props with
+               Value = 25 }, [])
+           ({ Bar.Item.props with
+               Value = 15 }, [])
+           ({ Bar.Item.props with
+               Value = 5 }, []) ])
 (*** hide ***)
 let render () =
     tryMount "bar-default-demo" bar
