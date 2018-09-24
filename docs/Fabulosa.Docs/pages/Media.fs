@@ -92,29 +92,44 @@ let render () =
         (PropTable.propTable typeof<Media.Video.Props> Media.Video.props)
 (**
 <div id="media">
-    <h2 class="s-title">
-        Media
-    </h2>
+
+<h2 class="s-title">
+    Media
+</h2>
+
+Media includes responsive images,
+figures and video classes.
+
 </div>
 
-Media includes responsive images, figures and video classes.
-
 <div id="images">
-    <h3 class="s-title">
-        Images
-    </h3>
-</div>    
-    
-Add the ```img-responsive``` class to <img> elements. The images will scale with the parent sizes.
+
+<h3 class="s-title">
+    Images
+</h3>
+
+Add the ```img-responsive``` class to
+<img> elements. The images will scale
+with the parent sizes.
+
+</div>
+
+<div id="image-props">
+
+<h3 class="s-title">
+    Image Props
+</h3>
 
 <div class="props-table" id="media-img-props-table"></div>
 
-*)
+</div>
 
-(**
+<div id="image-responsive">
+
 <h4 class="s-title">
     Image Responsive
 </h4>
+
 <div class="demo">
     <div class="columns">
         <div class="column col-4 col-mr-auto">
@@ -141,11 +156,17 @@ Add the ```img-responsive``` class to <img> elements. The images will scale with
         </div>
     </div>
 </div>
+
 *)
 
 (*** include: media-img-responsive-demo ***)
 
 (**
+
+</div>
+
+<div id="image-contain">
+
 <h4 class="s-title">
     Image Contain
 </h4>
@@ -155,10 +176,17 @@ Add the ```img-responsive``` class to <img> elements. The images will scale with
     <div id="media-img-fit-contain-demo"></div>
   </div>
 </div>
+
 *)
+
 (*** include: media-img-fit-contain-demo ***)
 
 (**
+
+</div>
+
+<div id="image-cover">
+
 <h4 class="s-title">
     Image Cover
 </h4>
@@ -168,24 +196,41 @@ Add the ```img-responsive``` class to <img> elements. The images will scale with
     <div id="media-img-fit-cover-demo"></div>
   </div>
 </div>
+
 *)
+
 (*** include: media-img-fit-cover-demo ***)
 
 (**
+
+</div>
+
 <div id="video">
-    <h3 class="s-title">
-        Video
-    </h3>
-</div>    
+
+<h3 class="s-title">
+    Video
+</h3>
+
+A container for video elements
+
+</div>
 
 <div id="video-props">
-    <h4 class="s-title">
-        Video Props
-    </h4>
-</div>    
+
+<h4 class="s-title">
+    Video Props
+</h4>
 
 <div class="props-table" id="video-props-table"></div>
- 
+
+</div>
+
+<div id="video-examples">
+
+<h4 class="s-title">
+    Video Examples
+</h4>
+
 <div class="demo">
     <div class="columns">
         <div class="column col-6 col-mx-auto">
@@ -199,32 +244,46 @@ Add the ```img-responsive``` class to <img> elements. The images will scale with
     </div>
 </div>
 
-*)
+</div>
 
-(**
 <div id="figure">
-    <h3 class="s-title">
-        Figure/Caption
-    </h3>
-</div>    
-    
-Figure serves as a container for reponsive images and caption. Caption defines the text(or any ReactElement) that is displayed as metadata about the image.
+
+<h3 class="s-title">
+    Figure/Caption
+</h3>
+
+Figure serves as a container for reponsive
+images and caption. Caption defines the
+text(or any ReactElement) that is displayed
+as metadata about the image.
+
+</div>
 
 <div id="figure-props">
-    <h4 class="s-title">
-        Figure Props
-    </h4>
-</div>    
+
+<h4 class="s-title">
+    Figure Props
+</h4>
 
 <div class="props-table" id="figure-props-table"></div>
 
-<div id="caption-props">
-    <h4 class="s-title">
-        Caption Props
-    </h4>
 </div>    
 
+<div id="caption-props">
+
+<h4 class="s-title">
+    Caption Props
+</h4>
+
 <div class="props-table" id="caption-props-table"></div>
+
+</div>
+
+<div id="figure-examples">
+
+<h4 class="s-title">
+    Figure Example
+</div>
 
 <div class="demo">
     <div class="columns">
@@ -236,3 +295,9 @@ Figure serves as a container for reponsive images and caption. Caption defines t
 *)
 
 (*** include: figure-demo ***)
+
+(**
+
+</div>
+
+*)

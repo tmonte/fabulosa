@@ -69,45 +69,57 @@ let render () =
     tryMount "tag-rounded-demo" roundedDemo
 (**
 <div id="tags">
-    <h2 class="s-title">
-        Tags
-    </h2>
-</div>
+
+<h2 class="s-title">
+    Tags
+</h2>
 
 Tags are formatted text tags for highlighted,
 informative information. Tags refere to
 Spectre.css [Labels](https://picturepan2.github.io/spectre/elements.html#labels)
 
-<div id="props">
-    <h3 class="s-title">
-        Props
-    </h3>
 </div>
+
+<div id="props">
+
+<h3 class="s-title">
+    Props
+</h3>
 
 <div id="tag-props-table"></div>
-*)
 
-(**
-<div id="color">
-    <h3 class="s-title">
-        Color
-    </h3>
 </div>
+
+<div id="color">
+
+<h3 class="s-title">
+    Color
+</h3>
 
 <div id="tag-color-demo"></div>
 
 *)
+
 (*** include: tag-color-demo ***)
 
-
 (**
-<div id="rounded">
-    <h3 class="s-title">
-        Rounded
-    </h3>
+
 </div>
+
+<div id="rounded">
+
+<h3 class="s-title">
+    Rounded
+</h3>
 
 <div id="tag-rounded-demo"></div>
 
 *)
+
 (*** include: tag-rounded-demo ***)
+
+(**
+
+</div>
+
+*)

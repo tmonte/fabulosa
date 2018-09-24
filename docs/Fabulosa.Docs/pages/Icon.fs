@@ -9,14 +9,14 @@ open Fable.Import.React
 (*** define: icon-sample ***)
 let icon =
     Icon.ƒ
-        ({ Icon.props with
-             Kind = Icon.Kind.Download })
+        { Icon.props with
+             Kind = Icon.Kind.Download }
 (*** define: icon-size-sample ***)
 let x4 =
     Icon.ƒ
-        ({ Icon.props with
+        { Icon.props with
              Kind = Icon.Kind.Upload
-             Size = Icon.Size.X4 })
+             Size = Icon.Size.X4 }
 (**
 
 <div id="icon">

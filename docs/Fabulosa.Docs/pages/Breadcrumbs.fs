@@ -42,11 +42,17 @@ Breadcrumbs are used as navigational hierarchies to indicate current location.
 
 </div>
 
+<div id="breadcrumb-props">
+
 <h3 class="s-title">
     Props
 </h3>
 
 <div class="props-table" id="breadcrumbs-props-table"></div>
+
+</div>
+
+<div id="breadcrumb-example">
 
 <h3 class="s-title">
     Example
@@ -59,13 +65,16 @@ Breadcrumbs are used as navigational hierarchies to indicate current location.
 
 (**
 
-<h2 class="s-title">
-    Breadcrumb Items
-</h2>
+</div>
+
+<div id="breadcrumb-items">
 
 <h3 class="s-title">
-    Props
+    Breadcrumb Item Props
 </h3>
 
 <div class="props-table" id="breadcrumb-items-props-table"></div>
+
+</div>
+
 *)

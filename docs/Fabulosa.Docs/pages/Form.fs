@@ -25,7 +25,7 @@ let input =
            Input.ƒ
              { Input.props with
                  HTMLProps =
-                   [ Placeholder "Please enter your name" ] } ] )
+                   [ Placeholder "Please enter your name" ] } ])
 (*** define: form-input-group-sample ***)
 let inputGroup =
     Form.Group.ƒ
