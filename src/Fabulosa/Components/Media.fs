@@ -91,7 +91,7 @@ module Media =
 
         let ƒ (image: T) =
             image.HTMLProps 
-            |> addProp (kind props.Kind)
+            |> addProp (kind image.Kind)
             |> R.img
     
         let render = ƒ
