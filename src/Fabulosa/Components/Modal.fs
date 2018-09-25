@@ -15,18 +15,19 @@ module Modal =
         }
                
         type Children =
-        | Element of ReactElement list
+        | Elements of ReactElement list
         | Text of string
+        
+        type T = Props * Children
         
         let props = {
              HTMLProps = []
         }
                 
         let ƒ props children = 
-            let children =
-                match children with 
-                | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
-                | Element e -> [R.div [ClassName "modal-title"] e]
+            let children = match children with 
+            | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
+            | Elements e -> [R.div [ClassName "modal-title"] e]
             
             props.HTMLProps
             |> addProp (ClassName "modal-header")
@@ -41,14 +42,29 @@ module Modal =
         }
                
         type Children =
-        | Element of ReactElement list
-        | Buttons of Button.Props * ReactElement list list
+        | Elements of ReactElement list
+        | Buttons of (Button.Props * ReactElement list) list
         
+        [<RequireQualifiedAccess>]
+        type T = Props * Children
+                
         let props = {
              HTMLProps = []
         }
         
-        let ƒ props children = R.span [] []
+        let ƒ (footer: T) =
+            let props, children = footer
+            let children =
+                match children with
+                | Elements e -> e
+                | Buttons b -> 
+                    b
+                    |> List.map (fun button -> button ||> Button.ƒ) 
+         
+            props.HTMLProps
+            |> addProp (ClassName "modal-footer")
+            |> R.div 
+            <| children
             
         let f = ƒ
     
@@ -57,24 +73,26 @@ module Modal =
     | Medium
     | Large
     
-    type OnClose = unit -> unit
+    type OnClose = MouseEvent -> unit
     
     type Props = {
         HTMLProps: IHTMLProp list
-        OnClose: OnClose option
+        OnRequestClose: OnClose option
         Size: Size
+        IsOpen: bool
     }
       
     type Children = {
-        Header: Header.Props option
+        Header: Header.T option
         Body: ReactElement list
-        Footer: Footer.Props option
+        Footer: Footer.T option
     }
     
     let props = {
          HTMLProps = []
-         OnClose = None
+         OnRequestClose = None
          Size = Size.Medium
+         IsOpen = true
     }
     
     let children = {
@@ -83,7 +101,53 @@ module Modal =
         Footer =  None
     }
     
-    let ƒ props children = R.span [] [] 
+    let modalOverLay onRequestClose =
+        let props = 
+            match onRequestClose with 
+            | Some fn -> [OnClick fn :> IHTMLProp]
+            | None -> []
+        
+        props
+        |> addProp (ClassName "modal-overlay")
+        |> R.a
+        <| []
+    
+    let getClassFromSize = 
+        function
+        | Small -> "modal-sm"
+        | Medium -> ""
+        | Large -> "modal-lg"
+    
+    let getClasses size =
+        getClassFromSize size
+        |> sprintf "modal active %s"
+        |> ClassName 
+    
+    
+    let ƒheader (header: (Header.Props * Header.Children) option) (onRequestClose: OnClose option) =
+        match header, onRequestClose with 
+        | Some h, Some f -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"] []; Header.ƒ <|| h] |> Some
+        | Some h, None -> R.div [ClassName "modal-header"] [Header.ƒ <|| h] |> Some
+        | None, Some f -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; OnClick f] []] |> Some
+        | None, None -> None
+        
+    let ƒfooter =
+        function
+        | Some f -> R.div [ClassName "modal-footer"] [f |> Footer.ƒ] |> Some
+        | None -> None
+        
+    let ƒ (props:Props) (children:Children) = 
+        props.HTMLProps
+        |> addProp (getClasses props.Size)
+        |> R.div 
+        <| [
+            modalOverLay props.OnRequestClose
+            R.div [ClassName "modal-container"] [
+                ƒheader children.Header props.OnRequestClose |> R.ofOption
+                R.div [ClassName "modal-body"] children.Body
+                ƒfooter children.Footer |> R.ofOption
+            ]
+        ]
         
     let f = ƒ
-    
+      

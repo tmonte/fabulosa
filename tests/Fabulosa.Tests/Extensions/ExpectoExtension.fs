@@ -36,7 +36,12 @@ module Expect
     
     let hasNoDescendentClass (expectedClassName: string) (node: ReactNode.T) =
         let actualDescendentsClasses, expectedClasses = parseDescendent expectedClassName node
-        Expect.isEmpty expectedClasses "Found classes when not supposed to find any"
+        let actual = actualDescendentsClasses |> Set.ofSeq
+        let expected = expectedClasses |> Set.ofSeq
+        let interssect = Set.intersect actual expected
+        Expect.isEmpty interssect (sprintf "Found classes when not supposed to find them. Actual [%A] Expected [%A]" actual expected)
+    
+//        Expect.throws test (sprintf "Found classes [%s] when not supposed to find them." expectedClassName)
 
     let hasOrderedDescendentClass multiplier (expected: string) (node: ReactNode.T) =
         let multiplied = String.replicate multiplier (expected + " ")
