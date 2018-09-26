@@ -5,6 +5,8 @@ open Fabulosa
 module R = Fable.Helpers.React
 open R.Props
 open Expect
+open Foq
+open System.Reflection
 
 [<Tests>]
 let tests =
@@ -54,13 +56,27 @@ let tests =
             |> hasChild 1 (next |> ReactNode.unit)
         }
 
-        // test "Pagination page changed" {
-        //     let fn _ = ()
-        //     Pagination.ƒ
-        //         { Pagination.props with
-        //              PageChanged = Some fn }
-        //     |> ReactNode.unit
-        //     |> hasDescendentProp (OnClick (Pagination.pageChanged >> fn))
-        // }
+        test "Pagination page changed" {
+            let mockElement =
+                Mock<Fable.Import.Browser.Element>
+                    .Property(fun x -> <@ x.innerHTML @>)
+                    .Returns("Prev")
+            let mockEvent =
+                Mock<Fable.Import.React.MouseEvent>
+                    .Property(fun x -> <@ x.currentTarget @>)
+                    .Returns(mockElement)
+            let moduleInfo = 
+                Assembly.GetAssembly(typeof<Pagination.T>).GetTypes()
+                |> Seq.find (fun t -> t.Name = "Pagination")
+            let result =
+                moduleInfo
+                    .GetMethod(
+                        "pageChanged",
+                        BindingFlags.NonPublic |||
+                        BindingFlags.Public |||
+                        BindingFlags.Static)
+                    .Invoke(null, [| mockEvent |])
+            Expect.equal (result :?> int) -2 "Should have a Prev button"
+        }
 
     ]
