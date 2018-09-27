@@ -12,6 +12,8 @@ module Pagination =
     type Props =
         { HTMLProps: HTMLProps
           PrevNext: bool
+          Pages: uint32
+          Active: uint32
           PageChanged: (int -> unit) option }
 
     [<RequireQualifiedAccess>]
@@ -20,14 +22,16 @@ module Pagination =
     let props =
         { Props.HTMLProps = []
           Props.PrevNext = true
+          Props.Pages = 0u
+          Props.Active = 0u
           Props.PageChanged = Some (fun _ -> ()) }
 
-    let (|Int|_|) str =
+    let private (|Int|_|) str =
        match System.Int32.TryParse(str) with
        | (true,int) -> Some int
        | _ -> None
 
-    let pageChanged (e: MouseEvent) =
+    let private pageChanged (e: MouseEvent) =
         let element = e.currentTarget :?> Browser.Element
         match element.innerHTML with
         | Int value -> value
@@ -37,26 +41,48 @@ module Pagination =
             | "Next" -> -1
             | _ -> -99
 
-    let private item cb text =
-        let props =
+    let private item cb (props: HTMLProps) text =
+        let combined =
             match cb with
-            | Some cb -> [ OnClick (pageChanged >> cb) ]
-            | None -> []
+            | Some cb -> props @ [ OnClick (pageChanged >> cb) ]
+            | None -> props
             |> List.cast
         R.li
             []
             [ R.a
-                props
+                combined
                 [ R.str text ] ]
+
+    let private active (number: uint32) (page: uint32): HTMLProps =
+        if page = number then
+            [ ClassName "page-item active" ]
+        else [ ClassName "page-item" ]
+
+    let private generate (pages: uint32) (active: uint32) =
+        if pages > 3u then
+            seq { yield active - 1u
+                  yield active
+                  yield active + 1u }
+        else seq { 1u .. pages }
 
     let ƒ (pagination: T) =
         let createItem = item pagination.PageChanged
         pagination.HTMLProps
         |> addProp (ClassName "pagination")
-        |> R.ul
-        <| [ (if pagination.PrevNext then
-                createItem "Prev"
-              else R.ofOption None)
-             (if pagination.PrevNext then
-                createItem "Next"
-              else R.ofOption None) ]
+        |> R.ul <|
+        seq
+            { yield
+                (if pagination.PrevNext then
+                    createItem [ ClassName "page-item" ] "Prev"
+                 else R.ofOption None)
+              yield!
+                seq { 1u .. pagination.Pages }
+                |> Seq.map
+                    (fun n ->
+                        createItem
+                            (active pagination.Active n)
+                            (string n))
+              yield
+                (if pagination.PrevNext then
+                    createItem [ ClassName "page-item" ] "Next"
+                 else R.ofOption None) }

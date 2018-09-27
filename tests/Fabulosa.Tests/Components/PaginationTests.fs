@@ -76,7 +76,38 @@ let tests =
                         BindingFlags.Public |||
                         BindingFlags.Static)
                     .Invoke(null, [| mockEvent |])
-            Expect.equal (result :?> int) -2 "Should have a Prev button"
+            Expect.equal (result :?> int) -2 "Should change page to prev"
+        }
+
+        test "Pagination number of pages" {
+            let prev = R.str "Prev"
+            let one = R.str "1"
+            let two = R.str "2"
+            let three = R.str "3"
+            let next = R.str "Next"
+            Pagination.ƒ
+                { Pagination.props with
+                    Pages = 3u }
+            |> ReactNode.unit
+            |>! hasChild 1 (prev |> ReactNode.unit)
+            |>! hasChild 1 (one |> ReactNode.unit)
+            |>! hasChild 1 (two |> ReactNode.unit)
+            |>! hasChild 1 (three |> ReactNode.unit)
+            |> hasChild 1 (next |> ReactNode.unit)
+        }
+
+        test "Pagination active page" {
+            let prev = R.str "Prev"
+            let one = R.str "1"
+            let two = R.str "2"
+            let three = R.str "3"
+            let next = R.str "Next"
+            Pagination.ƒ
+                { Pagination.props with
+                    Pages = 3u
+                    Active = 2u }
+            |> ReactNode.unit
+            |> hasOrderedDescendentClass 1 "page-item page-item page-item active page-item page-item"
         }
 
     ]
