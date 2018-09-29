@@ -61,11 +61,9 @@ module Pagination =
             let onPageChanged =
                 onClick >> props.OnPageChanged
             let anchor =
-                Anchor.ƒ
-                    ({ Button.props with
-                         HTMLProps =
-                           [OnClick onPageChanged] },
-                     [ R.str children ])
+                R.a
+                    [ OnClick onPageChanged; Href "#" ]
+                    [ R.str children ]
             props.HTMLProps
             |> addProps
                 [ ClassName "page-item"

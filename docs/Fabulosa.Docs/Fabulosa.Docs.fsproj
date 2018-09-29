@@ -4,9 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Renderer.fs" />
     <Compile Include="PropTable.fs" />
     <Compile Include="pages/Accordion.fs" />
@@ -29,6 +26,7 @@
     <Compile Include="pages/Card.fs" />
     <Compile Include="pages/Chip.fs" />
     <Compile Include="pages/Nav.fs" />
+    <Compile Include="pages\Pagination.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -40,6 +38,7 @@
     <None Include="assets/avatar-1.png" />
     <Compile Include="App.fs" />
     <None Include="paket.references" />
+    <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
