@@ -14,7 +14,7 @@ module ReactNode
     type T =
         { Kind: string
           Props: IProp seq
-          Children: T seq }
+          Children: T list }
         override x.Equals yobj =
             match yobj with
             | :? T as y ->
@@ -35,7 +35,7 @@ module ReactNode
             element :?> R.HTMLNode |> ReactNodeElement.extract
         { Kind = kind
           Props = props
-          Children = Seq.map unit children }
+          Children = List.map unit <| List.ofSeq children }
 
     let props node = node.Props
 
@@ -43,16 +43,14 @@ module ReactNode
 
     let children node = node.Children
 
-    #nowarn "40"
-    let rec descendents =
-        children
-        >> Seq.collect
-            (fun child ->
-                seq {
-                    yield child
-                    yield! descendents child
-                })
-        
+    let descendents =
+        let rec loop acc stack =
+            match stack with
+            | [] -> acc
+            | h::t ->
+                loop (acc @ [h]) (h.Children @ t)
+        children >> loop []
+
     let className =
         let classes =
             function
@@ -63,7 +61,7 @@ module ReactNode
         >> Seq.map classes
         >> Seq.choose id
         >> Seq.join " "
-    
+
     let text node =
         let value =
             function

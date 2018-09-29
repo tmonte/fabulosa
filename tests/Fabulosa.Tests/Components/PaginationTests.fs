@@ -6,7 +6,16 @@ module R = Fable.Helpers.React
 open R.Props
 open Expect
 open Foq
-open System.Reflection
+
+let mockClickable text =
+    let mockElement =
+        Mock<Fable.Import.Browser.Element>
+            .Property(fun x -> <@ x.innerHTML @>)
+            .Returns(text)
+    Mock<Fable.Import.React.MouseEvent>
+        .Property(fun x -> <@ x.currentTarget @>)
+        .Returns(mockElement)
+
 
 [<Tests>]
 let tests =
@@ -40,20 +49,15 @@ let tests =
 
         test "Pagination some pages" {
             let pages =
-                seq { 1 .. 7 }
+                seq { 1 .. 10 }
                 |> Seq.map
                    (fun n ->
-                       Pagination.Item.props, string n)
+                       Pagination.Item.props, "1")
                 |> List.ofSeq
-            let pagination =
-                Pagination.ƒ
-                    (Pagination.props, pages)
-                |> ReactNode.unit
-            pages
-            |> List.map
-                (Pagination.Item.ƒ >> ReactNode.unit)
-            |> List.iter
-                (fun child -> pagination |> hasChild 1 child)
+            Pagination.ƒ
+                (Pagination.props, pages)
+            |> ReactNode.unit
+            |> hasChild 10 (Pagination.Item.ƒ (List.head pages) |> ReactNode.unit)
         }
 
         test "Pagination item defaults" {
@@ -79,27 +83,15 @@ let tests =
             |> hasClass "active"
         }
 
-        //test "Pagination page changed" {
-        //    let mockElement =
-        //        Mock<Fable.Import.Browser.Element>
-        //            .Property(fun x -> <@ x.innerHTML @>)
-        //            .Returns("Prev")
-        //    let mockEvent =
-        //        Mock<Fable.Import.React.MouseEvent>
-        //            .Property(fun x -> <@ x.currentTarget @>)
-        //            .Returns(mockElement)
-        //    let moduleInfo = 
-        //        Assembly.GetAssembly(typeof<Pagination.T>).GetTypes()
-        //        |> Seq.find (fun t -> t.Name = "Pagination")
-        //    let result =
-        //        moduleInfo
-        //            .GetMethod(
-        //                "pageChanged",
-        //                BindingFlags.NonPublic |||
-        //                BindingFlags.Public |||
-        //                BindingFlags.Static)
-        //            .Invoke(null, [| mockEvent |])
-        //    Expect.equal (result :?> int) -2 "Should change page to prev"
-        //}
+        test "Pagination page changed" {
+            let page = Pagination.Item.onClick (mockClickable "Prev")
+            Expect.equal page -2 "Should return -2 for prev"
+            let page = Pagination.Item.onClick (mockClickable "Next")
+            Expect.equal page -1 "Should return -2 for prev"
+            seq { 1 .. 10 }
+            |> Seq.iter (fun n ->
+                let page = Pagination.Item.onClick (mockClickable (string n))
+                Expect.equal page n "Should return the clicked page")
+        }
 
     ]

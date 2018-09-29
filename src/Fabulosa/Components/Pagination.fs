@@ -28,7 +28,7 @@ module Pagination =
            | (true,int) -> Some int
            | _ -> None
 
-        let private onClick (e: MouseEvent) =
+        let onClick (e: MouseEvent) =
             let element = e.currentTarget :?> Browser.Element
             match element.innerHTML with
             | Int value -> value
