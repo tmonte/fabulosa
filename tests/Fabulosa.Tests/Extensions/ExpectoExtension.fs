@@ -23,8 +23,8 @@ module Expect
 
     let hasUniqueClass expectedClasses node = 
         let actualClasses = node |> ReactNode.className
-        Expect.equal expectedClasses actualClasses
-            (sprintf "hasUniqueClass should contain %s only. Found %s" expectedClasses actualClasses)
+        Expect.equal actualClasses expectedClasses
+            (sprintf "Class should be '%s'. Was '%s'" expectedClasses actualClasses)
 
     let hasClass (expected: string) node =
         let actual = node |> ReactNode.className |> filterEmpty
@@ -58,9 +58,9 @@ module Expect
     let hasNoChildren (node:ReactNode.T) =
         Expect.isEmpty node.Children "Expect node to have 0 children"
 
-    let hasText expectedText node =
-        let text = node |> ReactNode.descendentText
-        Expect.equal expectedText text "Text value mismatch"
+    let hasText expected node =
+        let actual = node |> ReactNode.descendentText
+        Expect.equal actual expected "Text value mismatch"
     
     let isNull node =
         Expect.isNull node "Node is expected to be null"
