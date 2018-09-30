@@ -61,8 +61,12 @@ module PageNav =
                 [ ClassName ("page-item page-" + kind) ]
                 [ R.a
                     (action kind item)
-                    [ R.div [] [ R.str item.SubTitle ]
-                      R.div [] [ R.str item.Title ] ] ]
+                    [ R.div
+                        [ ClassName "page-item-subtitle" ]
+                        [ R.str item.SubTitle ]
+                      R.div
+                        [ ClassName "page-item-title h5" ]
+                        [ R.str item.Title ] ] ]
         | None -> R.ofOption None
 
     let ƒ (pageNav: T) =

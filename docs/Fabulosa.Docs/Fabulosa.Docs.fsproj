@@ -8,25 +8,26 @@
     <Compile Include="PropTable.fs" />
     <Compile Include="pages/Accordion.fs" />
     <Compile Include="pages/Avatar.fs" />
+    <Compile Include="pages/Badge.fs" />
     <Compile Include="pages/Bar.fs" />
     <Compile Include="pages/Breadcrumbs.fs" />
     <Compile Include="pages/Button.fs" />
+    <Compile Include="pages/Card.fs" />
+    <Compile Include="pages/Chip.fs" />
     <Compile Include="pages/Empty.fs" />
-    <Compile Include="pages/Index.fs" />
     <Compile Include="pages/Form.fs" />
+    <Compile Include="pages/Grid.fs" />
+    <Compile Include="pages/Icon.fs" />
+    <Compile Include="pages/Index.fs" />
     <Compile Include="pages/Media.fs" />
     <Compile Include="pages/Menu.fs" />
-    <Compile Include="pages/Badge.fs" />
-    <Compile Include="pages/Icon.fs" />
-    <Compile Include="pages/Grid.fs" />
+    <Compile Include="pages/Nav.fs" />
     <Compile Include="pages/Navbar.fs" />
+    <Compile Include="pages/Pagenav.fs" />
+    <Compile Include="pages/Pagination.fs" />
     <Compile Include="pages/Responsive.fs" />
     <Compile Include="pages/Table.fs" />
     <Compile Include="pages/Tag.fs" />
-    <Compile Include="pages/Card.fs" />
-    <Compile Include="pages/Chip.fs" />
-    <Compile Include="pages/Nav.fs" />
-    <Compile Include="pages\Pagination.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -40,5 +41,5 @@
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
   </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+  <Import Project="../../.paket/Paket.Restore.targets" />
 </Project>

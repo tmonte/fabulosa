@@ -64,26 +64,33 @@ let tests =
                        Action = PageNav.Action.Link "" } })
             |> ReactNode.unit
             |>! hasOrderedDescendentClass 1
-                 "page-item page-next"
+                 "page-item page-next page-item-subtitle page-item-title"
             |> hasText "Next Page 3"
         }
 
         test "PageNav item click" {
             let props =
-                PageNav.action
-                    "prev"
-                    { Title = ""
-                      SubTitle = ""
-                      Action = PageNav.Action.OnPageChanged
-                        (fun page ->
-                            Expect.equal page -2 "Should be prev page") }
-            match List.head props with
-            | :? DOMAttr as attr ->
-                match attr with
-                | OnClick fn -> fn (mockClickable "")
-                | _ -> ()
-            | _ -> ()
-            ()
+                PageNav.ƒ
+                    (PageNav.props,
+                     { Prev = None
+                       Next = Some
+                         { SubTitle = "Next"
+                           Title = "Page 3"
+                           Action = PageNav.Action.OnPageChanged
+                             (fun page ->
+                                Expect.equal page -1 "Should click on the 'Next' link") } })
+                |> ReactNode.unit
+                |> ReactNode.descendentProps
+            let onClick (prop: IProp) =
+                match prop with
+                | :? DOMAttr as attr ->
+                    match attr with
+                    | OnClick fn -> Some fn
+                    | _ -> None
+                | _ -> None
+            match Seq.tryPick onClick props with
+            | Some fn -> fn (mockClickable "element")
+            | None -> ()
         }
 
     ]
