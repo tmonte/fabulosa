@@ -19,6 +19,7 @@
     <Compile Include="pages/Icon.fs" />
     <Compile Include="pages/Index.fs" />
     <Compile Include="pages/Media.fs" />
+    <Compile Include="pages/Modal.fs" />
     <Compile Include="pages/Menu.fs" />
     <Compile Include="pages/Nav.fs" />
     <Compile Include="pages/Navbar.fs" />
@@ -30,7 +31,7 @@
     <Compile Include="pages/Step.fs" />
     <Compile Include="pages/Table.fs" />
     <Compile Include="pages/Tag.fs" />
-    <Compile Include="pages\Tab.fs" />
+    <Compile Include="pages/Tab.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />

@@ -61,7 +61,8 @@ var pages = [
     'panel.html',
     'popover.html',
     'step.html',
-    'tab.html'
+    'tab.html',
+    'modal.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page

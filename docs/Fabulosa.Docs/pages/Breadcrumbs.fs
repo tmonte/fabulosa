@@ -31,50 +31,27 @@ let render () =
     tryMount "breadcrumb-items-props-table"
         (PropTable.propTable typeof<Breadcrumb.Item.Props> Breadcrumb.Item.props)
 (**
-
 <div id="breadcrumbs">
-
-<h2 class="s-title">
-    Breadcrumbs
-</h2>
-
-Breadcrumbs are used as navigational hierarchies to indicate current location.
-
+    <h2 class="s-title">Breadcrumbs</h2>
+    Breadcrumbs are used as navigational hierarchies to indicate current location.
 </div>
 
 <div id="breadcrumb-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="breadcrumbs-props-table"></div>
-
+    <h3 class="s-title">Props</h3>
+    <div class="props-table" id="breadcrumbs-props-table"></div>
 </div>
 
 <div id="breadcrumb-example">
-
-<h3 class="s-title">
-    Example
-</h3>
-
-<div id="breadcrumbs-demo"> </div>
+    <h3 class="s-title">Example</h3>
+    <div id="breadcrumbs-demo"> </div>
+</div>
 *)
 
 (*** include: breadcrumbs-demo ***)
 
 (**
-
-</div>
-
 <div id="breadcrumb-items">
-
-<h3 class="s-title">
-    Breadcrumb Item Props
-</h3>
-
-<div class="props-table" id="breadcrumb-items-props-table"></div>
-
+    <h3 class="s-title">Breadcrumb Item Props</h3>
+    <div class="props-table" id="breadcrumb-items-props-table"></div>
 </div>
-
 *)
