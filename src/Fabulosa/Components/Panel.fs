@@ -75,9 +75,18 @@ module Panel =
           Children.Body = None
           Children.Footer = None }
 
+    let private header =
+        function
+        | Some elements ->
+            R.div
+                [ ClassName ("panel-header") ]
+                [ R.div [ ClassName "panel-title h6"] elements ]
+        | None -> R.ofOption None
+
     let private child kind =
         function
-        | Some elements -> R.div [ ClassName ("panel-" + kind) ] elements
+        | Some elements ->
+            R.div [ ClassName ("panel-" + kind) ] elements
         | None -> R.ofOption None
 
     let ƒ (panel: T) =
@@ -85,7 +94,7 @@ module Panel =
         props.HTMLProps
         |> addProp (ClassName "panel")
         |> R.div
-        <| [ child "header" children.Header
+        <| [ header children.Header
              child "nav" children.Nav
              child "body" children.Body
              child "footer" children.Footer ]
