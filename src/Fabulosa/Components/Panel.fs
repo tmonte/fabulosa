@@ -17,7 +17,7 @@ module Panel =
         let ƒ (header: T) =
             R.div
                 [ ClassName "panel-header" ]
-                header
+                [ R.div [ ClassName "panel-title h6"] header ]
 
     [<RequireQualifiedAccess>]
     module Nav =
@@ -58,10 +58,10 @@ module Panel =
 
     [<RequireQualifiedAccess>]
     type Children =
-        { Header: (ReactElement list) option
-          Nav: (ReactElement list) option
-          Body: (ReactElement list) option
-          Footer: (ReactElement list) option }
+        { Header: Header.T option
+          Nav: Nav.T option
+          Body: Body.T option
+          Footer: Footer.T option }
 
     [<RequireQualifiedAccess>]
     type T = Props * Children
@@ -75,18 +75,10 @@ module Panel =
           Children.Body = None
           Children.Footer = None }
 
-    let private header =
+    let private child render =
         function
         | Some elements ->
-            R.div
-                [ ClassName ("panel-header") ]
-                [ R.div [ ClassName "panel-title h6"] elements ]
-        | None -> R.ofOption None
-
-    let private child kind =
-        function
-        | Some elements ->
-            R.div [ ClassName ("panel-" + kind) ] elements
+            render elements
         | None -> R.ofOption None
 
     let ƒ (panel: T) =
@@ -94,7 +86,7 @@ module Panel =
         props.HTMLProps
         |> addProp (ClassName "panel")
         |> R.div
-        <| [ header children.Header
-             child "nav" children.Nav
-             child "body" children.Body
-             child "footer" children.Footer ]
+        <| [ child Header.ƒ children.Header
+             child Nav.ƒ children.Nav
+             child Body.ƒ children.Body
+             child Footer.ƒ children.Footer ]

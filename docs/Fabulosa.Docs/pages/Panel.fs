@@ -68,9 +68,8 @@ let render () =
     Panel
 </h2>
 
-The panel component is fully customizable,
-with props for active, disabled, and a callback
-that gives you the clicked page
+Panels are flexible view container with
+auto-expand content section
 
 </div>
 
@@ -90,9 +89,7 @@ that gives you the clicked page
     Default
 </h3>
 
-A simple panel component that shows all pages.
-If you want collapsed pages, just add disabled items
-you can use the disabled prop.
+A simple panel component with a header, body, and footer
 
 <div class="demo" id="panel-default-demo"></div>
 

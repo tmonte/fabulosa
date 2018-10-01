@@ -36,6 +36,9 @@ let tests =
                      Header = Some header })
             |> ReactNode.unit
             |> hasChild 1 (Panel.Header.ƒ header |> ReactNode.unit)
+            Panel.Header.ƒ header
+            |> ReactNode.unit
+            |> hasDescendentClass "panel-title h6"
         }
 
         test "Panel nav" {

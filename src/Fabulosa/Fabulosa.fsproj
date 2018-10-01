@@ -33,15 +33,16 @@
     <Compile Include="Components/Grid.fs" />
     <Compile Include="Components/Menu.fs" />
     <Compile Include="Components/Modal.fs" />
+    <Compile Include="Components/Nav.fs" />
     <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/PageNav.fs" />
     <Compile Include="Components/Pagination.fs" />
+    <Compile Include="Components/Panel.fs" />
+    <Compile Include="Components/Popover.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Typography.fs" />
-    <Compile Include="Components/Nav.fs" />
-    <Compile Include="Components\Panel.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />

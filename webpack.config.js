@@ -58,7 +58,8 @@ var pages = [
     'nav.html',
     'pagination.html',
     'pagenav.html',
-    'panel.html'
+    'panel.html',
+    'popover.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page
