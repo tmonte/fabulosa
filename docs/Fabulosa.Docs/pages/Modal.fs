@@ -8,7 +8,8 @@ open Fable.Import.React
 open Renderer
 
 (*** define: modal-sample ***)
-let modal = R.str "hello"
+let modal = 
+    Modal.f (Modal.defaults, Modal.children)
 
 (*** hide ***)
 let demo = R.div [Style [MaxWidth "50%"]] [modal]

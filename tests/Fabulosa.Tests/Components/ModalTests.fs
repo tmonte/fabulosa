@@ -143,7 +143,7 @@ let modalTests =
             
             (propsSmall, Modal.children)
             |> Modal.ƒ
-            |> ReactNode.unit
+            |> ReactNode.unit    
             |> hasClass "modal active modal-sm"
             
             (propsMedium, Modal.children)

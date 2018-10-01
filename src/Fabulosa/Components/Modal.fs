@@ -140,17 +140,20 @@ module Modal =
         
     let ƒ modal = 
         let props, children = modal
-        props.HTMLProps
-        |> addProp (getClasses props.Size)
-        |> R.div 
-        <| [
-            modalOverLay props.OnRequestClose
-            R.div [ClassName "modal-container"] [
-                ƒheader children.Header props.OnRequestClose |> R.ofOption
-                R.div [ClassName "modal-body"] children.Body
-                ƒfooter children.Footer |> R.ofOption
-            ]
-        ]
+        match props.IsOpen with 
+        | true ->
+            props.HTMLProps
+            |> addProp (getClasses props.Size)
+            |> R.div 
+            <| [
+                modalOverLay props.OnRequestClose
+                R.div [ClassName "modal-container"] [
+                    ƒheader children.Header props.OnRequestClose |> R.ofOption
+                    R.div [ClassName "modal-body"] children.Body
+                    ƒfooter children.Footer |> R.ofOption
+                ]
+            ] |> Portal.ƒ "modal-portal"
+        | false -> null
         
     let f = ƒ
       
