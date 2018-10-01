@@ -37,6 +37,7 @@
     <Compile Include="Components/RadioTests.fs" />
     <Compile Include="Components/ResponsiveTests.fs" />
     <Compile Include="Components/SelectTests.fs" />
+    <Compile Include="Components/StepTests.fs" />
     <Compile Include="Components/SwitchTests.fs" />
     <Compile Include="Components/TableTests.fs" />
     <Compile Include="Components/TagTests.fs" />

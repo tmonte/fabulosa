@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
@@ -28,6 +27,7 @@
     <Compile Include="pages/Panel.fs" />
     <Compile Include="pages/Popover.fs" />
     <Compile Include="pages/Responsive.fs" />
+    <Compile Include="pages/Step.fs" />
     <Compile Include="pages/Table.fs" />
     <Compile Include="pages/Tag.fs" />
     <None Include="README.md" />
