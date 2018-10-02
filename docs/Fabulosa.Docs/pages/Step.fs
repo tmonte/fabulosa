@@ -1,4 +1,4 @@
-﻿module StepStep
+﻿module StepPage
 
 open Fabulosa
 open Fabulosa.Docs
