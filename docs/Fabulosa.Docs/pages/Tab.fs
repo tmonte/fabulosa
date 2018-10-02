@@ -1,0 +1,3 @@
+﻿module TabPage
+
+let render () = ()
