@@ -18,6 +18,7 @@ module Badge =
     type Child =
     | Avatar of Avatar.T
     | Button of Button.T
+    | Anchor of HTMLProps * ReactElement list
     | Div of HTMLProps * ReactElement list
     | Span of HTMLProps * ReactElement list
         
@@ -40,6 +41,10 @@ module Badge =
                 ( { props with
                       HTMLProps = combine props.HTMLProps badge },
                   children )
+        | Child.Anchor (props, children) ->
+            R.a
+                (combine props badge)
+                children
         | Child.Div (props, children) ->
             R.div
                 (combine props badge)

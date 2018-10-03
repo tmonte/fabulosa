@@ -14,33 +14,43 @@ module Tab =
         [<RequireQualifiedAccess>]
         type Props =
             { HTMLProps: HTMLProps
-              Badge: int option }
+              Active: bool }
 
         [<RequireQualifiedAccess>]
         type T = Props * ReactElement list
 
         let props =
             { Props.HTMLProps = []
-              Props.Badge = None }
+              Props.Active = false }
+
+        let private active =
+            function
+            | true -> "active"
+            | false -> ""
+            >> ClassName
               
         let ƒ (item: T) =
             let props, children = item
             props.HTMLProps
-            |> addProp (ClassName "tab-item")
+            |> addProps
+                [ ClassName "tab-item"
+                  active props.Active ]
             |> R.li <| children
 
 
     [<RequireQualifiedAccess>]
     type Props =
         { HTMLProps: HTMLProps
-          Action: (ReactElement list) option }
+          Action: (ReactElement list) option
+          Block: bool }
 
     [<RequireQualifiedAccess>]
     type T = Props * Item.T list
 
     let props =
         { Props.HTMLProps = []
-          Props.Action = None }
+          Props.Action = None
+          Props.Block = false }
 
     let private renderAction =
         function
@@ -50,12 +60,18 @@ module Tab =
                 action
         | None -> R.ofOption None
 
+    let private block =
+        function
+        | true -> "tab-block"
+        | false -> ""
+        >> ClassName
 
     let ƒ (tab: T) =
         let props, children = tab
         props.HTMLProps
-        |> addProp (ClassName "tab")
+        |> addProps
+            [ ClassName "tab"
+              block props.Block ]
         |> R.ul
-        <| seq
-            { yield! (Seq.map Item.ƒ children)
-              yield renderAction props.Action }
+        <| (List.map Item.ƒ children) @
+           [ renderAction props.Action ]

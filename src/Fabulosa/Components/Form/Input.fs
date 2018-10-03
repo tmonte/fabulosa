@@ -109,6 +109,7 @@ module InputGroup =
     type Props =
         { AddonRight: AddonRight
           AddonLeft: AddonLeft
+          Inline: bool
           HTMLProps: IHTMLProp list }
 
     [<RequireQualifiedAccess>]
@@ -120,17 +121,18 @@ module InputGroup =
     let props =
         { Props.AddonRight = AddonRight.Unset
           Props.AddonLeft = AddonLeft.Unset
+          Props.Inline = false
           Props.HTMLProps = [] }
 
     let private button =
         function
         | AddonRight.Button (props, children) ->
             Button.ƒ
-                ( { props with
-                      HTMLProps =
-                          props.HTMLProps
-                          |> addProp (ClassName "input-group-btn") },
-                  children )
+                ({ props with
+                     HTMLProps =
+                       props.HTMLProps
+                       |> addProp (ClassName "input-group-btn") },
+                  children)
             |> Some
         | AddonRight.Unset -> None
 
@@ -138,16 +140,24 @@ module InputGroup =
         function
         | AddonLeft.Text text ->
             R.span
-                [ClassName "input-group-addon"]
-                [R.str text]
+                [ ClassName "input-group-addon" ]
+                [ R.str text ]
             |> Some
         | AddonLeft.Unset -> None
+
+    let private groupInline =
+        function
+        | true -> "input-inline"
+        | false -> ""
+        >> ClassName
 
     let ƒ (inputGroup: T) =
         let props, children = inputGroup
         let containerProps =
             props.HTMLProps
-            |> addProp (ClassName "input-group") 
+            |> addProps
+                [ ClassName "input-group"
+                  groupInline props.Inline ]
         R.div containerProps
             [ text props.AddonLeft |> R.ofOption
               R.fragment [] children

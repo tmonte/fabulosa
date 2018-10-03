@@ -28,6 +28,14 @@ let tests =
             |> hasClass "custom"
         }
 
+        test "Tab block" {
+           Tab.ƒ
+               ({ Tab.props with
+                    Block = true }, [])
+            |> ReactNode.unit
+            |> hasClass "tab-block"
+        }
+
         test "Tab action" {
             let button =
                 Button.ƒ
@@ -60,13 +68,12 @@ let tests =
             |> hasChild 1 (child |> ReactNode.unit)
         }
 
-        //test "Tab item badge" {
-        //    Tab.Item.ƒ
-        //        ({ Tab.Item.props with
-        //             Badge = Some 1 }, [])
-        //    |> ReactNode.unit
-        //    |>! hasProp (Data ("badge", 1))
-        //    |> hasClass "badge"
-        //}
+        test "Tab item active" {
+            Tab.Item.ƒ
+                ({ Tab.Item.props with
+                     Active = true }, [])
+            |> ReactNode.unit
+            |> hasClass "active"
+        }
         
     ]
