@@ -77,6 +77,29 @@ module ReactNode
     let find child =
         descendents
         >> Seq.filter ((=) child)
+        
+    let findByClassName (c2: string) = 
+        let filter n = 
+            let getClass =
+                function
+                | ClassName c -> Some c
+                | _ -> None
+            
+            let nodeClasses = 
+                n
+                |> props
+                |> Seq.choose htmlAttrs
+                |> Seq.map getClass
+                |> Seq.choose id
+                |> Set.ofSeq
+            
+            let classes = c2.Split " " |> Set.ofArray
+            
+            let intersection = Set.intersect nodeClasses classes  
+            
+            Set.isEmpty intersection
+    
+        descendents >> List.filter filter
 
     let descendentClassName =
         descendents
