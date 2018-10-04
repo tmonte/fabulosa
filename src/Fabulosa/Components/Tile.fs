@@ -119,10 +119,7 @@ module Tile =
 
     let private icon iconƒ =
         function
-        | Some props ->
-            R.div
-                [ ClassName "tile-icon" ]
-                [ iconƒ props ]
+        | Some props -> iconƒ props
         | None -> R.ofOption None
 
     let build iconƒ contentƒ actionƒ (tile: T<'Icon, 'Content, 'Action>) =
