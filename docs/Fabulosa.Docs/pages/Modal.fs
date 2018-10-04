@@ -8,8 +8,9 @@ open Fable.Import.React
 open Renderer
 
 (*** define: modal-sample ***)
-let modal = 
-    Modal.ƒ (Modal.props, 
+let modal: Modal.T = 
+    (
+        Modal.props, 
         {
             Header = (Modal.Header.props, Modal.Header.Children.Text "#Cirão da massa") |> Some
             Body = [
@@ -22,83 +23,73 @@ let modal =
             Footer = (
                 Modal.Footer.props, 
                 [
-                    (Button.props, [R.str "Vote Amoerda"])
-                    ({Button.props with Kind = Button.Primary}, [R.str "Vote Ciro 12"])
+                    (Button.props, [R.str "Vote Bozo"])
+                    ({Button.props with Kind = Button.Kind.Primary}, [R.str "Vote Ciro 12"])
                 ] |> Modal.Footer.Buttons)  
             |> Some
         }
     )
+let props, children = modal
 
-(*** hide ***)
+let smallModal: Modal.T = { props with Size = Modal.Size.Small }, children
+let largeModal: Modal.T = { props with Size = Modal.Size.Large }, children
+
 module Container =
- open Fabulosa.Extensions
+    open Fabulosa.Extensions
     open Fable.Import
     open Fable.Import.React
     module R = Fable.Helpers.React
     open Fable.Helpers.React.ReactiveComponents
     open R.Props
     
-    type Props = { Dumb: bool}
     type State = { Opened: bool}
-    type Children = ReactElement list
     type Message = 
         | Open
         | Close
-    type T = Props * Children
+    
     type private Dispatch = Message -> unit
     
-    let private init (props: Props) = { Opened = false }
-
+    let private init _ = { Opened = false }
+    
     let private update message state =
-       match message with 
-       | Open -> { state with Opened = true }
-       | Close -> { state with Opened = false }
-
-    let private view (model: Model<Props, State>) (dispatch: Dispatch) =
+        match message with 
+        | Open -> { state with Opened = true }
+        | Close -> { state with Opened = false }
+    
+    let private view (model: Model<Modal.T, State>) (dispatch: Dispatch) =
+        let props, children = model.props
+        let props = { props with 
+                        IsOpen = model.state.Opened
+                        OnRequestClose = Some (fun _ -> dispatch Close) }
+        let size = props.Size
         R.fragment [][
-            R.div [] [
-                Button.ƒ ({Button.props with Kind = Button.Primary; HTMLProps = [OnClick (fun _ -> dispatch Open)] }, [R.str "Open Modal"])
-            ] 
-            Modal.ƒ (
-                { Modal.props with 
-                    IsOpen = model.state.Opened
-                    OnRequestClose = Some (fun _ -> dispatch Close)
-                }, 
-                {
-                    Header = (Modal.Header.props, Modal.Header.Children.Text "#Cirão da massa") |> Some
-                    Body = [
-                        Media.Figure.ƒ 
-                            (Media.Figure.props, {
-                                Image = { Media.Image.props with HTMLProps = [Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] }
-                                Caption = (Media.Caption.props, Media.Caption.Children.Text "Choose your destiny") |> Some
-                            })
-                    ]
-                    Footer = (
-                        Modal.Footer.props, 
-                        [
-                            (Button.props, [R.str "Vote Coiso"])
-                            ({Button.props with Kind = Button.Primary}, [R.str "Vote Ciro 12"])
-                        ] |> Modal.Footer.Buttons)  
-                    |> Some
-                }
-            )
+            Button.ƒ ({Button.props with Kind = Button.Kind.Primary; HTMLProps = [OnClick (fun _ -> dispatch Open)] }, [R.str (sprintf "Open %A Modal" size)]) 
+            Modal.ƒ (props, children)
         ]
     
-    let ƒ (container : T) =
-        let props, children = container
+    let ƒ (content : Modal.T) =
         R.reactiveCom
             init
             update
             view
             ""
-            props
+            content
             []
-
-
-
-
-let demo = R.div [Style [MaxWidth "50%"]] [
-    Container.ƒ ({ Dumb = true }, [])
+            
+(*** hide ***)
+let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
+let demo = R.div [style] [ 
+    Grid.ƒ
+        (Grid.props,
+         [ Grid.Row.props,
+           [ { Grid.Column.props with Size = 4; SMSize = 12 },
+             [Container.ƒ smallModal]
+             { Grid.Column.props with Size = 4; SMSize = 12 },
+             [Container.ƒ modal]
+             { Grid.Column.props with Size = 4; SMSize = 12 },
+             [Container.ƒ largeModal]
+           ]
+         ])
 ]
 
 let render () =
