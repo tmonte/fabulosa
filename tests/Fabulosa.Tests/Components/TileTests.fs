@@ -11,102 +11,87 @@ open Expect
 let tests =
     testList "Tile tests" [
 
-        //test "Tile default" {
-        //   Tile.ƒ
-        //       (Tile.props, Tile.children)
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "tile"
-        //}
+        test "Tile default" {
+           Tile.ƒ
+               (Tile.props, Tile.children)
+            |> ReactNode.unit
+            |> hasUniqueClass "tile"
+        }
 
-        //test "Tile html props" {
-        //    Tile.ƒ
-        //        ({ Tile.props with
-        //             HTMLProps =
-        //               [ ClassName "custom" ] },
-        //         Tile.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "custom"
-        //}
+        test "Tile html props" {
+            Tile.ƒ
+                ({ Tile.props with
+                     HTMLProps =
+                       [ ClassName "custom" ] },
+                 Tile.children)
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
 
-        //test "Tile centered" {
-        //   Tile.ƒ
-        //       ({ Tile.props with
-        //            Compact = true },
-        //        Tile.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "tile-centered"
-        //}
+        test "Tile centered" {
+           Tile.ƒ
+               ({ Tile.props with
+                    Compact = true },
+                Tile.children)
+            |> ReactNode.unit
+            |> hasClass "tile-centered"
+        }
 
-        //test "Tile icon" {
-        //    let tileIcon =
-        //        (Tile.TileIcon.props, Icon.props)
+        test "Tile icon" {
+            let tileIcon =
+                (Tile.TileIcon.props, Icon.props)
 
-        //    Tile.ƒ
-        //        (Tile.props,
-        //         { Tile.children with
-        //             Icon = Some tileIcon })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Tile.TileIcon.ƒ tileIcon |> ReactNode.unit)
+            Tile.ƒ
+                (Tile.props,
+                 { Tile.children with
+                     Icon = Some tileIcon })
+            |> ReactNode.unit
+            |> hasChild 1 (Tile.TileIcon.ƒ tileIcon |> ReactNode.unit)
 
-        //    Tile.TileIcon.ƒ tileIcon
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "tile-icon"
-        //}
+            Tile.TileIcon.ƒ tileIcon
+            |> ReactNode.unit
+            |> hasUniqueClass "tile-icon"
+        }
 
-        //test "Tile content" {
-        //    let content =
-        //        (Tile.Content.props, [ R.str "Content" ])
+        test "Tile content" {
+            let content: Tile.Content.T =
+                (Tile.Content.props,
+                 { Title = "Title"
+                   SubTitle = "SubTitle" })
 
-        //    Tile.ƒ
-        //        (Tile.props,
-        //         { Tile.children with
-        //             Content = content })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Tile.Content.ƒ content |> ReactNode.unit)
+            Tile.ƒ
+                (Tile.props,
+                 { Tile.children with
+                     Content = content })
+            |> ReactNode.unit
+            |> hasChild 1 (Tile.Content.ƒ content |> ReactNode.unit)
 
-        //    Tile.Content.ƒ content
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "tile-content"
-        //}
+            Tile.Content.ƒ content
+            |> ReactNode.unit
+            |>! hasUniqueClass "tile-content"
+            |> hasOrderedDescendentClass 1 "tile-title tile-subtitle text-gray"
+        }
 
-        //test "Tile action" {
-        //    let button =
-        //        Button.ƒ
-        //            (Button.props,
-        //             [ R.str "Button" ])
-        //    Tile.ƒ
-        //        ({ Tile.props with
-        //             Action = Some [ button ] },
-        //         [])
-        //    |> ReactNode.unit
-        //    |>! hasDescendentClass "tile-item tile-action"
-        //    |> hasChild 1 (button |> ReactNode.unit)
-        //}
+        test "Tile action" {
+            let child =
+                Button.ƒ
+                    (Button.props,
+                     [ R.str "Button" ])
+            let action: Tile.Action.T =
+                (Tile.Action.props,
+                 [ child ])
 
-        //test "Tile children" {
-        //    let item =
-        //        (Tile.Item.props,
-        //         [ R.a [] [ R.str "Tile" ] ])
-        //    Tile.ƒ
-        //        (Tile.props, [ item ])
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Tile.Item.ƒ item |> ReactNode.unit)
-        //}
+            Tile.ƒ
+                (Tile.props,
+                 { Tile.children with
+                     Action = action })
+            |> ReactNode.unit
+            |> hasChild 1 (Tile.Action.ƒ action |> ReactNode.unit)
 
-        //test "Tile item defaults" {
-        //    let child = R.a [] [ R.str "Tile" ]
-        //    Tile.Item.ƒ
-        //        (Tile.Item.props, [ child ])
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (child |> ReactNode.unit)
-        //}
-
-        //test "Tile item active" {
-        //    Tile.Item.ƒ
-        //        ({ Tile.Item.props with
-        //             Active = true }, [])
-        //    |> ReactNode.unit
-        //    |> hasClass "active"
-        //}
+            Tile.Action.ƒ action
+            |> ReactNode.unit
+            |>! hasUniqueClass "tile-action"
+            |> hasChild 1 (child |> ReactNode.unit)
+        }
         
     ]

@@ -35,19 +35,54 @@ module Tile =
         [<RequireQualifiedAccess>]
         type Props =
             { HTMLProps: HTMLProps }
+
+        type Children =
+            { Title: string
+              SubTitle: string }
             
         [<RequireQualifiedAccess>]
-        type T = Props * ReactElement list
+        type T = Props * Children
 
         let props =
             { Props.HTMLProps = [] }
 
-        let children: ReactElement list = []
+        let children =
+            { Children.Title = ""
+              Children.SubTitle = "" }
 
-        let build (icon: T) =
-            let props, children = icon
+        let build (content: T) =
+            let props, children = content
             props.HTMLProps
-            |> addProp (ClassName "tile-icon")
+            |> addProp (ClassName "tile-content")
+            |> R.div
+            <| [ R.p
+                   [ ClassName "tile-title" ]
+                   [ R.str children.Title ]
+                 R.p
+                   [ ClassName "tile-subtitle text-gray" ]
+                   [ R.str children.SubTitle ] ]
+
+        let ƒ = build
+
+    [<RequireQualifiedAccess>]
+    module Action =
+
+        [<RequireQualifiedAccess>]
+        type Props =
+            { HTMLProps: HTMLProps }
+
+        type Children = ReactElement list
+            
+        [<RequireQualifiedAccess>]
+        type T = Props * Children
+
+        let props =
+            { Props.HTMLProps = [] }
+
+        let build (action: T) =
+            let props, children = action
+            props.HTMLProps
+            |> addProp (ClassName "tile-action")
             |> R.div <| children
 
         let ƒ = build
@@ -58,12 +93,14 @@ module Tile =
           Compact: bool }
 
     [<RequireQualifiedAccess>]
-    type Children<'Icon, 'Content> =
+    type Children<'Icon, 'Content, 'Action> =
         { Icon: 'Icon option
-          Content: 'Content }
+          Content: 'Content
+          Action: 'Action }
 
     [<RequireQualifiedAccess>]
-    type T<'Icon, 'Content> = Props * Children<'Icon, 'Content>
+    type T<'Icon, 'Content, 'Action> =
+        Props * Children<'Icon, 'Content, 'Action>
 
     let props =
         { Props.HTMLProps = []
@@ -71,7 +108,8 @@ module Tile =
 
     let children =
         { Children.Icon = None
-          Children.Content = Content.children }
+          Children.Content = (Content.props, Content.children)
+          Children.Action = (Action.props, [])}
 
     let private compact =
         function
@@ -87,7 +125,7 @@ module Tile =
                 [ iconƒ props ]
         | None -> R.ofOption None
 
-    let build<'Icon, 'Content> iconƒ contentƒ (tile: T<'Icon, 'Content>) =
+    let build iconƒ contentƒ actionƒ (tile: T<'Icon, 'Content, 'Action>) =
         let props, children = tile
         props.HTMLProps
         |> addProps 
@@ -95,6 +133,7 @@ module Tile =
               compact props.Compact ]
         |> R.div
         <| [ icon iconƒ children.Icon
-             contentƒ children.Content ]
+             contentƒ children.Content
+             actionƒ children.Action ]
 
-    let ƒ = build TileIcon.ƒ Content.ƒ
+    let ƒ = build TileIcon.ƒ Content.ƒ Action.ƒ
