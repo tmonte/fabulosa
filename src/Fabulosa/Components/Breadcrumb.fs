@@ -60,11 +60,13 @@ module Breadcrumb =
     let props =
         { Props.HTMLProps = [] }
 
-    let ƒ (breadcrumb: T) =
+    let build itemƒ (breadcrumb: T) =
         let props, children = breadcrumb
         props.HTMLProps
         |> addProp (ClassName "breadcrumb")
         |> R.ul
-        <| List.map Item.ƒ children
+        <| List.map itemƒ children
+
+    let ƒ = build Item.ƒ
 
     let render = ƒ

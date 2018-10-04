@@ -37,7 +37,6 @@ module Tab =
                   active props.Active ]
             |> R.li <| children
 
-
     [<RequireQualifiedAccess>]
     type Props =
         { HTMLProps: HTMLProps
@@ -45,7 +44,7 @@ module Tab =
           Block: bool }
 
     [<RequireQualifiedAccess>]
-    type T = Props * Item.T list
+    type T<'Item> = Props * 'Item list
 
     let props =
         { Props.HTMLProps = []
@@ -56,7 +55,7 @@ module Tab =
         function
         | Some action ->
             R.li
-                [ClassName "tab-item tab-action"]
+                [ ClassName "tab-item tab-action" ]
                 action
         | None -> R.ofOption None
 
@@ -66,12 +65,14 @@ module Tab =
         | false -> ""
         >> ClassName
 
-    let ƒ (tab: T) =
+    let build<'Item> itemƒ (tab: T<'Item>) =
         let props, children = tab
         props.HTMLProps
         |> addProps
             [ ClassName "tab"
               block props.Block ]
         |> R.ul
-        <| (List.map Item.ƒ children) @
+        <| (List.map itemƒ children) @
            [ renderAction props.Action ]
+
+    let ƒ = build Item.ƒ

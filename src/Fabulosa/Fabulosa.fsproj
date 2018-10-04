@@ -43,6 +43,7 @@
     <Compile Include="Components/Tab.fs" />
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
+    <Compile Include="Components/Tile.fs" />
     <Compile Include="Components/Typography.fs" />
     <None Include="paket.references" />
   </ItemGroup>
