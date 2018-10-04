@@ -17,7 +17,6 @@ let headerTests =
             header
             |> Modal.Header.ƒ 
             |> ReactNode.unit
-            |>! hasUniqueClass "modal-header"
             |> hasChild 1 child
         }
         

@@ -32,8 +32,7 @@ module Modal =
             | Elements e -> [R.div [ClassName "modal-title"] e]
             
             props.HTMLProps
-            |> addProp (ClassName "modal-header")
-            |> R.div 
+            |> R.span 
             <| children
             
         let f = ƒ
@@ -129,7 +128,7 @@ module Modal =
     
     let ƒheader (header: Header.T option) (onRequestClose: OnClose option) =
         match header, onRequestClose with 
-        | Some h, Some f -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"] []; Header.ƒ h] |> Some
+        | Some h, Some f -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; OnClick f] []; Header.ƒ h] |> Some
         | Some h, None -> R.div [ClassName "modal-header"] [Header.ƒ h] |> Some
         | None, Some f -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; OnClick f] []] |> Some
         | None, None -> None
