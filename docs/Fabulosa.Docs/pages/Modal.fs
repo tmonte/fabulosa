@@ -79,37 +79,43 @@ module Container =
 (*** hide ***)
 let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
 let demo = R.div [style] [ 
-    Grid.ƒ
-        (Grid.props,
-         [ Grid.Row.props,
-           [ { Grid.Column.props with Size = 4; SMSize = 12 },
-             [Container.ƒ smallModal]
-             { Grid.Column.props with Size = 4; SMSize = 12 },
-             [Container.ƒ modal]
-             { Grid.Column.props with Size = 4; SMSize = 12 },
-             [Container.ƒ largeModal]
-           ]
-         ])
-]
+        Grid.ƒ
+            (Grid.props,
+             [ Grid.Row.props,
+               [ { Grid.Column.props with Size = 4; SMSize = 12 },
+                 [Container.ƒ smallModal]
+                 { Grid.Column.props with Size = 4; SMSize = 12 },
+                 [Container.ƒ modal]
+                 { Grid.Column.props with Size = 4; SMSize = 12 },
+                 [Container.ƒ largeModal]
+               ]
+             ])
+    ]
 
 let render () =
     tryMount "modal-demo" demo
     tryMount "modal-props-table" (PropTable.propTable typeof<Modal.Props> Modal.props)
+    tryMount "modal-header-props-table" (PropTable.propTable typeof<Modal.Header.Props> Modal.Header.props)
+    tryMount "modal-footer-props-table" (PropTable.propTable typeof<Modal.Footer.Props> Modal.Footer.props)
 (**
 
 <div id="modal">
-    <h2 class="s-title">Cards</h2>
-    Modal
+    <h2 class="s-title">Modal</h2>
+    Modals are flexible dialog prompts.
 </div>
 
 <div id="modal-props">
-    <h3 class="s-title">Props</h3>
+    <h3 class="s-title">Modal Props</h3>
     <div class="props-table" id="modal-props-table"></div>
+    <h3 class="s-title">Header Props</h3>
+    <div class="props-table" id="modal-header-props-table"></div>
+    <h3 class="s-title">Footer Props</h3>
+    <div class="props-table" id="modal-footer-props-table"></div>
 </div>
 
 <div id="modal-default">
-    <h3 class="s-title">Default</h3>
-    The default modal
+    <h3 class="s-title">Example</h3>
+    Modals come in 3 different sizes:
     <div class="demo" id="modal-demo"></div>
 </div>
 *)
