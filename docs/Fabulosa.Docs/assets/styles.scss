@@ -6,8 +6,8 @@ html, body {
     min-height: 100vh;
 }
 
-p {
-    margin: 1rem 0rem !important;
+.docs-content p {
+    margin: 1rem 0rem;
 }
 
 // For some reason this isn't working with just spectre css
@@ -206,4 +206,12 @@ summary {
     top: 0;
     left: 200px;
     z-index: 9999;
+}
+
+#tile-default-demo p {
+    margin-top: 0rem;
+}
+
+#tile-compact-demo p {
+    margin-top: 0rem;
 }

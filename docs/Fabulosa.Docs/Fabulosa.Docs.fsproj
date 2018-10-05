@@ -32,6 +32,7 @@
     <Compile Include="pages/Table.fs" />
     <Compile Include="pages/Tag.fs" />
     <Compile Include="pages/Tab.fs" />
+    <Compile Include="pages/Tile.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
