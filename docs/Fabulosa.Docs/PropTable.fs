@@ -4,6 +4,7 @@ module PropTable =
     open System.Reflection
     open FSharp.Reflection
     module R = Fable.Helpers.React
+    open Fable.Import
     open Fable.Import.React
     open R.Props
     open Fabulosa
@@ -13,16 +14,34 @@ module PropTable =
     module SystemType =
         let name (typ: PropertyInfo) = typ.Name
     
+    let rec systemTypeName(aType: System.Type) =
+        match aType with 
+            | list when list.Name = "FSharpList`1" -> 
+                list.GenericTypeArguments
+                |> List.ofArray
+                |> List.map (fun f -> systemTypeName f)
+                |> flip List.append ["list"]
+                |> List.reduce (fun x -> (fun y -> x + " " + y))
+            
+            | option when option.Name = "FSharpOption`1" -> 
+                option.GenericTypeArguments
+                |> List.ofArray
+                |> List.map (fun f -> systemTypeName f)
+                |> flip List.append ["option"]
+                |> List.reduce (fun x -> (fun y -> x + " " + y))
+                
+            | option when option.Name = "FSharpFunc`2" -> 
+                option.GenericTypeArguments
+                |> List.ofArray
+                |> List.map (fun f -> systemTypeName f)
+                |> List.reduce (fun x -> (fun y -> x + " -> " + y))
+            | t ->
+                t.Name
+    
+    
     let rec describeName (typeInfo: PropertyInfo) =
-        match typeInfo.PropertyType with 
-        | list when list.Name = "FSharpList`1" -> 
-            list.GenericTypeArguments
-            |> List.ofArray
-            |> List.map (fun f -> f.Name)
-            |> flip List.append ["list"]
-            |> List.reduce (fun x -> (fun y -> x + " " + y))
-        | t ->
-            t |> string
+        Browser.console.log(typeInfo.PropertyType)
+        systemTypeName typeInfo.PropertyType
 
     let rec describeType (typeInfo: PropertyInfo) =
         if FSharpType.IsUnion(typeInfo.PropertyType) then
@@ -36,8 +55,6 @@ module PropTable =
             |> Array.truncate 4
             |> Array.map name
             |> String.concat " | ") + more
-        else if FSharpType.IsFunction(typeInfo.PropertyType) then
-            typeInfo.Name
         else
             describeName typeInfo
         
