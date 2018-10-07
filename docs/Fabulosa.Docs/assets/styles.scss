@@ -215,3 +215,13 @@ summary {
 #tile-compact-demo p {
     margin-top: 0rem;
 }
+
+.toast {
+    max-width: 15rem;
+    position: fixed;
+    margin: 0 auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+}
