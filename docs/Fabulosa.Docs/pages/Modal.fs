@@ -20,13 +20,12 @@ let modal: Modal.T =
                         Caption = (Media.Caption.props, Media.Caption.Children.Text "Choose your destiny") |> Some
                     })
             ]
-            Footer = (
-                Modal.Footer.props, 
-                [
+            Footer =
+                (Modal.Footer.props, 
+                 [
                     (Button.props, [R.str "Vote Bozo"])
                     ({Button.props with Kind = Button.Kind.Primary}, [R.str "Vote Ciro 12"])
-                ] |> Modal.Footer.Buttons)  
-            |> Some
+                 ] |> Modal.Footer.Buttons) |> Some
         }
     )
 let props, children = modal

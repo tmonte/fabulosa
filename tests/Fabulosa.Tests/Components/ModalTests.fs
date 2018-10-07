@@ -96,10 +96,8 @@ let modalTests =
     testList "Modal" [
         test "renders default props" {
               let modal = (Modal.props, Modal.children) |> Modal.ƒ |> ReactNode.unit
-              let modalUnwrappedPortal = ReactNode.findByClassName "modal" modal
-              
-              modalUnwrappedPortal
-              |> Seq.head
+
+              modal
               |>! hasClass "modal active"
               |>! hasDescendentClass "modal-overlay modal-container modal-body"
               |>! hasNoDescendentClass "modal-header modal-footer"
@@ -110,9 +108,7 @@ let modalTests =
             let props =  { Modal.props with HTMLProps = [Id "pele"] }
             (props, Modal.children)
             |> Modal.ƒ
-            |> ReactNode.unit            
-            |> findByClassName "modal"
-            |> Seq.head 
+            |> ReactNode.unit
             |>! hasProp (Id "pele")
             |>! hasClass "modal active"
             |>! hasDescendentClass "modal-container"
@@ -124,15 +120,13 @@ let modalTests =
             let happyFunction parms = ()
             let overlay = R.a [ClassName "modal-overlay"; OnClick happyFunction] []
             let buttonClose = R.a [ClassName "btn btn-clear float-right"; OnClick happyFunction] []
-            
-            let props =  { Modal.props with
-                OnRequestClose = happyFunction |> Some
-            }
+
+            let props =
+                { Modal.props with
+                    OnRequestClose = happyFunction |> Some }
             (props, Modal.children)
             |> Modal.ƒ
             |> ReactNode.unit
-            |> findByClassName "modal"
-            |> Seq.head    
             |>! hasClass "modal active"
             |>! hasChild 1 (overlay |> ReactNode.unit)
             |>! hasChild 1 (buttonClose |> ReactNode.unit)
@@ -150,22 +144,16 @@ let modalTests =
             (propsSmall, Modal.children)
             |> Modal.ƒ
             |> ReactNode.unit
-            |> findByClassName "modal"
-            |> Seq.head    
             |> hasClass "modal active modal-sm"
             
             (propsMedium, Modal.children)
             |> Modal.ƒ
-            |> ReactNode.unit
-            |> findByClassName "modal"
-            |> Seq.head    
+            |> ReactNode.unit 
             |> hasClass "modal active"
             
             (propsLarge, Modal.children)
             |> Modal.ƒ 
-            |> ReactNode.unit
-            |> findByClassName "modal"
-            |> Seq.head    
+            |> ReactNode.unit 
             |> hasClass "modal active modal-lg"
         }
         

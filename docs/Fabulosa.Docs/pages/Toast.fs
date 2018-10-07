@@ -1,0 +1,3 @@
+﻿module ToastPage
+
+let render () = ()

@@ -18,5 +18,5 @@ module Portal =
             else existing
         ReactDom.createPortal (element, root)
         #else
-        R.div [] [element]
+        element
         #endif
