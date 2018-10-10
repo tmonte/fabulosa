@@ -13,15 +13,19 @@ module Textarea =
         { HTMLProps: IHTMLProp list }
 
     [<RequireQualifiedAccess>]
-    type T = Props * ReactElement list
+    type Children = string
+
+    [<RequireQualifiedAccess>]
+    type T = Props * Children
 
     let props =
         { Props.HTMLProps = [] }
 
-    let ƒ (textarea: T) =
+    let build (textarea: T) =
         let props, children = textarea
         props.HTMLProps
         |> addProp (ClassName "form-input")
-        |> R.textarea <| children
+        |> R.textarea
+        <| [ R.str children ]
 
-    let render = ƒ
+    let ƒ = build
