@@ -3,46 +3,57 @@
 open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
-open Fable.Import.React
+module P = R.Props
 open Renderer
 
-let style = Style [Background "#f8f9fa"]
+let style = P.Style [P.Background "#f8f9fa"]
 (*** define: grid-sample ***)
 let grid =
     Grid.ƒ
         (Grid.props,
-         [ Grid.Row.props,
-           [ { Grid.Column.props with Size = 4 },
-             [ R.div [ style ] [ R.str "First Column" ] ]
-             { Grid.Column.props with Size = 8 },
-             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
+         [ GridRow
+            (GridRow.props,
+             [ GridColumn
+                 ({ GridColumn.props with Size = 4 },
+                  [ R.div [ style ] [ R.str "First Column" ] ])
+               GridColumn
+                 ({ GridColumn.props with Size = 8 },
+                  [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
 (*** define: row-sample ***)
 let gapless =
     Grid.ƒ
         (Grid.props,
-         [ { Grid.Row.props with Gapless = true },
-           [ { Grid.Column.props with Size = 4 },
-             [ R.div [ style ] [ R.str "First Column" ] ]
-             { Grid.Column.props with Size = 8 },
-             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
+         [ GridRow
+             ({ GridRow.props with Gapless = true },
+              [ GridColumn
+                  ({ GridColumn.props with Size = 4 },
+                   [ R.div [ style ] [ R.str "First Column" ] ])
+                GridColumn
+                  ({ GridColumn.props with Size = 8 },
+                   [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
 let oneline =
     Grid.ƒ
         (Grid.props,
-         [ { Grid.Row.props with OneLine = true },
-           [ { Grid.Column.props with Size = 4 },
-             [ R.div [ style ] [ R.str "First Column" ] ]
-             { Grid.Column.props with Size = 12 },
-             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
+         [ GridRow
+             ({ GridRow.props with OneLine = true },
+              [ GridColumn
+                  ({ GridColumn.props with Size = 4 },
+                   [ R.div [ style ] [ R.str "First Column" ] ])
+                GridColumn
+                  ({ GridColumn.props with Size = 12 },
+                  [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
 (*** define: column-sample ***)
 let small =
     Grid.ƒ
         (Grid.props,
-         [ Grid.Row.props,
-           [ { Grid.Column.props with Size = 4; SMSize = 12 },
-             [ R.div [ style ] [ R.str "First Column" ] ]
-             { Grid.Column.props with Size = 8; SMSize = 12 },
-             [ R.div [ style ] [ R.str "Second Column" ] ] ] ])
+         [ GridRow
+             (GridRow.props,
+              [ GridColumn
+                  ({ GridColumn.props with Size = 4; SMSize = 12 },
+                   [ R.div [ style ] [ R.str "First Column" ] ])
+                GridColumn
+                  ({ GridColumn.props with Size = 8; SMSize = 12 },
+                   [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
 (**
 
 <div id="grid">
@@ -137,5 +148,5 @@ let render () =
     tryMount "row-oneline-demo" oneline
     tryMount "column-demo" small
     tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> Grid.props)
-    tryMount "row-props-table" (PropTable.propTable typeof<Grid.Row.Props> Grid.Row.props)
-    tryMount "column-props-table" (PropTable.propTable typeof<Grid.Column.Props> Grid.Column.props)
+    tryMount "row-props-table" (PropTable.propTable typeof<GridRow.Props> GridRow.props)
+    tryMount "column-props-table" (PropTable.propTable typeof<GridColumn.Props> GridColumn.props)

@@ -12,16 +12,13 @@ let nav =
     Nav.ƒ
         (Nav.props,
          [ Nav.Child.Item
-             { Nav.Item.props with
-                 Text = "Item One" }
+             (Nav.Item.props,"Item One")
            Nav.Child.Nav
              (Nav.props,
               [ Nav.Child.Item
-                  { Nav.Item.props with
-                      Text = "Item One Nested" } ])
+                  (Nav.Item.props, "Item One Nested") ])
            Nav.Child.Item
-             { Nav.Item.props with
-                    Text = "Item Two" } ])
+             (Nav.Item.props,"Item Two") ])
 (*** hide ***)
 let render () =
     tryMount "nav-default-demo" nav

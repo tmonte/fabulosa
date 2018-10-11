@@ -5,31 +5,33 @@ module rec Nav =
     open Fabulosa.Extensions
     open Fable.Helpers.React.Props
     open Fable.Import.React
-    module R =  Fable.Helpers.React
+    module R = Fable.Helpers.React
 
-
+    [<RequireQualifiedAccess>]
     module Item =
 
         [<RequireQualifiedAccess>]
         type Props =
             { HTMLProps: HTMLProps
-              Href: string
-              Text: string }
+              Href: string }
 
         [<RequireQualifiedAccess>]
-        type T = Props
+        type Children = string
+
+        [<RequireQualifiedAccess>]
+        type T = Props * Children
 
         let props =
             { Props.HTMLProps = []
-              Props.Href = "#"
-              Props.Text = "" }
+              Props.Href = "#" }
 
         let ƒ (item: T) =
+            let props, children = item
             R.li
                 [ ClassName "nav-item" ]
                 [ R.a
-                    [ Href item.Href ]
-                    [ R.str item.Text ] ]
+                    [ Href props.Href ]
+                    [ R.str children ] ]
 
     [<RequireQualifiedAccess>]
     type Props =
