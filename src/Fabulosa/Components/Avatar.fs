@@ -88,7 +88,7 @@ module Avatar =
             |> Some
         | Kind.Unset -> None
 
-    let ƒ (avatar: T) =
+    let build (avatar: T) =
         let containerProps =
             addProps
                 [ ClassName "avatar"
@@ -99,5 +99,5 @@ module Avatar =
                 then R.img [ Src avatar.Source ]
                 else R.ofOption None )
               kind avatar.Kind |> R.ofOption ]
-              
-    let render = ƒ
+
+    let ƒ = build
