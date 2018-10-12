@@ -1,11 +1,8 @@
 ﻿namespace Fabulosa
 
-[<AutoOpen>]
-module Definitions =
+type GridRow<'Row> = GridRow of 'Row
 
-    type GridRow<'Row> = GridRow of 'Row
-
-    type GridColumn<'Column> = GridColumn of 'Column
+type GridColumn<'Column> = GridColumn of 'Column
 
 [<RequireQualifiedAccess>]
 module GridColumn =
@@ -13,7 +10,7 @@ module GridColumn =
     open Fabulosa.Extensions
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     [<RequireQualifiedAccess>]
     type Kind =
@@ -49,7 +46,7 @@ module GridColumn =
           MDSize: ColSize
           LGSize: ColSize
           XLSize: ColSize
-          HTMLProps: IHTMLProp list }
+          HTMLProps: P.HTMLProps }
 
     [<RequireQualifiedAccess>]
     type T = Props * ReactElement list
@@ -60,37 +57,37 @@ module GridColumn =
         | Kind.MRAuto -> "col-mr-auto"
         | Kind.MXAuto -> "col-mx-auto"
         | Kind.Unset -> ""
-        >> ClassName
+        >> P.ClassName
 
     let private size =
         function
         | n -> "col-" + string n
-        >> ClassName
+        >> P.ClassName
 
     let private xsSize =
         function
         | n -> "col-xs-" + string n
-        >> ClassName
+        >> P.ClassName
 
     let private smSize =
         function
         | n -> "col-sm-" + string n
-        >> ClassName
+        >> P.ClassName
 
     let private mdSize =
         function
         | n -> "col-md-" + string n
-        >> ClassName
+        >> P.ClassName
 
     let private lgSize =
         function
         | n -> "col-lg-" + string n
-        >> ClassName
+        >> P.ClassName
 
     let private xlSize =
          function
          | n -> "col-xl-" + string n
-         >> ClassName
+         >> P.ClassName
 
     let props =
         { Props.Kind = Kind.Unset
@@ -105,8 +102,8 @@ module GridColumn =
     let build (column: T) =
         let props, children = column
         props.HTMLProps
-        |> addProps
-            [ ClassName "column"
+        |> P.addProps
+            [ P.ClassName "column"
               kind props.Kind
               size props.Size
               xsSize props.XSSize
@@ -122,9 +119,8 @@ module GridColumn =
 module GridRow =
 
     open Fabulosa.Extensions
-    open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
 
     [<RequireQualifiedAccess>]
@@ -137,10 +133,10 @@ module GridRow =
     type Props =
         { Gapless: Gapless
           OneLine: OneLine
-          HTMLProps: IHTMLProp list }
+          HTMLProps: P.HTMLProps }
 
     [<RequireQualifiedAccess>]
-    type T<'Column> = Props * Definitions.GridColumn<'Column> list
+    type T<'Column> = Props * GridColumn<'Column> list
 
     let props =
         { Props.Gapless = false
@@ -151,24 +147,24 @@ module GridRow =
         function
         | true -> "col-gapless"
         | false -> ""
-        >> ClassName
+        >> P.ClassName
 
     let private oneLine =
         function
         | true -> "col-oneline"
         | false -> ""
-        >> ClassName
+        >> P.ClassName
 
     let build columnƒ (row: T<'Column>) =
         let props, children = row
         props.HTMLProps
-        |> addProps
-            [ ClassName "columns"
+        |> P.addProps
+            [ P.ClassName "columns"
               gapless props.Gapless
               oneLine props.OneLine ]
         |> R.div
         <| Seq.map
-            (fun (Definitions.GridColumn column) -> columnƒ column)
+            (fun (GridColumn column) -> columnƒ column)
             children
 
     let ƒ = build GridColumn.ƒ
@@ -179,26 +175,26 @@ module GridRow =
 module Grid =
 
     open Fabulosa.Extensions
-    open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     [<RequireQualifiedAccess>]
     type Props =
-        { HTMLProps: HTMLProps }
+        { HTMLProps: P.HTMLProps }
 
     [<RequireQualifiedAccess>]
-    type T<'Row> = Props * Definitions.GridRow<'Row> list
+    type T<'Row> = Props * GridRow<'Row> list
     let props =
         { Props.HTMLProps = [] }
 
     let build rowƒ (grid: T<'Row>) =
         let props, children = grid
         props.HTMLProps
-        |> addProp (ClassName "container")
+        |> P.addProp (P.ClassName "container")
         |> R.div
         <| Seq.map
-            (fun (Definitions.GridRow row) -> rowƒ row)
+            (fun (GridRow row) -> rowƒ row)
             children
 
     let ƒ = build GridRow.ƒ
+    

@@ -18,24 +18,24 @@ let tests =
             |> hasUniqueClass "tile"
         }
 
-        test "Tile html props" {
-            Tile.ƒ
-                ({ Tile.props with
-                     HTMLProps =
-                       [ ClassName "custom" ] },
-                 Tile.children)
-            |> ReactNode.unit
-            |> hasClass "custom"
-        }
+        //test "Tile html props" {
+        //    Tile.ƒ
+        //        ({ Tile.props with
+        //             HTMLProps =
+        //               [ ClassName "custom" ] },
+        //         Tile.children)
+        //    |> ReactNode.unit
+        //    |> hasClass "custom"
+        //}
 
-        test "Tile centered" {
-           Tile.ƒ
-               ({ Tile.props with
-                    Compact = true },
-                Tile.children)
-            |> ReactNode.unit
-            |> hasClass "tile-centered"
-        }
+        //test "Tile centered" {
+        //   Tile.ƒ
+        //       ({ Tile.props with
+        //            Compact = true },
+        //        Tile.children)
+        //    |> ReactNode.unit
+        //    |> hasClass "tile-centered"
+        //}
 
         test "Tile icon" {
             let tileIcon =

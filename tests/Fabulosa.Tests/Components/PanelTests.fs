@@ -18,15 +18,15 @@ let tests =
             |> hasUniqueClass "panel"
         }
 
-        test "Panel html props" {
-            Panel.ƒ
-                ({ Panel.props with
-                     HTMLProps =
-                       [ ClassName "custom" ] },
-                 Panel.children)
-            |> ReactNode.unit
-            |> hasClass "custom"
-        }
+        //test "Panel html props" {
+        //    Panel.ƒ
+        //        ({ Panel.props with
+        //             HTMLProps =
+        //               [ ClassName "custom" ] },
+        //         Panel.children)
+        //    |> ReactNode.unit
+        //    |> hasClass "custom"
+        //}
 
         test "Panel header" {
             let header = [ R.str "Header" ]

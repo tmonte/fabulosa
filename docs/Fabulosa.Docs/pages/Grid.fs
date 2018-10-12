@@ -41,7 +41,7 @@ let oneline =
                    [ R.div [ style ] [ R.str "First Column" ] ])
                 GridColumn
                   ({ GridColumn.props with Size = 12 },
-                  [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
+                   [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
 (*** define: column-sample ***)
 let small =
     Grid.ƒ

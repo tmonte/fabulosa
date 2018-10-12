@@ -18,14 +18,14 @@ let tests =
             |> hasUniqueClass "empty"
         }
 
-        test "Empty html props" {
-            Empty.ƒ
-                ({ Empty.props with 
-                     HTMLProps = [ClassName "custom"] },
-                 Empty.children)
-            |> ReactNode.unit
-            |> hasClass "empty custom"
-        }
+        //test "Empty html props" {
+        //    Empty.ƒ
+        //        ({ Empty.props with 
+        //             HTMLProps = [ClassName "custom"] },
+        //         Empty.children)
+        //    |> ReactNode.unit
+        //    |> hasClass "empty custom"
+        //}
 
         test "Empty with children" {
             let iconProps = 
