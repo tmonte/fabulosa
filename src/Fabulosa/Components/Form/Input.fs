@@ -2,7 +2,7 @@
 
 [<RequireQualifiedAccess>]
 module Input =
-
+    
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
@@ -43,6 +43,7 @@ module Input =
 [<RequireQualifiedAccess>]
 module IconInput =
 
+    open Fabulosa.Icon
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
@@ -60,7 +61,7 @@ module IconInput =
     [<RequireQualifiedAccess>]
     type Children =
         { Input: Input.T
-          Icon: Icon.T }
+          Icon: Icon }
 
     [<RequireQualifiedAccess>]
     type T = Props * Children
@@ -79,13 +80,12 @@ module IconInput =
         let containerClasses =
             [ position props.Position ]
             |> String.concat " "
-        let icon =
-            { children.Icon with
-                HTMLProps = children.Icon.HTMLProps
-                |> addProp (ClassName "form-icon") }
+        let iconOpt, iconReq = children.Icon
+        let iconT =
+            (iconOpt |> addProp (ClassName "form-icon"), iconReq)
         R.div [ClassName containerClasses]
             [ Input.ƒ children.Input
-              Icon.ƒ icon ]
+              icon iconT ]
 
     let ƒ = build
 

@@ -51,4 +51,5 @@ module Fable =
 
                 let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
                     props |> List.fold
-                        (fun acc prop -> acc |> addProp prop) htmlProps 
+                        (fun acc prop -> acc |> addProp prop) htmlProps
+ 

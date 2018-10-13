@@ -1,22 +1,15 @@
 ﻿module IconPage
 
-open Fabulosa
+open Fabulosa.Icon
 open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
 open Fable.Import.React
 
 (*** define: icon-sample ***)
-let icon =
-    Icon.ƒ
-        { Icon.props with
-             Kind = Icon.Kind.Download }
+let def = icon ([], { Kind = Download })
 (*** define: icon-size-sample ***)
-let x4 =
-    Icon.ƒ
-        { Icon.props with
-             Kind = Icon.Kind.Upload
-             Size = Icon.Size.X4 }
+let x4 = icon ([ Size X4 ], { Kind = Upload })
 (**
 
 <div id="icon">
@@ -82,7 +75,7 @@ Icons can have doubled, tripled, or quadrupled sizes
 
 (*** hide ***)
 let render () =
-    tryMount "icon-demo" icon
+    tryMount "icon-demo" def
     tryMount "icon-size-demo" x4
     tryMount "icon-props-table"
-        (PropTable.propTable typeof<Icon.Props> Icon.props)
+        (PropTable.propTable typeof<IconRequired> { Kind = Download })

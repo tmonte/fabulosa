@@ -48,16 +48,6 @@ Accordions are used to toggle sections of content.
 
 </div>
 
-<div id="accordion-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="accordion-props-table"></div>
-
-</div>
-
 <div id="accordion-default">
 
 <h3 class="s-title">
@@ -94,12 +84,22 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
+<div id="accordion-item-children">
+
+<h3 class="s-title">
+    Item children
+</h3>
+
+<div class="props-table" id="accordion-item-children-table"></div>
+
+</div>
+
 *)
 
 (*** hide ***)
 let render () =
     tryMount "accordion-demo" element
     tryMount "accordion-custom-demo" custom
-    //tryMount "accordion-props-table"
-        //(PropTable.propTable typeof<Accordion.Props> Accordion.props)
+    tryMount "accordion-item-children-table"
+        (PropTable.propTable typeof<AccordionItemChildren> { Header = "Text"; Body = [] })
     

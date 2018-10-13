@@ -4,17 +4,19 @@
 module Empty =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     [<RequireQualifiedAccess>]
     module EmptyIcon =
-       
-        let build (icon: Icon.T) =
+
+        let build (iconT: Icon) =
+            let (opt, req) = iconT
             R.div
-                [ ClassName "empty-icon" ]
-                [ Icon.ƒ { icon with Size = Icon.Size.X3 } ]
+                [ P.ClassName "empty-icon" ]
+                [ icon ([ Size X3 ], req) ]
 
         let ƒ = build
 
@@ -28,7 +30,7 @@ module Empty =
 
         let ƒ (title: T) =
             R.p
-                [ ClassName "empty-title h5" ]
+                [ P.ClassName "empty-title h5" ]
                 [ R.str title ]
 
     [<RequireQualifiedAccess>]
@@ -41,7 +43,7 @@ module Empty =
 
         let ƒ (subTitle: T) =
             R.p
-                [ ClassName "empty-subtitle" ]
+                [ P.ClassName "empty-subtitle" ]
                 [ R.str subTitle ]
 
     [<RequireQualifiedAccess>]
@@ -54,12 +56,12 @@ module Empty =
 
         let ƒ (action: T) =
             R.div
-                [ ClassName "empty-action" ]
+                [ P.ClassName "empty-action" ]
                 action
 
     [<RequireQualifiedAccess>]
     type Props =
-        { HTMLProps: HTMLProps }
+        { HTMLProps: P.HTMLProps }
 
     [<RequireQualifiedAccess>]
     type Children<'Icon, 'Title, 'SubTitle, 'Action> =
@@ -76,7 +78,7 @@ module Empty =
         { Props.HTMLProps = [] }
 
     let children =
-        { Children.Icon = Icon.props
+        { Children.Icon = ([], { Kind = Mail })
           Children.Title = Title.children
           Children.SubTitle = SubTitle.children
           Children.Action = Action.children }
@@ -89,7 +91,7 @@ module Empty =
         (empty: T<'Icon, 'Title, 'SubTitle, 'Action>) =
         let prps,children = empty
         props.HTMLProps
-        |> addProp (ClassName "empty")
+        |> P.addProp (P.ClassName "empty")
         |> R.div <|
         [ emptyIconƒ children.Icon
           titleƒ children.Title
