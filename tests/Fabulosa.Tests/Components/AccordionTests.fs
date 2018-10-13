@@ -1,9 +1,10 @@
 ﻿module AccordionTests
 
 open Expecto
+open Fabulosa.Accordion
 open Fabulosa
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -11,49 +12,41 @@ let tests =
     testList "Accordion tests" [
 
         test "Accordion default" {
-            Accordion.ƒ
-                (Accordion.props,
-                 [ { Header =
-                        { Accordion.Header.children with
-                            Text = "Header One"}
+            accordion ([],
+              [ AccordionItem ([],
+                  { Header = "Header One"
+                    Body =
+                      [ R.a [] [ R.str "Item One" ]
+                        R.a [] [ R.str "Item Two" ] ] })
+                AccordionItem ([],
+                   { Header = "Header One"
                      Body =
                        [ R.a [] [ R.str "Item One" ]
-                         R.a [] [ R.str "Item Two" ] ] }
-                   { Header =
-                        { Accordion.Header.children with
-                            Text = "Header Two" }
-                     Body =
-                       [ R.a [] [ R.str "Item One" ]
-                         R.a [] [ R.str "Item Two" ] ] } ])
+                         R.a [] [ R.str "Item Two" ] ] }) ])
             |> ReactNode.unit
             |> hasOrderedDescendentClass 2 "accordion accordion-header accordion-body"
         }
 
         test "Accordion custom icon" {
-            let iconT =
+            let icon =
                 { Icon.props with
                     Kind = Icon.Kind.Forward }
-            let icon =
-                Icon.ƒ
-                    { iconT with
-                        HTMLProps = [ ClassName "mr-1" ] }
-                |> ReactNode.unit
-            Accordion.ƒ
-                (Accordion.props,
-                 [ { Header =
-                        { Icon = iconT
-                          Text = "Header One"}
+            let renderedIcon =
+                { icon with
+                    HTMLProps = [ P.ClassName "mr-1" ] }
+            accordion ([],
+              [ AccordionItem ([ Icon icon ],
+                   { Header = "Header One"
                      Body =
                        [ R.a [] [ R.str "Item One" ]
-                         R.a [] [ R.str "Item Two" ] ] }
-                   { Header =
-                        { Icon = iconT
-                          Text = "Header One" }
+                         R.a [] [ R.str "Item Two" ] ] })
+                AccordionItem ([ Icon icon ],
+                   { Header = "Header One"
                      Body =
                        [ R.a [] [ R.str "Item One" ]
-                         R.a [] [ R.str "Item Two" ] ] } ])
+                         R.a [] [ R.str "Item Two" ] ] }) ])
             |> ReactNode.unit
-            |> hasChild 2 icon
+            |> hasChild 2 (Icon.ƒ renderedIcon |>  ReactNode.unit)
         }
 
     ]

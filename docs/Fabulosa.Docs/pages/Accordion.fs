@@ -1,46 +1,41 @@
 ﻿module AccordionPage
 
+open Fabulosa.Accordion
 open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Renderer
 
 (*** define: accordion-sample ***)
-let accordion =
-    Accordion.ƒ
-        (Accordion.props,
-         [ { Header =
-                { Accordion.Header.children with
-                    Text = "Header One"}
+let element =
+    accordion ([],
+      [ AccordionItem ([],
+          { Header = "Header One"
+            Body =
+              [ R.a [] [ R.str "Item One" ]
+                R.a [] [ R.str "Item Two" ] ] })
+        AccordionItem ([],
+           { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] }
-           { Header =
-                { Accordion.Header.children with
-                    Text = "Header Two" }
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] } ])
+                 R.a [] [ R.str "Item Two" ] ] }) ])
 (*** define: accordion-custom-sample ***)
+let icon =
+    Icon
+        { Icon.props with
+            Kind = Icon.Kind.Forward }
 let custom =
-    Accordion.ƒ
-        (Accordion.props,
-         [ { Header =
-                { Icon =
-                    { Icon.props with
-                        Kind = Icon.Kind.Forward }
-                  Text = "Header One"}
+    accordion ([],
+      [ AccordionItem ([ icon ],
+           { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] }
-           { Header =
-                { Icon =
-                    { Icon.props with
-                        Kind = Icon.Kind.Forward }
-                  Text = "Header One" }
+                 R.a [] [ R.str "Item Two" ] ] })
+        AccordionItem ([ icon ],
+           { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] } ])
+                 R.a [] [ R.str "Item Two" ] ] }) ])
 (**
 
 <div id="accordions">
@@ -103,8 +98,8 @@ Accordions accept icon props for a custom icon.
 
 (*** hide ***)
 let render () =
-    tryMount "accordion-demo" accordion
+    tryMount "accordion-demo" element
     tryMount "accordion-custom-demo" custom
-    tryMount "accordion-props-table"
-        (PropTable.propTable typeof<Accordion.Props> Accordion.props)
+    //tryMount "accordion-props-table"
+        //(PropTable.propTable typeof<Accordion.Props> Accordion.props)
     
