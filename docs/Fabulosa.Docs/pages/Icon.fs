@@ -10,6 +10,15 @@ open Fable.Import.React
 let def = icon ([], { Kind = Download })
 (*** define: icon-size-sample ***)
 let x4 = icon ([ Size X4 ], { Kind = Upload })
+(*** hide ***)
+let render () =
+    tryMount "icon-demo" def
+    tryMount "icon-size-demo" x4
+    tryMount "icon-props-table"
+        (PropTable.propTable typeof<IconRequired> { Kind = Download })
+    tryMount "icon-optional-props-table"
+        (PropTable.unionPropTable typeof<IconOptional>)
+
 (**
 
 <div id="icon">
@@ -22,16 +31,6 @@ Icons are single-element, responsive
 and pure CSS icons. You can include
 spectre-icons.css located in the dist
 folder to your web <head> to have these CSS icons.
-
-</div>
-
-<div id="icon-props">
-
-<h3 class="s-title">
-    Required props
-</h3>
-
-<div class="props-table" id="icon-props-table"></div>
 
 </div>
 
@@ -71,11 +70,24 @@ Icons can have doubled, tripled, or quadrupled sizes
 
 </div>
 
-*)
+<div id="icon-props">
 
-(*** hide ***)
-let render () =
-    tryMount "icon-demo" def
-    tryMount "icon-size-demo" x4
-    tryMount "icon-props-table"
-        (PropTable.propTable typeof<IconRequired> { Kind = Download })
+<h3 class="s-title">
+    Required props
+</h3>
+
+<div class="props-table" id="icon-props-table"></div>
+
+</div>
+
+<div id="icon-optional-props">
+
+<h3 class="s-title">
+    Optional props
+</h3>
+
+<div class="props-table" id="icon-optional-props-table"></div>
+
+</div>
+
+*)
