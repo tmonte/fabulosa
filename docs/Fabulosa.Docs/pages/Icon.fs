@@ -28,7 +28,7 @@ folder to your web <head> to have these CSS icons.
 <div id="icon-props">
 
 <h3 class="s-title">
-    Props
+    Required props
 </h3>
 
 <div class="props-table" id="icon-props-table"></div>

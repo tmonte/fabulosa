@@ -32,6 +32,14 @@ let custom =
              Body =
                [ R.a [] [ R.str "Item One" ]
                  R.a [] [ R.str "Item Two" ] ] }) ])
+(*** hide ***)
+let render () =
+    tryMount "accordion-demo" element
+    tryMount "accordion-custom-demo" custom
+    tryMount "accordion-item-children-table"
+        (PropTable.propTable typeof<AccordionItemChildren> { Header = "Text"; Body = [] })
+    tryMount "accordion-item-optional-table"
+        (PropTable.unionPropTable typeof<AccordionItemOptional>)
 (**
 
 <div id="accordions">
@@ -90,12 +98,15 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
-*)
+<div id="accordion-item-optional">
 
-(*** hide ***)
-let render () =
-    tryMount "accordion-demo" element
-    tryMount "accordion-custom-demo" custom
-    tryMount "accordion-item-children-table"
-        (PropTable.propTable typeof<AccordionItemChildren> { Header = "Text"; Body = [] })
+<h3 class="s-title">
+    Item optional props
+</h3>
+
+<div class="props-table" id="accordion-item-optional-table"></div>
+
+</div>
+
+*)
     

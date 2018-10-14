@@ -55,8 +55,8 @@ module PropTable =
             |> String.concat " | ") + more
         else
             describeName typeInfo
-        
-    let getPropFields aType (obj: obj) = 
+
+    let getRecordPropFields aType (obj: obj) = 
         let typ = aType
         let record = obj
         let recordTypeFields = FSharpType.GetRecordFields typ
@@ -81,6 +81,21 @@ module PropTable =
             t,
             R.str (z.ToString().Replace(";", ""))
         )
+
+    let getUnionPropFields (union: System.Type) = 
+        let name (case: UnionCaseInfo) =
+            let fields =
+                case.GetFields()
+                |> Array.map (fun e -> e.PropertyType)
+                |> Array.collect FSharpType.GetTupleElements
+                |> Array.map systemTypeName
+            (R.str case.Name,
+             R.str (String.concat " * " fields),
+             R.str "N/A")
+        FSharpType.GetUnionCases union
+        |> Array.map name
+        |> List.ofArray
+
 
     let toTableRow rowValue =
         let (col1, col2, col3) = rowValue
@@ -115,6 +130,8 @@ module PropTable =
                Table.Child.Body
                   (Table.Body.props,
                    (rowValues |> List.map toTableRow)) ])
-        
-    let propTable aType obj = getPropFields aType obj |> renderTable 
+
+    let propTable aType obj = getRecordPropFields aType obj |> renderTable 
+
+    let unionPropTable union = getUnionPropFields union |> renderTable
         
