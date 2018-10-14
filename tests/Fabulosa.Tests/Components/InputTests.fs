@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -38,7 +39,7 @@ let tests =
         }
 
         test "Input html props" {
-            let props = { Input.props with HTMLProps = [ClassName "custom"] }
+            let props = { Input.props with HTMLProps = [P.ClassName "custom"] }
             let input = Input.ƒ props
 
             input
@@ -51,13 +52,11 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (props,
-                     { Icon = Icon.props
+                     { Icon = ([], { Kind = Download })
                        Input = Input.props })
-            let icon =
-                Icon.ƒ {
-                    Icon.props with
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+            let iconElement =
+                icon ([ P.ClassName "form-icon" ], { Kind = Download })
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -65,7 +64,7 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
@@ -73,16 +72,11 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon =
-                        { Icon.props  with
-                            Kind = Icon.Kind.ArrowDown }
+                     { Icon = ([], { Kind = ArrowDown })
                        Input = Input.props })
-            let icon =
-                Icon.ƒ {
-                    Icon.props  with
-                        Kind = Icon.Kind.ArrowDown
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+            let iconElement =
+                icon ([ P.ClassName "form-icon" ], { Kind = ArrowDown })
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -90,7 +84,7 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
@@ -98,16 +92,11 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon =
-                        { Icon.props  with
-                            Size = Icon.Size.X2 }
+                     { Icon = ([ Size X2 ], { Kind = Download })
                        Input = Input.props })
-            let icon =
-                Icon.ƒ {
-                    Icon.props  with
-                        Size = Icon.Size.X2
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+            let iconElement =
+                icon ([ P.ClassName "form-icon"; Size X2 ], { Kind = Download })
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -115,7 +104,7 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
@@ -123,26 +112,23 @@ let tests =
             let inputT = {
                 Input.props with
                     Size = Input.Size.Large
-                    HTMLProps = [ClassName "custom-class"]
+                    HTMLProps = [P.ClassName "custom-class"]
             }
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon = Icon.props
+                     { Icon = ([], { Kind = Download })
                        Input = inputT })
-            let icon =
-                Icon.ƒ
-                    { Icon.props with
-                        HTMLProps = [ ClassName "form-icon" ] }
-                    |> ReactNode.unit
+            let iconElement =
+                icon ([ P.ClassName "form-icon"], { Kind = Download })
+                |> ReactNode.unit
             let input =
                 Input.ƒ inputT
-                |> ReactNode.unit
-            
+                |> ReactNode.unit            
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
@@ -174,7 +160,7 @@ let tests =
             let button =
                 Button.ƒ
                     ( { Button.props with
-                          HTMLProps = [ ClassName "input-group-btn" ] },
+                          HTMLProps = [ P.ClassName "input-group-btn" ] },
                       [] ) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with
@@ -194,7 +180,7 @@ let tests =
             let button =
                 Button.ƒ
                     ( { Button.props with
-                          HTMLProps = [ClassName "input-group-btn"] },
+                          HTMLProps = [P.ClassName "input-group-btn"] },
                       [] ) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with

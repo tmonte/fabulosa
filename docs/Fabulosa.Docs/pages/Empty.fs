@@ -1,6 +1,7 @@
 ﻿module EmptyPage
 
 open Fabulosa
+open Fabulosa.Icon
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
@@ -12,9 +13,7 @@ open Microsoft.FSharp.Core
 let empty =
     Empty.ƒ
         (Empty.props,
-         { Icon =
-             { Icon.props with
-                 Kind = Icon.Kind.Mail }
+         { Icon = ([], { Kind = Mail })
            Title = "You have no new messages" 
            SubTitle = "Click the button to start a conversation"
            Action =

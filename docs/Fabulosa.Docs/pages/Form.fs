@@ -1,6 +1,7 @@
 ﻿module FormPage
 
 open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -53,7 +54,7 @@ let inputGroup =
                       (Button.props,
                        [ R.str "Save"
                          R.RawText "\n"
-                         Icon.ƒ { Icon.props with Kind = Icon.Kind.Check } ]) },
+                         icon ([], { Kind = Check }) ]) },
                 [ InputGroup.Child.Input
                     ({ Input.props with
                          HTMLProps = [Placeholder "Please enter website address"] }) ]) ])

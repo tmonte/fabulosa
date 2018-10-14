@@ -3,12 +3,13 @@
 module Accordion =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
 
     type AccordionItemOptional =
-        | Icon of Icon.T
+        | Icon of Icon
         interface IHTMLProp
 
     type AccordionItemChildren =
@@ -25,28 +26,22 @@ module Accordion =
             | Icon props -> Some props
         | _ -> None
 
-    let createIcon optional =
-        optional
+    let createIcon opt =
+        opt
         |> List.tryPick someIcon
-        |> Option.orElse
-             (Some
-                { Icon.props with
-                    Kind = Icon.Kind.ArrowRight })
-        |> Option.map
-             (fun props ->
-                { props with
-                    HTMLProps = props.HTMLProps
-                    |> addProp (ClassName "mr-1") })
+        |> Option.orElse (Some ([], { Kind = ArrowRight }))
+        |> Option.map (fun (iconOpt, iconReq) ->
+             (iconOpt |> addProp (ClassName "mr-1"), iconReq))
         |> Option.get
 
     let accordionItem (c: AccordionItem) =
         let optional, children = c
-        let icon = createIcon optional
+        let i = createIcon optional
         R.details
             [ ClassName "accordion" ]
             [ R.summary
                 [ ClassName "accordion-header" ]
-                [ Icon.ƒ icon
+                [ icon i
                   R.RawText "\n"
                   R.str children.Header ]
               R.div

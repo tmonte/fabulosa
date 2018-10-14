@@ -4,6 +4,7 @@
 module Tile =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     module R = Fable.Helpers.React
     open R.Props
     open Fable.Import.React
@@ -27,7 +28,7 @@ module Tile =
             |> addProp (ClassName "tile-icon")
             |> R.div <| [ iconƒ children ]
 
-        let ƒ = build Icon.ƒ
+        let ƒ = build icon
 
     [<RequireQualifiedAccess>]
     module Content =

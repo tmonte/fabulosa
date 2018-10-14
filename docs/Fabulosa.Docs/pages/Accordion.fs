@@ -1,7 +1,7 @@
 ﻿module AccordionPage
 
 open Fabulosa.Accordion
-open Fabulosa
+open Fabulosa.Icon
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Renderer
@@ -20,18 +20,14 @@ let element =
                [ R.a [] [ R.str "Item One" ]
                  R.a [] [ R.str "Item Two" ] ] }) ])
 (*** define: accordion-custom-sample ***)
-let icon =
-    Icon
-        { Icon.props with
-            Kind = Icon.Kind.Forward }
 let custom =
     accordion ([],
-      [ AccordionItem ([ icon ],
+      [ AccordionItem ([ Icon ([], { Kind = Forward }) ],
            { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
                  R.a [] [ R.str "Item Two" ] ] })
-        AccordionItem ([ icon ],
+        AccordionItem ([ Icon ([], { Kind = Back }) ],
            { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
@@ -45,16 +41,6 @@ let custom =
 </h2>
 
 Accordions are used to toggle sections of content.
-
-</div>
-
-<div id="accordion-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="accordion-props-table"></div>
 
 </div>
 
@@ -94,12 +80,22 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
+<div id="accordion-item-children">
+
+<h3 class="s-title">
+    Item children
+</h3>
+
+<div class="props-table" id="accordion-item-children-table"></div>
+
+</div>
+
 *)
 
 (*** hide ***)
 let render () =
     tryMount "accordion-demo" element
     tryMount "accordion-custom-demo" custom
-    //tryMount "accordion-props-table"
-        //(PropTable.propTable typeof<Accordion.Props> Accordion.props)
+    tryMount "accordion-item-children-table"
+        (PropTable.propTable typeof<AccordionItemChildren> { Header = "Text"; Body = [] })
     

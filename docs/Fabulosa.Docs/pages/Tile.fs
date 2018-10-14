@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -20,8 +21,7 @@ let tile =
              ({ Tile.TileIcon.props with
                   HTMLProps =
                     [ ClassName "example-tile-icon" ] },
-              { Icon.props with
-                  Kind = Icon.Kind.People })
+              ([], { Kind = People }))
            Content =
              (contentProps,
                 { Title = "The Avengers"
@@ -43,17 +43,14 @@ let compact =
              ({ Tile.TileIcon.props with
                   HTMLProps =
                     [ ClassName "example-tile-icon" ] },
-              { Icon.props with
-                  Kind = Icon.Kind.Mail })
+              ([], { Kind = Mail }))
            Content =
              (contentProps,
                 { Title = "fabulosa-docs.pdf"
                   SubTitle = "14MB · Public · 1 Jan, 2017" })
            Action =
              (Tile.Action.props,
-              [ Icon.ƒ
-                  ({ Icon.props with
-                       Kind = Icon.Kind.MoreHoriz }) ]) })
+              [ icon ([], { Kind = MoreHoriz }) ]) })
 (*** hide ***)
 let render () =
     tryMount "tile-default-demo" tile

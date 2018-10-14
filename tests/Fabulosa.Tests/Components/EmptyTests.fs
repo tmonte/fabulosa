@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -28,17 +29,15 @@ let tests =
         //}
 
         test "Empty with children" {
-            let iconProps = 
-                { Icon.props with
-                        Kind = Icon.Kind.Mail }
+            let opt, req = ([], { Kind = Mail })
             let icon =
-                Icon.ƒ { iconProps with Size = Icon.Size.X3 }
+                icon (opt @ [ Size X3 ], req)
                 |> ReactNode.unit
             let action =
                 Button.ƒ ( Button.props, [R.str "Action"] )
             Empty.ƒ
                 (Empty.props,
-                 { Icon = iconProps
+                 { Icon = (opt, req)
                    Title = "Title"
                    SubTitle = "SubTitle"
                    Action = [action] })

@@ -1,9 +1,9 @@
 ﻿module IconTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -11,47 +11,37 @@ let tests =
     testList "Icon tests" [
 
         test "Icon default" {
-            Icon.ƒ Icon.props
+            icon ([], { Kind = Download })
             |> ReactNode.unit
-            |> hasUniqueClass "icon"
+            |> hasClass "icon icon-download"
         }
 
         test "Icon size x2" {
-            Icon.ƒ
-                { Icon.props with
-                    Size = Icon.Size.X2 }
+            icon ([ Size X2 ], { Kind = Download })
             |> ReactNode.unit
             |> hasClass "icon-2x"
         }
 
         test "Icon size x3" {
-            Icon.ƒ
-                { Icon.props with
-                    Size = Icon.Size.X3 }
+            icon ([ Size X3 ], { Kind = Download })
             |> ReactNode.unit
             |> hasClass "icon-3x"
         }
 
         test "Icon size x4" {
-            Icon.ƒ
-                { Icon.props with
-                    Size = Icon.Size.X4 }
+            icon ([ Size X4 ], { Kind = Download })
             |> ReactNode.unit
             |> hasClass "icon-4x"
         }
 
         test "Icon kind" {
-            Icon.ƒ
-                { Icon.props with
-                    Kind = Icon.Kind.Apps }
+            icon ([ Size X2 ], { Kind = Apps })
             |> ReactNode.unit
             |> hasClass "icon-apps"
         }
 
         test "Icon html props" {
-            Icon.ƒ
-                { Icon.props with
-                    HTMLProps = [ClassName "custom"] }
+            icon ([ P.ClassName "custom" ], { Kind = Download })
             |> ReactNode.unit
             |> hasClass "custom"
         }

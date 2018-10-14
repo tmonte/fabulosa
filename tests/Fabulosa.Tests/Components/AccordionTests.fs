@@ -1,8 +1,9 @@
 ﻿module AccordionTests
 
 open Expecto
+open Fabulosa.Extensions
 open Fabulosa.Accordion
-open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 module P = R.Props
 open Expect
@@ -28,25 +29,21 @@ let tests =
         }
 
         test "Accordion custom icon" {
-            let icon =
-                { Icon.props with
-                    Kind = Icon.Kind.Forward }
-            let renderedIcon =
-                { icon with
-                    HTMLProps = [ P.ClassName "mr-1" ] }
+            let opt, req = ([], { Kind = Forward })
+            let rendered = (opt |> P.addProp (P.ClassName "mr-1"), req)
             accordion ([],
-              [ AccordionItem ([ Icon icon ],
+              [ AccordionItem ([ Icon (opt, req) ],
                    { Header = "Header One"
                      Body =
                        [ R.a [] [ R.str "Item One" ]
                          R.a [] [ R.str "Item Two" ] ] })
-                AccordionItem ([ Icon icon ],
+                AccordionItem ([ Icon (opt, req) ],
                    { Header = "Header One"
                      Body =
                        [ R.a [] [ R.str "Item One" ]
                          R.a [] [ R.str "Item Two" ] ] }) ])
             |> ReactNode.unit
-            |> hasChild 2 (Icon.ƒ renderedIcon |>  ReactNode.unit)
+            |> hasChild 2 (icon rendered |>  ReactNode.unit)
         }
 
     ]

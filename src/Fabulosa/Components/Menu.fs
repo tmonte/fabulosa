@@ -3,6 +3,7 @@
 module Menu =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     open Fable.Import
     open Fable.Import.React
     module R = Fable.Helpers.React
@@ -59,8 +60,7 @@ module Menu =
 
         let children =
             Button.props,
-            [ Icon.ƒ
-                { Icon.props with Kind = Icon.Kind.Menu } ]
+            [ icon ([], { Kind = Menu }) ]
 
         let onClick (e: MouseEvent) =
             let element = e.currentTarget :?> Browser.Element
