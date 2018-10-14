@@ -1,7 +1,7 @@
 ﻿module AccordionPage
 
 open Fabulosa.Accordion
-open Fabulosa
+open Fabulosa.Icon
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Renderer
@@ -20,18 +20,14 @@ let element =
                [ R.a [] [ R.str "Item One" ]
                  R.a [] [ R.str "Item Two" ] ] }) ])
 (*** define: accordion-custom-sample ***)
-let icon =
-    Icon
-        { Icon.props with
-            Kind = Icon.Kind.Forward }
 let custom =
     accordion ([],
-      [ AccordionItem ([ icon ],
+      [ AccordionItem ([ Icon ([], { Kind = Forward }) ],
            { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]
                  R.a [] [ R.str "Item Two" ] ] })
-        AccordionItem ([ icon ],
+        AccordionItem ([ Icon ([], { Kind = Back }) ],
            { Header = "Header One"
              Body =
                [ R.a [] [ R.str "Item One" ]

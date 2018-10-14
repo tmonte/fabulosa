@@ -10,7 +10,7 @@
     <Compile Include="ReactNode.fs" />
     <Compile Include="ReactNodeTests.fs" />
     <Compile Include="Extensions/ExpectoExtension.fs" />
-<!--    <Compile Include="Components/AccordionTests.fs" />
+    <Compile Include="Components/AccordionTests.fs" />
     <Compile Include="Components/AvatarTests.fs" />
     <Compile Include="Components/BadgeTests.fs" />
     <Compile Include="Components/BarTests.fs" />
@@ -44,7 +44,7 @@
     <Compile Include="Components/TagTests.fs" />
     <Compile Include="Components/TextareaTests.fs" />
     <Compile Include="Components/TileTests.fs" />
-    <Compile Include="Components\ToastTests.fs" />-->
+    <Compile Include="Components\ToastTests.fs" />
     <Compile Include="Main.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />

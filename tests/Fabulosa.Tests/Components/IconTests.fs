@@ -13,7 +13,7 @@ let tests =
         test "Icon default" {
             icon ([], { Kind = Download })
             |> ReactNode.unit
-            |> hasUniqueClass "icon"
+            |> hasClass "icon icon-download"
         }
 
         test "Icon size x2" {

@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Icon
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 
@@ -39,7 +40,7 @@ let tests =
 
         test "Tile icon" {
             let tileIcon =
-                (Tile.TileIcon.props, Icon.props)
+                (Tile.TileIcon.props, ([], { Kind = Download }))
 
             Tile.ƒ
                 (Tile.props,

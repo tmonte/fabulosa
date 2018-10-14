@@ -118,8 +118,7 @@ module Icon =
 
     let icon (comp: Icon) =
         let opt, req = comp
-        opt
-        |> List.map size
-        |> addProps [ ClassName "icon"; kind req.Kind ]
-        |> R.i <| []
-        
+        R.i
+            (opt
+             |> List.map size
+             |> addProps [ ClassName "icon"; kind req.Kind ]) []        

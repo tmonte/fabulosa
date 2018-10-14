@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 open Fable.Import.React
 open Renderer
@@ -53,10 +54,7 @@ let error =
              Color = Button.Color.Error },
          [ R.str "Error" ])
 (*** hide ***)
-let icon =
-    Icon.ƒ
-        { Icon.props with
-            Kind = Icon.Kind.Plus }
+let icon = icon ([], { Kind = Plus })
 (*** define: button-format-sample ***)
 let squared =
     Button.ƒ
