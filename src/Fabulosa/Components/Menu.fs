@@ -73,7 +73,7 @@ module Menu =
             let props, children = trigger
             let cProps, cChildren = children
             let withClick =
-                cProps @ [ OnClick (onClick >> props) ]
+                cProps @ [ OnClick (onClick >> props); ClassName "btn" ]
             R.a withClick cChildren
 
         let ƒ = build

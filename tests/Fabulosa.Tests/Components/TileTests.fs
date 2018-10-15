@@ -3,6 +3,7 @@
 open Expecto
 open Fabulosa
 open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
 module P = R.Props
 open Expect
@@ -75,8 +76,8 @@ let tests =
 
         test "Tile action" {
             let child =
-                Button.ƒ
-                    (Button.props,
+                button
+                    ([],
                      [ R.str "Button" ])
             let action: Tile.Action.T =
                 (Tile.Action.props,

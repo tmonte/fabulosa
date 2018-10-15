@@ -2,6 +2,7 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Expect
@@ -86,27 +87,22 @@ let tests =
         }
 
         test "Bar slider default" {
-            let button =
-                Button.ƒ
-                    ({ Button.props with
-                         HTMLProps =
-                           [ ClassName "bar-slider-btn" ] }, [])
+            let but =
+                button
+                    ([ ClassName "bar-slider-btn" ], [])
             Bar.Slider.ƒ (Bar.props, [ (Bar.Item.props, []) ])
             |> ReactNode.unit
             |>! hasClass "bar bar-slider"
-            |>! hasChild 1
-                (Bar.Item.ƒ (Bar.Item.props, [button]) |> ReactNode.unit)
+            |>! hasChild 1 (Bar.Item.ƒ (Bar.Item.props, [ but ]) |> ReactNode.unit)
             |> hasDescendentClass "bar-item bar-slider-btn"
         }
 
         test "Bar slider multiple" {
-            let button =
-                Button.ƒ
-                    ( { Button.props with
-                          HTMLProps = [ ClassName "bar-slider-btn" ] },
-                      [] )
-            let item1 = ({ Bar.Item.props with Value = 25}, [ button ])
-            let item2 = ({ Bar.Item.props with Value = 20}, [ button])
+            let but =
+                button
+                    ([ ClassName "bar-slider-btn" ], [] )
+            let item1 = ({ Bar.Item.props with Value = 25}, [ but ])
+            let item2 = ({ Bar.Item.props with Value = 20}, [ but])
             Bar.Slider.ƒ (Bar.Slider.props, [item1; item2])
             |> ReactNode.unit
             |>! hasClass "bar bar-slider"

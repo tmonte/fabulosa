@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 open ReactNode
 
@@ -11,7 +12,7 @@ open ReactNode
 let headerTests =
     testList "Modal Header tests" [
         test "renders with text" {
-            let child = R.div [ClassName "modal-title h5"] [R.str "Ciro 12"] |> ReactNode.unit 
+            let child = R.div [P.ClassName "modal-title h5"] [R.str "Ciro 12"] |> ReactNode.unit 
             let header = Modal.Header.props, Modal.Header.Children.Text "Ciro 12"
             
             header
@@ -21,7 +22,7 @@ let headerTests =
         }
         
         test "renders with element" {
-            let complexChildContent = R.div [ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
             let child = complexChildContent |> ReactNode.unit 
             let header = Modal.Header.props, Modal.Header.Children.Elements [complexChildContent]
         
@@ -32,15 +33,15 @@ let headerTests =
         }
         
         test "renders props" {
-            let complexChildContent = R.div [ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
             let child = complexChildContent |> ReactNode.unit 
-            let props = { Modal.Header.props with HTMLProps = [Id "hello-world"] } 
+            let props = { Modal.Header.props with HTMLProps = [P.Id "hello-world"] } 
             let header = props, Modal.Header.Children.Elements [complexChildContent]
         
             header
             |> Modal.Header.ƒ 
             |> ReactNode.unit
-            |>! hasProp (Id "hello-world")
+            |>! hasProp (P.Id "hello-world")
             |> hasChild 1 child
         }
     ]
@@ -49,7 +50,7 @@ let headerTests =
 let footerTests =    
     testList "Modal Footer" [
         test "renders with element" {
-            let content = R.div [ClassName "h1"] [R.str  "Cirão da Massa"]
+            let content = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
             let child = content |> ReactNode.unit 
             let footer = Modal.Footer.props, Modal.Footer.Children.Elements [content] 
         
@@ -61,12 +62,12 @@ let footerTests =
         }
         
         test "renders with buttons" {
-            let buttons = [
-                { Button.props with Kind = Button.Kind.Primary }, [R.str "Submit"]
-                { Button.props with Kind = Button.Kind.Link }, [R.str "Close"]
+            let buttons: Button list = [
+                [ Kind Primary ], [R.str "Submit"]
+                [ Kind Link ], [R.str "Close"]
             ]
-            let primaryButton = buttons.[0] |> Button.ƒ |> ReactNode.unit 
-            let linkButton = buttons.[1] |> Button.ƒ |> ReactNode.unit 
+            let primaryButton = buttons.[0] |> button |> ReactNode.unit 
+            let linkButton = buttons.[1] |> button |> ReactNode.unit 
             let footer = Modal.Footer.props, Modal.Footer.Children.Buttons buttons
         
             footer
@@ -78,15 +79,15 @@ let footerTests =
         }
         
         test "renders props" {
-            let complexChildContent = R.div [ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
             let child = complexChildContent |> ReactNode.unit 
-            let props = { Modal.Footer.props with HTMLProps = [Id "hello-world"] } 
+            let props = { Modal.Footer.props with HTMLProps = [P.Id "hello-world"] } 
             let footer = props, Modal.Footer.Children.Elements [complexChildContent]
         
             footer
             |> Modal.Footer.ƒ 
             |> ReactNode.unit
-            |>! hasProp (Id "hello-world")
+            |>! hasProp (P.Id "hello-world")
             |> hasChild 1 child
         }
     ]
@@ -105,11 +106,11 @@ let modalTests =
         }
         
         test "renders props" {
-            let props =  { Modal.props with HTMLProps = [Id "pele"] }
+            let props =  { Modal.props with HTMLProps = [P.Id "pele"] }
             (props, Modal.children)
             |> Modal.ƒ
             |> ReactNode.unit
-            |>! hasProp (Id "pele")
+            |>! hasProp (P.Id "pele")
             |>! hasClass "modal active"
             |>! hasDescendentClass "modal-container"
             |>! hasDescendentClass "modal-body"
@@ -118,8 +119,8 @@ let modalTests =
         
         test "configures OnClose overlay" {
             let happyFunction parms = ()
-            let overlay = R.a [ClassName "modal-overlay"; OnClick happyFunction] []
-            let buttonClose = R.a [ClassName "btn btn-clear float-right"; OnClick happyFunction] []
+            let overlay = R.a [P.ClassName "modal-overlay"; P.OnClick happyFunction] []
+            let buttonClose = R.a [P.ClassName "btn btn-clear float-right"; P.OnClick happyFunction] []
 
             let props =
                 { Modal.props with

@@ -2,6 +2,7 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Expect
@@ -29,9 +30,7 @@ let tests =
         test "Card with children" {
             let body = R.p [] [R.str "Body" ]
             let footer =
-                Button.ƒ
-                    (Button.props,
-                      [ R.str "Footer" ])
+                button ([], [ R.str "Footer" ])
             let imageProps =
                 { Media.Image.props with
                     HTMLProps =  [ Src "bla.png" ] }

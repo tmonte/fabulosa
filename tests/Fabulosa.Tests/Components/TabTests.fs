@@ -2,6 +2,7 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Expect
@@ -38,8 +39,8 @@ let tests =
 
         test "Tab action" {
             let button =
-                Button.ƒ
-                    (Button.props,
+                button
+                    ([],
                      [ R.str "Button" ])
             Tab.ƒ
                 ({ Tab.props with

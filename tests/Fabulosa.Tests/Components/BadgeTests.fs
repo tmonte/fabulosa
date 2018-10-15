@@ -54,7 +54,7 @@ let tests =
             Badge.ƒ
                 (Badge.props,
                  Badge.Child.Button
-                   (Button.props, [ child ]))
+                   ([], [ child ]))
             |> ReactNode.unit
             |>! hasClass "btn"
             |> hasChild 1 (child |> ReactNode.unit)

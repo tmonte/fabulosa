@@ -3,6 +3,7 @@
 open Expecto
 open Fabulosa
 open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
 module P = R.Props
 open Expect
@@ -92,10 +93,10 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon = ([ Size X2 ], { Kind = Download })
+                     { Icon = ([ Icon.Size X2 ], { Kind = Download })
                        Input = Input.props })
             let iconElement =
-                icon ([ P.ClassName "form-icon"; Size X2 ], { Kind = Download })
+                icon ([ P.ClassName "form-icon"; Icon.Size X2 ], { Kind = Download })
                 |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
@@ -156,12 +157,9 @@ let tests =
 
         test "InputGroup right addon" {
             let inputT = Input.props
-            let buttonT = Button.props, []
-            let button =
-                Button.ƒ
-                    ( { Button.props with
-                          HTMLProps = [ P.ClassName "input-group-btn" ] },
-                      [] ) |> ReactNode.unit
+            let buttonT = [], []
+            let but =
+                button ([ P.ClassName "input-group-btn" ], []) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with
                       AddonRight = InputGroup.AddonRight.Button
@@ -170,18 +168,15 @@ let tests =
             |> ReactNode.unit
             |>! hasClass "input-group"
             |>! hasDescendentClass "input-group-btn"
-            |>! hasChild 1 button
+            |>! hasChild 1 but
             |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
         test "InputGroup left and right addon" {
             let inputT = Input.props
-            let buttonT = Button.props, []
-            let button =
-                Button.ƒ
-                    ( { Button.props with
-                          HTMLProps = [P.ClassName "input-group-btn"] },
-                      [] ) |> ReactNode.unit
+            let buttonT = [], []
+            let but =
+                button ([ P.ClassName "input-group-btn"], [] ) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with
                       AddonLeft = InputGroup.AddonLeft.Text "text"
@@ -192,7 +187,7 @@ let tests =
             |>! hasClass "input-group"
             |>! hasDescendentClass "input-group-addon"
             |>! hasDescendentClass "input-group-btn"
-            |>! hasChild 1 button
+            |>! hasChild 1 but
             |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
