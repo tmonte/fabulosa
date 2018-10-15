@@ -34,6 +34,7 @@
     <Compile Include="pages/Tab.fs" />
     <Compile Include="pages/Tile.fs" />
     <Compile Include="pages\Toast.fs" />
+    <Compile Include="pages\Tooltip.fs" />
     <None Include="README.md" />
     <None Include="assets/logo_1280.svg" />
     <None Include="assets/logo_320.svg" />
@@ -46,6 +47,9 @@
     <Compile Include="App.fs" />
     <None Include="paket.references" />
     <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\tooltip.scss" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />
 </Project>

@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Types/BoundingRect.fs" />
     <Compile Include="Extensions/ListExtension.fs" />
     <Compile Include="Extensions/SeqExtension.fs" />
     <Compile Include="Extensions/StringExtension.fs" />
@@ -45,7 +46,8 @@
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Tile.fs" />
     <Compile Include="Components/Typography.fs" />
-    <Compile Include="Components\Toast.fs" />
+    <Compile Include="Components/Toast.fs" />
+    <Compile Include="Components/Tooltip.fs" />
     <None Include="paket.references" />
   </ItemGroup>
   <Import Project="../../.paket/Paket.Restore.targets" />

@@ -1,0 +1,16 @@
+.fab-tooltip {
+  background: rgba(69, 77, 93, .9);
+  border-radius: .1rem;
+  color: #fff;
+  font-size: .7rem;
+  left: 50%;
+  max-width: 320px;
+  padding: .2rem .4rem;
+  pointer-events: none;
+  //transform: translate(-50%, .4rem);
+  transition: all .2s ease;
+  white-space: pre;
+  z-index: 300;
+  opacity: 1;
+  transform: translateZ(-.2rem);
+}

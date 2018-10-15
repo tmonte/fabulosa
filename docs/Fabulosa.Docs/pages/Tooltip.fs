@@ -1,11 +1,10 @@
-module ModalPage
+module TooltipPage
 
 open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
-open Fabulosa.Tooltip
 open Renderer
 
 (*** define: modal-sample ***)
@@ -79,10 +78,6 @@ module Container =
 (*** hide ***)
 let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
 let demo = R.div [style] [ 
-//        Tooltip.HoverTooltip.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!") 
-        Tooltip.AnotherHover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!")
-//        BaseTooltip.ƒ (Tooltip.BaseTooltip.props, TooltipContent.Text "I got this too")
-            
         Grid.ƒ
             (Grid.props,
              [ Grid.Row.props,
@@ -95,8 +90,6 @@ let demo = R.div [style] [
                ]
              ])
     ]
-    
-
 
 let render () =
     tryMount "modal-demo" demo
@@ -106,8 +99,8 @@ let render () =
 (**
 
 <div id="modal">
-    <h2 class="s-title">Modal</h2>
-    Modals are flexible dialog prompts.
+    <h2 class="s-title">Tooltips</h2>
+    Tooltips provide context information labels that appear on hover and focus.
 </div>
 
 <div id="modal-props">
