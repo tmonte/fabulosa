@@ -51,7 +51,7 @@ let inputGroup =
                   AddonLeft = InputGroup.AddonLeft.Text "https://"                                        
                   AddonRight =
                     InputGroup.AddonRight.Button
-                      (Button.props,
+                      ([],
                        [ R.str "Save"
                          R.RawText "\n"
                          icon ([], { Kind = Check }) ]) },

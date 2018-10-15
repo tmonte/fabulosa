@@ -5,6 +5,7 @@ module Bar =
 
     open Fable.Import.React
     open Fabulosa.Extensions
+    open Fabulosa.Button
     module R = Fable.Helpers.React
     open R.Props
 
@@ -133,9 +134,8 @@ module Bar =
                     let props, children = item
                     Item.ƒ
                         (props,
-                         [ Button.ƒ
-                             ({ Button.props with
-                                  HTMLProps = [ ClassName "bar-slider-btn" ] }, []) ]))
+                         [ button
+                             ([ ClassName "bar-slider-btn" ], []) ]))
                 children
 
         let ƒ = build

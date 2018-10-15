@@ -4,6 +4,7 @@ module Menu =
 
     open Fabulosa.Extensions
     open Fabulosa.Icon
+    open Fabulosa.Button
     open Fable.Import
     open Fable.Import.React
     module R = Fable.Helpers.React
@@ -51,16 +52,15 @@ module Menu =
             Message -> unit
 
         [<RequireQualifiedAccess>]
-        type private Children = Button.T
+        type private Children = Button
 
         [<RequireQualifiedAccess>]
         type T = Props * Children
 
         let props _ = ()
 
-        let children =
-            Button.props,
-            [ icon ([], { Kind = Menu }) ]
+        let children: Button =
+            ([], [ icon ([], { Kind = Menu }) ])
 
         let onClick (e: MouseEvent) =
             let element = e.currentTarget :?> Browser.Element
@@ -73,11 +73,8 @@ module Menu =
             let props, children = trigger
             let cProps, cChildren = children
             let withClick =
-                cProps.HTMLProps @ [ OnClick (onClick >> props) ]
-            Anchor.ƒ
-                ( { cProps with
-                      HTMLProps = withClick },
-                  cChildren )
+                cProps @ [ OnClick (onClick >> props) ]
+            R.a withClick cChildren
 
         let ƒ = build
 
@@ -128,7 +125,7 @@ module Menu =
 
     type Props =
         { HTMLProps: HTMLProps
-          Trigger: Button.T
+          Trigger: Button
           Opened: bool }
 
     [<RequireQualifiedAccess>]

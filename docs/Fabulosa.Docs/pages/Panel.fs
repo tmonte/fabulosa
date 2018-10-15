@@ -2,8 +2,9 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
@@ -39,13 +40,11 @@ let footer =
         ({ InputGroup.props with
              AddonRight =
                InputGroup.AddonRight.Button
-                 ({ Button.props with
-                      Kind = Button.Kind.Primary },
-                  [ R.str "Send" ]) },
+                 ([ Kind Primary ], [ R.str "Send" ]) },
            [ InputGroup.Child.Input
                ({ Input.props with
                     HTMLProps =
-                       [ Placeholder "Say Hello!" ] }) ]) ]
+                       [ P.Placeholder "Say Hello!" ] }) ]) ]
 
 (*** define: panel-default-sample ***)
 let panel =
@@ -57,7 +56,7 @@ let panel =
            Footer = Some footer })
 (*** hide ***)
 let render () =
-    tryMount "panel-default-demo" (R.div [ Style [ Width "50%" ] ] [ panel ])
+    tryMount "panel-default-demo" (R.div [ P.Style [ P.CSSProp.Width "50%" ] ] [ panel ])
     tryMount "panel-props-table"
         (PropTable.propTable typeof<Panel.Props> Panel.props)
 (**

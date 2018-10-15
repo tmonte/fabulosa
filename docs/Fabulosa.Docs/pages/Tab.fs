@@ -2,8 +2,9 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
@@ -15,15 +16,14 @@ let search =
            Inline = true
            AddonRight =
              InputGroup.AddonRight.Button
-               ({ Button.props with
-                    Kind = Button.Kind.Primary
-                    Size = Button.Size.Small },
+               ([ Kind Primary
+                  Size Small ],
                 [ R.str "Search" ]) },
          [ InputGroup.Child.Input
              ({ Input.props with
                   Size = Input.Size.Small
                   HTMLProps =
-                    [ Placeholder "Search documents" ] }) ])
+                    [ P.Placeholder "Search documents" ] }) ])
 
 let tab =
     Tab.ƒ

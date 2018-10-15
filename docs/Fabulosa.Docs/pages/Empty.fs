@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Icon
+open Fabulosa.Button
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
@@ -17,8 +18,7 @@ let empty =
            Title = "You have no new messages" 
            SubTitle = "Click the button to start a conversation"
            Action =
-             [ Button.ƒ
-                 (Button.props, [ R.str "Send a message" ]) ] })
+             [ button ([], [ R.str "Send a message" ]) ] })
 (*** hide ***)
 let render () =
     tryMount "empty-default-demo" empty

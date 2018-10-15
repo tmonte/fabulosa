@@ -3,15 +3,16 @@
 open Fabulosa
 open Fabulosa.Docs
 open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
 
 let contentProps =
     { Tile.Content.props
-        with HTMLProps = [ ClassName "tile-p" ] }
+        with HTMLProps = [ P.ClassName "tile-p" ] }
 
 (*** define: tile-default-sample ***)
 let tile =
@@ -20,7 +21,7 @@ let tile =
          { Icon = Some
              ({ Tile.TileIcon.props with
                   HTMLProps =
-                    [ ClassName "example-tile-icon" ] },
+                    [ P.ClassName "example-tile-icon" ] },
               ([], { Kind = People }))
            Content =
              (contentProps,
@@ -30,9 +31,8 @@ let tile =
                     big for any one hero to tackle..." })
            Action =
              (Tile.Action.props,
-              [ Button.ƒ
-                  ({ Button.props with
-                       Kind = Button.Kind.Primary },
+              [ button
+                  ([ Kind Primary ],
                    [ R.str "Action" ]) ]) })
 (*** define: tile-compact-sample ***)
 let compact =
@@ -42,7 +42,7 @@ let compact =
          { Icon = Some
              ({ Tile.TileIcon.props with
                   HTMLProps =
-                    [ ClassName "example-tile-icon" ] },
+                    [ P.ClassName "example-tile-icon" ] },
               ([], { Kind = Mail }))
            Content =
              (contentProps,

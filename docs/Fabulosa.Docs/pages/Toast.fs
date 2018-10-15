@@ -2,8 +2,9 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
@@ -27,27 +28,22 @@ let update message state =
         { state with Opened = not state.Opened }
 
 let toggler dispatch opened =
-    Button.ƒ
-        ({ Button.props  with
-             Kind = Button.Kind.Primary
-             HTMLProps =
-               [ OnClick
-                   (fun _ ->
-                      dispatch Toggle
-                      Fable.Import.JS.setTimeout
-                        (fun () -> dispatch Toggle)
-                        3000 |> ignore)
-                 Disabled opened ] },
+    button
+        ([ Kind Primary
+           P.OnClick
+             (fun _ ->
+                dispatch Toggle
+                Fable.Import.JS.setTimeout
+                  (fun () -> dispatch Toggle)
+                  3000 |> ignore)
+           P.Disabled opened ],
          [ R.str "Open" ])
 
 let trigger dispatch opened =
-    Button.ƒ
-        ({ Button.props  with
-             Kind = Button.Kind.Primary
-             HTMLProps =
-               [ OnClick
-                   (fun _ -> dispatch Toggle)
-                 Disabled opened ] },
+    button
+        ([ Kind Primary
+           P.OnClick (fun _ -> dispatch Toggle)
+           P.Disabled opened ],
          [ R.str "Open" ])
 
 (*** define: toast-default-sample ***)

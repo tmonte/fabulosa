@@ -4,6 +4,7 @@ namespace Fabulosa
 module Badge =
 
     open Fabulosa.Extensions
+    open Fabulosa.Button
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
@@ -29,15 +30,12 @@ module Badge =
     [<RequireQualifiedAccess>]
     module BadgeButton =
 
-        type T = Button.T * int
+        type T = Button * int
 
-        let build (button: T) =
-            let buttonT, badge = button
-            let props, children = buttonT
-            Button.ƒ
-                ({ props with
-                      HTMLProps = combine props.HTMLProps badge },
-                  children)
+        let build (b: T) =
+            let buttonT, badge = b
+            let optional, children = buttonT
+            button (combine optional badge, children)
 
         let ƒ = build
     

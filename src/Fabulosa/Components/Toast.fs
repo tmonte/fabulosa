@@ -4,6 +4,7 @@
 module Toast =
 
     open Fabulosa.Extensions
+    open Fabulosa.Button
     module R = Fable.Helpers.React
     open R.Props
     open Fable.Import.React
@@ -45,12 +46,9 @@ module Toast =
     let onRequestClose =
         function
         | Some fn ->
-            Button.ƒ
-                ({ Button.props with
-                     HTMLProps =
-                       [ ClassName "btn-clear float-right"
-                         OnClick fn] },
-                 [])
+            button
+                ([ ClassName "btn-clear float-right"
+                   OnClick fn], [])
         | None -> R.ofOption None
 
 

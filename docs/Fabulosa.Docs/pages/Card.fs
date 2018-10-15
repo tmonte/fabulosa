@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -19,8 +20,7 @@ let card =
                  the world by making tools for the mind
                  that advance humankind." ] ]
            Footer =
-             [ Button.ƒ
-                 (Button.props, [ R.str "Purchase" ]) ]
+             [ button ([], [ R.str "Purchase" ]) ]
            Image =
              { Media.Image.props with
                  HTMLProps = [ Src "assets/macos-sierra-2.jpg" ] } })

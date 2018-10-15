@@ -27,8 +27,7 @@ let button =
         ({ Badge.props with
              Badge = 3 },
          Badge.Child.Button
-           (Button.props,
-            [ R.str "Button" ]))
+           ([], [ R.str "Button" ]))
 
 let avatar =
     Badge.ƒ

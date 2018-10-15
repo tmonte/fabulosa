@@ -18,12 +18,11 @@ module Chip =
         type T = Props
 
         let ƒ (remove: T) =
-            ({ Anchor.props with
-                 HTMLProps =
-                   [ ClassName "btn btn-clear"
-                     Role "button"
-                     OnClick remove.OnRemove ] }, [])
-            |> Anchor.ƒ
+            R.a
+                [ ClassName "btn btn-clear"
+                  Role "button"
+                  OnClick remove.OnRemove ]
+                []
 
     module ChipAvatar =
         

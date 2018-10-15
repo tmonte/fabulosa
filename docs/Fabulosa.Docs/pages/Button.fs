@@ -1,94 +1,44 @@
 ﻿module ButtonPage
 
-open Fabulosa
 open Fabulosa.Docs
 open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
+open Fabulosa.Extensions.Fable.Helpers.React.Props
 open Fable.Import.React
 open Renderer
 
 (*** define: button-kind-sample ***)
-let button =
-    Button.ƒ
-        (Button.props,
-         [ R.str "Default" ])
+let def = button ([], [ R.str "Default" ])
 
-let primary =
-    Button.ƒ
-        ({ Button.props with
-             Kind = Button.Kind.Primary },
-         [ R.str "Primary" ])
+let primary = button ([ Kind Primary ], [ R.str "Primary" ])
 
-let link =
-    Button.ƒ
-        ({ Button.props with
-             Kind = Button.Kind.Link },
-         [ R.str "Link" ])
+let link = button ([ Kind Link ], [ R.str "Link" ])
 (*** define: button-size-sample ***)
-let small =
-    Button.ƒ
-        ({ Button.props with
-             Size = Button.Size.Small },
-         [ R.str "Small" ])
+let small = button ([ Size Small ], [ R.str "Small" ])
 
-let medium =
-    Button.ƒ
-        (Button.props,
-         [ R.str "Default" ])
+let medium = button ([], [ R.str "Medium" ])
 
-let large =
-    Button.ƒ
-        ({ Button.props with
-             Size = Button.Size.Large },
-         [ R.str "Large" ])
+let large = button ([ Size Large ], [ R.str "Large" ])
 (*** define: button-color-sample ***)
-let success =
-    Button.ƒ
-        ({ Button.props with
-             Color = Button.Color.Success },
-         [ R.str "Success" ])
+let success = button ([ Color Success ], [ R.str "Success" ])
 
-let error =
-    Button.ƒ
-        ({ Button.props with
-             Color = Button.Color.Error },
-         [ R.str "Error" ])
+let error = button ([ Color Error ], [ R.str "Error" ])
 (*** hide ***)
 let icon = icon ([], { Kind = Plus })
 (*** define: button-format-sample ***)
-let squared =
-    Button.ƒ
-        ({ Button.props with
-             Format = Button.Format.SquaredAction },
-         [ icon ])
+let squared = button ([ Shape Squared ], [ icon ])
 
-let round =
-    Button.ƒ
-        ({ Button.props with
-             Format = Button.Format.RoundAction
-             Kind = Button.Kind.Primary },
-         [ icon ])
+let round = button ([ Shape Round; Kind Primary ], [ icon ])
 (*** define: button-state-sample ***)
-let disabled =
-    Button.ƒ
-        ({ Button.props with
-             State = Button.State.Disabled },
-         [ R.str "Disabled" ])
+let disabled = button ([ State Disabled ], [ R.str "Disabled" ])
 
-let active =
-    Button.ƒ
-        ({ Button.props with
-             State = Button.State.Active },
-         [ R.str "Active" ])
+let active = button ([ State Active ], [ R.str "Active" ])
 
-let loading =
-    Button.ƒ
-        ({ Button.props with
-             State = Button.State.Loading },
-         [ R.str "-------" ])
+let loading = button ([ State Loading ], [ R.str "-------" ])
 (*** hide ***)
 let render () =
-    tryMount "button-default-demo" button
+    tryMount "button-default-demo" def
     tryMount "button-primary-demo" primary
     tryMount "button-link-demo" link
     tryMount "button-small-demo" small
@@ -102,7 +52,7 @@ let render () =
     tryMount "button-active-demo" active
     tryMount "button-loading-demo" loading
     tryMount "button-props-table"
-        (PropTable.propTable typeof<Button.Props> Button.props)
+        (PropTable.unionPropTable typeof<ButtonOptional>)
 (**
 
 <div id="buttons">
@@ -121,7 +71,7 @@ actions in different types and sizes.
 <div id="button-props">
 
 <h3 class="s-title">
-    Props
+    Optional Props
 </h3>
 
 <div class="props-table" id="button-props-table"></div>

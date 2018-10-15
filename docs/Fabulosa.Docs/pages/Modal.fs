@@ -2,10 +2,13 @@ module ModalPage
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
 open Renderer
+
+let button1: Button = ([], [R.str "Vote Bozo"])
 
 (*** define: modal-sample ***)
 let modal: Modal.T = 
@@ -23,8 +26,8 @@ let modal: Modal.T =
             Footer =
                 (Modal.Footer.props, 
                  [
-                    (Button.props, [R.str "Vote Bozo"])
-                    ({Button.props with Kind = Button.Kind.Primary}, [R.str "Vote Ciro 12"])
+                    button1
+                    ([ Kind Primary ], [R.str "Vote Ciro 12"])
                  ] |> Modal.Footer.Buttons) |> Some
         }
     )
@@ -62,7 +65,7 @@ module Container =
                         OnRequestClose = Some (fun _ -> dispatch Close) }
         let size = props.Size
         R.fragment [][
-            Button.ƒ ({Button.props with Kind = Button.Kind.Primary; HTMLProps = [P.OnClick (fun _ -> dispatch Open)] }, [R.str (sprintf "Open %A Modal" size)]) 
+            button ([ Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
             Modal.ƒ (props, children)
         ]
     

@@ -2,7 +2,7 @@
 
 [<RequireQualifiedAccess>]
 module Input =
-    
+
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
@@ -93,6 +93,7 @@ module IconInput =
 module InputGroup =
 
     open Fabulosa.Extensions
+    open Fabulosa.Button
     module R = Fable.Helpers.React
     open R.Props
 
@@ -100,16 +101,13 @@ module InputGroup =
     module GroupButton =
 
         [<RequireQualifiedAccess>]
-        type T = Button.T
+        type T = Button
 
         let ƒ (groupButton: T) =
             let props, children = groupButton
-            Button.ƒ
-                ({ props with
-                     HTMLProps =
-                       props.HTMLProps
-                       |> addProp (ClassName "input-group-btn") },
-                  children)
+            button
+                (props |> addProp (ClassName "input-group-btn"),
+                 children)
 
     [<RequireQualifiedAccess>]
     type AddonRight<'Button> =
