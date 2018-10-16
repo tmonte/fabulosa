@@ -20,9 +20,7 @@ let medium = avatar ([], Initial "FA")
 let large = avatar ([ Size Large ], Initial "FA")
 
 let extraLarge = avatar ([ Size ExtraLarge ], Initial "FA")
-(*** define: avatar-kinds-sample ***)
-let icon = avatar ([], Url "assets/avatar-1.png")
-
+(*** define: avatar-presence-sample ***)
 let presence = avatar ([ Presence Online ], Url "assets/avatar-1.png")
 (*** hide ***)
 let render () =
@@ -33,7 +31,6 @@ let render () =
     tryMount "avatar-md-demo" medium
     tryMount "avatar-lg-demo" large
     tryMount "avatar-xl-demo" extraLarge
-    tryMount "avatar-icon-demo" icon
     tryMount "avatar-presence-demo" presence
     tryMount "avatar-props-table"
         (PropTable.unionPropTable typeof<AvatarChildren>)
@@ -47,26 +44,6 @@ let render () =
 </h2>
 
 Avatars are user profile pictures.
-
-</div>
-
-<div id="avatar-optional-props">
-
-<h3 class="s-title">
-    Optional props
-</h3>
-
-<div class="props-table" id="avatar-optional-props-table"></div>
-
-</div>
-
-<div id="avatar-props">
-
-<h3 class="s-title">
-    Children
-</h3>
-
-<div class="props-table" id="avatar-props-table"></div>
 
 </div>
 
@@ -130,23 +107,44 @@ Avatar can be ExtraSmall, Small, Medium, Large and ExtraLarge.
 
 </div>
 
-<div id="avatar-kinds">
+<div id="avatar-presence">
 
 <h3 class="s-title">
-    Kind
+    Presence
 </h3>
 
-Avatar can have kinds of Icon or Presence.
+Avatar can have a presence indicator.
 
 <div class="demo">
-    <span id="avatar-icon-demo"></span>
     <span id="avatar-presence-demo"></span>
 </div>
 
 *)
 
-(*** include: avatar-kinds-sample ***)
+(*** include: avatar-presence-sample ***)
 
 (**
+
 </div>
+
+<div id="avatar-optional-props">
+
+<h3 class="s-title">
+    Optional props
+</h3>
+
+<div class="props-table" id="avatar-optional-props-table"></div>
+
+</div>
+
+<div id="avatar-props">
+
+<h3 class="s-title">
+    Child options
+</h3>
+
+<div class="props-table" id="avatar-props-table"></div>
+
+</div>
+
 *)

@@ -68,16 +68,6 @@ actions in different types and sizes.
 
 </div>
 
-<div id="button-props">
-
-<h3 class="s-title">
-    Optional Props
-</h3>
-
-<div class="props-table" id="button-props-table"></div>
-
-</div>
-
 <div id="kinds">
 
 <h3 class="s-title">
@@ -178,5 +168,17 @@ Buttons can have states of SquaredAction and RoundAction.
 (*** include: button-state-sample ***)
 
 (**
+
 </div>
+
+<div id="button-props">
+
+<h3 class="s-title">
+    Optional Props
+</h3>
+
+<div class="props-table" id="button-props-table"></div>
+
+</div>
+
 *)

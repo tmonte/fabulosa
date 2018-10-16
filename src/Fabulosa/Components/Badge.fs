@@ -17,12 +17,14 @@ module Badge =
     type BadgeRequired =
         { Value: int }
 
+    type private Element = HTMLProps * ReactElement list
+        
     type BadgeChildren =
         | BadgeAvatar of Avatar
         | BadgeButton of Button
-        | BadgeAnchor of HTMLProps * ReactElement list
-        | BadgeDiv of HTMLProps * ReactElement list
-        | BadgeSpan of HTMLProps * ReactElement list
+        | BadgeAnchor of Element
+        | BadgeDiv of Element
+        | BadgeSpan of Element
 
     type Badge =
         HTMLProps * BadgeRequired * BadgeChildren

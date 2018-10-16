@@ -48,20 +48,23 @@ module Avatar =
         :> IHTMLProp
 
     let private presenceIcon presence =
-        R.i
-            ([presence] |> addProp (ClassName "avatar-presence")) []
+        R.i ([presence] |> addProp (ClassName "avatar-presence")) []
 
-    let private presence (prop: IHTMLProp) =
-        match prop with
-        | :? AvatarOptional as opt ->
-            match opt with
-            | Presence Away -> Some "away"
-            | Presence Busy -> Some "busy"
-            | Presence Online -> Some "online"
-            | _ -> None
-            |> Option.map ClassName
-            |> Option.map presenceIcon
-        | _ -> None
+    let private presence (props: HTMLProps) =
+        List.tryPick
+            (fun (prop: IHTMLProp) ->
+                match prop with
+                | :? AvatarOptional as opt ->
+                    match opt with
+                    | Presence Away -> Some "away"
+                    | Presence Busy -> Some "busy"
+                    | Presence Online -> Some "online"
+                    | _ -> None
+                    |> Option.map ClassName
+                    |> Option.map presenceIcon
+                | _ -> None)
+            props
+        |> R.ofOption
 
     let private initial children (props: IHTMLProp list) =
         match children with
@@ -83,5 +86,4 @@ module Avatar =
         |> initial children
         |> R.figure
         <| [ image children
-             (List.tryPick presence optional)
-             |> R.ofOption ]
+             presence optional ]

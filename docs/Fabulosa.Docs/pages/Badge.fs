@@ -13,9 +13,9 @@ let div = badge ([], { Value = 1 }, BadgeDiv ([], [ R.str "Text" ]))
 
 let span = badge ([], { Value = 2 }, BadgeSpan ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
-let button = badge ([], { Value = 1 }, BadgeButton ([], [ R.str "Button" ]))
+let button = badge ([], { Value = 3 }, BadgeButton ([], [ R.str "Button" ]))
 
-let avatar = badge ([], { Value = 4 }, BadgeAvatar ([], Url "assets/avatar-1.png"))
+let avatar = badge ([], { Value = 4 }, BadgeAvatar ([ Size Large ], Url "assets/avatar-1.png"))
 (*** hide ***)
 let render () =
     tryMount "badge-div-demo" div
@@ -24,6 +24,8 @@ let render () =
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-props-table"
         (PropTable.propTable typeof<BadgeRequired> { Value = 1 })
+    tryMount "badge-child-table"
+        (PropTable.unionPropTable typeof<BadgeChildren>)
 (**
 <div id="badges">
 
@@ -31,19 +33,7 @@ let render () =
     Badge
 </h2>
 
-Forms provide the most common control styles
-used in forms, including input, textarea,
-select, checkbox, radio and switch.
-
-</div>
-
-<div id="badge-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="badge-props-table"></div>
+Badges are often used as unread number indicators.
 
 </div>
 
@@ -89,6 +79,26 @@ of the button and avatar components.
 (*** include: badge-button-avatar-sample ***)
 
 (**
+
+</div>
+
+<div id="badge-props">
+
+<h3 class="s-title">
+    Required props
+</h3>
+
+<div class="props-table" id="badge-props-table"></div>
+
+</div>
+
+<div id="badge-props">
+
+<h3 class="s-title">
+    Child options
+</h3>
+
+<div class="props-table" id="badge-child-table"></div>
 
 </div>
 

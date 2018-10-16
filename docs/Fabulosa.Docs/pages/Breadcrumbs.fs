@@ -16,36 +16,81 @@ let element =
 (*** hide ***)
 let render () =
     tryMount "breadcrumbs-demo" element
-    //tryMount "breadcrumbs-props-table"
-    //    (PropTable.propTable typeof<BreadcrumbProps> Breadcrumb.props)
-    //tryMount "breadcrumb-items-props-table"
-        //(PropTable.propTable typeof<BreadcrumbItemProps> BreadcrumbItem.props)
+    tryMount "breadcrumb-children-table"
+        (PropTable.unionPropTable typeof<BreadcrumbChildren>)
+    tryMount "breadcrumb-text-children-table"
+        (PropTable.propTable typeof<BreadcrumbTextChildren> { Text = "" })
+    tryMount "breadcrumb-link-required-table"
+        (PropTable.propTable typeof<BreadcrumbLinkRequired> { Href = "" })
+    tryMount "breadcrumb-link-children-table"
+        (PropTable.propTable typeof<BreadcrumbLinkChildren> { Text = "" })
 (**
+
 <div id="breadcrumbs">
 
-<h2 class="s-title">Breadcrumbs</h2>
+<h2 class="s-title">
+    Breadcrumbs
+</h2>
 
 Breadcrumbs are used as navigational
 hierarchies to indicate current location.
 
 </div>
 
-<div id="breadcrumb-props">
-    <h3 class="s-title">Props</h3>
-    <div class="props-table" id="breadcrumbs-props-table"></div>
+<div id="breadcrumb-example">
+
+<h3 class="s-title">
+    Example
+</h3>
+
+<div id="breadcrumbs-demo"></div>
+
 </div>
 
-<div id="breadcrumb-example">
-<h3 class="s-title">Example</h3>
-<div id="breadcrumbs-demo"></div>
-</div>
 *)
 
 (*** include: breadcrumbs-demo ***)
 
 (**
-<div id="breadcrumb-items">
-<h3 class="s-title">Breadcrumb Item Props</h3>
-<div class="props-table" id="breadcrumb-items-props-table"></div>
+
+<div id="breadcrumb-children">
+
+<h3 class="s-title">
+    Breadcrumb children
+</h3>
+
+<div class="props-table" id="breadcrumb-children-table"></div>
+
 </div>
+
+<div id="breadcrumb-text-children">
+
+<h3 class="s-title">
+    Breadcrumb text children
+</h3>
+
+<div class="props-table" id="breadcrumb-text-children-table"></div>
+
+</div>
+
+<div id="breadcrumb-link-required-children">
+
+<h3 class="s-title">
+    Breadcrumb link required props
+</h3>
+
+<div class="props-table" id="breadcrumb-link-required-table"></div>
+
+</div>
+
+<div id="breadcrumb-link-children">
+
+<h3 class="s-title">
+    Breadcrumb link children
+</h3>
+
+<div class="props-table" id="breadcrumb-link-children-table"></div>
+
+</div>
+
 *)
