@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -29,8 +30,7 @@ let avatar =
          { Chip.children with
              Text = "Chip"
              Avatar = Some
-               { Avatar.props with
-                   Source = "assets/avatar-1.png" } })
+               ([], Url "assets/avatar-1.png") })
 (*** hide ***)
 let render () =
     tryMount "chip-default-demo" chip

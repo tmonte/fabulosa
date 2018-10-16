@@ -3,6 +3,7 @@
 open Fabulosa
 open Fabulosa.Docs
 open Fabulosa.Button
+open Fabulosa.Badge
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -36,10 +37,9 @@ let tab =
                 Active = true },
             [ R.a [] [ R.str "Tab 2" ] ])
            (Tab.Item.props,
-            [ Badge.ƒ
-                ({ Badge.props with
-                     Badge = 1 },
-                 Badge.Child.Anchor
+            [ badge
+                ([], { Value = 1 },
+                 BadgeAnchor
                    ([], [ R.str "Tab 3" ])) ]) ])
 (*** hide ***)
 let render () =

@@ -5,8 +5,9 @@ open Fable.Import.React
 module Chip =
 
     open Fabulosa.Extensions
+    open Fabulosa.Avatar
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     module Remove =
 
@@ -19,23 +20,22 @@ module Chip =
 
         let ƒ (remove: T) =
             R.a
-                [ ClassName "btn btn-clear"
-                  Role "button"
-                  OnClick remove.OnRemove ]
+                [ P.ClassName "btn btn-clear"
+                  P.Role "button"
+                  P.OnClick remove.OnRemove ]
                 []
 
     module ChipAvatar =
-        
-        let build (avatar: Avatar.T) =
-            Avatar.ƒ
-                { avatar with
-                    Size = Avatar.Size.Small }
+
+        let build (c: Avatar) =
+            let optional, children = c
+            avatar ([ Size Small ], children)
 
         let ƒ = build
 
     [<RequireQualifiedAccess>]
     type Props =
-        { HTMLProps: HTMLProps
+        { HTMLProps: P.HTMLProps
           OnRemove: (MouseEvent -> unit) option }
 
     [<RequireQualifiedAccess>]
@@ -69,7 +69,7 @@ module Chip =
     let build avatarƒ (chip: T<'Avatar>) =
         let props, children = chip
         props.HTMLProps
-        |> addProp (ClassName "chip")
+        |> P.addProp (P.ClassName "chip")
         |> R.div <|
         [ avatar avatarƒ children.Avatar
           R.str children.Text

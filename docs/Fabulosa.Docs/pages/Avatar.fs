@@ -1,66 +1,32 @@
 ﻿module AvatarPage
 
-open Fabulosa
+open Fabulosa.Avatar
 open Fabulosa.Docs
 open Fable.Import.React
 module R = Fable.Helpers.React
 open Renderer
 
 (*** define: avatar-initial-sample ***)
-let avatar =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA" }
+let def = avatar ([], Initial "FA")
 (*** define: avatar-source-sample ***)
-let source =
-    Avatar.ƒ
-        { Avatar.props with
-            Source = "assets/avatar-1.png" }
+let source = avatar ([], Url "assets/avatar-1.png")
 (*** define: avatar-sizes-sample ***)
-let extraSmall =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Size = Avatar.Size.ExtraSmall }
+let extraSmall = avatar ([ Size ExtraSmall ], Initial "FA")
 (*** hide ***)
-let small =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Size = Avatar.Size.Small }
+let small = avatar ([ Size Small ], Initial "FA")
 
-let medium =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Size = Avatar.Size.Medium }
+let medium = avatar ([], Initial "FA")
 
-let large =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Size = Avatar.Size.Large }
+let large = avatar ([ Size Large ], Initial "FA")
 
-let extraLarge =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Size = Avatar.Size.ExtraLarge }
+let extraLarge = avatar ([ Size ExtraLarge ], Initial "FA")
 (*** define: avatar-kinds-sample ***)
-let icon =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Kind = Avatar.Kind.Icon "assets/avatar-1.png" }
+let icon = avatar ([], Url "assets/avatar-1.png")
 
-let presence =
-    Avatar.ƒ
-        { Avatar.props with
-            Initial = "FA"
-            Kind = Avatar.Kind.Presence Avatar.Presence.Online }
+let presence = avatar ([ Presence Online ], Url "assets/avatar-1.png")
 (*** hide ***)
 let render () =
-    tryMount "avatar-initial-demo" avatar
+    tryMount "avatar-initial-demo" def
     tryMount "avatar-source-demo" source
     tryMount "avatar-xs-demo" extraSmall
     tryMount "avatar-sm-demo" small
@@ -70,7 +36,9 @@ let render () =
     tryMount "avatar-icon-demo" icon
     tryMount "avatar-presence-demo" presence
     tryMount "avatar-props-table"
-        (PropTable.propTable typeof<Avatar.Props> Avatar.props)
+        (PropTable.unionPropTable typeof<AvatarChildren>)
+    tryMount "avatar-optional-props-table"
+        (PropTable.unionPropTable typeof<AvatarOptional>)
 (**
 <div id="avatars">
 
@@ -82,10 +50,20 @@ Avatars are user profile pictures.
 
 </div>
 
+<div id="avatar-optional-props">
+
+<h3 class="s-title">
+    Optional props
+</h3>
+
+<div class="props-table" id="avatar-optional-props-table"></div>
+
+</div>
+
 <div id="avatar-props">
 
 <h3 class="s-title">
-    Props
+    Children
 </h3>
 
 <div class="props-table" id="avatar-props-table"></div>

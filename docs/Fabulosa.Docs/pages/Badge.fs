@@ -1,42 +1,21 @@
 ﻿module BadgePage
 
-open Fabulosa
+open Fabulosa.Badge
+open Fabulosa.Avatar
 open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 
 (*** define: badge-div-span-sample ***)
-let div =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 1 },
-         Badge.Child.Div
-           ([], [ R.str "Text" ]))
+let div = badge ([], { Value = 1 }, BadgeDiv ([], [ R.str "Text" ]))
 
-let span =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 2 },
-         Badge.Child.Span
-           ([], [ R.str "Text" ]))
+let span = badge ([], { Value = 2 }, BadgeSpan ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
-let button =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 3 },
-         Badge.Child.Button
-           ([], [ R.str "Button" ]))
+let button = badge ([], { Value = 1 }, BadgeButton ([], [ R.str "Button" ]))
 
-let avatar =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 4 },
-         Badge.Child.Avatar
-           { Avatar.props with
-               Source = "assets/avatar-1.png"
-               Size = Avatar.Size.Large })
+let avatar = badge ([], { Value = 4 }, BadgeAvatar ([], Url "assets/avatar-1.png"))
 (*** hide ***)
 let render () =
     tryMount "badge-div-demo" div
@@ -44,7 +23,7 @@ let render () =
     tryMount "badge-button-demo" button
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-props-table"
-        (PropTable.propTable typeof<Badge.Props> Badge.props)
+        (PropTable.propTable typeof<BadgeRequired> { Value = 1 })
 (**
 <div id="badges">
 

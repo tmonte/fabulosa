@@ -1,103 +1,84 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Avatar =
 
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
-    type HTMLProps = IHTMLProp list
-
-    [<RequireQualifiedAccess>]
     type Size =
-    | ExtraSmall
-    | Small
-    | Medium
-    | Large
-    | ExtraLarge
-    | Unset
+        | ExtraSmall
+        | Small
+        | Large
+        | ExtraLarge
 
-    [<RequireQualifiedAccess>]
-    type Initial = string
-
-    [<RequireQualifiedAccess>]
     type Presence =
-    | Online
-    | Busy
-    | Away
-    | Unset
+        | Online
+        | Busy
+        | Away
 
-    [<RequireQualifiedAccess>]
-    type Kind =
-    | Icon of string
-    | Presence of Presence
-    | Unset
+    type AvatarOptional =
+        | Presence of Presence
+        | Size of Size
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Source = string
+    type AvatarChildren =
+        | Initial of string
+        | Url of string
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Kind: Kind
-          Initial: Initial
-          Size: Size
-          Source: Source
-          HTMLProps: HTMLProps }
+    type Avatar =
+        HTMLProps * AvatarChildren
 
-    [<RequireQualifiedAccess>]
-    type T = Props
+    let private size (prop: IHTMLProp) =
+        match prop with
+        | :? AvatarOptional as opt ->
+            match opt with
+            | Size ExtraSmall -> Some "avatar-xs"
+            | Size Small -> Some "avatar-sm"
+            | Size Large -> Some "avatar-lg"
+            | Size ExtraLarge -> Some "avatar-xl"
+            | _ -> None
+            |> Option.map ClassName
+            |> Option.map (fun n -> n :> IHTMLProp)
+            |> Option.orElse (Some prop)
+            |> Option.get
+        | _ -> prop
 
-    let props =
-        { Props.Kind = Kind.Unset
-          Props.Initial = ""
-          Props.Size = Size.Unset
-          Props.Source = ""
-          Props.HTMLProps = [] }
+    let private presenceIcon presence =
+        R.i
+            ([presence] |> addProp (ClassName "avatar-presence")) []
 
-    let private size =
-        function
-        | Size.ExtraSmall -> "avatar-xs"
-        | Size.Small -> "avatar-sm"
-        | Size.Medium -> "avatar-md"
-        | Size.Large -> "avatar-lg"
-        | Size.ExtraLarge -> "avatar-xl"
-        | Size.Unset -> "avatar-md"
-        >> ClassName
+    let private presence (prop: IHTMLProp) =
+        match prop with
+        | :? AvatarOptional as opt ->
+            match opt with
+            | Presence Away -> Some "away"
+            | Presence Busy -> Some "busy"
+            | Presence Online -> Some "online"
+            | _ -> None
+            |> Option.map ClassName
+            |> Option.map presenceIcon
+        | _ -> None
 
-    let private presence =
-        function
-        | Presence.Away -> "away"
-        | Presence.Busy -> "busy"
-        | Presence.Online -> "online"
-        | Presence.Unset -> ""
-        >> ClassName
+    let private initial children (props: IHTMLProp list) =
+        match children with
+        | Initial initial ->
+            props @ [ Data ("initial", initial) ]
+        | _ -> props
 
-    let private kind =
-        function
-        | Kind.Icon source ->
-            R.img
-                [ ClassName "avatar-icon"
-                  Src source ]
-            |> Some
-        | Kind.Presence p ->
-            R.i
-                [ ClassName "avatar-presence"
-                  presence p ] []
-            |> Some
-        | Kind.Unset -> None
+    let private image children =
+        match children with
+        | Url url ->
+            R.img [ Src url ]
+        | _ -> R.ofOption None
 
-    let build (avatar: T) =
-        let containerProps =
-            addProps
-                [ ClassName "avatar"
-                  size avatar.Size ] avatar.HTMLProps
-                  @ [ Data ("initial", avatar.Initial) ]
-        R.figure containerProps
-            [ ( if avatar.Source <> ""
-                then R.img [ Src avatar.Source ]
-                else R.ofOption None )
-              kind avatar.Kind |> R.ofOption ]
-
-    let ƒ = build
+    let avatar (c: Avatar) =
+        let optional, children = c
+        optional
+        |> List.map size
+        |> addProp (ClassName "avatar")
+        |> initial children
+        |> R.figure
+        <| [ image children
+             (List.tryPick presence optional)
+             |> R.ofOption ]
