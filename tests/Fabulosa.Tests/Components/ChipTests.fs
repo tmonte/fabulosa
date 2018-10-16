@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -21,7 +22,7 @@ let tests =
         test "Chip html props" {
             Chip.ƒ
                 ({ Chip.props with 
-                     HTMLProps = [ClassName "custom"] },
+                     HTMLProps = [P.ClassName "custom"] },
                  Chip.children)
             |> ReactNode.unit
             |> hasClass "chip custom"
@@ -34,14 +35,12 @@ let tests =
                     OnRemove = Some fn },
                  Chip.children)
             |> ReactNode.unit
-            |> hasDescendentProp (OnClick fn)
+            |> hasDescendentProp (P.OnClick fn)
         }
 
         test "Chip with children" {
-            let avatar =
-                Avatar.ƒ
-                    { Avatar.props with
-                        Size = Avatar.Size.Small }
+            let av =
+                avatar ([ Size Small ], Initial "FA")
                 |> ReactNode.unit
             let text =
                 R.str "Text"
@@ -49,10 +48,10 @@ let tests =
             Chip.ƒ
                 (Chip.props,
                  { Chip.children with
-                     Avatar = Some Avatar.props
+                     Avatar = Some ([], Initial "FA")
                      Text = "Text" })
             |> ReactNode.unit
-            |>! hasChild 1 avatar
+            |>! hasChild 1 av
             |>! hasChild 1 text
             |> ignore
         }

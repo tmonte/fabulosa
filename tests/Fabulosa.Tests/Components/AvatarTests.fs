@@ -1,9 +1,9 @@
 ﻿module AvatarTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -11,79 +11,37 @@ let tests =
     testList "Avatar tests" [
 
         test "Avatar default" {
-            let props = Avatar.props
-            let avatar = Avatar.ƒ props
-
-            avatar
+            avatar ([], Initial "FA")
             |> ReactNode.unit
-            |> hasClass "avatar avatar-md"
+            |> hasUniqueClass "avatar"
         }
 
         test "Avatar size small" {
-            let props = { Avatar.props with Size = Avatar.Size.Small }
-            let avatar = Avatar.ƒ props
-
-            avatar
+            avatar ([ Size Small ], Initial "FA")
             |> ReactNode.unit
-            |> hasClass "avatar avatar-sm"
+            |> hasUniqueClass "avatar avatar-sm"
         }
 
         test "Avatar data initial" {
-            let props = { Avatar.props with Initial = "FA" }
-            let avatar = Avatar.ƒ props
-
-            avatar
+            avatar ([], Initial "FA")
             |> ReactNode.unit
-            |> hasProp (Data ("initial", props.Initial))
+            |> hasProp (P.Data ("initial", "FA"))
         }
 
         test "Avatar image" {
-            let props = { Avatar.props with Source = "source.png" }
-            let avatar = Avatar.ƒ props
-            let image =
-                R.img [Src "source.png"]
-                |> ReactNode.unit
-
-            avatar
+            avatar ([], Url "FA")
             |> ReactNode.unit
-            |> hasChild 1 image
-        }
-
-        test "Avatar image with icon" {
-            let props =
-                { Avatar.props with
-                    Kind = Avatar.Kind.Icon "icon.png"}
-            let avatar = Avatar.ƒ props
-            let icon =
-                R.img [Src "icon.png"; ClassName "avatar-icon"]
-                |> ReactNode.unit      
-
-            avatar
-            |> ReactNode.unit
-            |> hasChild 1 icon
+            |> hasDescendentProp (P.Src "FA")
         }
 
         test "Avatar image with presence" {
-            let props =
-                { Avatar.props with
-                    Kind = Avatar.Kind.Presence Avatar.Presence.Online}
-            let avatar = Avatar.ƒ props
-            let icon =
-                R.img [Src "icon.png"]
-                |> ReactNode.unit      
-
-            avatar
+            avatar ([ Presence Online ], Initial "FA")
             |> ReactNode.unit
             |> hasDescendentClass "avatar-presence online"
         }
 
         test "Avatar html props" {
-            let props =
-                { Avatar.props with
-                    HTMLProps = [ClassName "custom"] }
-            let avatar = Avatar.ƒ props
-
-            avatar
+            avatar ([ P.ClassName "custom" ], Initial "FA")
             |> ReactNode.unit
             |> hasClass "custom"
         }

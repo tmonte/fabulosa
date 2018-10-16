@@ -29,20 +29,23 @@ module Avatar =
     type Avatar =
         HTMLProps * AvatarChildren
 
-    let private size (prop: IHTMLProp) =
-        match prop with
-        | :? AvatarOptional as opt ->
-            match opt with
-            | Size ExtraSmall -> Some "avatar-xs"
-            | Size Small -> Some "avatar-sm"
-            | Size Large -> Some "avatar-lg"
-            | Size ExtraLarge -> Some "avatar-xl"
-            | _ -> None
-            |> Option.map ClassName
-            |> Option.map (fun n -> n :> IHTMLProp)
-            |> Option.orElse (Some prop)
-            |> Option.get
-        | _ -> prop
+    let private size (props: HTMLProps) =
+        List.tryPick
+            (fun (prop: IHTMLProp) ->
+                match prop with
+                | :? AvatarOptional as opt ->
+                    match opt with
+                    | Size ExtraSmall -> Some "avatar-xs"
+                    | Size Small -> Some "avatar-sm"
+                    | Size Large -> Some "avatar-lg"
+                    | Size ExtraLarge -> Some "avatar-xl"
+                    | _ -> None
+                | _ -> None)
+            props
+        |> Option.orElse (Some "")
+        |> Option.get
+        |> ClassName
+        :> IHTMLProp
 
     let private presenceIcon presence =
         R.i
@@ -75,7 +78,7 @@ module Avatar =
     let avatar (c: Avatar) =
         let optional, children = c
         optional
-        |> List.map size
+        |> addProp (size optional)
         |> addProp (ClassName "avatar")
         |> initial children
         |> R.figure
