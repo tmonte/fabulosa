@@ -1,48 +1,32 @@
 ﻿module BarPage
 
-open Fabulosa
+open Fabulosa.Bar
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 
 (*** define: bar-default-sample ***)
-let bar =
-    Bar.ƒ
-        (Bar.props,
-         [ ({Bar.Item.props with Value = 25 }, []) ])
+let def = bar ([], [ BarItem ([], Value 25) ])
 (*** define: bar-small-sample ***)
-let small =
-    Bar.ƒ
-        ({ Bar.props with
-             Small = true },
-         [ ({ Bar.Item.props with Value = 25 }, []) ])
+let small = bar ([ Small true ], [ BarItem ([], Value 25) ])
 (*** define: bar-item-tooltip-sample ***)
-let tooltip =
-    Bar.ƒ
-        (Bar.props,
-         [ ({ Bar.Item.props with
-               Value = 25
-               Tooltip = true }, []) ])
+let tooltip = bar ([], [ BarItem ([ Tooltip true ], Value 25) ])
 (*** define: bar-item-multiple-sample ***)
 let multiple =
-    Bar.ƒ
-        (Bar.props,
-         [ ({ Bar.Item.props with
-               Value = 25 }, [])
-           ({ Bar.Item.props with
-               Value = 15 }, [])
-           ({ Bar.Item.props with
-               Value = 5 }, []) ])
+    bar ([],
+        [ BarItem ([], Value 25)
+          BarItem ([], Value 15)
+          BarItem ([], Value 5) ])
 (*** hide ***)
 let render () =
-    tryMount "bar-default-demo" bar
+    tryMount "bar-default-demo" def
     tryMount "bar-small-demo" small
     tryMount "bar-item-tooltip-demo" tooltip
     tryMount "bar-item-multiple-demo" multiple
-    tryMount "bar-props-table"
-        (PropTable.propTable typeof<Bar.Props> Bar.props)
+    tryMount "bar-optional-table"
+        (PropTable.unionPropTable typeof<BarOptional>)
 (**
 
 <div id="bars">
@@ -55,16 +39,6 @@ Bars represent the progress of a task or the
 value within the known range. Bars are custom
 components for displaying HTML5 progress, meter
 and input range elements.
-
-</div>
-
-<div id="bar-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="bar-props-table"></div>
 
 </div>
 
@@ -137,6 +111,16 @@ Bar can also have multiple items
 (*** include: bar-item-multiple-sample ***)
 
 (**
+
+</div>
+
+<div id="bar-optional">
+
+<h3 class="s-title">
+    Props
+</h3>
+
+<div class="props-table" id="bar-optional-table"></div>
 
 </div>
 

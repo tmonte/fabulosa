@@ -1,25 +1,12 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Bar =
 
-    open Fable.Import.React
     open Fabulosa.Extensions
-    open Fabulosa.Button
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
-    module Item =
-
-        [<RequireQualifiedAccess>]
-        type Value = int
-
-        [<RequireQualifiedAccess>]
-        type Tooltip = bool
-
-        [<RequireQualifiedAccess>]
-        type Color =
+    type Color =
         | Primary
         | Secondary
         | Dark
@@ -29,113 +16,101 @@ module Bar =
         | Error
         | Unset
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { Value: Value
-              Tooltip: Tooltip
-              Color: Color
-              HTMLProps: HTMLProps }
+    type BarItemOptional =
+        | Tooltip of bool
+        | Color of Color
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
+    type BarItemRequired =
+        Value of int
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type private BarItem =
+        HTMLProps * BarItemRequired
 
-        let props =
-            { Props.Value = 0
-              Props.Tooltip = false
-              Props.Color = Color.Unset
-              Props.HTMLProps = [] }
+    let private toPercent =
+        string >> (+) >> (|>) "%"
 
-        let private toPercent =
-            string >> (+) >> (|>) "%"
+    let private tooltip (prop: IHTMLProp) =
+        match prop with
+        | :? BarItemOptional as opt ->
+            match opt with
+            | Tooltip true -> Some "tooltip"
+            | _ -> None
+        | _ -> None
 
-        let private tooltip =
-            function
-            | true -> "tooltip"
-            | false -> ""
-            >> ClassName
+    let private tooltipData value (prop: IHTMLProp) =
+        match prop with
+        | :? BarItemOptional as opt ->
+            match opt with
+            | Tooltip true ->
+                Data ("tooltip", toPercent value)
+                :> IHTMLProp
+            | _ -> prop
+        | _ -> prop
 
-        let private tooltipData =
-            function
-            | true, value ->
-                [Data ("tooltip", toPercent value)]
-            | false, _ -> []
-            >> List.cast<IHTMLProp>
+    let private style value =
+        let width = R.Props.CSSProp.Width (toPercent value)
+        let style = Fable.Helpers.React.Props.Style [width]
+        [style]
+        |> List.cast<IHTMLProp>
 
-        let private style value =
-            let width = R.Props.CSSProp.Width (toPercent value)
-            let style = Fable.Helpers.React.Props.Style [width]
-            [style]
-            |> List.cast<IHTMLProp>
+    let barItem (c: BarItem) =
+        let opt, (Value value) = c
+        (opt @ style value)
+        |> addClass tooltip
+        |> List.map (tooltipData value)
+        |> addProp (ClassName "bar-item")
+        |> R.div <| []
 
-        let build (item: T) =
-            let props, children = item
-            props.HTMLProps
-            @ tooltipData (props.Tooltip, props.Value)
-            @ style props.Value
-            |> addProps
-                [ ClassName "bar-item"
-                  tooltip props.Tooltip ]
-            |> R.div <| children
+    type BarOptional =
+        | Small of bool
+        interface IHTMLProp
 
-        let ƒ = build
+    type BarChild =
+        BarItem of BarItem
 
-    [<RequireQualifiedAccess>]
-    type Small = bool
+    type private BarChildren =
+        BarChild list
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Small: Small
-          HTMLProps: HTMLProps }
+    type private Bar = HTMLProps * BarChildren
 
-    [<RequireQualifiedAccess>]
-    type Children<'Item> = 'Item list
+    let private small (prop: IHTMLProp) =
+        match prop with
+        | :? BarOptional as opt ->
+            match opt with
+            | Small true -> Some "bar-sm"
+            | _ -> None
+        | _ -> None
 
-    [<RequireQualifiedAccess>]
-    type T<'Item> = Props * Children<'Item>
-    
-    let props =
-        { Props.Small = false
-          Props.HTMLProps = [] }
-
-    let private small =
-        function
-        | true -> "bar-sm"
-        | false -> ""
-        >> ClassName
-
-    let build itemƒ (bar: T<'Item>) =
-        let props, children = bar
-        props.HTMLProps
-        |> addProps
-            [ ClassName "bar"
-              small props.Small ]
+    let bar (c: Bar) =
+        let optional, children = c
+        optional
+        |> addClass small
+        |> addProp (ClassName "bar")
         |> R.div
-        <| Seq.map itemƒ children
+        <| Seq.map
+            (fun (BarItem item) -> barItem item)
+            children
+        
+    //[<RequireQualifiedAccess>]
+    //module Slider =
 
-    let ƒ = build Item.ƒ
+        //let props = props
 
-    [<RequireQualifiedAccess>]
-    module Slider =
+        //let build (slider: T<Item.T>) =
+        //    let props, children = slider
+        //    props.HTMLProps
+        //    |> addProps
+        //        [ ClassName "bar bar-slider"
+        //          small props.Small ]
+        //    |> R.div
+        //    <| Seq.map
+        //        (fun item ->
+        //            let props, children = item
+        //            Item.ƒ
+        //                (props,
+        //                 [ button
+        //                     ([ ClassName "bar-slider-btn" ], []) ]))
+        //        children
 
-        let props = props
-
-        let build (slider: T<Item.T>) =
-            let props, children = slider
-            props.HTMLProps
-            |> addProps
-                [ ClassName "bar bar-slider"
-                  small props.Small ]
-            |> R.div
-            <| Seq.map
-                (fun item ->
-                    let props, children = item
-                    Item.ƒ
-                        (props,
-                         [ button
-                             ([ ClassName "bar-slider-btn" ], []) ]))
-                children
-
-        let ƒ = build
+        //let ƒ = build
