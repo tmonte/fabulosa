@@ -16,7 +16,7 @@ let popover =
          { Trigger =
              [ button ([], [ R.str "Popover" ]) ]
            Content =
-             [ CardPage.card ] })
+             [ CardPage.def ] })
 (*** hide ***)
 let render () =
     tryMount "popover-default-demo" popover
