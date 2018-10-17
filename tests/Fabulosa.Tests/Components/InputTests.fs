@@ -53,10 +53,10 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (props,
-                     { Icon = ([], { Kind = Download })
+                     { Icon = ([], Icon.Kind Download)
                        Input = Input.props })
             let iconElement =
-                icon ([ P.ClassName "form-icon" ], { Kind = Download })
+                icon ([ P.ClassName "form-icon" ], Icon.Kind Download)
                 |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
@@ -73,10 +73,10 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon = ([], { Kind = ArrowDown })
+                     { Icon = ([], Icon.Kind ArrowDown)
                        Input = Input.props })
             let iconElement =
-                icon ([ P.ClassName "form-icon" ], { Kind = ArrowDown })
+                icon ([ P.ClassName "form-icon" ], Icon.Kind ArrowDown)
                 |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
@@ -93,10 +93,10 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon = ([ Icon.Size X2 ], { Kind = Download })
+                     { Icon = ([ Icon.Size X2 ], Icon.Kind Download)
                        Input = Input.props })
             let iconElement =
-                icon ([ P.ClassName "form-icon"; Icon.Size X2 ], { Kind = Download })
+                icon ([ P.ClassName "form-icon"; Icon.Size X2 ], Icon.Kind Download)
                 |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
@@ -118,10 +118,10 @@ let tests =
             let inputIcon =
                 IconInput.ƒ
                     (IconInput.props,
-                     { Icon = ([], { Kind = Download })
+                     { Icon = ([], Icon.Kind Download)
                        Input = inputT })
             let iconElement =
-                icon ([ P.ClassName "form-icon"], { Kind = Download })
+                icon ([ P.ClassName "form-icon"], Icon.Kind Download)
                 |> ReactNode.unit
             let input =
                 Input.ƒ inputT

@@ -7,15 +7,15 @@ module R = Fable.Helpers.React
 open Fable.Import.React
 
 (*** define: icon-sample ***)
-let def = icon ([], { Kind = Download })
+let def = icon ([], Kind Download)
 (*** define: icon-size-sample ***)
-let x4 = icon ([ Size X4 ], { Kind = Upload })
+let x4 = icon ([ Size X4 ], Kind Upload)
 (*** hide ***)
 let render () =
     tryMount "icon-demo" def
     tryMount "icon-size-demo" x4
     tryMount "icon-props-table"
-        (PropTable.propTable typeof<IconRequired> { Kind = Download })
+        (PropTable.unionPropTable typeof<IconRequired>)
     tryMount "icon-optional-props-table"
         (PropTable.unionPropTable typeof<IconOptional>)
 

@@ -39,30 +39,61 @@ module Button =
 
     type Button = HTMLProps * ReactElement list
 
-    let private props (prop: IHTMLProp) =
+    let private kind (prop: IHTMLProp) =
         match prop with
         | :? ButtonOptional as opt ->
             match opt with
-            | Kind Default -> "btn-default"
-            | Kind Primary -> "btn-primary"
-            | Kind Link -> "btn-link"
-            | Color Success -> "btn-success"
-            | Color Error -> "btn-error"
-            | Size Small -> "btn-sm"
-            | Size Large -> "btn-lg"
-            | State Disabled -> "disabled"
-            | State Loading -> "loading"
-            | State Active -> "active"
-            | Shape Squared -> "btn-action"
-            | Shape Round -> "btn-action circle"
-            |> ClassName
-            :> IHTMLProp
-        | _ -> prop
+            | Kind Default -> Some "btn-default"
+            | Kind Primary -> Some "btn-primary"
+            | Kind Link -> Some "btn-link"
+            | _ -> None
+        | _ -> None
+
+    let private color (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Color Success -> Some "btn-success"
+            | Color Error -> Some "btn-error"
+            | _ -> None
+        | _ -> None
+
+    let private size (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Size Small -> Some "btn-sm"
+            | Size Large -> Some "btn-lg"
+            | _ -> None
+        | _ -> None
+
+    let private state (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | State Disabled -> Some "disabled"
+            | State Loading -> Some "loading"
+            | State Active -> Some "active"
+            | _ -> None
+        | _ -> None
+
+    let private shape (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Shape Squared -> Some "btn-action"
+            | Shape Round -> Some "btn-action circle"
+            | _ -> None
+        | _ -> None
 
     let button (c: Button) =
         let optional, children = c
         optional
-        |> List.map props
+        |> addClass kind
+        |> addClass color
+        |> addClass size
+        |> addClass state
+        |> addClass shape
         |> addProp (ClassName "btn")
         |> R.button <| children
         

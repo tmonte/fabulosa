@@ -60,7 +60,7 @@ module Menu =
         let props _ = ()
 
         let children: Button =
-            ([], [ icon ([], { Kind = Menu }) ])
+            ([], [ icon ([], Icon.Kind Menu) ])
 
         let onClick (e: MouseEvent) =
             let element = e.currentTarget :?> Browser.Element

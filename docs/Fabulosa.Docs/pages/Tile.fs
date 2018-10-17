@@ -22,7 +22,7 @@ let tile =
              ({ Tile.TileIcon.props with
                   HTMLProps =
                     [ P.ClassName "example-tile-icon" ] },
-              ([], { Kind = People }))
+              ([], Icon.Kind People))
            Content =
              (contentProps,
                 { Title = "The Avengers"
@@ -43,14 +43,14 @@ let compact =
              ({ Tile.TileIcon.props with
                   HTMLProps =
                     [ P.ClassName "example-tile-icon" ] },
-              ([], { Kind = Mail }))
+              ([], Icon.Kind Mail))
            Content =
              (contentProps,
                 { Title = "fabulosa-docs.pdf"
                   SubTitle = "14MB · Public · 1 Jan, 2017" })
            Action =
              (Tile.Action.props,
-              [ icon ([], { Kind = MoreHoriz }) ]) })
+              [ icon ([], Icon.Kind MoreHoriz) ]) })
 (*** hide ***)
 let render () =
     tryMount "tile-default-demo" tile

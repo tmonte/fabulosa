@@ -9,13 +9,13 @@ module P = R.Props
 open Fable.Import.React
 
 (*** define: badge-div-span-sample ***)
-let div = badge ([], { Value = 1 }, BadgeDiv ([], [ R.str "Text" ]))
+let div = badge ([], Value 1, BadgeDiv ([], [ R.str "Text" ]))
 
-let span = badge ([], { Value = 2 }, BadgeSpan ([], [ R.str "Text" ]))
+let span = badge ([], Value 2, BadgeSpan ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
-let button = badge ([], { Value = 3 }, BadgeButton ([], [ R.str "Button" ]))
+let button = badge ([], Value 3, BadgeButton ([], [ R.str "Button" ]))
 
-let avatar = badge ([], { Value = 4 }, BadgeAvatar ([ Size Large ], Url "assets/avatar-1.png"))
+let avatar = badge ([], Value 4, BadgeAvatar ([ Size Large ], Url "assets/avatar-1.png"))
 (*** hide ***)
 let render () =
     tryMount "badge-div-demo" div
@@ -23,7 +23,7 @@ let render () =
     tryMount "badge-button-demo" button
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-props-table"
-        (PropTable.propTable typeof<BadgeRequired> { Value = 1 })
+        (PropTable.unionPropTable typeof<BadgeRequired>)
     tryMount "badge-child-table"
         (PropTable.unionPropTable typeof<BadgeChildren>)
 (**

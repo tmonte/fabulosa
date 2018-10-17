@@ -5,40 +5,41 @@ module Breadcrumb =
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open Fable.Import.React
-    open R.Props
+    module P = R.Props
+
+    type Text = string
+
+    type Href = string
         
     type BreadcrumbLinkRequired =
-        { Href: string }
+        | Href of Href
 
-    type BreadcrumbLinkChildren =
-        { Text: string }
+    type BreadcrumbItemChildren =
+        | Text of Text
 
     type BreadcrumbLink =
-        HTMLProps * BreadcrumbLinkRequired * BreadcrumbLinkChildren
+        P.HTMLProps * BreadcrumbLinkRequired * BreadcrumbItemChildren
                
     let breadcrumbLink (c: BreadcrumbLink) =
-        let optional, required, children = c
+        let optional, (Href href), (Text text) = c
         optional
-        |> addProp (ClassName "breadcrumb-item")
+        |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
-        <| [ R.a [ Href required.Href ] [ R.str children.Text ] ]
+        <| [ R.a [ P.Href href ] [ R.str text ] ]
 
-    type BreadcrumbTextOptional = HTMLProps
+    type BreadcrumbTextOptional = P.HTMLProps
     
-    type BreadcrumbTextChildren =
-        { Text: string }
-
     type BreadcrumbText =
-        BreadcrumbTextOptional * BreadcrumbTextChildren
+        BreadcrumbTextOptional * BreadcrumbItemChildren
 
     let breadcrumbText (c: BreadcrumbText) =
-        let optional, children = c
+        let optional, (Text text) = c
         optional
-        |> addProp (ClassName "breadcrumb-item")
+        |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
-        <| [ R.str children.Text ]
+        <| [ R.str text ]
 
-    type BreadcrumbElementsOptional = HTMLProps
+    type BreadcrumbElementsOptional = P.HTMLProps
     
     type BreadcrumbElementsChildren = ReactElement list
 
@@ -48,11 +49,11 @@ module Breadcrumb =
     let breadcrumbElements (c: BreadcrumbElements) =
         let optional, children = c
         optional
-        |> addProp (ClassName "breadcrumb-item")
+        |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
         <| children
 
-    type BreadcrumbOptional = HTMLProps
+    type BreadcrumbOptional = P.HTMLProps
     
     type BreadcrumbChildren =
         | BreadcrumbElements of BreadcrumbElements
@@ -65,7 +66,7 @@ module Breadcrumb =
     let breadcrumb (c: Breadcrumb) =
         let optional, children = c
         optional
-        |> addProp (ClassName "breadcrumb")
+        |> P.addProp (P.ClassName "breadcrumb")
         |> R.ul
         <| List.map
             (function

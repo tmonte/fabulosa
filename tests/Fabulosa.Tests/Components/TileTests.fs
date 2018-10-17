@@ -41,7 +41,7 @@ let tests =
 
         test "Tile icon" {
             let tileIcon =
-                (Tile.TileIcon.props, ([], { Kind = Download }))
+                (Tile.TileIcon.props, ([], Icon.Kind Download))
 
             Tile.ƒ
                 (Tile.props,

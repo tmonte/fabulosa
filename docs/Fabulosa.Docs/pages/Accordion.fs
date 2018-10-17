@@ -10,34 +10,36 @@ open Renderer
 let element =
     accordion ([],
       [ AccordionItem ([],
-          { Header = "Header One"
-            Body =
-              [ R.a [] [ R.str "Item One" ]
-                R.a [] [ R.str "Item Two" ] ] })
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ]))
         AccordionItem ([],
-           { Header = "Header One"
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] }) ])
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ])) ])
 (*** define: accordion-custom-sample ***)
 let custom =
     accordion ([],
-      [ AccordionItem ([ Icon ([], { Kind = Forward }) ],
-           { Header = "Header One"
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] })
-        AccordionItem ([ Icon ([], { Kind = Back }) ],
-           { Header = "Header One"
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] }) ])
+      [ AccordionItem ([ Icon ([], Kind Forward) ],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ] ))
+        AccordionItem ([ Icon ([], Kind Back) ],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ] )) ])
 (*** hide ***)
 let render () =
     tryMount "accordion-demo" element
     tryMount "accordion-custom-demo" custom
-    tryMount "accordion-item-children-table"
-        (PropTable.propTable typeof<AccordionItemChildren> { Header = "Text"; Body = [] })
+    tryMount "accordion-item-header-table"
+        (PropTable.unionPropTable typeof<AccordionHeader>)
+    tryMount "accordion-item-body-table"
+        (PropTable.unionPropTable typeof<AccordionBody>)
     tryMount "accordion-item-optional-table"
         (PropTable.unionPropTable typeof<AccordionItemOptional>)
 (**
@@ -88,13 +90,23 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
-<div id="accordion-item-children">
+<div id="accordion-item-header">
 
 <h3 class="s-title">
-    Item children
+    Item header
 </h3>
 
-<div class="props-table" id="accordion-item-children-table"></div>
+<div class="props-table" id="accordion-item-header-table"></div>
+
+</div>
+
+<div id="accordion-item-body">
+
+<h3 class="s-title">
+    Item body
+</h3>
+
+<div class="props-table" id="accordion-item-body-table"></div>
 
 </div>
 

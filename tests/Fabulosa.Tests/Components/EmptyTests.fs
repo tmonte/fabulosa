@@ -30,7 +30,7 @@ let tests =
         //}
 
         test "Empty with children" {
-            let opt, req = ([], { Kind = Mail })
+            let opt, req = ([], Icon.Kind Mail)
             let icon =
                 icon (opt @ [ Icon.Size X3 ], req)
                 |> ReactNode.unit

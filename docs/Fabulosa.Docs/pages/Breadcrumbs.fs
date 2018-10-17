@@ -3,15 +3,15 @@
 open Fabulosa.Breadcrumb
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 
 (*** define: breadcrumbs-demo ***)
 let element =
     breadcrumb ([],
-        [ BreadcrumbText ([], { Text = "Text" })
-          BreadcrumbLink ([], { Href = "#" }, { Text = "Link" })
+        [ BreadcrumbText ([], Text "Text")
+          BreadcrumbLink ([], Href "#", Text "Link")
           BreadcrumbElements ([], [ R.str "Hey: "; R.a [] [ R.str "Jude" ] ]) ])
 (*** hide ***)
 let render () =
@@ -19,11 +19,11 @@ let render () =
     tryMount "breadcrumb-children-table"
         (PropTable.unionPropTable typeof<BreadcrumbChildren>)
     tryMount "breadcrumb-text-children-table"
-        (PropTable.propTable typeof<BreadcrumbTextChildren> { Text = "" })
+        (PropTable.unionPropTable typeof<BreadcrumbItemChildren>)
     tryMount "breadcrumb-link-required-table"
-        (PropTable.propTable typeof<BreadcrumbLinkRequired> { Href = "" })
+        (PropTable.unionPropTable typeof<BreadcrumbLinkRequired>)
     tryMount "breadcrumb-link-children-table"
-        (PropTable.propTable typeof<BreadcrumbLinkChildren> { Text = "" })
+        (PropTable.unionPropTable typeof<BreadcrumbItemChildren>)
 (**
 
 <div id="breadcrumbs">

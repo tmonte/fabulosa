@@ -12,9 +12,14 @@ module Accordion =
         | Icon of Icon
         interface IHTMLProp
 
+    type AccordionHeader =
+        | Header of string
+
+    type AccordionBody =
+        | Body of (ReactElement list)
+
     type AccordionItemChildren =
-        { Header: string
-          Body: ReactElement list }
+        AccordionHeader * AccordionBody
 
     type AccordionItem =
         HTMLProps * AccordionItemChildren
@@ -29,13 +34,13 @@ module Accordion =
     let createIcon opt =
         opt
         |> List.tryPick someIcon
-        |> Option.orElse (Some ([], { Kind = ArrowRight }))
+        |> Option.orElse (Some ([], Icon.Kind ArrowRight))
         |> Option.map (fun (iconOpt, iconReq) ->
              (iconOpt |> addProp (ClassName "mr-1"), iconReq))
         |> Option.get
 
     let accordionItem (c: AccordionItem) =
-        let optional, children = c
+        let optional, (Header header, Body body) = c
         let i = createIcon optional
         R.details
             [ ClassName "accordion" ]
@@ -43,14 +48,14 @@ module Accordion =
                 [ ClassName "accordion-header" ]
                 [ icon i
                   R.RawText "\n"
-                  R.str children.Header ]
+                  R.str header ]
               R.div
                 [ ClassName "accordion-body" ]
                 [ R.ul
                      [ ClassName "menu menu-nav"] 
                      [ R.li
                         [ ClassName "menu-item" ]
-                        children.Body ] ] ]
+                        body ] ] ]
 
     type AccordionChild =
         AccordionItem of AccordionItem

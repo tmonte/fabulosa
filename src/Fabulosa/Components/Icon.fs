@@ -57,7 +57,7 @@ module Icon =
         interface IHTMLProp
 
     type IconRequired =
-        { Kind: Kind }
+        Kind of Kind
 
     type Icon =
         HTMLProps * IconRequired
@@ -117,8 +117,8 @@ module Icon =
         | _ -> prop
 
     let icon (comp: Icon) =
-        let opt, req = comp
+        let opt, (Kind req) = comp
         R.i
             (opt
              |> List.map size
-             |> addProps [ ClassName "icon"; kind req.Kind ]) []        
+             |> addProps [ ClassName "icon"; kind req ]) []        

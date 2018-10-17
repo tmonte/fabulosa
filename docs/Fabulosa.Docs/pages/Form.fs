@@ -54,7 +54,7 @@ let inputGroup =
                       ([],
                        [ R.str "Save"
                          R.RawText "\n"
-                         icon ([], { Kind = Check }) ]) },
+                         icon ([], Icon.Kind Check) ]) },
                 [ InputGroup.Child.Input
                     ({ Input.props with
                          HTMLProps = [Placeholder "Please enter website address"] }) ]) ])

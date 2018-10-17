@@ -78,7 +78,7 @@ module Empty =
         { Props.HTMLProps = [] }
 
     let children =
-        { Children.Icon = ([], { Kind = Mail })
+        { Children.Icon = ([], Kind Mail)
           Children.Title = Title.children
           Children.SubTitle = SubTitle.children
           Children.Action = Action.children }

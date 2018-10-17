@@ -15,7 +15,7 @@ module Badge =
         @ [ Data ("badge", badge) ]
         
     type BadgeRequired =
-        { Value: int }
+        Value of int
 
     type private Element = HTMLProps * ReactElement list
         
@@ -30,15 +30,15 @@ module Badge =
         HTMLProps * BadgeRequired * BadgeChildren
 
     let badge (c: Badge) =
-        let optional, required, children = c
+        let optional, (Value value), children = c
         match children with
         | BadgeAvatar (opt, children) ->
-            avatar (combine opt required.Value, children)
+            avatar (combine opt value, children)
         | BadgeButton (opt, req) ->
-            button (combine opt required.Value, req)
+            button (combine opt value, req)
         | BadgeAnchor (anchorProps, children) ->
-            R.a (combine anchorProps required.Value) children
+            R.a (combine anchorProps value) children
         | BadgeDiv (divProps, children) ->
-            R.div (combine divProps required.Value) children
+            R.div (combine divProps value) children
         | BadgeSpan (spanProps, children) ->
-            R.span (combine spanProps required.Value) children
+            R.span (combine spanProps value) children

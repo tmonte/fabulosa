@@ -38,7 +38,7 @@ let tab =
             [ R.a [] [ R.str "Tab 2" ] ])
            (Tab.Item.props,
             [ badge
-                ([], { Value = 1 },
+                ([], Value 1,
                  BadgeAnchor
                    ([], [ R.str "Tab 3" ])) ]) ])
 (*** hide ***)

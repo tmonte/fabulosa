@@ -33,7 +33,7 @@ module Fable =
                         :> IHTMLProp
                         |> Some
                     | _ -> None
-
+                    
                 let addProp (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
                     if htmlProps |> List.length > 0 then
                         let filtered =
@@ -52,4 +52,14 @@ module Fable =
                 let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
                     props |> List.fold
                         (fun acc prop -> acc |> addProp prop) htmlProps
+
+                let addClass cb (props: HTMLProps)=
+                    List.tryPick
+                        (fun (prop: IHTMLProp) ->
+                            cb prop)
+                        props
+                    |> Option.map ClassName
+                    |> Option.orElse (Some (ClassName ""))
+                    |> Option.get
+                    |> addProp <| props
  
