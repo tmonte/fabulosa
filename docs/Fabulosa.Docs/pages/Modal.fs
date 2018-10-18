@@ -80,9 +80,11 @@ module Container =
 let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
 let demo = R.div [style] [ 
 //        Tooltip.HoverTooltip.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!") 
-        Tooltip.AnotherHover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!")
+        Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!")
 //        BaseTooltip.ƒ (Tooltip.BaseTooltip.props, TooltipContent.Text "I got this too")
-            
+      
+       
+       
         Grid.ƒ
             (Grid.props,
              [ Grid.Row.props,
