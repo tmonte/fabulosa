@@ -1,78 +1,57 @@
 ﻿namespace Fabulosa
 
-open Fable.Import.React
-[<RequireQualifiedAccess>]
 module Chip =
 
+    open Fable.Import.React
     open Fabulosa.Extensions
     open Fabulosa.Avatar
     module R = Fable.Helpers.React
     module P = R.Props
 
-    module Remove =
+    type ChipOptional =
+        | OnRemove of (MouseEvent -> unit)
+        | Avatar of AvatarChildren
+        interface P.IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { OnRemove: MouseEvent -> unit }
+    type ChipChildren =
+        Text of string
 
-        [<RequireQualifiedAccess>]
-        type T = Props
+    type Chip =
+        P.HTMLProps * ChipChildren
 
-        let ƒ (remove: T) =
-            R.a
-                [ P.ClassName "btn btn-clear"
-                  P.Role "button"
-                  P.OnClick remove.OnRemove ]
-                []
+    let private pick fn (props: P.HTMLProps) =
+        props |> List.tryPick fn
 
-    module ChipAvatar =
+    let private onRemove =
+        fun (prop: P.IHTMLProp) ->
+            match prop with
+            | :? ChipOptional as opt ->
+                match opt with
+                | OnRemove fn ->
+                    Some (R.a
+                      [ P.ClassName "btn btn-clear"
+                        P.Role "button"
+                        P.OnClick fn ] [])
+                | _ -> None
+            | _ -> None
+        |> pick
 
-        let build (c: Avatar) =
-            let optional, children = c
-            avatar ([ Size Small ], children)
+    let private avatar =
+        fun (prop: P.IHTMLProp) ->
+            match prop with
+            | :? ChipOptional as opt ->
+                match opt with
+                | Avatar chi ->
+                    Some (avatar ([ Avatar.Size Avatar.Small ], chi))
+                | _ -> None
+            | _ -> None
+        |> pick
 
-        let ƒ = build
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: P.HTMLProps
-          OnRemove: (MouseEvent -> unit) option }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Avatar> =
-        { Text: string
-          Avatar: 'Avatar option }
-
-    [<RequireQualifiedAccess>]
-    type T<'Avatar> =
-        Props * Children<'Avatar>
-
-    let props =
-        { Props.HTMLProps = []
-          Props.OnRemove = None }
-
-    let children =
-        { Children.Text = ""
-          Children.Avatar = None }
-
-    let private remove =
-        function
-        | Some fn -> Remove.ƒ { OnRemove = fn }
-        | None -> R.ofOption None
-
-    let private avatar avatarƒ =
-        function
-        | Some avatar ->
-            avatarƒ avatar
-        | None -> R.ofOption None
-
-    let build avatarƒ (chip: T<'Avatar>) =
-        let props, children = chip
-        props.HTMLProps
+    let chip (c: Chip) =
+        let opt, (Text text) = c
+        opt
         |> P.addProp (P.ClassName "chip")
         |> R.div <|
-        [ avatar avatarƒ children.Avatar
-          R.str children.Text
-          remove props.OnRemove ]
-
-    let ƒ = build ChipAvatar.ƒ
+        [ R.ofOption (avatar opt)
+          R.str text
+          R.ofOption (onRemove opt) ]

@@ -1,7 +1,7 @@
 ﻿module ChipTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Chip
 open Fabulosa.Avatar
 module R = Fable.Helpers.React
 module P = R.Props
@@ -12,28 +12,20 @@ let tests =
     testList "Chip tests" [
 
         test "Chip default" {
-            Chip.ƒ
-                (Chip.props,
-                 Chip.children)
+            chip ([], Text "Chip")
             |> ReactNode.unit
             |> hasUniqueClass "chip"
         }
 
         test "Chip html props" {
-            Chip.ƒ
-                ({ Chip.props with 
-                     HTMLProps = [P.ClassName "custom"] },
-                 Chip.children)
+            chip ([ P.ClassName "custom" ], Text "Chip")
             |> ReactNode.unit
             |> hasClass "chip custom"
         }
 
         test "Chip removable" {
             let fn = ignore
-            Chip.ƒ
-                ({ Chip.props with
-                    OnRemove = Some fn },
-                 Chip.children)
+            chip ([ OnRemove fn ], Text "Chip")
             |> ReactNode.unit
             |> hasDescendentProp (P.OnClick fn)
         }
@@ -42,17 +34,10 @@ let tests =
             let av =
                 avatar ([ Size Small ], Initial "FA")
                 |> ReactNode.unit
-            let text =
-                R.str "Text"
-                |> ReactNode.unit
-            Chip.ƒ
-                (Chip.props,
-                 { Chip.children with
-                     Avatar = Some ([], Initial "FA")
-                     Text = "Text" })
+            chip ([ Avatar (Initial "FA") ], Text "Text" )
             |> ReactNode.unit
             |>! hasChild 1 av
-            |>! hasChild 1 text
+            |>! hasText "Text"
             |> ignore
         }
     ]
