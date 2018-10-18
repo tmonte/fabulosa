@@ -2,8 +2,10 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -38,7 +40,7 @@ let tests =
         }
 
         test "Input html props" {
-            let props = { Input.props with HTMLProps = [ClassName "custom"] }
+            let props = { Input.props with HTMLProps = [P.ClassName "custom"] }
             let input = Input.ƒ props
 
             input
@@ -48,12 +50,14 @@ let tests =
 
         test "IconInput default" {
             let props = IconInput.props
-            let inputIcon = IconInput.ƒ props
-            let icon =
-                Icon.ƒ {
-                    Icon.props with
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+            let inputIcon =
+                IconInput.ƒ
+                    (props,
+                     { Icon = ([], Icon.Kind Download)
+                       Input = Input.props })
+            let iconElement =
+                icon ([ P.ClassName "form-icon" ], Icon.Kind Download)
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -61,24 +65,19 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
         test "IconInput with icon kind" {
             let inputIcon =
-                IconInput.ƒ {
-                    IconInput.props with
-                        IconProps =
-                            { Icon.props  with
-                                Kind = Icon.Kind.ArrowDown }
-                }
-            let icon =
-                Icon.ƒ {
-                    Icon.props  with
-                        Kind = Icon.Kind.ArrowDown
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+                IconInput.ƒ
+                    (IconInput.props,
+                     { Icon = ([], Icon.Kind ArrowDown)
+                       Input = Input.props })
+            let iconElement =
+                icon ([ P.ClassName "form-icon" ], Icon.Kind ArrowDown)
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -86,24 +85,19 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
         test "IconInput with icon size" {
             let inputIcon =
-                IconInput.ƒ {
-                    IconInput.props with
-                        IconProps =
-                            { Icon.props  with
-                                Size = Icon.Size.X2 }
-                }
-            let icon =
-                Icon.ƒ {
-                    Icon.props  with
-                        Size = Icon.Size.X2
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
+                IconInput.ƒ
+                    (IconInput.props,
+                     { Icon = ([ Icon.Size X2 ], Icon.Kind Download)
+                       Input = Input.props })
+            let iconElement =
+                icon ([ P.ClassName "form-icon"; Icon.Size X2 ], Icon.Kind Download)
+                |> ReactNode.unit
             let input =
                 Input.ƒ Input.props
                 |> ReactNode.unit
@@ -111,101 +105,90 @@ let tests =
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
         test "IconInput with input size" {
-            let inputProps = {
-                Input.props  with
+            let inputT = {
+                Input.props with
                     Size = Input.Size.Large
-                    HTMLProps = [ClassName "custom-class"]
+                    HTMLProps = [P.ClassName "custom-class"]
             }
-            let props = {
-                IconInput.props with
-                    InputProps = inputProps
-            }
-            let inputIcon = IconInput.ƒ props
-            let icon =
-                Icon.ƒ {
-                    Icon.props with
-                        HTMLProps = [ClassName "form-icon"]
-                } |> ReactNode.unit
-            let input =
-                Input.ƒ inputProps
+            let inputIcon =
+                IconInput.ƒ
+                    (IconInput.props,
+                     { Icon = ([], Icon.Kind Download)
+                       Input = inputT })
+            let iconElement =
+                icon ([ P.ClassName "form-icon"], Icon.Kind Download)
                 |> ReactNode.unit
-            
+            let input =
+                Input.ƒ inputT
+                |> ReactNode.unit            
             inputIcon
             |> ReactNode.unit
             |>! hasClass "has-icon-left"
-            |>! hasChild 1 icon
+            |>! hasChild 1 iconElement
             |> hasChild 1 input
         }
 
         test "InputGroup default" {
-            let input = Input.ƒ Input.props
+            let inputT = Input.props
             InputGroup.ƒ
                 ( InputGroup.props,
-                  [ input ] )
+                  [ InputGroup.Child.Input Input.props ] )
             |> ReactNode.unit
             |>! hasClass "input-group"
-            |> hasChild 1 (input |> ReactNode.unit)
+            |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
         test "InputGroup left addon" {
-            let input = Input.ƒ Input.props
+            let inputT = Input.props
             InputGroup.ƒ
                 ( { InputGroup.props with
                       AddonLeft = InputGroup.AddonLeft.Text "text" },
-                  [ input ] )
+                  [ InputGroup.Child.Input Input.props ] )
             |> ReactNode.unit
             |>! hasClass "input-group"
             |>! hasDescendentClass "input-group-addon"
-            |> hasChild 1 (input |> ReactNode.unit)
+            |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
         test "InputGroup right addon" {
-            let input = Input.ƒ Input.props
-            let buttonProps = Button.props
-            let buttonChildren = []
-            let button =
-                Button.ƒ
-                    ( { buttonProps with
-                          HTMLProps = [ClassName "input-group-btn"] },
-                      buttonChildren ) |> ReactNode.unit
+            let inputT = Input.props
+            let buttonT = [], []
+            let but =
+                button ([ P.ClassName "input-group-btn" ], []) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with
                       AddonRight = InputGroup.AddonRight.Button
-                        (buttonProps, buttonChildren) },
-                  [ input ] )
+                        buttonT },
+                  [ InputGroup.Child.Input Input.props ] )
             |> ReactNode.unit
             |>! hasClass "input-group"
             |>! hasDescendentClass "input-group-btn"
-            |>! hasChild 1 button
-            |> hasChild 1 (input |> ReactNode.unit)
+            |>! hasChild 1 but
+            |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
         test "InputGroup left and right addon" {
-            let input = Input.ƒ Input.props
-            let buttonProps = Button.props
-            let buttonChildren = []
-            let button =
-                Button.ƒ
-                    ( { buttonProps with
-                          HTMLProps = [ClassName "input-group-btn"] },
-                      buttonChildren ) |> ReactNode.unit
+            let inputT = Input.props
+            let buttonT = [], []
+            let but =
+                button ([ P.ClassName "input-group-btn"], [] ) |> ReactNode.unit
             InputGroup.ƒ
                 ( { InputGroup.props with
                       AddonLeft = InputGroup.AddonLeft.Text "text"
                       AddonRight = InputGroup.AddonRight.Button
-                        (buttonProps, buttonChildren) },
-                  [ input ] )
+                        buttonT },
+                  [ InputGroup.Child.Input Input.props ] )
             |> ReactNode.unit
             |>! hasClass "input-group"
             |>! hasDescendentClass "input-group-addon"
             |>! hasDescendentClass "input-group-btn"
-            |>! hasChild 1 button
-            |> hasChild 1 (input |> ReactNode.unit)
+            |>! hasChild 1 but
+            |> hasChild 1 (Input.ƒ inputT |> ReactNode.unit)
         }
 
     ]

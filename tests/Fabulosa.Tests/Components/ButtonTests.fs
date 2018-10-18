@@ -2,8 +2,9 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -13,10 +14,9 @@ let tests =
         test "Button default" {
             let child =
                 R.div
-                    [ ClassName "custom" ]
+                    [ P.ClassName "custom" ]
                     [ R.str "text" ]
-            Button.ƒ
-                ( Button.props, [ child ] )
+            button ([], [ child ] )
             |> ReactNode.unit
             |>! hasUniqueClass "btn"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -25,20 +25,15 @@ let tests =
         test "Button custom class" {
             let child =
                 R.div [] [ R.str "text" ]
-            Button.ƒ
-                ( { Button.props with
-                      HTMLProps = [ClassName "custom"] },
-                  [child] )
+            button ([ P.ClassName "custom"], [child])
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
         test "Button kind primary" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Kind = Button.Kind.Primary },
-                  [ child ] )
+            button
+                ([ Kind Primary ], [ child ] )
             |> ReactNode.unit 
             |>! hasClass "btn btn-primary"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -46,10 +41,7 @@ let tests =
 
         test "Button kind link" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Kind = Button.Kind.Link },
-                  [ child ] )
+            button ([ Kind Link ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-link"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -57,10 +49,7 @@ let tests =
 
         test "Button color success" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Color = Button.Color.Success },
-                  [ child ] )
+            button ([ Color Success ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-success"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -68,10 +57,7 @@ let tests =
 
         test "Button color error" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Color = Button.Color.Error },
-                  [ child ] )
+            button ([ Color Error ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-error"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -79,10 +65,7 @@ let tests =
 
         test "Button size small" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Size = Button.Size.Small },
-                  [ child ] )
+            button ([ Size Small ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-sm"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -90,10 +73,7 @@ let tests =
 
         test "Button size large" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Size = Button.Size.Large },
-                  [ child ] )
+            button ([ Size Large ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn btn-lg"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -101,10 +81,7 @@ let tests =
 
         test "Button state disabled" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      State = Button.State.Disabled  },
-                  [ child ] )
+            button ([ State Disabled ], [ child ] )
             |> ReactNode.unit
             |>! hasClass "btn disabled"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -112,10 +89,7 @@ let tests =
 
         test "Button state active" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      State = Button.State.Active },
-                  [ child ] )
+            button ([ State Active ], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn active"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -123,10 +97,7 @@ let tests =
         
         test "Button state loading" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      State = Button.State.Loading },
-                  [ child ] )
+            button ([ State Loading ], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn loading"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -134,10 +105,7 @@ let tests =
 
         test "Button format squared action" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Format = Button.Format.SquaredAction },
-                  [ child ] )
+            button ([ Shape Squared ], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn btn-action"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -145,10 +113,7 @@ let tests =
 
         test "Button format round action" {
             let child = R.str "text"
-            Button.ƒ
-                ( { Button.props with
-                      Format = Button.Format.RoundAction },
-                  [ child ] )
+            button ([ Shape Round ], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn btn-action circle"
             |> hasChild 1 (child |> ReactNode.unit)
@@ -157,8 +122,7 @@ let tests =
         test "Button children with name" {
             let grandChild = R.span [] []
             let child = R.div [] [grandChild]
-            Button.ƒ
-                ( Button.props, [ child ] )
+            button ([], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn"
             |>! hasChild 1 (child |> ReactNode.unit)
@@ -166,11 +130,9 @@ let tests =
         }
         
         test "Button children with class" {
-            let grandChild = R.span [ClassName "grand-child"] []
-            let child = R.div [ClassName "child"] [grandChild]
-            Button.ƒ
-                ( { Button.props with Size = Button.Size.Small },
-                  [ child ] )
+            let grandChild = R.span [ P.ClassName "grand-child" ] []
+            let child = R.div [ P.ClassName "child" ] [ grandChild ]
+            button ([ Size Small ], [ child ])
             |> ReactNode.unit
             |>! hasClass "btn btn-sm"
             |>! hasChild 1 (child |> ReactNode.unit)

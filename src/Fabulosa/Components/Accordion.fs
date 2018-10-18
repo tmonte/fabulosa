@@ -3,97 +3,70 @@
 module Accordion =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
 
-    module Header =
+    type AccordionItemOptional =
+        | Icon of Icon
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Children =
-            { Icon: Icon.T
-              Text: string }
+    type AccordionHeader =
+        | Header of string
 
-        [<RequireQualifiedAccess>]
-        type T = Children
+    type AccordionBody =
+        | Body of (ReactElement list)
 
-        let ƒ (header: T) =
-            R.summary
+    type AccordionItemChildren =
+        AccordionHeader * AccordionBody
+
+    type AccordionItem =
+        HTMLProps * AccordionItemChildren
+
+    let someIcon (optional: IHTMLProp) =
+        match optional with
+        | :? AccordionItemOptional as prop ->
+            match prop with
+            | Icon props -> Some props
+        | _ -> None
+
+    let createIcon opt =
+        opt
+        |> List.tryPick someIcon
+        |> Option.orElse (Some ([], Icon.Kind ArrowRight))
+        |> Option.map (fun (iconOpt, iconReq) ->
+             (iconOpt |> addProp (ClassName "mr-1"), iconReq))
+        |> Option.get
+
+    let accordionItem (c: AccordionItem) =
+        let optional, (Header header, Body body) = c
+        let i = createIcon optional
+        R.details
+            [ ClassName "accordion" ]
+            [ R.summary
                 [ ClassName "accordion-header" ]
-                [ Icon.ƒ header.Icon
+                [ icon i
                   R.RawText "\n"
-                  R.str header.Text ]
-
-    module Body =
-
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
-
-        [<RequireQualifiedAccess>]
-        type T = Children
-
-        let private renderItem content =
-            R.li
-                [ ClassName "menu-item" ]
-                [ content ]
-
-        let ƒ (body: T) =
-            R.div
+                  R.str header ]
+              R.div
                 [ ClassName "accordion-body" ]
                 [ R.ul
-                    [ ClassName "menu menu-nav"] 
-                    ( List.map renderItem body ) ]
+                     [ ClassName "menu menu-nav"] 
+                     [ R.li
+                        [ ClassName "menu-item" ]
+                        body ] ] ]
 
-    module Item =
+    type AccordionChild =
+        AccordionItem of AccordionItem
+    
+    type Accordion =
+        HTMLProps * AccordionChild list
 
-        [<RequireQualifiedAccess>]
-        type Children =
-            { Header: Header.T
-              Body: Body.T }
-
-        [<RequireQualifiedAccess>]
-        type T = Children
-
-        let ƒ (item: T) =
-            R.details
-                [ ClassName "accordion" ]
-                [ Header.ƒ item.Header
-                  Body.ƒ item.Body ]
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { CustomIcon: Icon.Props
-          HTMLProps: IHTMLProp list }
-
-    [<RequireQualifiedAccess>]
-    type Child =
-        { Header: string
-          Body: ReactElement list }
-
-    [<RequireQualifiedAccess>]
-    type Children = Child list
-
-    [<RequireQualifiedAccess>]
-    type T = Props * Children    
-    let props =
-        { Props.CustomIcon =
-            { Icon.props with
-                Kind = Icon.Kind.ArrowRight }
-          Props.HTMLProps = [] }
-
-    let ƒ (accordion: T) =
-        let props, children = accordion
-        let iconProps =
-            { props.CustomIcon with
-                HTMLProps = props.CustomIcon.HTMLProps
-                |> addProp (ClassName "mr-1") }
-        R.div []
-        <| Seq.map
-            (fun (child: Child) ->
-                Item.ƒ
-                    { Header =
-                        { Icon = iconProps
-                          Text = child.Header }
-                      Body = child.Body } )
-            children
-        
+    let accordion (c: Accordion) =
+        let optional, children = c
+        R.div
+            optional
+            (Seq.map
+               (fun (AccordionItem item) -> accordionItem item)
+               children)

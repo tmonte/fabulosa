@@ -1,7 +1,9 @@
 ﻿module ChipPage
 
 open Fabulosa
+open Fabulosa.Chip
 open Fabulosa.Docs
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -10,33 +12,18 @@ open Fable.Import.JS
 open Microsoft.FSharp.Core
 
 (*** define: chip-default-sample ***)
-let chip =
-    Chip.ƒ
-        (Chip.props,
-         { Chip.children with Text = "Chip" })
+let def = chip ([], Text "Chip")
 (*** define: chip-removable-sample ***)
 let fn _ = console.log "removed"
 
-let removable =
-    Chip.ƒ
-        ({ Chip.props with
-             OnRemove = Some fn },
-         { Chip.children with Text = "Chip" })
+let removable = chip ([ OnRemove fn ], Text "Chip")
 (*** define: chip-avatar-sample ***)
-let avatar =
-    Chip.ƒ
-        (Chip.props,
-         { Chip.children with
-             Text = "Chip"
-             Avatar = Some
-               { Avatar.props with
-                   Source = "assets/avatar-1.png" } })
+let avatar = chip ([ Avatar (Url "assets/avatar-1.png") ], Text "Chip")
 (*** hide ***)
 let render () =
-    tryMount "chip-default-demo" chip
+    tryMount "chip-default-demo" def
     tryMount "chip-removable-demo" removable
     tryMount "chip-avatar-demo" avatar
-    tryMount "chip-props-table" (PropTable.propTable typeof<Chip.Props> Chip.props)
 (**
 
 <div id="chips">

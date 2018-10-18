@@ -4,22 +4,21 @@
 module Empty =
 
     open Fabulosa.Extensions
+    open Fabulosa.Icon
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     [<RequireQualifiedAccess>]
-    module Icon =
+    module EmptyIcon =
 
-        [<RequireQualifiedAccess>]
-        type T = Icon.T
-
-        let props = Icon.props
-
-        let ƒ (icon: T) =
+        let build (iconT: Icon) =
+            let (opt, req) = iconT
             R.div
-                [ ClassName "empty-icon" ]
-                [ Icon.ƒ { icon with Size = Icon.Size.X3 } ]
+                [ P.ClassName "empty-icon" ]
+                [ icon ([ Size X3 ], req) ]
+
+        let ƒ = build
 
     [<RequireQualifiedAccess>]
     module Title =
@@ -31,7 +30,7 @@ module Empty =
 
         let ƒ (title: T) =
             R.p
-                [ ClassName "empty-title h5" ]
+                [ P.ClassName "empty-title h5" ]
                 [ R.str title ]
 
     [<RequireQualifiedAccess>]
@@ -44,7 +43,7 @@ module Empty =
 
         let ƒ (subTitle: T) =
             R.p
-                [ ClassName "empty-subtitle" ]
+                [ P.ClassName "empty-subtitle" ]
                 [ R.str subTitle ]
 
     [<RequireQualifiedAccess>]
@@ -57,38 +56,46 @@ module Empty =
 
         let ƒ (action: T) =
             R.div
-                [ ClassName "empty-action" ]
+                [ P.ClassName "empty-action" ]
                 action
 
     [<RequireQualifiedAccess>]
     type Props =
-        { HTMLProps: HTMLProps }
+        { HTMLProps: P.HTMLProps }
 
     [<RequireQualifiedAccess>]
-    type Children =
-        { Icon: Icon.T
-          Title: Title.T
-          SubTitle: SubTitle.T
-          Action: Action.T }
+    type Children<'Icon, 'Title, 'SubTitle, 'Action> =
+        { Icon: 'Icon
+          Title: 'Title
+          SubTitle: 'SubTitle
+          Action: 'Action }
 
     [<RequireQualifiedAccess>]
-    type T = Props * Children
+    type T<'Icon, 'Title, 'SubTitle, 'Action> =
+        Props * Children<'Icon, 'Title, 'SubTitle, 'Action>
 
     let props =
         { Props.HTMLProps = [] }
 
     let children =
-        { Children.Icon = Icon.props
+        { Children.Icon = ([], Kind Mail)
           Children.Title = Title.children
           Children.SubTitle = SubTitle.children
           Children.Action = Action.children }
-          
-    let ƒ (empty: T) =
-        let props, children = empty
+
+    let build
+        emptyIconƒ
+        titleƒ
+        subTitleƒ
+        actionƒ
+        (empty: T<'Icon, 'Title, 'SubTitle, 'Action>) =
+        let prps,children = empty
         props.HTMLProps
-        |> addProp (ClassName "empty")
+        |> P.addProp (P.ClassName "empty")
         |> R.div <|
-        [ Icon.ƒ children.Icon
-          Title.ƒ children.Title
-          SubTitle.ƒ children.SubTitle
-          Action.ƒ children.Action ]
+        [ emptyIconƒ children.Icon
+          titleƒ children.Title
+          subTitleƒ children.SubTitle
+          actionƒ children.Action ]
+
+    let ƒ = build EmptyIcon.ƒ Title.ƒ SubTitle.ƒ Action.ƒ

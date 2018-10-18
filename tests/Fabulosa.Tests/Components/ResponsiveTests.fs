@@ -2,6 +2,7 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Expect
@@ -19,7 +20,7 @@ let tests =
          }
 
          test "Responsive hide small" {
-            let child = Button.ƒ ( Button.props, [R.str "text"] )
+            let child = button ([], [R.str "text"])
             let props = { Responsive.props with Hide = Responsive.Size.SM }
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit
@@ -28,7 +29,7 @@ let tests =
          }
 
          test "Responsive show large" {
-            let child = Button.ƒ ( Button.props, [R.str "text"] )
+            let child = button ([], [R.str "text"])
             let props = { Responsive.props with Show = Responsive.Size.LG }
             Responsive.ƒ ( props, [ child ] )
             |> ReactNode.unit

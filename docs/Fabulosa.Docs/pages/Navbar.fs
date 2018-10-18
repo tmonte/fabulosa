@@ -4,6 +4,7 @@ open Fabulosa
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Fable.Import.React
+open R.Props
 open Renderer
 
 (*** define: navbar-sample ***)
@@ -12,25 +13,14 @@ let navbar =
         (Navbar.props,
          [ Navbar.Child.Section
              (Navbar.props,
-              [ Anchor.ƒ
-                  ({ Anchor.props with
-                       Kind = Button.Kind.Link },
-                   [ R.str "Left 1" ])
-                Anchor.ƒ
-                  ({ Anchor.props with
-                       Kind = Button.Kind.Link },
-                   [ R.str "Left 2" ]) ])
+              [ R.a [ ClassName "btn btn-link"] [ R.str "Left 1" ]
+                R.a [ ClassName "btn btn-link"] [ R.str "Left 2" ]])
            Navbar.Child.Center
              (Navbar.props,
-              [ Anchor.ƒ
-                  ({ Anchor.props with
-                       Kind = Button.Kind.Link },
-                    [ R.str "Center" ]) ])
+              [ R.a [ ClassName "btn btn-link"] [ R.str "Center" ] ])
            Navbar.Child.Section
               (Navbar.props,
-               [ Anchor.ƒ
-                   (Anchor.props,
-                    [ R.str "Right" ]) ]) ])
+               [ R.a [ ClassName "btn btn-link"] [ R.str "Right" ] ]) ])
 (*** hide ***)
 let render () =
     tryMount "navbar-demo" navbar

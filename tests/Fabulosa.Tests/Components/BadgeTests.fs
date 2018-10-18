@@ -1,9 +1,10 @@
 ﻿module BadgeTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Badge
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -11,62 +12,41 @@ let tests =
     testList "Badge tests" [
 
         test "Badge default" {
-            Badge.ƒ
-                (Badge.props, Badge.children)
+            badge ([], Value 1, BadgeDiv ([], [ R.str "Badge" ]))
             |> ReactNode.unit
-            |> hasUniqueClass "badge"
-        }
-
-        test "Badge data" {
-            Badge.ƒ
-                ({ Badge.props with Badge = 1 },
-                 Badge.children)
-            |> ReactNode.unit
-            |> hasProp (Data ("badge", 1))
-        }
-
-        test "Badge div" {
-            let child = R.str "Text"
-            Badge.ƒ
-                (Badge.props,
-                 Badge.Child.Div
-                   ([ ClassName "custom" ],
-                    [ child ]))
-            |> ReactNode.unit
-            |>! hasClass "custom"
-            |> hasChild 1 (child |> ReactNode.unit)
+            |>! hasUniqueClass "badge"
+            |>! hasProp (P.Data ("badge", 1))
+            |> hasText "Badge"
         }
 
         test "Badge span" {
-            let child = R.str "Text"
-            Badge.ƒ
-                (Badge.props,
-                 Badge.Child.Span
-                   ([ ClassName "custom" ],
-                    [ child ]))
+            badge ([], Value 2, BadgeSpan ([], [ R.str "Badge" ]))
             |> ReactNode.unit
-            |>! hasClass "custom"
-            |> hasChild 1 (child |> ReactNode.unit)
+            |>! hasUniqueClass "badge"
+            |>! hasProp (P.Data ("badge", 2))
+            |> hasText "Badge"
         }
 
         test "Badge button" {
-            let child = R.str "Text"
-            Badge.ƒ
-                (Badge.props,
-                 Badge.Child.Button
-                   (Button.props, [ child ]))
+            badge ([], Value 3, BadgeButton ([], [ R.str "Badge" ]))
             |> ReactNode.unit
-            |>! hasClass "btn"
-            |> hasChild 1 (child |> ReactNode.unit)
+            |>! hasUniqueClass "btn badge"
+            |>! hasProp (P.Data ("badge", 3))
+            |> hasText "Badge"
         }
 
         test "Badge avatar" {
-            Badge.ƒ
-                (Badge.props,
-                 Badge.Child.Avatar
-                   Avatar.props)
+            badge ([], Value 1, BadgeAvatar ([], Initial "FA"))
             |> ReactNode.unit
-            |> hasClass "avatar"
+            |>! hasClass "avatar badge"
+            |> hasProp (P.Data ("badge", 1))
+        }
+
+        test "Badge avatar size" {
+            badge ([], Value 99, BadgeAvatar ([ Size Large ], Initial "FA"))
+            |> ReactNode.unit
+            |>! hasUniqueClass "avatar avatar-lg badge"
+            |> hasProp (P.Data ("badge", 99))
         }
 
     ]

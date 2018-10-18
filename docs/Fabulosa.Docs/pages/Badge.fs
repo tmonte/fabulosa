@@ -1,43 +1,21 @@
 ﻿module BadgePage
 
-open Fabulosa
+open Fabulosa.Badge
+open Fabulosa.Avatar
 open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 
 (*** define: badge-div-span-sample ***)
-let div =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 1 },
-         Badge.Child.Div
-           ([], [ R.str "Text" ]))
+let div = badge ([], Value 1, BadgeDiv ([], [ R.str "Text" ]))
 
-let span =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 2 },
-         Badge.Child.Span
-           ([], [ R.str "Text" ]))
+let span = badge ([], Value 2, BadgeSpan ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
-let button =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 3 },
-         Badge.Child.Button
-           (Button.props,
-            [ R.str "Button" ]))
+let button = badge ([], Value 3, BadgeButton ([], [ R.str "Button" ]))
 
-let avatar =
-    Badge.ƒ
-        ({ Badge.props with
-             Badge = 4 },
-         Badge.Child.Avatar
-           { Avatar.props with
-               Source = "assets/avatar-1.png"
-               Size = Avatar.Size.Large })
+let avatar = badge ([], Value 4, BadgeAvatar ([ Size Large ], Url "assets/avatar-1.png"))
 (*** hide ***)
 let render () =
     tryMount "badge-div-demo" div
@@ -45,7 +23,9 @@ let render () =
     tryMount "badge-button-demo" button
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-props-table"
-        (PropTable.propTable typeof<Badge.Props> Badge.props)
+        (PropTable.unionPropTable typeof<BadgeRequired>)
+    tryMount "badge-child-table"
+        (PropTable.unionPropTable typeof<BadgeChildren>)
 (**
 <div id="badges">
 
@@ -53,19 +33,7 @@ let render () =
     Badge
 </h2>
 
-Forms provide the most common control styles
-used in forms, including input, textarea,
-select, checkbox, radio and switch.
-
-</div>
-
-<div id="badge-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="badge-props-table"></div>
+Badges are often used as unread number indicators.
 
 </div>
 
@@ -111,6 +79,26 @@ of the button and avatar components.
 (*** include: badge-button-avatar-sample ***)
 
 (**
+
+</div>
+
+<div id="badge-props">
+
+<h3 class="s-title">
+    Required props
+</h3>
+
+<div class="props-table" id="badge-props-table"></div>
+
+</div>
+
+<div id="badge-props">
+
+<h3 class="s-title">
+    Child options
+</h3>
+
+<div class="props-table" id="badge-child-table"></div>
 
 </div>
 

@@ -1,65 +1,44 @@
-﻿namespace Fabulosa
+namespace Fabulosa
 
 module Badge =
 
     open Fabulosa.Extensions
+    open Fabulosa.Button
+    open Fabulosa.Avatar
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
-    
-    [<RequireQualifiedAccess>]
-    type Badge = int
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Badge: Badge }
-
-    [<RequireQualifiedAccess>]
-    type Child =
-    | Avatar of Avatar.T
-    | Button of Button.T
-    | Anchor of HTMLProps * ReactElement list
-    | Div of HTMLProps * ReactElement list
-    | Span of HTMLProps * ReactElement list
-        
-    [<RequireQualifiedAccess>]
-    type T = Props * Child
-
-    let private combine htmlProps badge =
+    let private combine htmlProps (badge: int) =
         (htmlProps
          |> addProp (ClassName "badge"))
-        @ [Data ("badge", badge)]
+        @ [ Data ("badge", badge) ]
+        
+    type BadgeRequired =
+        Value of int
 
-    let private renderChildren child badge =
-        match child with
-        | Child.Avatar props ->
-            Avatar.ƒ
-                { props with
-                    HTMLProps = combine props.HTMLProps badge }
-        | Child.Button (props, children) ->
-            Button.ƒ
-                ( { props with
-                      HTMLProps = combine props.HTMLProps badge },
-                  children )
-        | Child.Anchor (props, children) ->
-            R.a
-                (combine props badge)
-                children
-        | Child.Div (props, children) ->
-            R.div
-                (combine props badge)
-                children
-        | Child.Span (props, children) ->
-            R.span
-                (combine props badge)
-                children
+    type private Element = HTMLProps * ReactElement list
+        
+    type BadgeChildren =
+        | BadgeAvatar of Avatar
+        | BadgeButton of Button
+        | BadgeAnchor of Element
+        | BadgeDiv of Element
+        | BadgeSpan of Element
 
-    let props =
-        { Props.Badge = 0 }
+    type Badge =
+        HTMLProps * BadgeRequired * BadgeChildren
 
-    let children =
-        Child.Div ([], [])
-
-    let ƒ (badge: T) =
-        let props, children = badge
-        renderChildren children props.Badge
+    let badge (c: Badge) =
+        let optional, (Value value), children = c
+        match children with
+        | BadgeAvatar (opt, children) ->
+            avatar (combine opt value, children)
+        | BadgeButton (opt, req) ->
+            button (combine opt value, req)
+        | BadgeAnchor (anchorProps, children) ->
+            R.a (combine anchorProps value) children
+        | BadgeDiv (divProps, children) ->
+            R.div (combine divProps value) children
+        | BadgeSpan (spanProps, children) ->
+            R.span (combine spanProps value) children

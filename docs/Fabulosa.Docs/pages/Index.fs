@@ -7,13 +7,13 @@ open Fable.Import.React
 open Renderer
 
 (*** define: sample ***)
-let fabulousButton =
-    Anchor.ƒ
-        ({ Anchor.props with
-             Kind = Button.Kind.Primary
-             HTMLProps =
-               [ Href "button.html" ] },
-         [ R.str "Fabulosa" ])
+let fabulousButton = R.a [] []
+    //Anchor.ƒ
+        //({ Anchor.props with
+         //    Kind = Button.Kind.Primary
+         //    HTMLProps =
+         //      [ Href "button.html" ] },
+         //[ R.str "Fabulosa" ])
 (*** hide ***)
 let render () =
     tryMount "button-demo" fabulousButton

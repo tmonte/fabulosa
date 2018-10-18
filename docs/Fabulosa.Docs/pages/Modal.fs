@@ -2,11 +2,14 @@ module ModalPage
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Fabulosa.Tooltip
 open Renderer
+
+let button1: Button = ([], [R.str "Vote Bozo"])
 
 (*** define: modal-sample ***)
 let modal: Modal.T = 
@@ -17,15 +20,15 @@ let modal: Modal.T =
             Body = [
                 Media.Figure.ƒ 
                     (Media.Figure.props, {
-                        Image = { Media.Image.props with HTMLProps = [Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] }
+                        Image = { Media.Image.props with HTMLProps = [P.Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] }
                         Caption = (Media.Caption.props, Media.Caption.Children.Text "Choose your destiny") |> Some
                     })
             ]
             Footer =
                 (Modal.Footer.props, 
                  [
-                    (Button.props, [R.str "Vote Bozo"])
-                    ({Button.props with Kind = Button.Kind.Primary}, [R.str "Vote Ciro 12"])
+                    button1
+                    ([ Kind Primary ], [R.str "Vote Ciro 12"])
                  ] |> Modal.Footer.Buttons) |> Some
         }
     )
@@ -40,7 +43,7 @@ module Container =
     open Fable.Import.React
     module R = Fable.Helpers.React
     open Fable.Helpers.React.ReactiveComponents
-    open R.Props
+    module P = R.Props
     
     type State = { Opened: bool}
     type Message = 
@@ -63,7 +66,7 @@ module Container =
                         OnRequestClose = Some (fun _ -> dispatch Close) }
         let size = props.Size
         R.fragment [][
-            Button.ƒ ({Button.props with Kind = Button.Kind.Primary; HTMLProps = [OnClick (fun _ -> dispatch Open)] }, [R.str (sprintf "Open %A Modal" size)]) 
+            button ([ Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
             Modal.ƒ (props, children)
         ]
     
@@ -77,7 +80,7 @@ module Container =
             []
             
 (*** hide ***)
-let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
+let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
 let demo = R.div [style] [ 
 //        Tooltip.HoverTooltip.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!") 
         Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!")
@@ -87,15 +90,17 @@ let demo = R.div [style] [
        
         Grid.ƒ
             (Grid.props,
-             [ Grid.Row.props,
-               [ { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ smallModal]
-                 { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ modal]
-                 { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ largeModal]
-               ]
-             ])
+             [ GridRow
+                 (GridRow.props,
+                  [ GridColumn
+                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+                       [ Container.ƒ smallModal ])
+                    GridColumn
+                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+                       [ Container.ƒ modal ])
+                    GridColumn
+                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+                       [ Container.ƒ largeModal ]) ]) ])
     ]
     
 

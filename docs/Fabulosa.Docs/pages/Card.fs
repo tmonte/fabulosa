@@ -1,34 +1,29 @@
 ﻿module CardPage
 
 open Fabulosa
-open Fabulosa.Docs
+open Fabulosa.Card
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 
 (*** define: card-default-sample ***)
-let card =
-    Card.ƒ
-        (Card.props,
-         { Header =
-             { Title = "Apple" 
-               SubTitle = "Hardware and software" }
-           Body =
-             [ R.p [] [ R.str "To make a contribution to
-                 the world by making tools for the mind
-                 that advance humankind." ] ]
-           Footer =
-             [ Button.ƒ
-                 (Button.props, [ R.str "Purchase" ]) ]
-           Image =
-             { Media.Image.props with
-                 HTMLProps = [ Src "assets/macos-sierra-2.jpg" ] } })
+let def =
+    card ([],
+      (Image
+         { Media.Image.props with
+             HTMLProps = [ P.Src "assets/macos-sierra-2.jpg" ] },
+       Header ([], (Title "Apple", SubTitle "Hardware and software")),
+       Body ([],
+         [ R.p [] [ R.str "To make a contribution to
+             the world by making tools for the mind
+             that advance humankind." ] ]),
+       Footer ([], [ button ([], [ R.str "Purchase" ]) ]) ))
 (*** hide ***)
-let demo = R.div [Style [MaxWidth "50%"]] [card]
+let demo = R.div [ P.Style [ P.MaxWidth "50%" ] ] [ def ]
 let render () =
     tryMount "card-default-demo" demo
-    tryMount "card-props-table" (PropTable.propTable typeof<Card.Props> Card.props)
 (**
 
 <div id="cards">
@@ -38,16 +33,6 @@ let render () =
 </h2>
 
 Cards are flexible content containers.
-
-</div>
-
-<div id="card-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="card-props-table"></div>
 
 </div>
 

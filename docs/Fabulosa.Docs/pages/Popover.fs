@@ -2,6 +2,7 @@ module PopoverPage
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
@@ -13,9 +14,9 @@ let popover =
     Popover.ƒ
         (Popover.props,
          { Trigger =
-             [ Button.ƒ (Button.props, [ R.str "Popover" ]) ]
+             [ button ([], [ R.str "Popover" ]) ]
            Content =
-             [ CardPage.card ] })
+             [ CardPage.def ] })
 (*** hide ***)
 let render () =
     tryMount "popover-default-demo" popover

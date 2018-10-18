@@ -1,119 +1,92 @@
 ﻿module BreadcrumbTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Breadcrumb
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
-open Fabulosa
 
 [<Tests>]
 let tests =
     testList "Breadcrumbs" [
         test "display an empty container by default" {
-            Breadcrumb.ƒ
-                (Breadcrumb.props, [])
+            breadcrumb ([], [])
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb"
             |> hasNoChildren
         }
         
         test "receives HTMLProps" {
-            Breadcrumb.ƒ
-                ({ Breadcrumb.props with
-                     HTMLProps = [ Id "hello-world" ]}, [])
+            breadcrumb ([ P.Id "hello-world" ], [])
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb"
-            |>! hasProp (Id "hello-world")
+            |>! hasProp (P.Id "hello-world")
             |> hasNoChildren
         }
-        
+
         test "renders children" {
-            let items =
-                [ (Breadcrumb.Item.props,
-                   Breadcrumb.Item.Children.Text "Ciro > Haddad")
-                  (Breadcrumb.Item.props,
-                   Breadcrumb.Item.Children.Text "Ciro > Boulos > Haddad")
-                  (Breadcrumb.Item.props, 
-                   Breadcrumb.Item.Children.Link
-                     { Href = "cirogomes.com.br" ; Text = "Ciro Gomes" })
-                  (Breadcrumb.Item.props,
-                   Breadcrumb.Item.Children.Link
-                     { Href = "ubuntu.com" ; Text = "Linux > any" })
-                  (Breadcrumb.Item.props, 
-                   Breadcrumb.Item.Children.Elements
-                     [ R.div [ ClassName "find-me" ] [] ]) ]
+            let text: BreadcrumbText = ([], Text "Ciro > Haddad")
+            let link: BreadcrumbLink = ([], Href "cirogomes.com.br", Text "Ciro Gomes")
+            let elements: BreadcrumbElements = ([], [ R.div [ P.ClassName "find-me" ] [] ])
+            let children = 
+                [ BreadcrumbText text
+                  BreadcrumbLink link
+                  BreadcrumbElements elements ]
+            breadcrumb ([], children)
+            |> ReactNode.unit
+            |>! hasUniqueClass "breadcrumb"
+            |>! hasChild 1 (breadcrumbText text |> ReactNode.unit)
+            |>! hasChild 1 (breadcrumbLink link |> ReactNode.unit)
+            |> hasChild 1 (breadcrumbElements elements |> ReactNode.unit)
 
-            let breadcrumb = 
-                Breadcrumb.ƒ (Breadcrumb.props, items)
-                |> ReactNode.unit
-
-
-            breadcrumb |> hasUniqueClass "breadcrumb"
-
-            items
-            |> List.map Breadcrumb.Item.ƒ
-            |> List.iter
-                (fun item ->
-                    breadcrumb
-                    |> hasChild 1 (item |> ReactNode.unit))
         }
 
     ]
 
 [<Tests>]
 let breadcrumbItemsTest =    
-    testList "Breadcrumb item tests" [
-        test "render the defaults" {
-            Breadcrumb.Item.ƒ
-                (Breadcrumb.Item.props, 
-                 Breadcrumb.Item.Children.Text "Pele")
+    testList "Breadcrumb items tests" [
+        test "breadcrumb text defaults" {
+            breadcrumbText ([], Text "Pele")
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb-item"
             |> hasText "Pele"
         }
 
-        test "receives HTMLProps" {
-            Breadcrumb.Item.ƒ
-                ({ Breadcrumb.Item.props with
-                     HTMLProps = [ Id "hello-world" ] },
-                 Breadcrumb.Item.Children.Text "Pele")
+        test "breadcrumb text optional props" {
+            breadcrumbText ([ P.ClassName "custom" ], Text "Pele")
             |> ReactNode.unit
-            |>! hasUniqueClass "breadcrumb-item"
-            |>! hasProp (Id "hello-world")
+            |>! hasClass "breadcrumb-item custom"
             |> hasText "Pele"
         }
 
-        test "renders link" {
-            let expectedChild =
-                R.a
-                    [ Href "google.com" ]
-                    [ R.str "Hello" ]
-                |> ReactNode.unit
-
-            Breadcrumb.Item.ƒ
-                (Breadcrumb.Item.props,
-                 Breadcrumb.Item.Children.Link
-                   { Breadcrumb.Item.Link.Href = "google.com"
-                     Breadcrumb.Item.Link.Text = "Hello" })
+        test "breadcrumb link defaults" {
+            breadcrumbLink ([], Href "#abc", Text "Pele")
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb-item"
-            |> hasChild 1 expectedChild
+            |>! hasDescendentProp (P.Href "#abc")
+            |> hasText "Pele"
         }
-        
-        test "BreadcrumbItem renders react element" {
-            let div =
-                R.div
-                    [ Id "happy-div" ]
-                    [ R.str "Ciro 12" ]
-            let expectedChild = div |> ReactNode.unit
 
-            Breadcrumb.Item.ƒ
-                (Breadcrumb.Item.props,
-                 Breadcrumb.Item.Children.Elements
-                   [ div ])
+        test "breadcrumb link optional props" {
+            breadcrumbLink ([ P.ClassName "custom" ], Href "#abc", Text "Pele")
+            |> ReactNode.unit
+            |>! hasClass "breadcrumb-item custom"
+            |>! hasDescendentProp (P.Href "#abc")
+            |> hasText "Pele"
+        }
+
+        test "breadcrumb elements defaults" {
+            let child = R.a [] [ R.str "Text" ]
+            breadcrumbElements ([], [ child ])
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb-item"
-            |> hasChild 1 (div |> ReactNode.unit)
+            |> hasChild 1 (child |> ReactNode.unit)
+        }
+
+        test "breadcrumb elements optional props" {
+            breadcrumbElements ([ P.ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "breadcrumb-item custom"
         }
     ]

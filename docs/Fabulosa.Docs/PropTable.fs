@@ -4,8 +4,6 @@ module PropTable =
     open System.Reflection
     open FSharp.Reflection
     module R = Fable.Helpers.React
-    open Fable.Import
-    open Fable.Import.React
     open R.Props
     open Fabulosa
     
@@ -37,64 +35,66 @@ module PropTable =
                 |> List.reduce (fun x -> (fun y -> x + " -> " + y))
             | t ->
                 t.Name
-    
-    let rec describeName (typeInfo: PropertyInfo) =
-        systemTypeName typeInfo.PropertyType
 
-    let rec describeType (typeInfo: PropertyInfo) =
-        if FSharpType.IsUnion(typeInfo.PropertyType) then
-            let name (case: UnionCaseInfo) = case.Name
-            let cases = FSharpType.GetUnionCases typeInfo.PropertyType
+    let rec describeType (propType: System.Type) =
+        if FSharpType.IsTuple propType then
+            propType
+            |> FSharpType.GetTupleElements
+            |> Array.map systemTypeName
+            |> List.ofArray
+            |> String.concat " * "
+        else if FSharpType.IsUnion propType then
+            let cases = FSharpType.GetUnionCases propType
             let more =
-                if Seq.length cases > 4
+                if Seq.length cases > 6
                 then " | ..."
                 else ""
             (cases
-            |> Array.truncate 4
-            |> Array.map name
+            |> Array.truncate 6
+            |> Array.map (fun c -> c.Name)
             |> String.concat " | ") + more
         else
-            describeName typeInfo
-        
-    let getPropFields aType (obj: obj) = 
-        let typ = aType
-        let record = obj
-        let recordTypeFields = FSharpType.GetRecordFields typ
-        let recordValueFields = FSharpValue.GetRecordFields record
-        let fieldNames = recordTypeFields |> Array.map SystemType.name
-        let fieldPropertyTypes = recordTypeFields |> Array.map describeType
+            systemTypeName propType
 
-        recordValueFields
+    let getRecordPropFields aType (record: obj) = 
+        let recordTypeFields = FSharpType.GetRecordFields aType
+        let fieldNames = recordTypeFields |> Array.map SystemType.name
+        let fieldPropertyTypes =
+            recordTypeFields
+            |> Array.map (fun propInfo -> propInfo.PropertyType)
+            |> Array.map describeType
+
+        record
+        |> FSharpValue.GetRecordFields
         |> Array.zip3 fieldNames fieldPropertyTypes
         |> List.ofArray 
-        |> List.map (fun (x, y, z) ->
-            let t =
-                if y.StartsWith("Fabulosa.") then
-                    let page =
-                        (y.Split ('.')).[1].ToLower()
-                    R.a
-                        [Href (page + ".html#" + page + "-props")]
-                        [R.str y]
-                else
-                    R.str y
-            R.str (x |> string),
-            t,
-            R.str (z.ToString().Replace(";", ""))
-        )
+        |> List.map (fun (x, y, _) -> R.str x, R.str y)
+        
+    let getUnionPropFields (union: System.Type) = 
+        FSharpType.GetUnionCases union
+        |> List.ofArray
+        |> List.collect
+            (fun case ->
+                let fields = case.GetFields()
+                let propTypes =
+                    fields
+                    |> Array.map (fun e -> e.PropertyType)
+                propTypes
+                |> Array.map
+                    (fun typ -> (case.Name, describeType typ))
+                |> Array.map (fun (a, b) -> (R.str a, R.str b))
+                |> List.ofArray
+            )
 
     let toTableRow rowValue =
-        let (col1, col2, col3) = rowValue
+        let (col1, col2) = rowValue
         (Table.Row.props,
          [ Table.Row.Child.Column
              (Table.Column.props, [col1])
            Table.Row.Child.Column
               ({ Table.Column.props with
                    HTMLProps = [ Style [ WhiteSpace "pre" ] ] },
-                 [col2])
-           Table.Row.Child.Column
-              ({ Table.Column.props with
-                   HTMLProps = [Style [WhiteSpace "pre"]] },
-               [col3]) ])
+                 [col2]) ])
 
     let renderTable rowValues =
         Table.ƒ
@@ -108,13 +108,12 @@ module PropTable =
                           [R.str "Name"])
                        Table.Row.Child.TitleColumn
                            (Table.TitleColumn.props,
-                            [R.str "Type"])
-                       Table.Row.Child.TitleColumn
-                           (Table.TitleColumn.props,
-                            [R.str "Default"]) ]) ])
+                            [R.str "Type"]) ]) ])
                Table.Child.Body
                   (Table.Body.props,
                    (rowValues |> List.map toTableRow)) ])
-        
-    let propTable aType obj = getPropFields aType obj |> renderTable 
+
+    let propTable aType obj = getRecordPropFields aType obj |> renderTable 
+
+    let unionPropTable union = getUnionPropFields union |> renderTable
         

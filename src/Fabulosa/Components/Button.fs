@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Button =
 
     open Fable.Import.React
@@ -8,175 +7,160 @@ module Button =
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
     type Kind =
-    | Default
-    | Primary
-    | Link
-    | Unset
+        | Default
+        | Primary
+        | Link
 
-    [<RequireQualifiedAccess>]
     type Color =
-    | Success
-    | Error
-    | Unset
+        | Success
+        | Error
 
-    [<RequireQualifiedAccess>]
     type Size =
-    | Small
-    | Large
-    | Unset
+        | Small
+        | Large
 
-    [<RequireQualifiedAccess>]
     type State =
-    | Disabled
-    | Active
-    | Loading
-    | Unset
+        | Disabled
+        | Active
+        | Loading
 
-    [<RequireQualifiedAccess>]
-    type Format =
-    | SquaredAction
-    | RoundAction
-    | Unset
+    type Shape =
+        | Squared
+        | Round
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Kind: Kind
-          Color: Color
-          Size: Size
-          State: State
-          Format: Format
-          HTMLProps: IHTMLProp list }
+    type ButtonOptional =
+        | Kind of Kind
+        | Color of Color
+        | Size of Size
+        | State of State
+        | Shape of Shape
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Children = ReactElement list
+    type Button = HTMLProps * ReactElement list
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
+    let private kind (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Kind Default -> Some "btn-default"
+            | Kind Primary -> Some "btn-primary"
+            | Kind Link -> Some "btn-link"
+            | _ -> None
+        | _ -> None
 
-    let kind =
-        function
-        | Kind.Default -> "btn-default"
-        | Kind.Primary -> "btn-primary"
-        | Kind.Link -> "btn-link"
-        | Kind.Unset -> ""
-        >> ClassName
+    let private color (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Color Success -> Some "btn-success"
+            | Color Error -> Some "btn-error"
+            | _ -> None
+        | _ -> None
 
-    let color =
-        function
-        | Color.Success -> "btn-success"
-        | Color.Error -> "btn-error"
-        | Color.Unset -> ""
-        >> ClassName
+    let private size (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Size Small -> Some "btn-sm"
+            | Size Large -> Some "btn-lg"
+            | _ -> None
+        | _ -> None
 
-    let size =
-        function
-        | Size.Small -> "btn-sm"
-        | Size.Large -> "btn-lg"
-        | Size.Unset -> ""
-        >> ClassName
+    let private state (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | State Disabled -> Some "disabled"
+            | State Loading -> Some "loading"
+            | State Active -> Some "active"
+            | _ -> None
+        | _ -> None
 
-    let state =
-        function
-        | State.Disabled -> "disabled"
-        | State.Loading -> "loading"
-        | State.Active -> "active"
-        | State.Unset -> ""
-        >> ClassName
+    let private shape (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonOptional as opt ->
+            match opt with
+            | Shape Squared -> Some "btn-action"
+            | Shape Round -> Some "btn-action circle"
+            | _ -> None
+        | _ -> None
 
-    let format =
-        function
-        | Format.SquaredAction -> "btn-action"
-        | Format.RoundAction -> "btn-action circle"
-        | Format.Unset -> ""
-        >> ClassName
-
-    let props =
-        { Props.Kind = Kind.Unset
-          Props.Color = Color.Unset
-          Props.Size = Size.Unset
-          Props.State = State.Unset
-          Props.Format = Format.Unset
-          Props.HTMLProps = [] }
-
-    let ƒ (button: T) =
-        let props, children = button
-        props.HTMLProps
-        |> addProps
-            [ ClassName "btn"
-              kind props.Kind
-              color props.Color
-              size props.Size
-              state props.State
-              format props.Format ]
+    let button (c: Button) =
+        let optional, children = c
+        optional
+        |> addClass kind
+        |> addClass color
+        |> addClass size
+        |> addClass state
+        |> addClass shape
+        |> addProp (ClassName "btn")
         |> R.button <| children
+        
+//[<RequireQualifiedAccess>]
+//module Anchor =
 
-    let render = ƒ
+//    open Fable.Import.React
+//    open Fabulosa.Extensions
+//    module R = Fable.Helpers.React
+//    open R.Props
 
-[<RequireQualifiedAccess>]
-module Anchor =
+//    [<RequireQualifiedAccess>]
+//    type Children = ReactElement list
 
-    open Fable.Import.React
-    open Fabulosa.Extensions
-    module R = Fable.Helpers.React
-    open R.Props
+//    [<RequireQualifiedAccess>]
+//    type T = Button.T
 
-    [<RequireQualifiedAccess>]
-    type Children = ReactElement list
+//    let props = Button.props
 
-    [<RequireQualifiedAccess>]
-    type T = Button.T
+//    let build (anchor: T) =
+//        let props, children = anchor
+//        props.HTMLProps
+//        |> addProps
+//            [ ClassName "btn"
+//              Button.kind props.Kind
+//              Button.size props.Size
+//              Button.color props.Color
+//              Button.state props.State
+//              Button.format props.Format ]
+//        |> R.a <| children
 
-    let props = Button.props
+//    let ƒ = build
 
-    let ƒ (anchor: T) =
-        let props, children = anchor
-        props.HTMLProps
-        |> addProps
-            [ ClassName "btn"
-              Button.kind props.Kind
-              Button.size props.Size
-              Button.color props.Color
-              Button.state props.State
-              Button.format props.Format ]
-        |> R.a <| children
+//module ButtonGroup =
 
-    let render = ƒ
+    //open Fabulosa.Extensions
+    //module R = Fable.Helpers.React
+    //open R.Props
 
-module ButtonGroup =
+    //[<RequireQualifiedAccess>]
+    //type Block = bool
 
-    open Fable.Import.React
-    open Fabulosa.Extensions
-    module R = Fable.Helpers.React
-    open R.Props
+    //[<RequireQualifiedAccess>]
+    //type Props =
+    //    { Block: Block
+    //      HTMLProps: IHTMLProp list }
 
-    [<RequireQualifiedAccess>]
-    type Block = bool
+    //[<RequireQualifiedAccess>]
+    //type Children<'Button> = 'Button list
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Block: Block
-          HTMLProps: IHTMLProp list }
+    //[<RequireQualifiedAccess>]
+    //type T<'Button> = Props * Children<'Button>
 
-    [<RequireQualifiedAccess>]
-    type Children = ReactElement list
+    //let props =
+    //    { Props.Block = false
+    //      Props.HTMLProps = [] }
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Button.T list
+    //let private block =
+    //    function
+    //    | true -> "btn-group-block"
+    //    | false -> ""
 
-    let props =
-        { Props.Block = false
-          Props.HTMLProps = [] }
+    //let build buttonƒ (buttonGroup: T<'Button>) =
+    //    let props, children = buttonGroup
+    //    props.HTMLProps
+    //    |> addProp (ClassName "btn-group")
+    //    |> R.div
+    //    <| Seq.map buttonƒ children
 
-    let private block =
-        function
-        | true -> "btn-group-block"
-        | false -> ""
-
-    let ƒ (buttonGroup: T) =
-        let props, children = buttonGroup
-        props.HTMLProps
-        |> addProp (ClassName "btn-group")
-        |> R.div
-        <| Seq.map Button.ƒ children
+    //let ƒ = build Button.ƒ

@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Card =
 
     open Fabulosa.Extensions
@@ -8,88 +7,81 @@ module Card =
     module R = Fable.Helpers.React
     open R.Props
 
-    module Header =
+    type Text = string
+
+    type ReactElements = ReactElement list
+
+    type HeaderTitle =
+        Title of Text
+
+    type HeaderSubTitle =
+        SubTitle of Text
+
+    type HeaderChildren =
+        HeaderTitle * HeaderSubTitle
+
+    type Header =
+        HTMLProps * HeaderChildren
+
+    let header (c: Header) =
+        let opt, (Title title, SubTitle subTitle) = c
+        opt
+        |> addProp (ClassName "card-header")
+        |> R.div
+        <| [ R.div
+              [ ClassName "card-title h5" ]
+              [ R.str title ]
+             R.div
+              [ ClassName "card-subtitle text-gray" ]
+              [ R.str subTitle ] ]
+
+    type Body = HTMLProps * ReactElements
+
+    let body (c: Body) =
+        let opt, chi = c
+        if not (List.isEmpty chi) then
+            opt
+            |> addProp (ClassName "card-body")
+            |> R.div <| chi
+        else
+            R.ofOption None
+
+    type Footer =
+        HTMLProps * ReactElements
+
+    let footer (c: Footer) =
+        let opt, chi = c
+        if not (List.isEmpty chi) then
+            opt
+            |> addProp (ClassName "card-footer")
+            |> R.div <| chi
+        else
+            R.ofOption None
+
+    type CardHeader =
+        Header of Header
+
+    type CardBody =
+        Body of Body
+
+    type CardFooter =
+        Footer of Footer
+
+    type CardImage =
+        Image of Media.Image.Props
+
+    type CardChildren =
+        CardImage * CardHeader * CardBody * CardFooter
         
-        [<RequireQualifiedAccess>]
-        type T =
-            { Title: string
-              SubTitle: string }
+    type Card =
+        HTMLProps * CardChildren
 
-        let props =
-            { T.Title = ""
-              T.SubTitle = "" }
-
-        let ƒ (header: T) =
-            R.div
-                [ ClassName "card-header" ]
-                [ R.div
-                    [ ClassName "card-title h5" ]
-                    [ R.str header.Title ]
-                  R.div
-                    [ ClassName "card-subtitle text-gray" ]
-                    [ R.str header.SubTitle ] ]
-
-    module Body =
-
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
-
-        [<RequireQualifiedAccess>]
-        type T = Children
-
-        let props = []
-
-        let ƒ (body: T) =
-            if not (List.isEmpty body) then
-                R.div [ClassName "card-body"] body
-            else
-                R.ofOption None
-
-    module Footer =
-
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
-
-        [<RequireQualifiedAccess>]
-        type T = Children
-
-        let props = []
-
-        let ƒ (footer: T) =
-            if not (List.isEmpty footer) then
-                R.div [ClassName "card-footer"] footer
-            else
-                R.ofOption None
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Children =
-        { Image: Media.Image.Props
-          Header: Header.T
-          Body: Body.T
-          Footer: Footer.T }
-
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let children =
-        { Children.Header = Header.props
-          Children.Body = Body.props
-          Children.Footer = Footer.props
-          Children.Image = Media.Image.props }
-
-    let ƒ (card: T) =
-        let props, children = card
-        props.HTMLProps
+    let card (c: Card) =
+        let opt, (Image i, Header h, Body b, Footer f) = c
+        opt
         |> addProp (ClassName "card")
         |> R.div <|
-        [ Header.ƒ children.Header
-          R.div [ ClassName "card-image" ] [ Media.Image.ƒ children.Image ]
-          Body.ƒ children.Body
-          Footer.ƒ children.Footer ]
+        [ header h
+          R.div [ ClassName "card-image" ] [ Media.Image.ƒ i ]
+          body b
+          footer f ]

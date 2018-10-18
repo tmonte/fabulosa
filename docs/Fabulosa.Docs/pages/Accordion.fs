@@ -1,38 +1,47 @@
 ﻿module AccordionPage
 
-open Fabulosa
+open Fabulosa.Accordion
+open Fabulosa.Icon
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open Fable.Import.React
 open Renderer
 
 (*** define: accordion-sample ***)
-let accordion =
-    Accordion.ƒ
-        (Accordion.props,
-         [ { Header = "Header One"
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] }
-           { Header = "Header Two"
-             Body =
-               [ R.a [] [ R.str "Item One" ]
-                 R.a [] [ R.str "Item Two" ] ] } ])
+let element =
+    accordion ([],
+      [ AccordionItem ([],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ]))
+        AccordionItem ([],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ])) ])
 (*** define: accordion-custom-sample ***)
 let custom =
-    Accordion.ƒ
-        ({ Accordion.props with
-             CustomIcon =
-               { Icon.props with
-                   Kind = Icon.Kind.Forward } },
-         [ { Header = "Header One"
-             Body =
-               [ R.a [] [R.str "Item One"]
-                 R.a [] [R.str "Item Two"] ] }
-           { Header = "Header Two"
-             Body =
-               [ R.a [] [R.str "Item One"]
-                 R.a [] [R.str "Item Two"] ] } ])
+    accordion ([],
+      [ AccordionItem ([ Icon ([], Kind Forward) ],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ] ))
+        AccordionItem ([ Icon ([], Kind Back) ],
+          (Header "Header One",
+           Body
+             [ R.a [] [ R.str "Item One" ]
+               R.a [] [ R.str "Item Two" ] ] )) ])
+(*** hide ***)
+let render () =
+    tryMount "accordion-demo" element
+    tryMount "accordion-custom-demo" custom
+    tryMount "accordion-item-header-table"
+        (PropTable.unionPropTable typeof<AccordionHeader>)
+    tryMount "accordion-item-body-table"
+        (PropTable.unionPropTable typeof<AccordionBody>)
+    tryMount "accordion-item-optional-table"
+        (PropTable.unionPropTable typeof<AccordionItemOptional>)
 (**
 
 <div id="accordions">
@@ -42,16 +51,6 @@ let custom =
 </h2>
 
 Accordions are used to toggle sections of content.
-
-</div>
-
-<div id="accordion-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="accordion-props-table"></div>
 
 </div>
 
@@ -91,12 +90,35 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
-*)
+<div id="accordion-item-header">
 
-(*** hide ***)
-let render () =
-    tryMount "accordion-demo" accordion
-    tryMount "accordion-custom-demo" custom
-    tryMount "accordion-props-table"
-        (PropTable.propTable typeof<Accordion.Props> Accordion.props)
+<h3 class="s-title">
+    Item header
+</h3>
+
+<div class="props-table" id="accordion-item-header-table"></div>
+
+</div>
+
+<div id="accordion-item-body">
+
+<h3 class="s-title">
+    Item body
+</h3>
+
+<div class="props-table" id="accordion-item-body-table"></div>
+
+</div>
+
+<div id="accordion-item-optional">
+
+<h3 class="s-title">
+    Item optional props
+</h3>
+
+<div class="props-table" id="accordion-item-optional-table"></div>
+
+</div>
+
+*)
     

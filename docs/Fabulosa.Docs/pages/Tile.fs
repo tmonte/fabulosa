@@ -2,15 +2,17 @@
 
 open Fabulosa
 open Fabulosa.Docs
+open Fabulosa.Icon
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
 
 let contentProps =
     { Tile.Content.props
-        with HTMLProps = [ ClassName "tile-p" ] }
+        with HTMLProps = [ P.ClassName "tile-p" ] }
 
 (*** define: tile-default-sample ***)
 let tile =
@@ -19,9 +21,8 @@ let tile =
          { Icon = Some
              ({ Tile.TileIcon.props with
                   HTMLProps =
-                    [ ClassName "example-tile-icon" ] },
-              { Icon.props with
-                  Kind = Icon.Kind.People })
+                    [ P.ClassName "example-tile-icon" ] },
+              ([], Icon.Kind People))
            Content =
              (contentProps,
                 { Title = "The Avengers"
@@ -30,9 +31,8 @@ let tile =
                     big for any one hero to tackle..." })
            Action =
              (Tile.Action.props,
-              [ Button.ƒ
-                  ({ Button.props with
-                       Kind = Button.Kind.Primary },
+              [ button
+                  ([ Kind Primary ],
                    [ R.str "Action" ]) ]) })
 (*** define: tile-compact-sample ***)
 let compact =
@@ -42,18 +42,15 @@ let compact =
          { Icon = Some
              ({ Tile.TileIcon.props with
                   HTMLProps =
-                    [ ClassName "example-tile-icon" ] },
-              { Icon.props with
-                  Kind = Icon.Kind.Mail })
+                    [ P.ClassName "example-tile-icon" ] },
+              ([], Icon.Kind Mail))
            Content =
              (contentProps,
                 { Title = "fabulosa-docs.pdf"
                   SubTitle = "14MB · Public · 1 Jan, 2017" })
            Action =
              (Tile.Action.props,
-              [ Icon.ƒ
-                  ({ Icon.props with
-                       Kind = Icon.Kind.MoreHoriz }) ]) })
+              [ icon ([], Icon.Kind MoreHoriz) ]) })
 (*** hide ***)
 let render () =
     tryMount "tile-default-demo" tile

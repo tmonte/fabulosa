@@ -2,6 +2,7 @@ module PopoverTests
 
 open Expecto
 open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
 open R.Props
 open Expect
@@ -42,7 +43,7 @@ let tests =
         }
 
         test "Popover trigger" {
-            let trigger = [ Button.ƒ (Button.props, [ R.str "Button" ]) ]
+            let trigger = [ button ([], [ R.str "Button" ]) ]
             Popover.ƒ
                 (Popover.props,
                  { Trigger = trigger

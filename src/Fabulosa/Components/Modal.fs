@@ -3,6 +3,7 @@ namespace Fabulosa
 module R = Fable.Helpers.React
 open R.Props
 open Fabulosa.Extensions
+open Fabulosa.Button
 
 [<RequireQualifiedAccess>]
 module Modal =
@@ -45,7 +46,7 @@ module Modal =
                
         type Children =
         | Elements of ReactElement list
-        | Buttons of Button.T list
+        | Buttons of Button list
         
         [<RequireQualifiedAccess>]
         type T = Props * Children
@@ -59,7 +60,7 @@ module Modal =
             let children =
                 match children with
                 | Elements e -> e
-                | Buttons b -> b |> List.map Button.ƒ 
+                | Buttons b -> b |> List.map button 
          
             props.HTMLProps
             |> addProp (ClassName "modal-footer")

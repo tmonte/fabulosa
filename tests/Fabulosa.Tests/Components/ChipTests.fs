@@ -1,9 +1,10 @@
 ﻿module ChipTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Chip
+open Fabulosa.Avatar
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
@@ -11,49 +12,32 @@ let tests =
     testList "Chip tests" [
 
         test "Chip default" {
-            Chip.ƒ
-                (Chip.props,
-                 Chip.children)
+            chip ([], Text "Chip")
             |> ReactNode.unit
             |> hasUniqueClass "chip"
         }
 
         test "Chip html props" {
-            Chip.ƒ
-                ({ Chip.props with 
-                     HTMLProps = [ClassName "custom"] },
-                 Chip.children)
+            chip ([ P.ClassName "custom" ], Text "Chip")
             |> ReactNode.unit
             |> hasClass "chip custom"
         }
 
         test "Chip removable" {
             let fn = ignore
-            Chip.ƒ
-                ({ Chip.props with
-                    OnRemove = Some fn },
-                 Chip.children)
+            chip ([ OnRemove fn ], Text "Chip")
             |> ReactNode.unit
-            |> hasDescendentProp (OnClick fn)
+            |> hasDescendentProp (P.OnClick fn)
         }
 
         test "Chip with children" {
-            let avatar =
-                Avatar.ƒ
-                    { Avatar.props with
-                        Size = Avatar.Size.Small }
+            let av =
+                avatar ([ Size Small ], Initial "FA")
                 |> ReactNode.unit
-            let text =
-                R.str "Text"
-                |> ReactNode.unit
-            Chip.ƒ
-                (Chip.props,
-                 { Chip.children with
-                     Avatar = Some Avatar.props
-                     Text = "Text" })
+            chip ([ Avatar (Initial "FA") ], Text "Text" )
             |> ReactNode.unit
-            |>! hasChild 1 avatar
-            |>! hasChild 1 text
+            |>! hasChild 1 av
+            |>! hasText "Text"
             |> ignore
         }
     ]

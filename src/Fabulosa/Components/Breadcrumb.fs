@@ -1,72 +1,76 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Breadcrumb =
 
     open Fabulosa.Extensions
-    open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    open Fable.Import.React
+    module P = R.Props
 
-    [<RequireQualifiedAccess>]
-    module Item =
+    type Text = string
 
-        [<RequireQualifiedAccess>]
-        type Link =
-            { Href: string
-              Text: string }
+    type Href = string
+        
+    type BreadcrumbLinkRequired =
+        | Href of Href
 
-        [<RequireQualifiedAccess>]
-        type Children = 
-        | Elements of ReactElement list
-        | Link of Link
-        | Text of string
+    type BreadcrumbItemChildren =
+        | Text of Text
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }    
+    type BreadcrumbLink =
+        P.HTMLProps * BreadcrumbLinkRequired * BreadcrumbItemChildren
+               
+    let breadcrumbLink (c: BreadcrumbLink) =
+        let optional, (Href href), (Text text) = c
+        optional
+        |> P.addProp (P.ClassName "breadcrumb-item")
+        |> R.div
+        <| [ R.a [ P.Href href ] [ R.str text ] ]
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type BreadcrumbTextOptional = P.HTMLProps
+    
+    type BreadcrumbText =
+        BreadcrumbTextOptional * BreadcrumbItemChildren
 
-        let props =
-            { Props.HTMLProps = [] }
+    let breadcrumbText (c: BreadcrumbText) =
+        let optional, (Text text) = c
+        optional
+        |> P.addProp (P.ClassName "breadcrumb-item")
+        |> R.div
+        <| [ R.str text ]
 
-        let private renderChildren =
-            function
-            | Children.Text t -> [R.fragment [] [R.str t]]
-            | Children.Link l -> [R.a [Href l.Href] [R.str l.Text]]
-            | Children.Elements e -> e 
+    type BreadcrumbElementsOptional = P.HTMLProps
+    
+    type BreadcrumbElementsChildren = ReactElement list
 
-        let ƒ (item: T) = 
-            let props, children = item
-            props.HTMLProps
-            |> addProp (ClassName "breadcrumb-item")
-            |> R.li
-            <| renderChildren children
+    type BreadcrumbElements =
+        BreadcrumbElementsOptional * BreadcrumbElementsChildren
 
-        let render = ƒ
+    let breadcrumbElements (c: BreadcrumbElements) =
+        let optional, children = c
+        optional
+        |> P.addProp (P.ClassName "breadcrumb-item")
+        |> R.div
+        <| children
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
+    type BreadcrumbOptional = P.HTMLProps
+    
+    type BreadcrumbChildren =
+        | BreadcrumbElements of BreadcrumbElements
+        | BreadcrumbLink of BreadcrumbLink
+        | BreadcrumbText of BreadcrumbText
 
-    [<RequireQualifiedAccess>]
-    type Children = Item.T list
+    type Breadcrumb =
+        BreadcrumbOptional * BreadcrumbChildren list
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let build itemƒ (breadcrumb: T) =
-        let props, children = breadcrumb
-        props.HTMLProps
-        |> addProp (ClassName "breadcrumb")
+    let breadcrumb (c: Breadcrumb) =
+        let optional, children = c
+        optional
+        |> P.addProp (P.ClassName "breadcrumb")
         |> R.ul
-        <| List.map itemƒ children
-
-    let ƒ = build Item.ƒ
-
-    let render = ƒ
+        <| List.map
+            (function
+             | BreadcrumbElements elements -> breadcrumbElements elements
+             | BreadcrumbLink link -> breadcrumbLink link
+             | BreadcrumbText text -> breadcrumbText text)
+            children
