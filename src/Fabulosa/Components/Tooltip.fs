@@ -230,7 +230,8 @@ module Tooltip =
         let hoverTooltip props = React.ofType<HoverClass, Props, _> props []
             
         let build baseTooltipƒ (tooltip: T) =
-            hoverTooltip { props with TooltipContent = TooltipContent.Text "I'm a tooltip"}
+            let props, children = tooltip
+            hoverTooltip { props with TooltipContent = props.TooltipContent; Orientation = props.Orientation }
 
         let ƒ tooltip = build BaseTooltip.ƒ tooltip
         
