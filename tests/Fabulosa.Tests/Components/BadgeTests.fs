@@ -45,7 +45,7 @@ let tests =
         test "Badge avatar size" {
             badge ([], Value 99, BadgeAvatar ([ Size Large ], Initial "FA"))
             |> ReactNode.unit
-            |>! hasUniqueClass "avatar avatar-lg badge"
+            |>! hasUniqueClass "avatar badge avatar-lg"
             |> hasProp (P.Data ("badge", 99))
         }
 

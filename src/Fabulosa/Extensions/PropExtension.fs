@@ -1,13 +1,11 @@
 namespace Fabulosa.Extensions
 
-module R = Fable.Helpers.React
-open R.Props
+open Fable.Helpers.React.Props
 
 module Fable =
     module Helpers =
         module React =
             module Props =
-
                 type HTMLProps = IHTMLProp list
                 
                 let nonEmpty =
@@ -35,17 +33,15 @@ module Fable =
                         :> IHTMLProp
                         |> Some
                     | _ -> None
-                                        
+                    
                 let addPropOld (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
                     if htmlProps |> List.length > 0 then
-                        let filtered =
-                            htmlProps |> List.filter (combineProp prop >> Option.isNone)
-                        let combined =
-                            htmlProps |> List.choose (combineProp prop)
+                        let filtered = htmlProps |> List.filter (combineProp prop >> Option.isNone)
+                        let combined = htmlProps |> List.choose (combineProp prop)
                         if combined |> List.length > 0 then
                             List.append combined filtered
                         else
-                           prop :: combined
+                            prop :: filtered
                     else [prop]
 
                 let addPropsOld (props: HTMLProps) (htmlProps: HTMLProps) =

@@ -33,7 +33,7 @@ let tests =
         }
 
         test "Bar small" {
-            bar ([ Small true ], [])
+            bar ([ Small ], [])
             |> ReactNode.unit
             |> hasClass "bar bar-sm"
         }
@@ -63,7 +63,7 @@ let tests =
         }
 
         test "Bar item tooltip" {
-            barItem ([ Tooltip true ], Value 25)
+            barItem ([ Tooltip ], Value 25)
             |> ReactNode.unit
             |>! hasClass "bar-item tooltip"
             |>! hasProp (P.Style [ P.CSSProp.Width "25%" ])

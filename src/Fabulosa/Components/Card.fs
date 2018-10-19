@@ -76,8 +76,8 @@ module Card =
     type Card =
         HTMLProps * CardChildren
 
-    let card (c: Card) =
-        let opt, (Image i, Header h, Body b, Footer f) = c
+    let card (comp: Card) =
+        let opt, (Image i, Header h, Body b, Footer f) = comp
         opt
         |> addProp (ClassName "card")
         |> R.div <|
