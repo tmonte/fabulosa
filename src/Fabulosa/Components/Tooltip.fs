@@ -18,38 +18,32 @@ module Tooltip =
         | Bottom
         | Right
         | Left 
+
+    type TooltipChildren = 
+        | Children of ReactElement list
         
     type TooltipContent =
-        | Text of string
-        | Elements of ReactElement list
-        
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: IHTMLProp list
-          Orientation: Orientation 
-          TooltipContent: TooltipContent  }
-    
-    [<RequireQualifiedAccess>]
-    type Children = ReactElement
-    
-    [<RequireQualifiedAccess>]
-    type T = Props * Children 
-        
-    type TooltipRequired = 
-        Content of ReactElement list
-    
-    type TooltipChildren = Target of ReactElement list
+        | Content of ReactElement list
     
     type TooltipOptional =
         | Orientation of Orientation
         interface IHTMLProp
     
-    type Tooltip = HTMLProps * TooltipRequired * TooltipChildren       
+    type Tooltip = HTMLProps * TooltipContent * TooltipChildren       
     
-    let props =
-        { Props.HTMLProps = []
-          Props.Orientation = Orientation.Top
-          Props.TooltipContent = TooltipContent.Text "" }    
+    let private pick fn (props:HTMLProps) =
+                props |> List.tryPick fn
+    
+    let private orientation =
+        fun (prop: IHTMLProp) ->
+            match prop with
+            | :? TooltipOptional as opt ->
+                match opt with
+                | Orientation ori ->
+                    Some (ori)
+                | _ -> None
+            | _ -> None
+        |> pick      
         
     [<RequireQualifiedAccess>]
     module BaseTooltip =
@@ -60,42 +54,44 @@ module Tooltip =
         open Extensions.Fable.Helpers.React.Props
         open Fable.Import
         
+        type BaseTooltipOptional =
+            | Reference of (Browser.Element -> unit)
+            | Orientation of Orientation
+            interface IHTMLProp
+        
+        type BaseTooltip = HTMLProps * TooltipContent
+                  
         let positionClassName =
             function
-                | Orientation.Top -> ""
-                | Orientation.Right -> "tooltip-right"
-                | Orientation.Bottom -> "tooltip-bottom"
-                | Orientation.Left -> "tooltip-left"
-                >> ClassName
-        
-        type Props = 
-            { HTMLProps: IHTMLProp list  
-              Ref: Browser.Element -> unit  
-              Orientation: Orientation }
-              
-        type T = Props * TooltipContent  
-        
-        let props = 
-            { HTMLProps = []
-              Ref = fun _ -> ()  
-              Orientation = Orientation.Top }
-                
-        let ƒ (tooltipContent: T) =
-            let props, children = tooltipContent
-            let tooltipContent = 
-                match children with 
-                | Text t -> [ R.str t ]
-                | Elements els -> els   
-    
-            props.HTMLProps
+                | Some Orientation.Top -> ""
+                | Some Orientation.Right -> "tooltip-right"
+                | Some Orientation.Bottom -> "tooltip-bottom"
+                | Some Orientation.Left -> "tooltip-left"
+                | None -> ""
+                >> ClassName    
+                      
+        let private reference =
+            fun (prop: IHTMLProp) ->
+                match prop with
+                | :? BaseTooltipOptional as opt ->
+                    match opt with
+                    | Reference ref ->
+                        Some (Prop.Ref ref)
+                    | _ -> None
+                | _ -> None
+            |> pick      
+      
+        let baseTooltip (tooltip: BaseTooltip) =
+            let opt, TooltipContent.Content children = tooltip
+            
+            opt
             |> addProps 
-                [ ClassName "fab-tooltip"
-                  Ref props.Ref  
-                  positionClassName props.Orientation ]
+                [ ClassName "fab-tooltip"  
+                    
+                  positionClassName (orientation opt) ]
+            |> addPropOpt (opt |> reference|> Option.map (fun x -> upcast x))
             |> R.span
-            <| match children with 
-               | Text t -> [ R.str t ]
-               | Elements els -> els   
+            <| children
         
 
     [<RequireQualifiedAccess>]
@@ -112,6 +108,11 @@ module Tooltip =
         type Hover = 
         | Hovering
         | NotHovering   
+        
+        type Props =
+            { HTMLProps: IHTMLProp list
+              Orientation: Orientation 
+              TooltipContent: TooltipContent }
                  
         type State = { Style: HTMLAttr }
                
@@ -178,44 +179,29 @@ module Tooltip =
                 |> ignore 
                 
             member this.basetooltipProps () =
-                  props.HTMLProps
-                  |> addProp this.state.Style    
+                  this.props.HTMLProps
+                  |> addProps 
+                    [ this.state.Style
+                      Ref setTooltipRef 
+                      Orientation this.props.Orientation]   
             
             override this.render() =
-                let updatedProps =
-                    props.HTMLProps
-                    |> addProp this.state.Style
-            
                 R.fragment [] 
                     [ R.span [Ref setTargetRef; OnMouseEnter this.onMouseEnter; OnMouseLeave this.onMouseLeave] this.children
-                      BaseTooltip.ƒ ( { Ref = setTooltipRef; HTMLProps = this.basetooltipProps(); Orientation = props.Orientation}, this.props.TooltipContent)
+                      BaseTooltip.baseTooltip (this.basetooltipProps(), this.props.TooltipContent)
                       |> Portal.ƒ "tooltip-portal"]
-
-    let private pick fn (props:HTMLProps) =
-            props |> List.tryPick fn
-
-    let private orientation =
-        fun (prop: IHTMLProp) ->
-            match prop with
-            | :? TooltipOptional as opt ->
-                match opt with
-                | Orientation ori ->
-                    Some (ori)
-                | _ -> None
-            | _ -> None
-        |> pick
             
     let tooltip (tooltip: Tooltip) =
-        let opt, TooltipRequired.Content content, TooltipChildren.Target children = tooltip
+        let opt, content, TooltipChildren.Children children = tooltip
         
         let tooltipOrientation =
             match orientation opt with 
             | Some s -> s
             | None -> Orientation.Top
                                     
-        React.ofType<Hover.HoverClass, Props, _> 
+        React.ofType<Hover.HoverClass, Hover.Props, _> 
             { HTMLProps = opt
               Orientation = tooltipOrientation
-              TooltipContent = TooltipContent.Elements content }
+              TooltipContent = content }
             children
       

@@ -82,15 +82,9 @@ module Container =
 (*** hide ***)
 let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
 let demo = R.div [style] [ 
-//        Tooltip.HoverTooltip.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!") 
-        Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"; Orientation = Tooltip.Orientation.Left}, R.str "Hover me!!")
-        Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"}, R.str "Hover me!!")
-        Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"; Orientation = Tooltip.Orientation.Bottom}, R.str "Hover me!!")
-        Tooltip.Hover.ƒ ({ Tooltip.props with TooltipContent = TooltipContent.Text "I'm a tooltip"; Orientation = Tooltip.Orientation.Right}, R.str "Hover me!!")
+        tooltip ([], Content [R.str "top"], Children [R.str"top tooltip content"])
         
-//        BaseTooltip.ƒ (Tooltip.BaseTooltip.props, TooltipContent.Text "I got this too")
-      
-       
+ 
        
         Grid.ƒ
             (Grid.props,

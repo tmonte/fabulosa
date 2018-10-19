@@ -48,7 +48,12 @@ module Fable =
                         else
                             [prop] @ filtered
                     else [prop]
-
+                
+                let addPropOpt (prop: IHTMLProp option) (htmlProps: IHTMLProp list) =
+                    match prop with
+                    | Some p -> addProp p htmlProps
+                    | None -> htmlProps
+    
                 let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
                     props |> List.fold
                         (fun acc prop -> acc |> addProp prop) htmlProps
