@@ -63,7 +63,8 @@ module Button =
         let opt, chi = comp
         opt
         |> addProp (ClassName "btn")
-        |> mapMerge propToClassName
+        |> map propToClassName
+        |> merge
         |> renderer <| chi
 
     let button = createButton R.button
@@ -101,6 +102,7 @@ module ButtonGroup =
         let opt, chi = comp
         opt
         |> addProp (ClassName "btn-group")
-        |> mapMerge propToClassName
+        |> map propToClassName
+        |> merge
         |> R.div
         <| Seq.map (fun (Button btn) -> button btn) chi

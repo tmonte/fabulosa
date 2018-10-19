@@ -35,9 +35,11 @@ module Bar =
         | :? BarItemOptional as opt ->
             match opt with
             | Tooltip ->
-                ((ClassName "tooltip") :> IHTMLProp)
-                :: (Data ("tooltip", toPercent value) :> IHTMLProp)
-                :: [] |> List.cast<IHTMLProp>
+                [] |> List.cast<IHTMLProp> 
+                |> addProps
+                    [ ClassName "tooltip"
+                      Data ("tooltip", toPercent value) ]
+                |> merge
             | _ -> []
         | _ -> []
 
@@ -49,9 +51,10 @@ module Bar =
     let barItem (comp: BarItem) =
         let opt, (Value value) = comp
         opt
-        |> addProp (ClassName "bar-item")
-        |> addProp (style value)
-        |> addProps (List.collect (tooltip value) opt)
+        |> addProps
+            (ClassName "bar-item" :> IHTMLProp
+            :: style value
+            :: (List.collect (tooltip value) opt))
         |> merge
         |> R.div <| []
 
@@ -80,7 +83,8 @@ module Bar =
         let opt, chi = comp
         opt
         |> addProp (ClassName "bar")
-        |> mapMerge small
+        |> map small
+        |> merge
         |> R.div
         <| Seq.map
             (fun (BarItem item) -> barItem item)

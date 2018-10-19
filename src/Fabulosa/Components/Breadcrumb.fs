@@ -24,6 +24,7 @@ module Breadcrumb =
         let opt, (Href hrf), (Text txt) = comp
         opt
         |> P.addProp (P.ClassName "breadcrumb-item")
+        |> P.merge
         |> R.div
         <| [ R.a [ P.Href hrf ] [ R.str txt ] ]
 
@@ -36,6 +37,7 @@ module Breadcrumb =
         let opt, (Text txt) = comp
         opt
         |> P.addProp (P.ClassName "breadcrumb-item")
+        |> P.merge
         |> R.div
         <| [ R.str txt ]
 
@@ -50,6 +52,7 @@ module Breadcrumb =
         let opt, chi = comp
         opt
         |> P.addProp (P.ClassName "breadcrumb-item")
+        |> P.merge
         |> R.div
         <| chi
 
@@ -67,6 +70,7 @@ module Breadcrumb =
         let opt, chi = comp
         opt
         |> P.addProp (P.ClassName "breadcrumb")
+        |> P.merge
         |> R.ul
         <| List.map
             (function

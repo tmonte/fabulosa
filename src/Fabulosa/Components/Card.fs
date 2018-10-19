@@ -27,6 +27,7 @@ module Card =
         let opt, (Title title, SubTitle subTitle) = c
         opt
         |> addProp (ClassName "card-header")
+        |> merge
         |> R.div
         <| [ R.div
               [ ClassName "card-title h5" ]
@@ -42,6 +43,7 @@ module Card =
         if not (List.isEmpty chi) then
             opt
             |> addProp (ClassName "card-body")
+            |> merge
             |> R.div <| chi
         else
             R.ofOption None
@@ -54,6 +56,7 @@ module Card =
         if not (List.isEmpty chi) then
             opt
             |> addProp (ClassName "card-footer")
+            |> merge
             |> R.div <| chi
         else
             R.ofOption None
@@ -80,6 +83,7 @@ module Card =
         let opt, (Image i, Header h, Body b, Footer f) = comp
         opt
         |> addProp (ClassName "card")
+        |> merge
         |> R.div <|
         [ header h
           R.div [ ClassName "card-image" ] [ Media.Image.ƒ i ]

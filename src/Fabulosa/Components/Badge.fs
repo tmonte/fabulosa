@@ -14,6 +14,7 @@ module Badge =
         |> addProps
             [ ClassName "badge"
               Data ("badge", badge) ]
+        |> merge
         
     type BadgeRequired =
         Value of int

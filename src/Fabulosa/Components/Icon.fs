@@ -122,5 +122,6 @@ module Icon =
         |> addProps
             [ ClassName "icon"
               kind req ]
-        |> mapMerge size
+        |> map size
+        |> merge
         |> R.i <| []

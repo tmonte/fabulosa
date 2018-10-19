@@ -30,7 +30,7 @@ let tests =
 
         test "Accordion custom icon" {
             let opt, req = ([], Kind Forward)
-            let rendered = (opt |> P.addProp (P.ClassName "mr-1"), req)
+            let rendered = (opt |> P.addProp (P.ClassName "mr-1") |> P.merge, req)
             accordion ([],
               [ AccordionItem ([ Icon (opt, req) ],
                   (Header "Header One",
