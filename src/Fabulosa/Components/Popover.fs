@@ -61,7 +61,7 @@ module Popover =
     let build triggerƒ contentƒ (popover: T<'Trigger, 'Content>) =
         let props, children = popover
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "popover"
               position props.Position ]
         |> R.div

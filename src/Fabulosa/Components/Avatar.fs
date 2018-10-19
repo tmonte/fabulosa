@@ -28,27 +28,22 @@ module Avatar =
 
     type Avatar =
         HTMLProps * AvatarChildren
-
-    let private size (props: HTMLProps) =
-        List.tryPick
-            (fun (prop: IHTMLProp) ->
-                match prop with
-                | :? AvatarOptional as opt ->
-                    match opt with
-                    | Size ExtraSmall -> Some "avatar-xs"
-                    | Size Small -> Some "avatar-sm"
-                    | Size Large -> Some "avatar-lg"
-                    | Size ExtraLarge -> Some "avatar-xl"
-                    | _ -> None
-                | _ -> None)
-            props
-        |> Option.orElse (Some "")
-        |> Option.get
-        |> ClassName
-        :> IHTMLProp
+        
+    let private size (prop: IHTMLProp) =
+        match prop with
+        | :? AvatarOptional as opt ->
+            match opt with
+            | Size ExtraSmall -> "avatar-xs"
+            | Size Small -> "avatar-sm"
+            | Size Large -> "avatar-lg"
+            | Size ExtraLarge -> "avatar-xl"
+            | _ -> ""
+            |> ClassName
+            :> IHTMLProp
+        | _ -> prop
 
     let private presenceIcon presence =
-        R.i ([presence] |> addProp (ClassName "avatar-presence")) []
+        R.i ([ presence; ClassName "avatar-presence" ]) []
 
     let private presence (props: HTMLProps) =
         List.tryPick
@@ -69,7 +64,7 @@ module Avatar =
     let private initial children (props: IHTMLProp list) =
         match children with
         | Initial initial ->
-            props @ [ Data ("initial", initial) ]
+            props |> addProp (Data ("initial", initial))
         | _ -> props
 
     let private image children =
@@ -78,12 +73,12 @@ module Avatar =
             R.img [ Src url ]
         | _ -> R.ofOption None
 
-    let avatar (c: Avatar) =
-        let optional, children = c
-        optional
-        |> addProp (size optional)
+    let avatar (comp: Avatar) =
+        let opt, chi = comp
+        opt
         |> addProp (ClassName "avatar")
-        |> initial children
+        |> mapMerge size
+        |> initial chi
         |> R.figure
-        <| [ image children
-             presence optional ]
+        <| [ image chi
+             presence opt ]

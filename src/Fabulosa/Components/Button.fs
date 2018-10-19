@@ -39,128 +39,68 @@ module Button =
 
     type Button = HTMLProps * ReactElement list
 
-    let private kind (prop: IHTMLProp) =
+    let private propToClassName (prop: IHTMLProp) =
         match prop with
         | :? ButtonOptional as opt ->
             match opt with
-            | Kind Default -> Some "btn-default"
-            | Kind Primary -> Some "btn-primary"
-            | Kind Link -> Some "btn-link"
-            | _ -> None
-        | _ -> None
+            | Kind Default -> "btn-default"
+            | Kind Primary -> "btn-primary"
+            | Kind Link -> "btn-link"
+            | Color Success -> "btn-success"
+            | Color Error -> "btn-error"
+            | Size Small -> "btn-sm"
+            | Size Large -> "btn-lg"
+            | State Disabled -> "disabled"
+            | State Loading -> "loading"
+            | State Active -> "active"
+            | Shape Squared -> "btn-action"
+            | Shape Round -> "btn-action circle"
+            |> ClassName
+            :> IHTMLProp
+        | _ -> prop
 
-    let private color (prop: IHTMLProp) =
-        match prop with
-        | :? ButtonOptional as opt ->
-            match opt with
-            | Color Success -> Some "btn-success"
-            | Color Error -> Some "btn-error"
-            | _ -> None
-        | _ -> None
-
-    let private size (prop: IHTMLProp) =
-        match prop with
-        | :? ButtonOptional as opt ->
-            match opt with
-            | Size Small -> Some "btn-sm"
-            | Size Large -> Some "btn-lg"
-            | _ -> None
-        | _ -> None
-
-    let private state (prop: IHTMLProp) =
-        match prop with
-        | :? ButtonOptional as opt ->
-            match opt with
-            | State Disabled -> Some "disabled"
-            | State Loading -> Some "loading"
-            | State Active -> Some "active"
-            | _ -> None
-        | _ -> None
-
-    let private shape (prop: IHTMLProp) =
-        match prop with
-        | :? ButtonOptional as opt ->
-            match opt with
-            | Shape Squared -> Some "btn-action"
-            | Shape Round -> Some "btn-action circle"
-            | _ -> None
-        | _ -> None
-
-    let button (c: Button) =
-        let optional, children = c
-        optional
-        |> addClass kind
-        |> addClass color
-        |> addClass size
-        |> addClass state
-        |> addClass shape
+    let private createButton renderer (comp: Button) =
+        let opt, chi = comp
+        opt
         |> addProp (ClassName "btn")
-        |> R.button <| children
-        
-//[<RequireQualifiedAccess>]
-//module Anchor =
+        |> mapMerge propToClassName
+        |> renderer <| chi
 
-//    open Fable.Import.React
-//    open Fabulosa.Extensions
-//    module R = Fable.Helpers.React
-//    open R.Props
+    let button = createButton R.button
 
-//    [<RequireQualifiedAccess>]
-//    type Children = ReactElement list
+    let anchor = createButton R.a
 
-//    [<RequireQualifiedAccess>]
-//    type T = Button.T
+module ButtonGroup =
 
-//    let props = Button.props
+    open Fabulosa.Extensions
+    open Button
+    module R = Fable.Helpers.React
+    open R.Props
+    
+    type ButtonGroupOptional =
+        | Block
+        interface IHTMLProp
 
-//    let build (anchor: T) =
-//        let props, children = anchor
-//        props.HTMLProps
-//        |> addProps
-//            [ ClassName "btn"
-//              Button.kind props.Kind
-//              Button.size props.Size
-//              Button.color props.Color
-//              Button.state props.State
-//              Button.format props.Format ]
-//        |> R.a <| children
+    type ButtonGroupChild =
+        Button of Button
 
-//    let ƒ = build
+    type ButtonGroupChildren = ButtonGroupChild list
 
-//module ButtonGroup =
+    type ButtonGroup = HTMLProps * ButtonGroupChildren
 
-    //open Fabulosa.Extensions
-    //module R = Fable.Helpers.React
-    //open R.Props
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? ButtonGroupOptional as opt ->
+            match opt with
+            | Block -> "btn-group-block"
+            |> ClassName
+            :> IHTMLProp
+        | _ -> prop
 
-    //[<RequireQualifiedAccess>]
-    //type Block = bool
-
-    //[<RequireQualifiedAccess>]
-    //type Props =
-    //    { Block: Block
-    //      HTMLProps: IHTMLProp list }
-
-    //[<RequireQualifiedAccess>]
-    //type Children<'Button> = 'Button list
-
-    //[<RequireQualifiedAccess>]
-    //type T<'Button> = Props * Children<'Button>
-
-    //let props =
-    //    { Props.Block = false
-    //      Props.HTMLProps = [] }
-
-    //let private block =
-    //    function
-    //    | true -> "btn-group-block"
-    //    | false -> ""
-
-    //let build buttonƒ (buttonGroup: T<'Button>) =
-    //    let props, children = buttonGroup
-    //    props.HTMLProps
-    //    |> addProp (ClassName "btn-group")
-    //    |> R.div
-    //    <| Seq.map buttonƒ children
-
-    //let ƒ = build Button.ƒ
+    let buttonGroup (comp: ButtonGroup) =
+        let opt, chi = comp
+        opt
+        |> addProp (ClassName "btn-group")
+        |> mapMerge propToClassName
+        |> R.div
+        <| Seq.map (fun (Button btn) -> button btn) chi

@@ -24,7 +24,7 @@ module Textarea =
     let build (textarea: T) =
         let props, children = textarea
         props.HTMLProps
-        |> addProp (ClassName "form-input")
+        |> addPropOld (ClassName "form-input")
         |> R.textarea
         <| [ R.str children ]
 

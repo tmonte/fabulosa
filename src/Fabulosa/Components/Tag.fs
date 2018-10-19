@@ -53,7 +53,7 @@ module Tag =
     let build (tag: T) =
         let props, children = tag
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "label"
               color props.Color
               rounded props.Rounded ]

@@ -54,7 +54,7 @@ module rec Nav =
     let build itemƒ (nav: T<'Item>) =
         let props, children = nav
         props.HTMLProps
-        |> addProp (ClassName "nav")
+        |> addPropOld (ClassName "nav")
         |> R.ul
         <| Seq.map
             (function

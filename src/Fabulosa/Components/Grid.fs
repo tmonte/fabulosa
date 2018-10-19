@@ -102,7 +102,7 @@ module GridColumn =
     let build (column: T) =
         let props, children = column
         props.HTMLProps
-        |> P.addProps
+        |> P.addPropsOld
             [ P.ClassName "column"
               kind props.Kind
               size props.Size
@@ -158,7 +158,7 @@ module GridRow =
     let build columnƒ (row: T<'Column>) =
         let props, children = row
         props.HTMLProps
-        |> P.addProps
+        |> P.addPropsOld
             [ P.ClassName "columns"
               gapless props.Gapless
               oneLine props.OneLine ]
@@ -190,7 +190,7 @@ module Grid =
     let build rowƒ (grid: T<'Row>) =
         let props, children = grid
         props.HTMLProps
-        |> P.addProp (P.ClassName "container")
+        |> P.addPropOld (P.ClassName "container")
         |> R.div
         <| Seq.map
             (fun (GridRow row) -> rowƒ row)

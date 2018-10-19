@@ -10,9 +10,9 @@ open Renderer
 (*** define: bar-default-sample ***)
 let def = bar ([], [ BarItem ([], Value 25) ])
 (*** define: bar-small-sample ***)
-let small = bar ([ Small true ], [ BarItem ([], Value 25) ])
+let small = bar ([ Small ], [ BarItem ([], Value 25) ])
 (*** define: bar-item-tooltip-sample ***)
-let tooltip = bar ([], [ BarItem ([ Tooltip true ], Value 25) ])
+let tooltip = bar ([], [ BarItem ([ Tooltip ], Value 25) ])
 (*** define: bar-item-multiple-sample ***)
 let multiple =
     bar ([],

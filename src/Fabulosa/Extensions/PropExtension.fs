@@ -1,11 +1,13 @@
 namespace Fabulosa.Extensions
 
-open Fable.Helpers.React.Props
+module R = Fable.Helpers.React
+open R.Props
 
 module Fable =
     module Helpers =
         module React =
             module Props =
+
                 type HTMLProps = IHTMLProp list
                 
                 let nonEmpty =
@@ -33,33 +35,57 @@ module Fable =
                         :> IHTMLProp
                         |> Some
                     | _ -> None
-                    
-                let addProp (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
+                                        
+                let addPropOld (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
                     if htmlProps |> List.length > 0 then
                         let filtered =
-                            htmlProps
-                            |> List.filter
-                                (combineProp prop >> Option.isNone)
+                            htmlProps |> List.filter (combineProp prop >> Option.isNone)
                         let combined =
-                            htmlProps
-                            |> List.choose (combineProp prop)
+                            htmlProps |> List.choose (combineProp prop)
                         if combined |> List.length > 0 then
-                            combined @ filtered
+                            List.append combined filtered
                         else
-                            [prop] @ filtered
+                           prop :: combined
                     else [prop]
 
-                let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
+                let addPropsOld (props: HTMLProps) (htmlProps: HTMLProps) =
                     props |> List.fold
-                        (fun acc prop -> acc |> addProp prop) htmlProps
+                        (fun acc prop -> acc |> addPropOld prop) htmlProps
 
-                let addClass cb (props: HTMLProps)=
-                    List.tryPick
-                        (fun (prop: IHTMLProp) ->
-                            cb prop)
-                        props
-                    |> Option.map ClassName
-                    |> Option.orElse (Some (ClassName ""))
-                    |> Option.get
-                    |> addProp <| props
- 
+                let addProp (prop: IHTMLProp) (htmlProps: HTMLProps) =
+                    prop :: htmlProps
+
+                let addProps (other: HTMLProps) (existing: HTMLProps) = 
+                    other |> List.fold
+                        (fun acc prop -> acc |> addProp prop) existing
+
+                let merge (props: HTMLProps) =
+                    let propToClassNames =
+                        List.choose htmlAttrs
+                        >> List.choose
+                            (function
+                             | ClassName a -> Some a
+                             | _ -> None)
+                    let withoutClassNames =
+                        List.filter
+                            (fun (prop: IHTMLProp) ->
+                                match prop with
+                                | :? HTMLAttr as htmlAttr ->
+                                    match htmlAttr with
+                                    | ClassName _ -> false
+                                    | _ -> true
+                                | _ -> true)
+                    let classNames = propToClassNames props
+                    let otherProps = withoutClassNames props
+                    (classNames
+                     |> String.concat " "
+                     |> ClassName
+                     :> IHTMLProp)
+                    :: otherProps
+
+                let map (mapping: IHTMLProp -> IHTMLProp) =
+                    List.map mapping
+
+                let mapMerge (mapping: IHTMLProp -> IHTMLProp) =
+                    map mapping >> merge
+                                            

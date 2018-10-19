@@ -24,29 +24,31 @@ module Accordion =
     type AccordionItem =
         HTMLProps * AccordionItemChildren
 
-    let someIcon (optional: IHTMLProp) =
+    let private someIcon (optional: IHTMLProp) =
         match optional with
         | :? AccordionItemOptional as prop ->
             match prop with
             | Icon props -> Some props
         | _ -> None
 
-    let createIcon opt =
+    let private createIcon opt =
         opt
         |> List.tryPick someIcon
         |> Option.orElse (Some ([], Icon.Kind ArrowRight))
         |> Option.map (fun (iconOpt, iconReq) ->
-             (iconOpt |> addProp (ClassName "mr-1"), iconReq))
+             (iconOpt
+              |> addProp (ClassName "mr-1")
+              |> merge, iconReq))
         |> Option.get
 
-    let accordionItem (c: AccordionItem) =
-        let optional, (Header header, Body body) = c
-        let i = createIcon optional
+    let private item (comp: AccordionItem) =
+        let opt, (Header header, Body body) = comp
+        let icn = createIcon opt
         R.details
             [ ClassName "accordion" ]
             [ R.summary
                 [ ClassName "accordion-header" ]
-                [ icon i
+                [ icon icn
                   R.RawText "\n"
                   R.str header ]
               R.div
@@ -63,10 +65,10 @@ module Accordion =
     type Accordion =
         HTMLProps * AccordionChild list
 
-    let accordion (c: Accordion) =
-        let optional, children = c
+    let accordion (comp: Accordion) =
+        let opt, chi = comp
         R.div
-            optional
+            opt
             (Seq.map
-               (fun (AccordionItem item) -> accordionItem item)
-               children)
+               (fun (AccordionItem itm) -> item itm)
+               chi)

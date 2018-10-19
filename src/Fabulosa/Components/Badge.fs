@@ -9,10 +9,11 @@ module Badge =
     module R = Fable.Helpers.React
     open R.Props
 
-    let private combine htmlProps (badge: int) =
-        (htmlProps
-         |> addProp (ClassName "badge"))
-        @ [ Data ("badge", badge) ]
+    let private combine props badge =
+        props
+        |> addProps
+            [ ClassName "badge"
+              Data ("badge", badge) ]
         
     type BadgeRequired =
         Value of int

@@ -52,7 +52,7 @@ module Responsive =
     let build (responsive: T) =
         let props, children = responsive
         []
-        |> addProps
+        |> addPropsOld
             [ ClassName "responsive"
               hide props.Hide
               show props.Show ]

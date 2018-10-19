@@ -55,7 +55,7 @@ module Toast =
     let build (toast: T) =
         let props, children = toast
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "toast"
               color props.Color ]
         |> R.div

@@ -63,7 +63,7 @@ module Modal =
                 | Buttons b -> b |> List.map button 
          
             props.HTMLProps
-            |> addProp (ClassName "modal-footer")
+            |> addPropOld (ClassName "modal-footer")
             |> R.div 
             <| children
             
@@ -112,7 +112,7 @@ module Modal =
             | None -> []
         
         props
-        |> addProp (ClassName "modal-overlay")
+        |> addPropOld (ClassName "modal-overlay")
         |> R.a
         <| []
     
@@ -145,7 +145,7 @@ module Modal =
         match props.IsOpen with 
         | true ->
             props.HTMLProps
-            |> addProp (getClasses props.Size)
+            |> addPropOld (getClasses props.Size)
             |> R.div 
             <| [
                 modalOverLay props.OnRequestClose

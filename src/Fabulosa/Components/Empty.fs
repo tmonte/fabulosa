@@ -91,7 +91,7 @@ module Empty =
         (empty: T<'Icon, 'Title, 'SubTitle, 'Action>) =
         let prps,children = empty
         props.HTMLProps
-        |> P.addProp (P.ClassName "empty")
+        |> P.addPropOld (P.ClassName "empty")
         |> R.div <|
         [ emptyIconƒ children.Icon
           titleƒ children.Title

@@ -34,7 +34,7 @@ module Step =
         let ƒ (item: T) =
             let props, children = item
             R.li
-                ([] |> addProps
+                ([] |> addPropsOld
                     [ ClassName "step-item"
                       active props.Active ])
                 [ R.a props.HTMLProps children ]
@@ -55,7 +55,7 @@ module Step =
     let build itemƒ (step: T<'Item>) =
         let props, children = step
         props.HTMLProps
-        |> addProp (ClassName "step")
+        |> addPropOld (ClassName "step")
         |> R.div
         <| Seq.map itemƒ children
 

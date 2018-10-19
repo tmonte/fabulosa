@@ -34,7 +34,7 @@ module Checkbox =
     let build (checkbox: T) =
         let props, children = checkbox
         let containerProps =
-            [] |> addProps
+            [] |> addPropsOld
                 [ ClassName "form-checkbox"
                   inlineCheckbox props.Inline ]
         R.label containerProps

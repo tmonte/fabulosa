@@ -50,7 +50,7 @@ module Chip =
     let chip (c: Chip) =
         let opt, (Text text) = c
         opt
-        |> P.addProp (P.ClassName "chip")
+        |> P.addPropOld (P.ClassName "chip")
         |> R.div <|
         [ R.ofOption (avatar opt)
           R.str text

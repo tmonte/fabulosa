@@ -96,7 +96,7 @@ module Table =
         let build columnƒ titleColumnƒ (row: T<'Column, 'TitleColumn>) =
             let props, children = row
             props.HTMLProps
-            |> addProp (active props.Active)
+            |> addPropOld (active props.Active)
             |> R.tr
             <| List.map
                 (function
@@ -192,7 +192,7 @@ module Table =
     let build headƒ bodyƒ (table: T<'Head, 'Body>) =
         let props, children = table
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "table"
               kind props.Kind ]
         |> R.table

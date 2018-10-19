@@ -25,7 +25,7 @@ module Tile =
         let build<'Icon> iconƒ (icon: T<'Icon>) =
             let props, children = icon
             props.HTMLProps
-            |> addProp (ClassName "tile-icon")
+            |> addPropOld (ClassName "tile-icon")
             |> R.div <| [ iconƒ children ]
 
         let ƒ = build icon
@@ -54,7 +54,7 @@ module Tile =
         let build (content: T) =
             let props, children = content
             props.HTMLProps
-            |> addProp (ClassName "tile-content")
+            |> addPropOld (ClassName "tile-content")
             |> R.div
             <| [ R.p
                    [ ClassName "tile-title" ]
@@ -83,7 +83,7 @@ module Tile =
         let build (action: T) =
             let props, children = action
             props.HTMLProps
-            |> addProp (ClassName "tile-action")
+            |> addPropOld (ClassName "tile-action")
             |> R.div <| children
 
         let ƒ = build
@@ -130,7 +130,7 @@ module Tile =
         (tile: T<'Icon, 'Content, 'Action>) =
         let pops, children = tile
         props.HTMLProps
-        |> addProps 
+        |> addPropsOld 
             [ ClassName "tile"
               compact props.Compact ]
         |> R.div

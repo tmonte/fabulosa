@@ -20,24 +20,24 @@ module Breadcrumb =
     type BreadcrumbLink =
         P.HTMLProps * BreadcrumbLinkRequired * BreadcrumbItemChildren
                
-    let breadcrumbLink (c: BreadcrumbLink) =
-        let optional, (Href href), (Text text) = c
-        optional
+    let breadcrumbLink (comp: BreadcrumbLink) =
+        let opt, (Href hrf), (Text txt) = comp
+        opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
-        <| [ R.a [ P.Href href ] [ R.str text ] ]
+        <| [ R.a [ P.Href hrf ] [ R.str txt ] ]
 
     type BreadcrumbTextOptional = P.HTMLProps
     
     type BreadcrumbText =
         BreadcrumbTextOptional * BreadcrumbItemChildren
 
-    let breadcrumbText (c: BreadcrumbText) =
-        let optional, (Text text) = c
-        optional
+    let breadcrumbText (comp: BreadcrumbText) =
+        let opt, (Text txt) = comp
+        opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
-        <| [ R.str text ]
+        <| [ R.str txt ]
 
     type BreadcrumbElementsOptional = P.HTMLProps
     
@@ -46,12 +46,12 @@ module Breadcrumb =
     type BreadcrumbElements =
         BreadcrumbElementsOptional * BreadcrumbElementsChildren
 
-    let breadcrumbElements (c: BreadcrumbElements) =
-        let optional, children = c
-        optional
+    let breadcrumbElements (comp: BreadcrumbElements) =
+        let opt, chi = comp
+        opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> R.div
-        <| children
+        <| chi
 
     type BreadcrumbOptional = P.HTMLProps
     
@@ -63,9 +63,9 @@ module Breadcrumb =
     type Breadcrumb =
         BreadcrumbOptional * BreadcrumbChildren list
 
-    let breadcrumb (c: Breadcrumb) =
-        let optional, children = c
-        optional
+    let breadcrumb (comp: Breadcrumb) =
+        let opt, chi = comp
+        opt
         |> P.addProp (P.ClassName "breadcrumb")
         |> R.ul
         <| List.map
@@ -73,4 +73,4 @@ module Breadcrumb =
              | BreadcrumbElements elements -> breadcrumbElements elements
              | BreadcrumbLink link -> breadcrumbLink link
              | BreadcrumbText text -> breadcrumbText text)
-            children
+            chi

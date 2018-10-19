@@ -109,16 +109,18 @@ module Icon =
         match prop with
         | :? IconOptional as opt ->
             (match opt with
-             | Size (X2) -> "icon-2x"
-             | Size (X3) -> "icon-3x"
-             | Size (X4) -> "icon-4x"
+             | Size X2 -> "icon-2x"
+             | Size X3 -> "icon-3x"
+             | Size X4 -> "icon-4x"
              |> ClassName)
             :> IHTMLProp
         | _ -> prop
 
     let icon (comp: Icon) =
         let opt, (Kind req) = comp
-        R.i
-            (opt
-             |> List.map size
-             |> addProps [ ClassName "icon"; kind req ]) []        
+        opt
+        |> addProps
+            [ ClassName "icon"
+              kind req ]
+        |> mapMerge size
+        |> R.i <| []

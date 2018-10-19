@@ -108,7 +108,7 @@ module Menu =
                     [ Position "absolute"
                       Left x
                       Top y ] ]
-                |> addProp (ClassName "menu")
+                |> addPropOld (ClassName "menu")
                 |> R.ul <| children
             else R.ofOption None
 
