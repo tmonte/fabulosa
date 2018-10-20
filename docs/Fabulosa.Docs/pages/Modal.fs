@@ -3,6 +3,7 @@ module ModalPage
 open Fabulosa
 open Fabulosa.Docs
 open Fabulosa.Button
+open Fabulosa.Grid
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -27,7 +28,7 @@ let modal: Modal.T =
                 (Modal.Footer.props, 
                  [
                     button1
-                    ([ Kind Primary ], [R.str "Vote Ciro 12"])
+                    ([ Button.Kind Primary ], [R.str "Vote Ciro 12"])
                  ] |> Modal.Footer.Buttons) |> Some
         }
     )
@@ -65,7 +66,7 @@ module Container =
                         OnRequestClose = Some (fun _ -> dispatch Close) }
         let size = props.Size
         R.fragment [][
-            button ([ Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
+            button ([ Button.Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
             Modal.ƒ (props, children)
         ]
     
@@ -81,18 +82,18 @@ module Container =
 (*** hide ***)
 let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
 let demo = R.div [style] [ 
-        Grid.ƒ
-            (Grid.props,
-             [ GridRow
-                 (GridRow.props,
-                  [ GridColumn
-                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+        grid
+            ([],
+             [ Row
+                 ([],
+                  [ Column
+                      ([ Size 4; SMSize 12 ],
                        [ Container.ƒ smallModal ])
-                    GridColumn
-                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+                    Column
+                      ([ Size 4; SMSize 12 ],
                        [ Container.ƒ modal ])
-                    GridColumn
-                      ({ GridColumn.props with Size = 4; SMSize = 12 },
+                    Column
+                      ([ Size 4; SMSize 12 ],
                        [ Container.ƒ largeModal ]) ]) ])
     ]
 
