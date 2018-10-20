@@ -12,7 +12,7 @@ let tests =
     testList "Badge tests" [
 
         test "Badge default" {
-            badge ([], Value 1, BadgeDiv ([], [ R.str "Badge" ]))
+            badge ([], Value 1, Div ([], [ R.str "Badge" ]))
             |> ReactNode.unit
             |>! hasUniqueClass "badge"
             |>! hasProp (P.Data ("badge", 1))
@@ -20,7 +20,7 @@ let tests =
         }
 
         test "Badge span" {
-            badge ([], Value 2, BadgeSpan ([], [ R.str "Badge" ]))
+            badge ([], Value 2, Span ([], [ R.str "Badge" ]))
             |> ReactNode.unit
             |>! hasUniqueClass "badge"
             |>! hasProp (P.Data ("badge", 2))
@@ -28,7 +28,7 @@ let tests =
         }
 
         test "Badge button" {
-            badge ([], Value 3, BadgeButton ([], [ R.str "Badge" ]))
+            badge ([], Value 3, Button ([], [ R.str "Badge" ]))
             |> ReactNode.unit
             |>! hasUniqueClass "btn badge"
             |>! hasProp (P.Data ("badge", 3))
@@ -36,14 +36,14 @@ let tests =
         }
 
         test "Badge avatar" {
-            badge ([], Value 1, BadgeAvatar ([], Initial "FA"))
+            badge ([], Value 1, Avatar ([], Initial "FA"))
             |> ReactNode.unit
             |>! hasClass "avatar badge"
             |> hasProp (P.Data ("badge", 1))
         }
 
         test "Badge avatar size" {
-            badge ([], Value 99, BadgeAvatar ([ Size Large ], Initial "FA"))
+            badge ([], Value 99, Avatar ([ Size Large ], Initial "FA"))
             |> ReactNode.unit
             |>! hasUniqueClass "avatar badge avatar-lg"
             |> hasProp (P.Data ("badge", 99))
