@@ -1,8 +1,7 @@
 ﻿module ToastPage
 
-open Fabulosa
-open Fabulosa.Docs
 open Fabulosa.Button
+open Fabulosa.Toast
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -29,7 +28,7 @@ let update message state =
 
 let toggler dispatch opened =
     button
-        ([ Kind Primary
+        ([ ButtonOptional.Kind Kind.Primary
            P.OnClick
              (fun _ ->
                 dispatch Toggle
@@ -41,28 +40,25 @@ let toggler dispatch opened =
 
 let trigger dispatch opened =
     button
-        ([ Kind Primary
+        ([ ButtonOptional.Kind Kind.Primary
            P.OnClick (fun _ -> dispatch Toggle)
            P.Disabled opened ],
          [ R.str "Open" ])
 
 (*** define: toast-default-sample ***)
-let toast =
-    Toast.ƒ
-        (Toast.props, "Default toast")
+let def = toast ([], Text "Default toast")
 (*** define: toast-primary-sample ***)
 let primary dispatch =
-    Toast.ƒ
-        ({ Toast.props with
-             Color = Toast.Color.Primary
-             OnRequestClose = Some (fun _ -> dispatch Toggle )},
-         "You can close me!")
+    toast
+        ([ Color Primary
+           OnRequestClose (fun _ -> dispatch Toggle ) ],
+         Text "You can close me!")
 (*** hide ***)
 
 let defaultView (model: Model<unit, State>) dispatch =
     let renderToast =
         if model.state.Opened then
-            toast
+            def
         else R.ofOption None
     R.div [] 
         [ toggler dispatch model.state.Opened
@@ -84,8 +80,8 @@ let demo view  =
 let render () =
     tryMount "toast-default-demo" <| demo defaultView
     tryMount "toast-primary-demo" <| demo primaryView
-    tryMount "toast-props-table"
-        (PropTable.propTable typeof<Toast.Props> Toast.props)
+    //tryMount "toast-props-table"
+        //(PropTable.propTable typeof<Toast.Props> Toast.props)
 (**
 
 <div id="toast">

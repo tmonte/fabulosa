@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Toast =
 
     open Fabulosa.Extensions
@@ -9,58 +8,55 @@ module Toast =
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
     type Color =
     | Primary
     | Success
     | Warning
     | Error
-    | None
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps
-          Color: Color
-          OnRequestClose: (MouseEvent -> unit) option }
+    type ToastOptional =
+        | Color of Color
+        | OnRequestClose of (MouseEvent -> unit)
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Children = string
+    type ToastChildren =
+        Text of string
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
+    type Toast = HTMLProps * ToastChildren
 
-    let props =
-        { Props.HTMLProps = []
-          Props.Color = Color.None
-          Props.OnRequestClose = None }
+    let private color (prop: IHTMLProp) =
+        match prop with
+        | :? ToastOptional as opt ->
+            match opt with
+            | Color Primary -> className "toast-primary"
+            | Color Success -> className "toast-success"
+            | Color Warning -> className "toast-warning"
+            | Color Error -> className "toast-error"
+            | _ -> prop
+        | _ -> prop
 
-    let color =
-        function
-        | Color.Primary -> "toast-primary"
-        | Color.Success -> "toast-success"
-        | Color.Warning -> "toast-warning"
-        | Color.Error -> "toast-error"
-        | Color.None -> ""
-        >> ClassName
+    let private onRequestClose (props: HTMLProps) =
+        props
+        |> List.tryPick
+            (function
+            | :? ToastOptional as opt ->
+                match opt with
+                | OnRequestClose fn ->
+                    Some (button
+                        ([ ClassName "btn-clear float-right"
+                           OnClick fn], []))
+                | _ -> None
+            | _ -> None)
+        |> R.ofOption
 
-    let onRequestClose =
-        function
-        | Some fn ->
-            button
-                ([ ClassName "btn-clear float-right"
-                   OnClick fn], [])
-        | None -> R.ofOption None
-
-
-    let build (toast: T) =
-        let props, children = toast
-        props.HTMLProps
-        |> addPropsOld
-            [ ClassName "toast"
-              color props.Color ]
+    let toast (comp: Toast) =
+        let opt, (Text txt) = comp
+        opt
+        |> addProp (ClassName "toast")
+        |> map color
+        |> merge
         |> R.div
-        <| [ onRequestClose props.OnRequestClose
-             R.str children ]
+        <| [ onRequestClose opt
+             R.str txt ]
         |> Portal.ƒ "toast-container"
-
-    let ƒ = build
+        

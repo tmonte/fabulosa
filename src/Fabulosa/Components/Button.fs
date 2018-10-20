@@ -37,7 +37,11 @@ module Button =
         | Shape of Shape
         interface IHTMLProp
 
-    type Button = HTMLProps * ReactElement list
+    type Button =
+        HTMLProps * ReactElement list
+
+    type Nested =
+        Button of Button
 
     let private propToClassName (prop: IHTMLProp) =
         match prop with

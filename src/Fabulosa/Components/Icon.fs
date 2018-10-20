@@ -108,11 +108,11 @@ module Icon =
     let private size (prop: IHTMLProp) =
         match prop with
         | :? IconOptional as opt ->
-            (match opt with
-             | Size X2 -> "icon-2x"
-             | Size X3 -> "icon-3x"
-             | Size X4 -> "icon-4x"
-             |> ClassName)
+            match opt with
+            | Size X2 -> "icon-2x"
+            | Size X3 -> "icon-3x"
+            | Size X4 -> "icon-4x"
+            |> ClassName
             :> IHTMLProp
         | _ -> prop
 

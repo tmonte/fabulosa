@@ -51,6 +51,8 @@ module Fable =
                 type Unmerged =
                     Unmerged of HTMLProps
 
+                let className text = ClassName text :> IHTMLProp
+
                 let unit = Unmerged
 
                 let addProp (prop: IHTMLProp) (htmlProps: HTMLProps) =

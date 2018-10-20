@@ -33,13 +33,11 @@ module Avatar =
         match prop with
         | :? AvatarOptional as opt ->
             match opt with
-            | Size ExtraSmall -> "avatar-xs"
-            | Size Small -> "avatar-sm"
-            | Size Large -> "avatar-lg"
-            | Size ExtraLarge -> "avatar-xl"
-            | _ -> ""
-            |> ClassName
-            :> IHTMLProp
+            | Size ExtraSmall -> className "avatar-xs"
+            | Size Small -> className "avatar-sm"
+            | Size Large -> className "avatar-lg"
+            | Size ExtraLarge -> className "avatar-xl"
+            | _ -> prop
         | _ -> prop
 
     let private presenceIcon presence =

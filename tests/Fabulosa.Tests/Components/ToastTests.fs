@@ -1,10 +1,10 @@
 ﻿module ToastTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Toast
 module R = Fable.Helpers.React
 open Fable.Import.React
-open R.Props
+module P = R.Props
 open Expect
 open Foq
 
@@ -23,52 +23,32 @@ let tests =
     testList "Toast tests" [
 
         test "Toast default" {
-           Toast.ƒ
-               (Toast.props, "Toast")
+           toast ([], Text "Toast")
             |> ReactNode.unit
-            |> hasUniqueClass "toast"
+            |>! hasUniqueClass "toast"
+            |> hasText "Toast"
         }
 
         test "Toast html props" {
-            Toast.ƒ
-                ({ Toast.props with
-                     HTMLProps =
-                       [ ClassName "custom" ] },
-                 "")
+            toast ([ P.ClassName "custom" ], Text "Toast")
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
-        test "Toast children" {
-            Toast.ƒ
-                (Toast.props, "Toast")
-            |> ReactNode.unit
-            |> hasText "Toast"
-        }
-
         test "Toast colors" {
-            Toast.ƒ
-                ({ Toast.props with
-                     Color = Toast.Color.Primary },
-                 "Toast")
+            toast ([ Color Primary ], Text "Toast")
             |> ReactNode.unit
             |> hasClass "toast-primary"
-            Toast.ƒ
-                ({ Toast.props with
-                     Color = Toast.Color.Success },
-                 "Toast")
+
+            toast ([ Color Success ], Text "Toast")
             |> ReactNode.unit
             |> hasClass "toast-success"
-            Toast.ƒ
-                ({ Toast.props with
-                     Color = Toast.Color.Warning },
-                 "Toast")
+
+            toast ([ Color Warning ], Text "Toast")
             |> ReactNode.unit
             |> hasClass "toast-warning"
-            Toast.ƒ
-                ({ Toast.props with
-                     Color = Toast.Color.Error },
-                 "Toast")
+
+            toast ([ Color Error ], Text "Toast")
             |> ReactNode.unit
             |> hasClass "toast-error"
         }
@@ -82,17 +62,14 @@ let tests =
                     ((clickable) :> obj)
                     "Should be the mocked element"
             let props =
-                Toast.ƒ
-                    ({ Toast.props with
-                         OnRequestClose = Some fn },
-                     "Toast")
+                toast ([ OnRequestClose fn ], Text "Toast")
                 |> ReactNode.unit
                 |> ReactNode.descendentProps
-            let onClick (prop: IProp) =
+            let onClick (prop: P.IProp) =
                 match prop with
-                | :? DOMAttr as attr ->
+                | :? P.DOMAttr as attr ->
                     match attr with
-                    | OnClick fn -> Some fn
+                    | P.OnClick fn -> Some fn
                     | _ -> None
                 | _ -> None
             match Seq.tryPick onClick props with
@@ -101,7 +78,6 @@ let tests =
                 Expect.isTrue
                     false
                     "Did not contain onClick prop"
-            
         }
        
     ]

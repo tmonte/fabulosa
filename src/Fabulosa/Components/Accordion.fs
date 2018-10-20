@@ -60,7 +60,7 @@ module Accordion =
                         body ] ] ]
 
     type AccordionChild =
-        AccordionItem of AccordionItem
+        Item of AccordionItem
     
     type Accordion =
         HTMLProps * AccordionChild list
@@ -70,5 +70,5 @@ module Accordion =
         R.div
             opt
             (Seq.map
-               (fun (AccordionItem itm) -> item itm)
+               (fun (Item itm) -> item itm)
                chi)
