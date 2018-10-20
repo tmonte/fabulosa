@@ -1,9 +1,9 @@
 ﻿module EmptyTests
 
 open Expecto
-open Fabulosa
 open Fabulosa.Icon
 open Fabulosa.Button
+open Fabulosa.Empty
 module R = Fable.Helpers.React
 module P = R.Props
 open Expect
@@ -13,39 +13,25 @@ let tests =
     testList "Empty tests" [
 
         test "Empty default" {
-            Empty.ƒ
-                (Empty.props,
-                 Empty.children)
-            |> ReactNode.unit
-            |> hasUniqueClass "empty"
-        }
-
-        //test "Empty html props" {
-        //    Empty.ƒ
-        //        ({ Empty.props with 
-        //             HTMLProps = [ClassName "custom"] },
-        //         Empty.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "empty custom"
-        //}
-
-        test "Empty with children" {
-            let opt, req = ([], Icon.Kind Mail)
+            let icnOpt, icnReq = ([], IconRequired.Kind Mail)
             let icon =
-                icon (opt @ [ Icon.Size X3 ], req)
+                icon (icnOpt @ [ IconOptional.Size X3 ], icnReq)
                 |> ReactNode.unit
+            let btnOpt, btnReq = ([], [ R.str "Action" ])
             let action =
-                button ([], [R.str "Action"] )
-            Empty.ƒ
-                (Empty.props,
-                 { Icon = (opt, req)
-                   Title = "Title"
-                   SubTitle = "SubTitle"
-                   Action = [action] })
+                button (btnOpt, btnReq)
+            empty
+                ([],
+                 (Icon (icnOpt, icnReq),
+                  Title "Title",
+                  Subtitle "Subtitle",
+                  Action [ action ]))
             |> ReactNode.unit
             |>! hasChild 1 icon
-            |>! hasText "Title SubTitle Action"
+            |>! hasChild 1 (action |> ReactNode.unit)
+            |>! hasText "Title Subtitle Action"
             |>! hasOrderedDescendentClass 1 "empty-icon empty-title empty-subtitle empty-action"
             |> ignore
         }
+
     ]

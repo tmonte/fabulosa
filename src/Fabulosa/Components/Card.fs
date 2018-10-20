@@ -23,7 +23,7 @@ module Card =
     type Header =
         HTMLProps * HeaderChildren
 
-    let header (c: Header) =
+    let cardHeader (c: Header) =
         let opt, (Title title, SubTitle subTitle) = c
         opt
         |> addProp (ClassName "card-header")
@@ -38,7 +38,7 @@ module Card =
 
     type Body = HTMLProps * ReactElements
 
-    let body (c: Body) =
+    let cardBody (c: Body) =
         let opt, chi = c
         if not (List.isEmpty chi) then
             opt
@@ -51,7 +51,7 @@ module Card =
     type Footer =
         HTMLProps * ReactElements
 
-    let footer (c: Footer) =
+    let cardFooter (c: Footer) =
         let opt, chi = c
         if not (List.isEmpty chi) then
             opt
@@ -85,7 +85,7 @@ module Card =
         |> addProp (ClassName "card")
         |> merge
         |> R.div <|
-        [ header h
+        [ cardHeader h
           R.div [ ClassName "card-image" ] [ Media.Image.ƒ i ]
-          body b
-          footer f ]
+          cardBody b
+          cardFooter f ]

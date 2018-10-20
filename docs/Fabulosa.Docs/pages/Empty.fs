@@ -1,6 +1,6 @@
 ﻿module EmptyPage
 
-open Fabulosa
+open Fabulosa.Empty
 open Fabulosa.Icon
 open Fabulosa.Button
 open Fabulosa.Docs
@@ -8,22 +8,20 @@ module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
 open Renderer
-open Microsoft.FSharp.Core
 
 (*** define: empty-default-sample ***)
-let empty =
-    Empty.ƒ
-        (Empty.props,
-         { Icon = ([], Icon.Kind Mail)
-           Title = "You have no new messages" 
-           SubTitle = "Click the button to start a conversation"
-           Action =
-             [ button ([], [ R.str "Send a message" ]) ] })
+let def =
+    empty
+        ([],
+         (Icon ([], IconRequired.Kind Mail),
+          Title "You have no new messages",
+          Subtitle "Click the button to start a conversation",
+          Action [ button ([], [ R.str "Send a message" ]) ] ))
 (*** hide ***)
 let render () =
-    tryMount "empty-default-demo" empty
-    tryMount "empty-props-table"
-        (PropTable.propTable typeof<Empty.Props> Empty.props)
+    tryMount "empty-default-demo" def
+    //tryMount "empty-props-table"
+        //(PropTable.unionPropTable typeof<EmptyChildren>)
 (**
 
 <div id="empty">

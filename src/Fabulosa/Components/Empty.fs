@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Empty =
 
     open Fabulosa.Extensions
@@ -9,93 +8,58 @@ module Empty =
     module R = Fable.Helpers.React
     module P = R.Props
 
-    [<RequireQualifiedAccess>]
-    module EmptyIcon =
+    let emptyIcon (comp: Icon) =
+        let opt, req = comp
+        R.div
+            [ P.ClassName "empty-icon" ]
+            [ icon ([ Size X3 ], req) ]
 
-        let build (iconT: Icon) =
-            let (opt, req) = iconT
-            R.div
-                [ P.ClassName "empty-icon" ]
-                [ icon ([ Size X3 ], req) ]
+    type Title = string
 
-        let ƒ = build
+    let emptyTitle (comp: Title) =
+        R.p
+            [ P.ClassName "empty-title h5" ]
+            [ R.str comp ]
 
-    [<RequireQualifiedAccess>]
-    module Title =
+    type Subtitle = string
 
-        [<RequireQualifiedAccess>]
-        type T = string
+    let emptySubtitle (comp: Subtitle) =
+        R.p
+            [ P.ClassName "empty-subtitle" ]
+            [ R.str comp ]
 
-        let children: T = ""
+    type Action = ReactElement list
 
-        let ƒ (title: T) =
-            R.p
-                [ P.ClassName "empty-title h5" ]
-                [ R.str title ]
+    type EmptyIcon =
+        Icon of Icon
 
-    [<RequireQualifiedAccess>]
-    module SubTitle =
+    type EmptyTitle =
+        Title of Title
 
-        [<RequireQualifiedAccess>]
-        type T = string
+    type EmptySubtitle =
+        Subtitle of Subtitle
 
-        let children: T = ""
+    type EmptyAction =
+        Action of Action
 
-        let ƒ (subTitle: T) =
-            R.p
-                [ P.ClassName "empty-subtitle" ]
-                [ R.str subTitle ]
+    let emptyAction (comp: Action) =
+        R.div
+            [ P.ClassName "empty-action" ]
+            comp
 
-    [<RequireQualifiedAccess>]
-    module Action =
+    type EmptyChildren =
+        EmptyIcon * EmptyTitle * EmptySubtitle * EmptyAction
 
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
+    type Empty =
+        P.HTMLProps * EmptyChildren
 
-        let children: T = []
-
-        let ƒ (action: T) =
-            R.div
-                [ P.ClassName "empty-action" ]
-                action
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: P.HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Icon, 'Title, 'SubTitle, 'Action> =
-        { Icon: 'Icon
-          Title: 'Title
-          SubTitle: 'SubTitle
-          Action: 'Action }
-
-    [<RequireQualifiedAccess>]
-    type T<'Icon, 'Title, 'SubTitle, 'Action> =
-        Props * Children<'Icon, 'Title, 'SubTitle, 'Action>
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let children =
-        { Children.Icon = ([], Kind Mail)
-          Children.Title = Title.children
-          Children.SubTitle = SubTitle.children
-          Children.Action = Action.children }
-
-    let build
-        emptyIconƒ
-        titleƒ
-        subTitleƒ
-        actionƒ
-        (empty: T<'Icon, 'Title, 'SubTitle, 'Action>) =
-        let prps,children = empty
-        props.HTMLProps
-        |> P.addPropOld (P.ClassName "empty")
+    let empty (comp: Empty) =
+        let opt, (Icon i, Title t, Subtitle s, Action a) = comp
+        opt
+        |> P.addProp (P.ClassName "empty")
+        |> P.merge
         |> R.div <|
-        [ emptyIconƒ children.Icon
-          titleƒ children.Title
-          subTitleƒ children.SubTitle
-          actionƒ children.Action ]
-
-    let ƒ = build EmptyIcon.ƒ Title.ƒ SubTitle.ƒ Action.ƒ
+        [ emptyIcon i
+          emptyTitle t
+          emptySubtitle s
+          emptyAction a ]
