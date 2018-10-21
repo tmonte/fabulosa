@@ -13,7 +13,8 @@ let tests =
     testList "Tile tests" [
 
         test "Tile default" {
-            let child = R.div [P.ClassName "child"] []
+            let child =
+                R.div [ P.ClassName "child" ] []
             tile ([],
               (Content ([],
                  (Title "Title",
@@ -26,24 +27,15 @@ let tests =
             |> hasChild 1 (child |> ReactNode.unit)
         }
 
-        //test "Tile html props" {
-        //    tile
-        //        ({ [] with
-        //             HTMLProps =
-        //               [ ClassName "custom" ] },
-        //         Tile.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "custom"
-        //}
-
-        //test "Tile centered" {
-        //   tile
-        //       ({ [] with
-        //            Compact = true },
-        //        Tile.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "tile-centered"
-        //}
+        test "Tile centered" {
+            tile ([ Compact ],
+              (Content ([],
+                 (Title "Title",
+                  Subtitle "SubTitle")),
+               Action ([], [])))
+            |> ReactNode.unit
+            |> hasClass "tile-centered"
+        }
 
         test "Tile icon" {
             let icn = ([], Kind Download)

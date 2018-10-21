@@ -1,62 +1,45 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Tag =
 
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
-    open Fabulosa.Extensions
 
-    [<RequireQualifiedAccess>]
     type Color =
-    | Default
-    | Primary
-    | Secondary
-    | Success
-    | Warning
-    | Error
+        | Primary
+        | Secondary
+        | Success
+        | Warning
+        | Error
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps
-          Rounded: bool
-          Color: Color }
+    type TagOptional =
+        | Rounded
+        | Color of Color
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Children = string
+    type TagChildren =
+        Text of string
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
+    type Tag = HTMLProps * TagChildren
 
-    let props =
-        { Props.HTMLProps = []
-          Props.Rounded = false
-          Props.Color = Color.Default }
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? TagOptional as opt ->
+            match opt with
+            | Color Primary -> "label-primary"
+            | Color Secondary -> "label-secondary"
+            | Color Success -> "label-success"
+            | Color Warning -> "label-warning"
+            | Color Error -> "label-error"
+            | Rounded -> "label-rounded"
+            |> ClassName
+            :> IHTMLProp
+        | _ -> prop
 
-    let private color =
-        function
-        | Color.Default -> ""
-        | Color.Primary -> "label-primary"
-        | Color.Secondary -> "label-secondary"
-        | Color.Success -> "label-success"
-        | Color.Warning -> "label-warning"
-        | Color.Error -> "label-error"
-        >> ClassName
-
-    let private rounded =
-        function
-        | true -> "label-rounded"
-        | false -> ""
-        >> ClassName
-
-    let build (tag: T) =
-        let props, children = tag
-        props.HTMLProps
-        |> addPropsOld
-            [ ClassName "label"
-              color props.Color
-              rounded props.Rounded ]
-        |> R.span <| [ R.str children ]
-
-    let ƒ = build
+    let tag ((opt, (Text txt)): Tag) =
+        opt
+        |> addProp (ClassName "label")
+        |> map propToClassName
+        |> merge
+        |> R.span <| [ R.str txt ]

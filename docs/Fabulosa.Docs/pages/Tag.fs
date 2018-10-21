@@ -1,56 +1,31 @@
 ﻿module TagPage
 
-open Fabulosa
-open Fabulosa.Docs
+open Fabulosa.Tag
 module R = Fable.Helpers.React
-open R.Props
-open Fable.Import.React
+module P = R.Props
 open Renderer
+open Fabulosa.Extensions.Fable.Helpers.React.Props
+open Fable.Import.React
 
 (*** define: tag-color-demo ***)
-let tag =
-    Tag.ƒ (Tag.props, "default label")
+let def = tag ([], Text "default label")
 
-let primary =
-    Tag.ƒ
-        ({ Tag.props with
-             Color = Tag.Color.Primary },
-         "primary label")
+let primary = tag ([ Color Primary ], Text "primary label")
 
-let secondary =
-    Tag.ƒ
-        ({ Tag.props with
-             Color = Tag.Color.Secondary },
-         "secondary label")
+let secondary = tag ([ Color Secondary ], Text "secondary label")
 
-let success =
-    Tag.ƒ
-        ({ Tag.props with
-             Color = Tag.Color.Success },
-         "success label")
+let success = tag ([ Color Success ], Text "success label")
 
-let warning =
-    Tag.ƒ
-        ({ Tag.props with
-             Color = Tag.Color.Warning },
-         "warning label")
+let warning = tag ([ Color Warning ], Text "warning label")
 
-let error =
-    Tag.ƒ
-        ({ Tag.props with
-             Color = Tag.Color.Error },
-         "error label")
+let error = tag ([ Color Error ], Text "error label")
 (*** define: tag-rounded-demo ***)
-let rounded =
-    Tag.ƒ
-        ({ Tag.props with
-             Rounded = true },
-         "rounded label")
+let rounded = tag ([ Rounded ], Text "rounded label")
 (*** hide ***)
 let colorDemo =    
     R.div
-        [ ClassName "tag-container" ]
-        [ R.div [] [ tag ]
+        [ P.ClassName "tag-container" ]
+        [ R.div [] [ def ]
           R.div [] [ primary ]
           R.div [] [ secondary ]
           R.div [] [ success ]
@@ -59,12 +34,12 @@ let colorDemo =
 
 let roundedDemo =
     R.div
-        [ ClassName "tag-container" ]
+        [ P.ClassName "tag-container" ]
         [ R.div [] [ rounded ] ]
 
 let render () =
-    tryMount "tag-props-table"
-        (PropTable.propTable typeof<Tag.Props> Tag.props)
+    //tryMount "tag-props-table"
+        //(PropTable.propTable typeof<Tag.Props> Tag.props)
     tryMount "tag-color-demo" colorDemo
     tryMount "tag-rounded-demo" roundedDemo
 (**
