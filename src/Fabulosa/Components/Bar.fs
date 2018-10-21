@@ -63,7 +63,7 @@ module Bar =
         interface IHTMLProp
 
     type BarChild =
-        BarItem of BarItem
+        Item of BarItem
 
     type private BarChildren =
         BarChild list
@@ -87,7 +87,7 @@ module Bar =
         |> merge
         |> R.div
         <| Seq.map
-            (fun (BarItem item) -> barItem item)
+            (fun (Item item) -> barItem item)
             chi
         
     //[<RequireQualifiedAccess>]

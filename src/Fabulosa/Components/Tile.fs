@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Tile =
 
     open Fabulosa.Extensions
@@ -9,133 +8,85 @@ module Tile =
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
-    module TileIcon =
+    type TileContentTitle =
+        Title of string
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-            
-        [<RequireQualifiedAccess>]
-        type T<'Icon> = Props * 'Icon
+    type TileContentSubtitle =
+        Subtitle of string
 
-        let props =
-            { Props.HTMLProps = [] }
+    type private TileContentChildren =
+        TileContentTitle * TileContentSubtitle
 
-        let build<'Icon> iconƒ (icon: T<'Icon>) =
-            let props, children = icon
-            props.HTMLProps
-            |> addPropOld (ClassName "tile-icon")
-            |> R.div <| [ iconƒ children ]
+    type private TileContent =
+        HTMLProps * TileContentChildren
 
-        let ƒ = build icon
-
-    [<RequireQualifiedAccess>]
-    module Content =
-
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-
-        type Children =
-            { Title: string
-              SubTitle: string }
-            
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
-
-        let props =
-            { Props.HTMLProps = [] }
-
-        let children =
-            { Children.Title = ""
-              Children.SubTitle = "" }
-
-        let build (content: T) =
-            let props, children = content
-            props.HTMLProps
-            |> addPropOld (ClassName "tile-content")
-            |> R.div
-            <| [ R.p
-                   [ ClassName "tile-title" ]
-                   [ R.str children.Title ]
-                 R.p
-                   [ ClassName "tile-subtitle text-gray" ]
-                   [ R.str children.SubTitle ] ]
-
-        let ƒ = build
-
-    [<RequireQualifiedAccess>]
-    module Action =
-
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-
-        type Children = ReactElement list
-            
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
-
-        let props =
-            { Props.HTMLProps = [] }
-
-        let build (action: T) =
-            let props, children = action
-            props.HTMLProps
-            |> addPropOld (ClassName "tile-action")
-            |> R.div <| children
-
-        let ƒ = build
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps
-          Compact: bool }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Icon, 'Content, 'Action> =
-        { Icon: 'Icon option
-          Content: 'Content
-          Action: 'Action }
-
-    [<RequireQualifiedAccess>]
-    type T<'Icon, 'Content, 'Action> =
-        Props * Children<'Icon, 'Content, 'Action>
-
-    let props =
-        { Props.HTMLProps = []
-          Props.Compact = false }
-
-    let children =
-        { Children.Icon = None
-          Children.Content = (Content.props, Content.children)
-          Children.Action = (Action.props, [])}
-
-    let private compact =
-        function
-        | true -> "tile-centered"
-        | false -> ""
-        >> ClassName
-
-    let private icon iconƒ =
-        function
-        | Some props -> iconƒ props
-        | None -> R.ofOption None
-
-    let build
-        iconƒ
-        contentƒ
-        actionƒ
-        (tile: T<'Icon, 'Content, 'Action>) =
-        let pops, children = tile
-        props.HTMLProps
-        |> addPropsOld 
-            [ ClassName "tile"
-              compact props.Compact ]
+    let tileContent (comp: TileContent) =
+        let opt, (Title ttl, Subtitle sttl) = comp
+        opt
+        |> addProp (ClassName "tile-content")
+        |> merge
         |> R.div
-        <| [ icon iconƒ children.Icon
-             contentƒ children.Content
-             actionƒ children.Action ]
+        <| [ R.p
+               [ ClassName "tile-title" ]
+               [ R.str ttl ]
+             R.p
+               [ ClassName "tile-subtitle text-gray" ]
+               [ R.str sttl ] ]
 
-    let ƒ = build TileIcon.ƒ Content.ƒ Action.ƒ
+    type private TileAction =
+        HTMLProps * ReactElement list
+
+    let tileAction (comp: TileAction) =
+        let opt, chi = comp
+        opt
+        |> addProp (ClassName "tile-action")
+        |> merge
+        |> R.div <| chi
+
+    type TileOptional =
+        | Compact
+        | Icon of Icon
+        interface IHTMLProp
+
+    type Content =
+        Content of TileContent
+
+    type Action =
+        Action of TileAction
+
+    type private TileChildren =
+        Content * Action
+
+    type private Tile =
+        HTMLProps * TileChildren
+
+    let private compact (prop: IHTMLProp) =
+        match prop with
+        | :? TileOptional as opt ->
+            match opt with
+            | Compact -> className "tile-centered"
+            | _ -> prop
+        | _ -> prop
+
+    let private tileIcon (props: HTMLProps) =
+        props
+        |> List.tryPick
+            (function
+            | :? TileOptional as opt ->
+                match opt with
+                | Icon icn ->
+                    Some (R.div [ ClassName "tile-icon example-tile-icon" ] [ icon icn ])
+                | _ -> None
+            | _ -> None)
+        |> R.ofOption
+
+    let tile (comp: Tile) =
+        let opt, (Content con, Action act) = comp
+        opt
+        |> addProp (ClassName "tile")
+        |> map compact
+        |> merge
+        |> R.div
+        <| [ tileIcon opt
+             tileContent con
+             tileAction act ]

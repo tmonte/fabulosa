@@ -1,9 +1,8 @@
 ﻿module EmptyPage
 
 open Fabulosa.Empty
-open Fabulosa.Icon
 open Fabulosa.Button
-open Fabulosa.Docs
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -13,7 +12,7 @@ open Renderer
 let def =
     empty
         ([],
-         (Icon ([], IconRequired.Kind Mail),
+         (Icon ([], Kind Mail),
           Title "You have no new messages",
           Subtitle "Click the button to start a conversation",
           Action [ button ([], [ R.str "Send a message" ]) ] ))

@@ -59,9 +59,9 @@ module Breadcrumb =
     type BreadcrumbOptional = P.HTMLProps
     
     type BreadcrumbChildren =
-        | BreadcrumbElements of BreadcrumbElements
-        | BreadcrumbLink of BreadcrumbLink
-        | BreadcrumbText of BreadcrumbText
+        | Elements of BreadcrumbElements
+        | Link of BreadcrumbLink
+        | String of BreadcrumbText
 
     type Breadcrumb =
         BreadcrumbOptional * BreadcrumbChildren list
@@ -74,7 +74,7 @@ module Breadcrumb =
         |> R.ul
         <| List.map
             (function
-             | BreadcrumbElements elements -> breadcrumbElements elements
-             | BreadcrumbLink link -> breadcrumbLink link
-             | BreadcrumbText text -> breadcrumbText text)
+             | Elements elements -> breadcrumbElements elements
+             | Link link -> breadcrumbLink link
+             | String text -> breadcrumbText text)
             chi

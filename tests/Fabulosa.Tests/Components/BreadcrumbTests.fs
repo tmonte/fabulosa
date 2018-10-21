@@ -25,13 +25,13 @@ let tests =
         }
 
         test "renders children" {
-            let text: BreadcrumbText = ([], Text "Ciro > Haddad")
-            let link: BreadcrumbLink = ([], Href "cirogomes.com.br", Text "Ciro Gomes")
-            let elements: BreadcrumbElements = ([], [ R.div [ P.ClassName "find-me" ] [] ])
+            let text = ([], Text "Ciro > Haddad")
+            let link = ([], Href "cirogomes.com.br", Text "Ciro Gomes")
+            let elements = ([], [ R.div [ P.ClassName "find-me" ] [] ])
             let children = 
-                [ BreadcrumbText text
-                  BreadcrumbLink link
-                  BreadcrumbElements elements ]
+                [ String text
+                  Link link
+                  Elements elements ]
             breadcrumb ([], children)
             |> ReactNode.unit
             |>! hasUniqueClass "breadcrumb"

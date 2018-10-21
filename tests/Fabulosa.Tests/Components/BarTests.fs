@@ -12,7 +12,7 @@ let tests =
 
         test "Bar default" {
             let item = ([], Value 10)
-            bar ([], [ BarItem item ])
+            bar ([], [ Item item ])
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1 (barItem item |> ReactNode.unit)
@@ -22,7 +22,7 @@ let tests =
         test "Bar multiple" {
             let item1 = ([], Value 25)
             let item2 = ([], Value 20)
-            bar ([], [ BarItem item1; BarItem item2 ])
+            bar ([], [ Item item1; Item item2 ])
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1
