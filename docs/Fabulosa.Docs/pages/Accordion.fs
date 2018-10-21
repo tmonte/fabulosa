@@ -9,12 +9,12 @@ open Renderer
 (*** define: accordion-sample ***)
 let element =
     accordion ([],
-      [ AccordionItem ([],
+      [ Item ([],
           (Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ]))
-        AccordionItem ([],
+        Item ([],
           (Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
@@ -22,16 +22,16 @@ let element =
 (*** define: accordion-custom-sample ***)
 let custom =
     accordion ([],
-      [ AccordionItem ([ Icon ([], Kind Forward) ],
+      [ Item ([ Icon ([], Kind Forward) ],
           (Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ] ))
-        AccordionItem ([ Icon ([], Kind Back) ],
+        Item ([ Icon ([], Kind Back) ],
           (Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
-               R.a [] [ R.str "Item Two" ] ] )) ])
+               R.a [] [ R.str "Item Two" ] ])) ])
 (*** hide ***)
 let render () =
     tryMount "accordion-demo" element
