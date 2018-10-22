@@ -46,7 +46,8 @@ module Menu =
     type TriggerChildren =
         Button of Button
 
-    type private Trigger = TriggerRequired * TriggerChildren
+    type private Trigger =
+        TriggerRequired * TriggerChildren
 
     let private onTriggerClicked (e: MouseEvent) =
         let element = e.currentTarget :?> Browser.Element
@@ -66,38 +67,33 @@ module Menu =
             |> P.merge
         R.a withClick btnChi
 
-    type MenuContainerOptional =
-        | Opened
-        interface P.IHTMLProp
+    type Position =
+        Position of int * int
+
+    type IsOpen =
+        IsOpen of bool
 
     type MenuContainerRequired =
-        Position of int * int
+        Position * IsOpen
 
     type MenuContainerChildren = ReactElement []
 
     type private MenuContainer =
         P.HTMLProps * MenuContainerRequired * MenuContainerChildren
 
-    let menuContainer (comp: MenuContainer) =
-        let opt, (Position (x, y)), chi = comp
-        opt
-        |> List.tryPick
-            (fun (prop: P.IHTMLProp) ->
-                match prop with
-                | :? MenuContainerOptional as cOpt ->
-                    match cOpt with
-                    | Opened ->
-                        opt
-                        |> P.addProps
-                            [ P.ClassName "menu"
-                              P.Style
-                                [ P.Position "absolute"
-                                  P.Left x
-                                  P.Top y ]]
-                        |> P.merge
-                        |> R.ul <| chi
-                        |> Some
-                | _ -> None)
+    let menuContainer (opt, (Position (x, y), IsOpen opn), chi) =
+        if opn then
+            opt
+            |> P.addProps
+                [ P.ClassName "menu"
+                  P.Style
+                      [ P.Position "absolute"
+                        P.Left x
+                        P.Top y ] ]
+            |> P.merge
+            |> R.ul <| chi
+            |> Some
+        else None
         |> R.ofOption
 
     type MenuChild =
@@ -114,37 +110,26 @@ module Menu =
         P.HTMLProps * MenuRequired * MenuChildren
 
     type State =
-        { Opened: bool
+        { IsOpen: bool
           Position: int * int }
 
-    let private init (opt, req) =
-        let opened =
-            List.tryFind
-                (fun (prop: P.IHTMLProp) ->
-                    match prop with
-                    | :? MenuContainerOptional as opt ->
-                        match opt with
-                        | Opened -> true
-                    | _ -> false)
-                opt
-        { Opened = opened.IsSome
+    let private init _ =
+        { IsOpen = false
           Position = 0, 0 }
 
     let private update message state =
         match message with
         | TriggerMessage.Click (x, y) ->
             { state with
-                Opened = not state.Opened
+                IsOpen = not state.IsOpen
                 Position = x, y }
 
     let private view (model) dispatch =
-        let opt, (Trigger trig) = model.props
-        let opn =
-            if model.state.Opened then [ Opened :> P.IHTMLProp ] else [] 
+        let (opt: P.HTMLProps), (Trigger trig) = model.props
         R.fragment [] 
             [ menuTrigger (dispatch, Button trig)
               menuContainer
-                (opn, Position model.state.Position, 
+                ([], (Position model.state.Position, IsOpen model.state.IsOpen), 
                  model.children)
               |> Portal.ƒ "menu-container" ]
 
