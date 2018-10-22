@@ -9,171 +9,157 @@ module Menu =
     open Fable.Import.React
     module R = Fable.Helpers.React
     open Fable.Helpers.React.ReactiveComponents
-    open R.Props
+    module P = R.Props
 
-    [<RequireQualifiedAccess>]
-    module Item =
+    type MenuItem = ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
+    let menuItem (comp: MenuItem) =
+        R.li [ P.ClassName "menu-item" ] comp
 
-        let build (item: T) =
-            R.li [ ClassName "menu-item" ] item
+    type MenuDividerOptional =
+        | Text of string
+        interface P.IHTMLProp
 
-        let ƒ = build
+    type MenuDivider =
+        P.HTMLProps
 
-    [<RequireQualifiedAccess>]
-    module Divider =
+    let private menuDividerText (prop: P.IHTMLProp) =
+        match prop with
+         | :? MenuDividerOptional as opt ->
+             match opt with
+             | Text txt ->
+                 P.Data ("content", txt) :> P.IHTMLProp
+         | _ -> prop 
 
-        [<RequireQualifiedAccess>]
-        type T = string option
+    let menuDivider (opt: MenuDivider) =
+        opt
+        |> P.addProp (P.ClassName "divider")
+        |> P.map menuDividerText
+        |> P.merge
+        |> R.li <| []
 
-        let build (divider: T) =
-            match divider with
-            | Some text ->
-                R.li
-                    [ ClassName "divider"
-                      Data ("content", text) ] []
-            | None ->
-                R.li
-                    [ ClassName "divider" ] []
+    type TriggerMessage =
+        Click of int * int
 
-        let ƒ = build
+    type private TriggerRequired =
+        TriggerMessage -> unit
 
-    [<RequireQualifiedAccess>]
-    module Trigger =
+    type TriggerChildren =
+        Button of Button
 
-        [<RequireQualifiedAccess>]
-        type Message =
-        | Click of int * int
+    type private Trigger = TriggerRequired * TriggerChildren
 
-        [<RequireQualifiedAccess>]
-        type private Props =
-            Message -> unit
+    let private onTriggerClicked (e: MouseEvent) =
+        Fable.Import.JS.console.log e
+        let element = e.currentTarget :?> Browser.Element
+        let rect = element.getBoundingClientRect ()
+        let x = (rect.left |> int) + (Browser.window.scrollX |> int)
+        let y = (rect.bottom |> int) + (Browser.window.scrollY |> int)
+        TriggerMessage.Click (x, y)
 
-        [<RequireQualifiedAccess>]
-        type private Children = Button
+    let menuTrigger (comp: Trigger) =
+        let req, (Button btn) = comp
+        let btnOpt, btnChi = btn
+        let withClick =
+            btnOpt
+            |> P.addProps
+                [ P.ClassName "btn"
+                  P.OnClick (onTriggerClicked >> req) ]
+            |> P.merge
+        R.a withClick btnChi
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type MenuContainerOptional =
+        | Opened
+        interface P.IHTMLProp
 
-        let props _ = ()
+    type MenuContainerRequired =
+        Position of int * int
 
-        let children: Button =
-            ([], [ icon ([], Icon.Kind Menu) ])
+    type MenuContainerChildren = ReactElement []
 
-        let onClick (e: MouseEvent) =
-            let element = e.currentTarget :?> Browser.Element
-            let rect = element.getBoundingClientRect ()
-            let x = (rect.left |> int) + (Browser.window.scrollX |> int)
-            let y = (rect.bottom |> int) + (Browser.window.scrollY |> int)
-            Message.Click (x, y)
+    type private MenuContainer =
+        P.HTMLProps * MenuContainerRequired * MenuContainerChildren
 
-        let build (trigger: T) =
-            let props, children = trigger
-            let cProps, cChildren = children
-            let withClick =
-                cProps @ [ OnClick (onClick >> props); ClassName "btn" ]
-            R.a withClick cChildren
+    let menuContainer (comp: MenuContainer) =
+        let opt, (Position (x, y)), chi = comp
+        Fable.Import.JS.console.log opt
+        let v =
+            List.tryPick
+                (fun (prop: P.IHTMLProp) ->
+                    match prop with
+                    | :? MenuContainerOptional as opt ->
+                        match opt with
+                        | Opened ->
+                            Some (R.ul
+                                [ P.Style
+                                    [ P.Position "absolute"
+                                      P.Left x
+                                      P.Top y ] ] chi)
+                    | _ -> None)
+                opt
+        Fable.Import.JS.console.log v
+        v |> R.ofOption
 
-        let ƒ = build
+    type MenuChild =
+    | Item of MenuItem
+    | Divider of MenuDivider
 
-    [<RequireQualifiedAccess>]
-    module Container =
+    type MenuChildren =
+        MenuChild list
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Opened: bool
-              Position: int * int }
+    type MenuRequired =
+        Trigger of Button
 
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement []
-
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
-
-        let props =
-            { Props.HTMLProps = []
-              Props.Opened = false
-              Props.Position = 0, 0 }
-
-        let build (container: T) =
-            let props, children = container
-            let (x, y) = props.Position
-            if props.Opened then
-                props.HTMLProps
-                @
-                [ Style
-                    [ Position "absolute"
-                      Left x
-                      Top y ] ]
-                |> addPropOld (ClassName "menu")
-                |> R.ul <| children
-            else R.ofOption None
-
-        let ƒ = build
-
-    [<RequireQualifiedAccess>]
-    type Child<'Item, 'Divider> =
-    | Item of 'Item
-    | Divider of 'Divider
-
-    [<RequireQualifiedAccess>]
-    type Children<'Item, 'Divider> =
-        Child<'Item, 'Divider> list
-
-    type Props =
-        { HTMLProps: HTMLProps
-          Trigger: Button
-          Opened: bool }
-
-    [<RequireQualifiedAccess>]
-    type T<'Item, 'Divider> =
-        Props * Children<'Item, 'Divider>
+    type Menu =
+        P.HTMLProps * MenuRequired * MenuChildren
 
     type State =
         { Opened: bool
           Position: int * int }
 
-    let private init (props: Props) =
-        { Opened = props.Opened
-          Position = Container.props.Position }
+    let private init (opt, req) =
+        let opened =
+            List.tryFind
+                (fun (prop: P.IHTMLProp) ->
+                    match prop with
+                    | :? MenuContainerOptional as opt ->
+                        match opt with
+                        | Opened -> true
+                    | _ -> false)
+                opt
+        { Opened = opened.IsSome
+          Position = 0, 0 }
 
     let private update message state =
+        Fable.Import.JS.console.log message
         match message with
-        | Trigger.Message.Click (x, y) ->
+        | TriggerMessage.Click (x, y) ->
             { state with
                 Opened = not state.Opened
                 Position = x, y }
 
-    let private view model dispatch =
+    let private view (model) dispatch =
+        let opt, (Trigger trig) = model.props
+        let opn =
+            if model.state.Opened then [ Opened :> P.IHTMLProp ] else [] 
         R.fragment [] 
-            [ Trigger.ƒ (dispatch, model.props.Trigger)
-              Container.ƒ
-                ({ Opened = model.state.Opened
-                   Position = model.state.Position
-                   HTMLProps = model.props.HTMLProps },
+            [ menuTrigger (dispatch, Button trig)
+              menuContainer
+                (opn, Position model.state.Position, 
                  model.children)
               |> Portal.ƒ "menu-container" ]
 
-    let props =
-        { HTMLProps = Container.props.HTMLProps
-          Trigger = Trigger.children
-          Opened = Container.props.Opened }
-
-    let build itemƒ dividerƒ (menu: T<'Item, 'Divider>) =
-        let props, children = menu
+    let menu (comp: Menu) =
+        let opt, req, children = comp
         R.reactiveCom
             init
             update
             view
             ""
-            props
+            (opt, req)
             (Seq.map
                 (function
-                 | Child.Item elements -> itemƒ elements
-                 | Child.Divider divider -> dividerƒ divider)
+                 | Item elements -> menuItem elements
+                 | Divider divider -> menuDivider divider)
                 children)
-
-    let ƒ = build Item.ƒ Divider.ƒ
+                
