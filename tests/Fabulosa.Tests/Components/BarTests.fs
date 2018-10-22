@@ -12,7 +12,7 @@ let tests =
 
         test "Bar default" {
             let item = ([], Value 10)
-            bar ([], [ BarItem item ])
+            bar ([], [ Item item ])
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1 (barItem item |> ReactNode.unit)
@@ -22,7 +22,7 @@ let tests =
         test "Bar multiple" {
             let item1 = ([], Value 25)
             let item2 = ([], Value 20)
-            bar ([], [ BarItem item1; BarItem item2 ])
+            bar ([], [ Item item1; Item item2 ])
             |> ReactNode.unit
             |>! hasUniqueClass "bar"
             |>! hasChild 1
@@ -33,7 +33,7 @@ let tests =
         }
 
         test "Bar small" {
-            bar ([ Small true ], [])
+            bar ([ Small ], [])
             |> ReactNode.unit
             |> hasClass "bar bar-sm"
         }
@@ -63,7 +63,7 @@ let tests =
         }
 
         test "Bar item tooltip" {
-            barItem ([ Tooltip true ], Value 25)
+            barItem ([ Tooltip ], Value 25)
             |> ReactNode.unit
             |>! hasClass "bar-item tooltip"
             |>! hasProp (P.Style [ P.CSSProp.Width "25%" ])

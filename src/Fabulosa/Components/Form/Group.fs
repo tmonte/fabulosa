@@ -48,7 +48,7 @@ module Group =
         (group: T<'Checkbox, 'Input, 'InputGroup, 'Label, 'Radio, 'Select, 'Switch, 'Textarea, 'Validation>) =
         let props, children = group
         props.HTMLProps
-        |> addProp (ClassName "form-group")
+        |> addPropOld (ClassName "form-group")
         |> R.div
         <| Seq.map
             (function

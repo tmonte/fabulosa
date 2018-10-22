@@ -90,7 +90,7 @@ module Panel =
         (panel: T<'Header, 'Nav, 'Body, 'Footer>) =
         let rops, children = panel
         props.HTMLProps
-        |> addProp (ClassName "panel")
+        |> addPropOld (ClassName "panel")
         |> R.div
         <| [ child headerƒ children.Header
              child navƒ children.Nav

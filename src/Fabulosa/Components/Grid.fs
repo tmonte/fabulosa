@@ -1,200 +1,103 @@
 ﻿namespace Fabulosa
 
-type GridRow<'Row> = GridRow of 'Row
-
-type GridColumn<'Column> = GridColumn of 'Column
-
-[<RequireQualifiedAccess>]
-module GridColumn =
+module Grid =
 
     open Fabulosa.Extensions
     open Fable.Import.React
     module R = Fable.Helpers.React
     module P = R.Props
 
-    [<RequireQualifiedAccess>]
     type Kind =
     | MLAuto
     | MRAuto
     | MXAuto
-    | Unset
 
-    [<RequireQualifiedAccess>]
     type private ColSize = int
 
-    [<RequireQualifiedAccess>]
-    type private XSSize = int
+    type GridColumnOptional =
+        | Kind of Kind
+        | Size of ColSize
+        | XSSize of ColSize
+        | SMSize of ColSize
+        | MDSize of ColSize
+        | LGSize of ColSize
+        | XLSize of ColSize
+        interface P.IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type private SMSize = ColSize
+    type GridColumn = P.HTMLProps * ReactElement list
 
-    [<RequireQualifiedAccess>]
-    type private MDSize = ColSize
+    let private colPropToClassName (prop: P.IHTMLProp) =
+        match prop with
+        | :? GridColumnOptional as opt ->
+            match opt with
+            | Kind MLAuto -> "col-ml-auto"
+            | Kind MRAuto -> "col-mr-auto"
+            | Kind MXAuto -> "col-mx-auto"
+            | Size n -> "col-" + string n
+            | XSSize n -> "col-xs-" + string n
+            | SMSize n -> "col-sm-" + string n
+            | MDSize n -> "col-md-" + string n
+            | LGSize n -> "col-lg-" + string n
+            | XLSize n -> "col-xl-" + string n
+            |> P.ClassName
+            :> P.IHTMLProp
+        | _ -> prop
 
-    [<RequireQualifiedAccess>]
-    type private LGSize = ColSize
+    let gridColumn (comp: GridColumn) =
+        let opt, chi = comp
+        opt
+        |> P.addProp (P.ClassName "column")
+        |> P.map colPropToClassName
+        |> P.merge
+        |> R.div <| chi
 
-    [<RequireQualifiedAccess>]
-    type private XLSize = ColSize
+    type GridRowOptional =
+        | Gapless
+        | OneLine
+        interface P.IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Kind: Kind
-          Size: ColSize
-          XSSize: ColSize
-          SMSize: ColSize
-          MDSize: ColSize
-          LGSize: ColSize
-          XLSize: ColSize
-          HTMLProps: P.HTMLProps }
+    type GridRowChild =
+        Column of GridColumn
 
-    [<RequireQualifiedAccess>]
-    type T = Props * ReactElement list
-    
-    let private kind =
-        function
-        | Kind.MLAuto -> "col-ml-auto"
-        | Kind.MRAuto -> "col-mr-auto"
-        | Kind.MXAuto -> "col-mx-auto"
-        | Kind.Unset -> ""
-        >> P.ClassName
+    type GridRowChildren = GridRowChild list
 
-    let private size =
-        function
-        | n -> "col-" + string n
-        >> P.ClassName
+    type GridRow = P.HTMLProps * GridRowChildren
 
-    let private xsSize =
-        function
-        | n -> "col-xs-" + string n
-        >> P.ClassName
+    let private rowPropToClassName (prop: P.IHTMLProp) =
+        match prop with
+        | :? GridRowOptional as opt ->
+            match opt with
+            | Gapless -> "col-gapless"
+            | OneLine -> "col-oneline"
+            |> P.ClassName
+            :> P.IHTMLProp
+        | _ -> prop
 
-    let private smSize =
-        function
-        | n -> "col-sm-" + string n
-        >> P.ClassName
-
-    let private mdSize =
-        function
-        | n -> "col-md-" + string n
-        >> P.ClassName
-
-    let private lgSize =
-        function
-        | n -> "col-lg-" + string n
-        >> P.ClassName
-
-    let private xlSize =
-         function
-         | n -> "col-xl-" + string n
-         >> P.ClassName
-
-    let props =
-        { Props.Kind = Kind.Unset
-          Props.Size = 12
-          Props.XSSize = 0
-          Props.SMSize = 0
-          Props.MDSize = 0
-          Props.LGSize = 0
-          Props.XLSize = 0
-          Props.HTMLProps = [] }
-
-    let build (column: T) =
-        let props, children = column
-        props.HTMLProps
-        |> P.addProps
-            [ P.ClassName "column"
-              kind props.Kind
-              size props.Size
-              xsSize props.XSSize
-              smSize props.SMSize
-              mdSize props.MDSize
-              lgSize props.LGSize
-              xlSize props.XLSize ]
-        |> R.div <| children
-
-    let ƒ = build
-
-[<RequireQualifiedAccess>]
-module GridRow =
-
-    open Fabulosa.Extensions
-    module R = Fable.Helpers.React
-    module P = R.Props
-
-
-    [<RequireQualifiedAccess>]
-    type private Gapless = bool
-
-    [<RequireQualifiedAccess>]
-    type private OneLine = bool
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Gapless: Gapless
-          OneLine: OneLine
-          HTMLProps: P.HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type T<'Column> = Props * GridColumn<'Column> list
-
-    let props =
-        { Props.Gapless = false
-          Props.OneLine = false
-          Props.HTMLProps = [] }
-
-    let private gapless =
-        function
-        | true -> "col-gapless"
-        | false -> ""
-        >> P.ClassName
-
-    let private oneLine =
-        function
-        | true -> "col-oneline"
-        | false -> ""
-        >> P.ClassName
-
-    let build columnƒ (row: T<'Column>) =
-        let props, children = row
-        props.HTMLProps
-        |> P.addProps
-            [ P.ClassName "columns"
-              gapless props.Gapless
-              oneLine props.OneLine ]
+    let gridRow (comp: GridRow) =
+        let opt, chi = comp
+        opt
+        |> P.addProp (P.ClassName "columns")
+        |> P.map rowPropToClassName
+        |> P.merge
         |> R.div
         <| Seq.map
-            (fun (GridColumn column) -> columnƒ column)
-            children
+            (fun (Column col) -> gridColumn col)
+            chi
 
-    let ƒ = build GridColumn.ƒ
+    type GridChild =
+        Row of GridRow
 
+    type GridChildren =
+        GridChild list
 
+    type Grid = P.HTMLProps * GridChildren
 
-[<RequireQualifiedAccess>]
-module Grid =
-
-    open Fabulosa.Extensions
-    module R = Fable.Helpers.React
-    module P = R.Props
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: P.HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type T<'Row> = Props * GridRow<'Row> list
-    let props =
-        { Props.HTMLProps = [] }
-
-    let build rowƒ (grid: T<'Row>) =
-        let props, children = grid
-        props.HTMLProps
+    let grid (comp: Grid) =
+        let opt, chi = comp
+        opt
         |> P.addProp (P.ClassName "container")
+        |> P.merge
         |> R.div
         <| Seq.map
-            (fun (GridRow row) -> rowƒ row)
-            children
-
-    let ƒ = build GridRow.ƒ
-    
+            (fun (Row row) -> gridRow row)
+            chi    

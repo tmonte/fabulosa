@@ -54,7 +54,7 @@ module Media =
         let ƒ (caption: T) =
             let props, children = caption
             props.HTMLProps
-            |> addProps
+            |> addPropsOld
                 [ ClassName "figure-caption"
                   direction props.Direction ]
             |> R.figcaption
@@ -91,7 +91,7 @@ module Media =
 
         let ƒ (image: T) =
             image.HTMLProps 
-            |> addProp (kind image.Kind)
+            |> addPropOld (kind image.Kind)
             |> R.img
     
         let render = ƒ
@@ -131,7 +131,7 @@ module Media =
         let ƒ (figure: T) =
             let props, children = figure
             props.HTMLProps
-            |> addProp (ClassName "figure")
+            |> addPropOld (ClassName "figure")
             |> R.figure
             <| [ Image.ƒ children.Image
                  caption children.Caption ]    
@@ -185,7 +185,7 @@ module Media =
 
             video.HTMLProps
             |> List.append (props |> List.cast)
-            |> addProps
+            |> addPropsOld
                 [ ClassName "video-responsive"
                   ratio video.Ratio ]
             |> parent <| children

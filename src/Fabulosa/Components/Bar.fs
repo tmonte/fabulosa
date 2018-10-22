@@ -17,7 +17,7 @@ module Bar =
         | Unset
 
     type BarItemOptional =
-        | Tooltip of bool
+        | Tooltip
         | Color of Color
         interface IHTMLProp
 
@@ -30,44 +30,40 @@ module Bar =
     let private toPercent =
         string >> (+) >> (|>) "%"
 
-    let private tooltip (prop: IHTMLProp) =
+    let private tooltip value (prop: IHTMLProp) =
         match prop with
         | :? BarItemOptional as opt ->
             match opt with
-            | Tooltip true -> Some "tooltip"
-            | _ -> None
-        | _ -> None
-
-    let private tooltipData value (prop: IHTMLProp) =
-        match prop with
-        | :? BarItemOptional as opt ->
-            match opt with
-            | Tooltip true ->
-                Data ("tooltip", toPercent value)
-                :> IHTMLProp
-            | _ -> prop
-        | _ -> prop
+            | Tooltip ->
+                [] |> List.cast<IHTMLProp> 
+                |> addProps
+                    [ ClassName "tooltip"
+                      Data ("tooltip", toPercent value) ]
+                |> merge
+            | _ -> []
+        | _ -> []
 
     let private style value =
         let width = R.Props.CSSProp.Width (toPercent value)
-        let style = Fable.Helpers.React.Props.Style [width]
-        [style]
-        |> List.cast<IHTMLProp>
+        Fable.Helpers.React.Props.Style [width]
+        :> IHTMLProp
 
-    let barItem (c: BarItem) =
-        let opt, (Value value) = c
-        (opt @ style value)
-        |> addClass tooltip
-        |> List.map (tooltipData value)
-        |> addProp (ClassName "bar-item")
+    let barItem (comp: BarItem) =
+        let opt, (Value value) = comp
+        opt
+        |> addProps
+            (ClassName "bar-item" :> IHTMLProp
+            :: style value
+            :: (List.collect (tooltip value) opt))
+        |> merge
         |> R.div <| []
 
     type BarOptional =
-        | Small of bool
+        | Small
         interface IHTMLProp
 
     type BarChild =
-        BarItem of BarItem
+        Item of BarItem
 
     type private BarChildren =
         BarChild list
@@ -78,19 +74,21 @@ module Bar =
         match prop with
         | :? BarOptional as opt ->
             match opt with
-            | Small true -> Some "bar-sm"
-            | _ -> None
-        | _ -> None
+            | Small -> "bar-sm"
+            |> ClassName
+            :> IHTMLProp
+        | _ -> prop
 
-    let bar (c: Bar) =
-        let optional, children = c
-        optional
-        |> addClass small
+    let bar (comp: Bar) =
+        let opt, chi = comp
+        opt
         |> addProp (ClassName "bar")
+        |> map small
+        |> merge
         |> R.div
         <| Seq.map
-            (fun (BarItem item) -> barItem item)
-            children
+            (fun (Item item) -> barItem item)
+            chi
         
     //[<RequireQualifiedAccess>]
     //module Slider =

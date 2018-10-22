@@ -23,7 +23,7 @@ let success = button ([ Color Success ], [ R.str "Success" ])
 
 let error = button ([ Color Error ], [ R.str "Error" ])
 (*** hide ***)
-let icon = icon ([], Fabulosa.Icon.Kind Plus)
+let icon = icon ([], IconRequired.Kind Plus)
 (*** define: button-format-sample ***)
 let squared = button ([ Shape Squared ], [ icon ])
 

@@ -1,62 +1,41 @@
 ﻿module TilePage
 
-open Fabulosa
+open Fabulosa.Tile
 open Fabulosa.Docs
-open Fabulosa.Icon
 open Fabulosa.Button
+open Fabulosa.Icon
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
 open Renderer
-open Microsoft.FSharp.Core
-
-let contentProps =
-    { Tile.Content.props
-        with HTMLProps = [ P.ClassName "tile-p" ] }
 
 (*** define: tile-default-sample ***)
-let tile =
-    Tile.ƒ
-        (Tile.props,
-         { Icon = Some
-             ({ Tile.TileIcon.props with
-                  HTMLProps =
-                    [ P.ClassName "example-tile-icon" ] },
-              ([], Icon.Kind People))
-           Content =
-             (contentProps,
-                { Title = "The Avengers"
-                  SubTitle = "Earth's Mightiest Heroes joined
-                    forces to take on threats that were too
-                    big for any one hero to tackle..." })
-           Action =
-             (Tile.Action.props,
-              [ button
-                  ([ Kind Primary ],
-                   [ R.str "Action" ]) ]) })
+let def =
+    tile ([Icon ([], Kind People)],
+      (Content ([],
+         (Title "The Avengers",
+          Subtitle
+            "Earth's Mightiest Heroes joined
+             forces to take on threats that were too
+             big for any one hero to tackle...")),
+       Action ([],
+         [ button
+             ([ ButtonOptional.Kind Primary ],
+              [ R.str "Action" ]) ]) ))
 (*** define: tile-compact-sample ***)
 let compact =
-    Tile.ƒ
-        ({ Tile.props with
-             Compact = true },
-         { Icon = Some
-             ({ Tile.TileIcon.props with
-                  HTMLProps =
-                    [ P.ClassName "example-tile-icon" ] },
-              ([], Icon.Kind Mail))
-           Content =
-             (contentProps,
-                { Title = "fabulosa-docs.pdf"
-                  SubTitle = "14MB · Public · 1 Jan, 2017" })
-           Action =
-             (Tile.Action.props,
-              [ icon ([], Icon.Kind MoreHoriz) ]) })
+    tile([ Compact; Icon ([], Kind Mail) ],
+      (Content ([],
+         (Title "fabulosa-docs.pdf",
+          Subtitle "14MB · Public · 1 Jan, 2017")),
+       Action ([],
+         [ icon ([], Kind MoreHoriz) ]) ))
 (*** hide ***)
 let render () =
-    tryMount "tile-default-demo" tile
+    tryMount "tile-default-demo" def
     tryMount "tile-compact-demo" compact
-    tryMount "tile-props-table"
-        (PropTable.propTable typeof<Tile.Props> Tile.props)
+    //tryMount "tile-props-table"
+        //(PropTable.propTable typeof<Tile.Props> Tile.props)
 (**
 
 <div id="tile">

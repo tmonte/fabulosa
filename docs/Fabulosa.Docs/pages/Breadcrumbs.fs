@@ -10,9 +10,9 @@ open Renderer
 (*** define: breadcrumbs-demo ***)
 let element =
     breadcrumb ([],
-        [ BreadcrumbText ([], Text "Text")
-          BreadcrumbLink ([], Href "#", Text "Link")
-          BreadcrumbElements ([], [ R.str "Hey: "; R.a [] [ R.str "Jude" ] ]) ])
+        [ String ([], Text "Text")
+          Link ([], Href "#", Text "Link")
+          Elements ([], [ R.str "Hey: "; R.a [] [ R.str "Jude" ] ]) ])
 (*** hide ***)
 let render () =
     tryMount "breadcrumbs-demo" element

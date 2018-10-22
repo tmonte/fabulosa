@@ -32,7 +32,7 @@ module Tab =
         let ƒ (item: T) =
             let props, children = item
             props.HTMLProps
-            |> addProps
+            |> addPropsOld
                 [ ClassName "tab-item"
                   active props.Active ]
             |> R.li <| children
@@ -68,7 +68,7 @@ module Tab =
     let build<'Item> itemƒ (tab: T<'Item>) =
         let props, children = tab
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "tab"
               block props.Block ]
         |> R.ul

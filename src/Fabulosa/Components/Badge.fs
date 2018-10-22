@@ -9,22 +9,24 @@ module Badge =
     module R = Fable.Helpers.React
     open R.Props
 
-    let private combine htmlProps (badge: int) =
-        (htmlProps
-         |> addProp (ClassName "badge"))
-        @ [ Data ("badge", badge) ]
+    let private combine props badge =
+        props
+        |> addProps
+            [ ClassName "badge"
+              Data ("badge", badge) ]
+        |> merge
         
     type BadgeRequired =
         Value of int
 
     type private Element = HTMLProps * ReactElement list
-        
+    
     type BadgeChildren =
-        | BadgeAvatar of Avatar
-        | BadgeButton of Button
-        | BadgeAnchor of Element
-        | BadgeDiv of Element
-        | BadgeSpan of Element
+        | Avatar of Avatar
+        | Button of Button
+        | Anchor of Element
+        | Div of Element
+        | Span of Element
 
     type Badge =
         HTMLProps * BadgeRequired * BadgeChildren
@@ -32,13 +34,13 @@ module Badge =
     let badge (c: Badge) =
         let optional, (Value value), children = c
         match children with
-        | BadgeAvatar (opt, children) ->
+        | Avatar (opt, children) ->
             avatar (combine opt value, children)
-        | BadgeButton (opt, req) ->
+        | Button (opt, req) ->
             button (combine opt value, req)
-        | BadgeAnchor (anchorProps, children) ->
+        | Anchor (anchorProps, children) ->
             R.a (combine anchorProps value) children
-        | BadgeDiv (divProps, children) ->
+        | Div (divProps, children) ->
             R.div (combine divProps value) children
-        | BadgeSpan (spanProps, children) ->
+        | Span (spanProps, children) ->
             R.span (combine spanProps value) children

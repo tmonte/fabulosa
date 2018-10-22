@@ -37,7 +37,7 @@ module Label =
     let build (label: T) =
         let props, children = label
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "form-label"
               ClassName <| size props.Size ]
         |> R.label

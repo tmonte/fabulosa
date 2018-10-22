@@ -8,17 +8,17 @@ open Fable.Import.React
 open Renderer
 
 (*** define: bar-default-sample ***)
-let def = bar ([], [ BarItem ([], Value 25) ])
+let def = bar ([], [ Item ([], Value 25) ])
 (*** define: bar-small-sample ***)
-let small = bar ([ Small true ], [ BarItem ([], Value 25) ])
+let small = bar ([ Small ], [ Item ([], Value 25) ])
 (*** define: bar-item-tooltip-sample ***)
-let tooltip = bar ([], [ BarItem ([ Tooltip true ], Value 25) ])
+let tooltip = bar ([], [ Item ([ Tooltip ], Value 25) ])
 (*** define: bar-item-multiple-sample ***)
 let multiple =
     bar ([],
-        [ BarItem ([], Value 25)
-          BarItem ([], Value 15)
-          BarItem ([], Value 5) ])
+        [ Item ([], Value 25)
+          Item ([], Value 15)
+          Item ([], Value 5) ])
 (*** hide ***)
 let render () =
     tryMount "bar-default-demo" def

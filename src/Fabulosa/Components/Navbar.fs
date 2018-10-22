@@ -21,7 +21,7 @@ module Navbar =
         let ƒ (section: T) =
             let props, children = section
             props.HTMLProps
-            |> addProp (ClassName "navbar-section")
+            |> addPropOld (ClassName "navbar-section")
             |> R.section <| children
 
         let render = ƒ
@@ -35,7 +35,7 @@ module Navbar =
         let ƒ (center: T) =
             let props, children = center
             props.HTMLProps
-            |> addProp (ClassName "navbar-center")
+            |> addPropOld (ClassName "navbar-center")
             |> R.section <| children
 
         let render = ƒ
@@ -49,7 +49,7 @@ module Navbar =
         let ƒ (brand: T) =
             let props, children = brand
             props.HTMLProps
-            |> addProp (ClassName "navbar-brand")
+            |> addPropOld (ClassName "navbar-brand")
             |> R.a <| children
 
         let render = ƒ
@@ -78,7 +78,7 @@ module Navbar =
         (navbar: T<'Brand, 'Section, 'Center>) =
         let props, children = navbar
         props.HTMLProps
-        |> addProp (ClassName "navbar")
+        |> addPropOld (ClassName "navbar")
         |> R.header
         <| Seq.map
             (function

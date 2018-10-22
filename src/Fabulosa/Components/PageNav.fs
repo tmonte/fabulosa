@@ -72,7 +72,7 @@ module PageNav =
     let build (pageNav: T) =
         let props, children = pageNav
         props.HTMLProps
-        |> addProp (ClassName "pagination")
+        |> addPropOld (ClassName "pagination")
         |> R.ul
         <| [ child "prev" children.Prev
              child "next" children.Next ]

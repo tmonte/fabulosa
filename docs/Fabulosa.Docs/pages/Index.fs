@@ -1,22 +1,20 @@
 ﻿module IndexPage
 
-open Fabulosa
+open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 
 (*** define: sample ***)
-let fabulousButton = R.a [] []
-    //Anchor.ƒ
-        //({ Anchor.props with
-         //    Kind = Button.Kind.Primary
-         //    HTMLProps =
-         //      [ Href "button.html" ] },
-         //[ R.str "Fabulosa" ])
+let fabulous =
+    anchor
+        ([ Kind Primary
+           P.Href "button.html" ],
+         [ R.str "Fabulosa" ])
 (*** hide ***)
 let render () =
-    tryMount "button-demo" fabulousButton
+    tryMount "button-demo" fabulous
 (**
 <h2 class="s-title">
     Getting Started

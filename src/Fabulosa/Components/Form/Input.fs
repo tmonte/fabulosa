@@ -33,7 +33,7 @@ module Input =
 
     let ƒ (input: T) =
         input.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "form-input"
               ClassName <| size input.Size ]
         |> R.input
@@ -82,7 +82,7 @@ module IconInput =
             |> String.concat " "
         let iconOpt, iconReq = children.Icon
         let iconT =
-            (iconOpt |> addProp (ClassName "form-icon"), iconReq)
+            (iconOpt |> addPropOld (ClassName "form-icon"), iconReq)
         R.div [ClassName containerClasses]
             [ Input.ƒ children.Input
               icon iconT ]
@@ -106,7 +106,7 @@ module InputGroup =
         let ƒ (groupButton: T) =
             let props, children = groupButton
             button
-                (props |> addProp (ClassName "input-group-btn"),
+                (props |> addPropOld (ClassName "input-group-btn"),
                  children)
 
     [<RequireQualifiedAccess>]
@@ -175,7 +175,7 @@ module InputGroup =
         let props, children = inputGroup
         let containerProps =
             props.HTMLProps
-            |> addProps
+            |> addPropsOld
                 [ ClassName "input-group"
                   groupInline props.Inline ]
         R.div containerProps

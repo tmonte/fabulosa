@@ -23,10 +23,11 @@ module Card =
     type Header =
         HTMLProps * HeaderChildren
 
-    let header (c: Header) =
+    let cardHeader (c: Header) =
         let opt, (Title title, SubTitle subTitle) = c
         opt
         |> addProp (ClassName "card-header")
+        |> merge
         |> R.div
         <| [ R.div
               [ ClassName "card-title h5" ]
@@ -37,11 +38,12 @@ module Card =
 
     type Body = HTMLProps * ReactElements
 
-    let body (c: Body) =
+    let cardBody (c: Body) =
         let opt, chi = c
         if not (List.isEmpty chi) then
             opt
             |> addProp (ClassName "card-body")
+            |> merge
             |> R.div <| chi
         else
             R.ofOption None
@@ -49,11 +51,12 @@ module Card =
     type Footer =
         HTMLProps * ReactElements
 
-    let footer (c: Footer) =
+    let cardFooter (c: Footer) =
         let opt, chi = c
         if not (List.isEmpty chi) then
             opt
             |> addProp (ClassName "card-footer")
+            |> merge
             |> R.div <| chi
         else
             R.ofOption None
@@ -76,12 +79,13 @@ module Card =
     type Card =
         HTMLProps * CardChildren
 
-    let card (c: Card) =
-        let opt, (Image i, Header h, Body b, Footer f) = c
+    let card (comp: Card) =
+        let opt, (Image i, Header h, Body b, Footer f) = comp
         opt
         |> addProp (ClassName "card")
+        |> merge
         |> R.div <|
-        [ header h
+        [ cardHeader h
           R.div [ ClassName "card-image" ] [ Media.Image.ƒ i ]
-          body b
-          footer f ]
+          cardBody b
+          cardFooter f ]

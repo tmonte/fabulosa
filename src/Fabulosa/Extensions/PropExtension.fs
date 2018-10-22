@@ -34,37 +34,59 @@ module Fable =
                         |> Some
                     | _ -> None
                     
-                let addProp (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
+                let addPropOld (prop: IHTMLProp) (htmlProps: IHTMLProp list) =
                     if htmlProps |> List.length > 0 then
-                        let filtered =
-                            htmlProps
-                            |> List.filter
-                                (combineProp prop >> Option.isNone)
-                        let combined =
-                            htmlProps
-                            |> List.choose (combineProp prop)
+                        let filtered = htmlProps |> List.filter (combineProp prop >> Option.isNone)
+                        let combined = htmlProps |> List.choose (combineProp prop)
                         if combined |> List.length > 0 then
-                            combined @ filtered
+                            List.append combined filtered
                         else
-                            [prop] @ filtered
+                            prop :: filtered
                     else [prop]
-                
-                let addPropOpt (prop: IHTMLProp option) (htmlProps: IHTMLProp list) =
-                    match prop with
-                    | Some p -> addProp p htmlProps
-                    | None -> htmlProps
-    
-                let addProps (props: HTMLProps) (htmlProps: HTMLProps) =
-                    props |> List.fold
-                        (fun acc prop -> acc |> addProp prop) htmlProps
 
-                let addClass cb (props: HTMLProps)=
-                    List.tryPick
-                        (fun (prop: IHTMLProp) ->
-                            cb prop)
-                        props
-                    |> Option.map ClassName
-                    |> Option.orElse (Some (ClassName ""))
-                    |> Option.get
-                    |> addProp <| props
- 
+                let addPropsOld (props: HTMLProps) (htmlProps: HTMLProps) =
+                    props |> List.fold
+                        (fun acc prop -> acc |> addPropOld prop) htmlProps
+
+                type Unmerged =
+                    Unmerged of HTMLProps
+
+                let className text = ClassName text :> IHTMLProp
+
+                let unit = Unmerged
+
+                let addProp (prop: IHTMLProp) (htmlProps: HTMLProps) =
+                    Unmerged (prop :: htmlProps)
+
+                let addProps (other: HTMLProps) (existing: HTMLProps) = 
+                    other |> List.fold
+                        (fun (Unmerged acc) prop -> addProp prop acc) (Unmerged existing)
+
+                let merge (unmerged: Unmerged) =
+                    let propToClassNames =
+                        List.choose htmlAttrs
+                        >> List.choose
+                            (function
+                             | ClassName a -> Some a
+                             | _ -> None)
+                    let withoutClassNames =
+                        List.filter
+                            (fun (prop: IHTMLProp) ->
+                                match prop with
+                                | :? HTMLAttr as htmlAttr ->
+                                    match htmlAttr with
+                                    | ClassName _ -> false
+                                    | _ -> true
+                                | _ -> true)
+                    let (Unmerged props) = unmerged
+                    let classNames = propToClassNames props
+                    let otherProps = withoutClassNames props
+                    (classNames
+                     |> String.concat " "
+                     |> ClassName
+                     :> IHTMLProp)
+                    :: otherProps
+
+                let map (mapping: IHTMLProp -> IHTMLProp) (unmerged: Unmerged) =
+                    let (Unmerged props) = unmerged
+                    List.map mapping props |> Unmerged

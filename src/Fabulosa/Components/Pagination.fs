@@ -65,7 +65,7 @@ module Pagination =
                     [ OnClick onPageChanged; Href "#" ]
                     [ R.str children ]
             props.HTMLProps
-            |> addProps
+            |> addPropsOld
                 [ ClassName "page-item"
                   active props.Active
                   disabled props.Disabled ]
@@ -89,7 +89,7 @@ module Pagination =
     let build itemƒ (pagination: T<'Item>) =
         let props, children = pagination
         props.HTMLProps
-        |> addProp (ClassName "pagination")
+        |> addPropOld (ClassName "pagination")
         |> R.ul <| Seq.map itemƒ children
 
     let ƒ = build Item.ƒ

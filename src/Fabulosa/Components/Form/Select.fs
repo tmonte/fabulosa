@@ -88,7 +88,7 @@ module Select =
     let build groupƒ optionƒ (select: T<'Group, 'Option>) =
         let props, children = select
         props.HTMLProps
-        |> addProps
+        |> addPropsOld
             [ ClassName "form-select"
               size props.Size ]
         |> R.select

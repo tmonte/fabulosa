@@ -28,27 +28,24 @@ module Avatar =
 
     type Avatar =
         HTMLProps * AvatarChildren
-
-    let private size (props: HTMLProps) =
-        List.tryPick
-            (fun (prop: IHTMLProp) ->
-                match prop with
-                | :? AvatarOptional as opt ->
-                    match opt with
-                    | Size ExtraSmall -> Some "avatar-xs"
-                    | Size Small -> Some "avatar-sm"
-                    | Size Large -> Some "avatar-lg"
-                    | Size ExtraLarge -> Some "avatar-xl"
-                    | _ -> None
-                | _ -> None)
-            props
-        |> Option.orElse (Some "")
-        |> Option.get
-        |> ClassName
-        :> IHTMLProp
+        
+    let private size (prop: IHTMLProp) =
+        match prop with
+        | :? AvatarOptional as opt ->
+            match opt with
+            | Size ExtraSmall -> className "avatar-xs"
+            | Size Small -> className "avatar-sm"
+            | Size Large -> className "avatar-lg"
+            | Size ExtraLarge -> className "avatar-xl"
+            | _ -> prop
+        | _ -> prop
 
     let private presenceIcon presence =
-        R.i ([presence] |> addProp (ClassName "avatar-presence")) []
+        let props =
+            [ presence ]
+            |> addProp (ClassName "avatar-presence")
+            |> merge
+        R.i props []
 
     let private presence (props: HTMLProps) =
         List.tryPick
@@ -69,7 +66,7 @@ module Avatar =
     let private initial children (props: IHTMLProp list) =
         match children with
         | Initial initial ->
-            props @ [ Data ("initial", initial) ]
+            props |> addProp (Data ("initial", initial)) |> merge
         | _ -> props
 
     let private image children =
@@ -78,12 +75,13 @@ module Avatar =
             R.img [ Src url ]
         | _ -> R.ofOption None
 
-    let avatar (c: Avatar) =
-        let optional, children = c
-        optional
-        |> addProp (size optional)
+    let avatar (comp: Avatar) =
+        let opt, chi = comp
+        opt
         |> addProp (ClassName "avatar")
-        |> initial children
+        |> map size
+        |> merge
+        |> initial chi
         |> R.figure
-        <| [ image children
-             presence optional ]
+        <| [ image chi
+             presence opt ]
