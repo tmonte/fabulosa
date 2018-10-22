@@ -1,18 +1,19 @@
 ﻿module MenuPage
 
 open Fabulosa.Menu
+open Fabulosa.Icon
 open Renderer
 module R = Fable.Helpers.React
-open R.Props
 open Fable.Import.React
                 
 (*** define: menu-default-sample ***)
 let def =
     menu
-        ([], Trigger ([], [ R.str "text" ]),
+        ([], Trigger ([], [ icon ([], Kind Menu) ]),
          [ Item [ R.a [] [ R.str "Links" ] ]
            Divider ([])
            Item [ R.a [] [ R.str "Link 1" ] ]
+           Divider ([ Text "DIVIDER" ])
            Item [ R.a [] [ R.str "Link 2" ] ] ])
 (*** hide ***)
 let render () =

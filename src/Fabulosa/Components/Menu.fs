@@ -3,7 +3,6 @@
 module Menu =
 
     open Fabulosa.Extensions
-    open Fabulosa.Icon
     open Fabulosa.Button
     open Fable.Import
     open Fable.Import.React
@@ -50,7 +49,6 @@ module Menu =
     type private Trigger = TriggerRequired * TriggerChildren
 
     let private onTriggerClicked (e: MouseEvent) =
-        Fable.Import.JS.console.log e
         let element = e.currentTarget :?> Browser.Element
         let rect = element.getBoundingClientRect ()
         let x = (rect.left |> int) + (Browser.window.scrollX |> int)
@@ -82,23 +80,25 @@ module Menu =
 
     let menuContainer (comp: MenuContainer) =
         let opt, (Position (x, y)), chi = comp
-        Fable.Import.JS.console.log opt
-        let v =
-            List.tryPick
-                (fun (prop: P.IHTMLProp) ->
-                    match prop with
-                    | :? MenuContainerOptional as opt ->
-                        match opt with
-                        | Opened ->
-                            Some (R.ul
-                                [ P.Style
-                                    [ P.Position "absolute"
-                                      P.Left x
-                                      P.Top y ] ] chi)
-                    | _ -> None)
-                opt
-        Fable.Import.JS.console.log v
-        v |> R.ofOption
+        opt
+        |> List.tryPick
+            (fun (prop: P.IHTMLProp) ->
+                match prop with
+                | :? MenuContainerOptional as cOpt ->
+                    match cOpt with
+                    | Opened ->
+                        opt
+                        |> P.addProps
+                            [ P.ClassName "menu"
+                              P.Style
+                                [ P.Position "absolute"
+                                  P.Left x
+                                  P.Top y ]]
+                        |> P.merge
+                        |> R.ul <| chi
+                        |> Some
+                | _ -> None)
+        |> R.ofOption
 
     type MenuChild =
     | Item of MenuItem
@@ -131,7 +131,6 @@ module Menu =
           Position = 0, 0 }
 
     let private update message state =
-        Fable.Import.JS.console.log message
         match message with
         | TriggerMessage.Click (x, y) ->
             { state with
