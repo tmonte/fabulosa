@@ -10,6 +10,12 @@ module Menu =
     open Fable.Helpers.React.ReactiveComponents
     module P = R.Props
 
+    let apply<'T when 'T :> P.IHTMLProp> fn (prop: P.IHTMLProp) =
+        match prop with
+         | :? 'T as opt ->
+            fn opt
+         | _ -> prop
+
     type MenuItem = ReactElement list
 
     let menuItem (comp: MenuItem) =
@@ -71,7 +77,8 @@ module Menu =
         Position of int * int
 
     type IsOpen =
-        IsOpen of bool
+        | IsOpen of bool
+        interface P.IHTMLProp
 
     type MenuContainerRequired =
         Position * IsOpen
@@ -113,8 +120,17 @@ module Menu =
         { IsOpen: bool
           Position: int * int }
 
-    let private init _ =
-        { IsOpen = false
+    let private init (opt, req) =
+        let maybeOpen =
+            opt
+            |> List.tryFind
+                (fun (prop: P.IHTMLProp) ->
+                    match prop with
+                    | :? IsOpen as opt ->
+                        match opt with
+                        | IsOpen opn -> true
+                    | _ -> false)
+        { IsOpen = maybeOpen.IsSome
           Position = 0, 0 }
 
     let private update message state =
