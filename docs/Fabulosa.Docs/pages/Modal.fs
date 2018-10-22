@@ -83,7 +83,13 @@ module Container =
 let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
 let demo = R.div [style] [ 
         tooltip ([], Content [R.str "top"], Children [R.str"top tooltip content"])
-        
+        R.br []; R.br []; R.br []
+        tooltip ([Orientation Bottom], Content [R.str "bottom"], Children [R.str"bottom tooltip content"])
+        R.br []; R.br []; R.br []
+        tooltip ([Orientation Right], Content [R.str "right"], Children [R.str"right tooltip content"])
+        R.br []; R.br []; R.br []
+        tooltip ([Orientation Left], Content [R.str "left"], Children [R.str"left tooltip content"])
+        R.br []; R.br []; R.br []
  
        
         Grid.ƒ

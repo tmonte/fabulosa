@@ -63,7 +63,7 @@ module Tooltip =
                   
         let positionClassName =
             function
-                | Some Orientation.Top -> ""
+                | Some Orientation.Top -> "tooltip-top"
                 | Some Orientation.Right -> "tooltip-right"
                 | Some Orientation.Bottom -> "tooltip-bottom"
                 | Some Orientation.Left -> "tooltip-left"
@@ -114,37 +114,34 @@ module Tooltip =
               Orientation: Orientation 
               TooltipContent: TooltipContent }
                  
-        type State = { Style: HTMLAttr }
+        type State = { Style: HTMLAttr; Hover: Hover }
                
         type HoverClass(refCallBack) =
             inherit PureComponent<Props, State>(refCallBack)
-            do base.setInitState { Style =  Style [] }
+            do base.setInitState { Style =  Style []; Hover = NotHovering }
                   
             let mutable targetElement = None
             let mutable tooltipElement = None  
-            
-            let display =
-                function 
-                | Hovering -> Opacity "1"
-                | NotHovering -> Opacity "0" 
-    
-            let bottomPosition (target: BoundingRect) (tooltip: BoundingRect) hover =
-                let horizontalCenter = target.Left + (target.Width / 2) - (tooltip.Width / 2)
-                Style [Top (sprintf "%dpx" (target.Bottom));Left (sprintf "%dpx" horizontalCenter); Position "fixed"; display hover]
-            
-            let topPosition (target: BoundingRect) (tooltip: BoundingRect) hover =
-                let horizontalCenter = target.Left + (target.Width / 2) - (tooltip.Width / 2)
-                Style [Top (sprintf "%dpx" (target.Top - tooltip.Height));Left (sprintf "%dpx" horizontalCenter); Position "fixed"; display hover]
+
+            let padding = 4                
                 
-            let leftPosition (target: BoundingRect) (tooltip: BoundingRect) hover =
-                let verticalCenter = target.Top + (target.Height / 2) - (tooltip.Height / 2)
-                Style [Top (sprintf "%dpx" verticalCenter);Left (sprintf "%dpx" (target.Left - tooltip.Width)); Position "fixed"; display hover]
+            let bottomPosition (target: BoundingRect) (tooltip: BoundingRect) =
+                let horizontalCenter = target.Left + (target.Width / 2) - (tooltip.Width / 2)
+                Style [Top (sprintf "%dpx" (target.Bottom + padding));Left (sprintf "%dpx" horizontalCenter)]
             
-            let rightPosition (target: BoundingRect) (tooltip: BoundingRect) hover =
+            let topPosition (target: BoundingRect) (tooltip: BoundingRect) =
+                let horizontalCenter = target.Left + (target.Width / 2) - (tooltip.Width / 2)
+                Style [Top (sprintf "%dpx" (target.Top - tooltip.Height - padding));Left (sprintf "%dpx" horizontalCenter)]
+                
+            let leftPosition (target: BoundingRect) (tooltip: BoundingRect) =
                 let verticalCenter = target.Top + (target.Height / 2) - (tooltip.Height / 2)
-                Style [Top (sprintf "%dpx" verticalCenter);Left (sprintf "%dpx" (target.Left + target.Width)); Position "fixed"; display hover]
+                Style [Top (sprintf "%dpx" verticalCenter);Left (sprintf "%dpx" (target.Left - tooltip.Width - padding))]
+            
+            let rightPosition (target: BoundingRect) (tooltip: BoundingRect) =
+                let verticalCenter = target.Top + (target.Height / 2) - (tooltip.Height / 2)
+                Style [Top (sprintf "%dpx" verticalCenter); Left (sprintf "%dpx" (target.Left + target.Width + padding))]
                                         
-            let calculatePosition (targetElement:Browser.Element) (tooltipElement:Browser.Element) orientation hover =
+            let calculatePosition (targetElement:Browser.Element) (tooltipElement:Browser.Element) orientation =
                 let targetBoundaries = targetElement.getBoundingClientRect() |> BoundingRect.OfClientRectType
                 let tooltipBoundaries = tooltipElement.getBoundingClientRect() |> BoundingRect.OfClientRectType
                 match orientation with 
@@ -152,7 +149,7 @@ module Tooltip =
                  | Orientation.Right -> rightPosition
                  | Orientation.Bottom -> bottomPosition
                  | Orientation.Left -> leftPosition
-                <||| (targetBoundaries, tooltipBoundaries, hover)
+                <|| (targetBoundaries, tooltipBoundaries)
                 
             let setTooltipRef (ref:Browser.Element) = 
                 if ref <> null then
@@ -161,6 +158,11 @@ module Tooltip =
             let setTargetRef (ref:Browser.Element) = 
                 if ref <> null then
                     targetElement <- Some ref
+            
+            let hoverClassName =
+                function
+                | Hovering -> ClassName "tooltip-active" :> IHTMLProp |> Some 
+                | NotHovering -> None
                         
             override this.componentDidMount () = this.updatePosition NotHovering
             
@@ -172,18 +174,19 @@ module Tooltip =
                 
             member this.updatePosition hover =
                 let mapElements target tooltip = 
-                    let style = calculatePosition target tooltip this.props.Orientation hover
-                    this.setState { Style = style;}
+                    let style = calculatePosition target tooltip this.props.Orientation
+                    this.setState { Style = style; Hover = hover}
                     
                 Option.map2 mapElements targetElement tooltipElement
                 |> ignore 
                 
             member this.basetooltipProps () =
-                  this.props.HTMLProps
-                  |> addProps 
-                    [ this.state.Style
-                      Ref setTooltipRef 
-                      Orientation this.props.Orientation]   
+                this.props.HTMLProps
+                |> addPropOpt (hoverClassName this.state.Hover)
+                |> addProps 
+                  [ this.state.Style
+                    Ref setTooltipRef
+                    Orientation this.props.Orientation ]
             
             override this.render() =
                 R.fragment [] 
