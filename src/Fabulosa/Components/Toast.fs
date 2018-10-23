@@ -9,10 +9,10 @@ module Toast =
     open Fable.Import.React
 
     type Color =
-    | Primary
-    | Success
-    | Warning
-    | Error
+        | Primary
+        | Success
+        | Warning
+        | Error
 
     type ToastOptional =
         | Color of Color
@@ -51,7 +51,7 @@ module Toast =
 
     let toast (comp: Toast) =
         let opt, (Text txt) = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "toast")
         |> map color
         |> merge

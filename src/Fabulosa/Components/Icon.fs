@@ -118,7 +118,7 @@ module Icon =
 
     let icon (comp: Icon) =
         let opt, (Kind req) = comp
-        opt
+        Unmerged opt
         |> addProps
             [ ClassName "icon"
               kind req ]

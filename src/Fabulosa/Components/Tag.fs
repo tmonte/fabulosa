@@ -38,7 +38,7 @@ module Tag =
         | _ -> prop
 
     let tag ((opt, (Text txt)): Tag) =
-        opt
+        Unmerged opt
         |> addProp (ClassName "label")
         |> map propToClassName
         |> merge

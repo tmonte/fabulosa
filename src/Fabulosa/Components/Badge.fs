@@ -10,7 +10,7 @@ module Badge =
     open R.Props
 
     let private combine props badge =
-        props
+        Unmerged props
         |> addProps
             [ ClassName "badge"
               Data ("badge", badge) ]

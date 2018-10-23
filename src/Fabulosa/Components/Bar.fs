@@ -35,7 +35,7 @@ module Bar =
         | :? BarItemOptional as opt ->
             match opt with
             | Tooltip ->
-                [] |> List.cast<IHTMLProp> 
+                Unmerged []
                 |> addProps
                     [ ClassName "tooltip"
                       Data ("tooltip", toPercent value) ]
@@ -50,7 +50,7 @@ module Bar =
 
     let barItem (comp: BarItem) =
         let opt, (Value value) = comp
-        opt
+        Unmerged opt
         |> addProps
             (ClassName "bar-item" :> IHTMLProp
             :: style value
@@ -81,7 +81,7 @@ module Bar =
 
     let bar (comp: Bar) =
         let opt, chi = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "bar")
         |> map small
         |> merge

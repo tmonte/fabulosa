@@ -49,8 +49,9 @@ module Chip =
 
     let chip (c: Chip) =
         let opt, (Text text) = c
-        opt
-        |> P.addPropOld (P.ClassName "chip")
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "chip")
+        |> P.merge
         |> R.div <|
         [ R.ofOption (avatar opt)
           R.str text

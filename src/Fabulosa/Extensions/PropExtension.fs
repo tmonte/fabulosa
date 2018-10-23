@@ -55,12 +55,12 @@ module Fable =
 
                 let unit = Unmerged
 
-                let addProp (prop: IHTMLProp) (htmlProps: HTMLProps) =
+                let addProp (prop: IHTMLProp) (Unmerged htmlProps) =
                     Unmerged (prop :: htmlProps)
 
-                let addProps (other: HTMLProps) (existing: HTMLProps) = 
+                let addProps (other: HTMLProps) (Unmerged existing) = 
                     other |> List.fold
-                        (fun (Unmerged acc) prop -> addProp prop acc) (Unmerged existing)
+                        (fun acc prop -> addProp prop acc) (Unmerged existing)
 
                 let merge (unmerged: Unmerged) =
                     let propToClassNames =

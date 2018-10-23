@@ -22,7 +22,7 @@ module Breadcrumb =
                
     let breadcrumbLink (comp: BreadcrumbLink) =
         let opt, (Href hrf), (Text txt) = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> P.merge
         |> R.div
@@ -35,7 +35,7 @@ module Breadcrumb =
 
     let breadcrumbText (comp: BreadcrumbText) =
         let opt, (Text txt) = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> P.merge
         |> R.div
@@ -50,7 +50,7 @@ module Breadcrumb =
 
     let breadcrumbElements (comp: BreadcrumbElements) =
         let opt, chi = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "breadcrumb-item")
         |> P.merge
         |> R.div
@@ -68,7 +68,7 @@ module Breadcrumb =
 
     let breadcrumb (comp: Breadcrumb) =
         let opt, chi = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "breadcrumb")
         |> P.merge
         |> R.ul

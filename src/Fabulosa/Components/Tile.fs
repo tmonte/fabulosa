@@ -22,7 +22,7 @@ module Tile =
 
     let tileContent (comp: TileContent) =
         let opt, (Title ttl, Subtitle sttl) = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "tile-content")
         |> merge
         |> R.div
@@ -38,7 +38,7 @@ module Tile =
 
     let tileAction (comp: TileAction) =
         let opt, chi = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "tile-action")
         |> merge
         |> R.div <| chi
@@ -82,7 +82,7 @@ module Tile =
 
     let tile (comp: Tile) =
         let opt, (Content con, Action act) = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "tile")
         |> map compact
         |> merge

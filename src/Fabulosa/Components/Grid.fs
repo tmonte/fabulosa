@@ -45,7 +45,7 @@ module Grid =
 
     let gridColumn (comp: GridColumn) =
         let opt, chi = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "column")
         |> P.map colPropToClassName
         |> P.merge
@@ -75,7 +75,7 @@ module Grid =
 
     let gridRow (comp: GridRow) =
         let opt, chi = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "columns")
         |> P.map rowPropToClassName
         |> P.merge
@@ -94,7 +94,7 @@ module Grid =
 
     let grid (comp: Grid) =
         let opt, chi = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "container")
         |> P.merge
         |> R.div

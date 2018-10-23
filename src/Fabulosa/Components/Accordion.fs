@@ -36,7 +36,7 @@ module Accordion =
         |> List.tryPick someIcon
         |> Option.orElse (Some ([], Icon.Kind ArrowRight))
         |> Option.map (fun (iconOpt, iconReq) ->
-             (iconOpt
+             (Unmerged iconOpt
               |> addProp (ClassName "mr-1")
               |> merge, iconReq))
         |> Option.get

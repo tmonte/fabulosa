@@ -42,7 +42,7 @@ module Avatar =
 
     let private presenceIcon presence =
         let props =
-            [ presence ]
+            Unmerged [ presence ]
             |> addProp (ClassName "avatar-presence")
             |> merge
         R.i props []
@@ -66,7 +66,7 @@ module Avatar =
     let private initial children (props: IHTMLProp list) =
         match children with
         | Initial initial ->
-            props |> addProp (Data ("initial", initial)) |> merge
+            Unmerged props |> addProp (Data ("initial", initial)) |> merge
         | _ -> props
 
     let private image children =
@@ -77,7 +77,7 @@ module Avatar =
 
     let avatar (comp: Avatar) =
         let opt, chi = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "avatar")
         |> map size
         |> merge

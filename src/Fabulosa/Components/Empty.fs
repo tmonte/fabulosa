@@ -55,7 +55,7 @@ module Empty =
 
     let empty (comp: Empty) =
         let opt, (Icon i, Title t, Subtitle s, Action a) = comp
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "empty")
         |> P.merge
         |> R.div <|

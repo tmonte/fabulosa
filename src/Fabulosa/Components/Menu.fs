@@ -9,13 +9,7 @@ module Menu =
     module R = Fable.Helpers.React
     open Fable.Helpers.React.ReactiveComponents
     module P = R.Props
-
-    let apply<'T when 'T :> P.IHTMLProp> fn (prop: P.IHTMLProp) =
-        match prop with
-         | :? 'T as opt ->
-            fn opt
-         | _ -> prop
-
+    
     type MenuItem = ReactElement list
 
     let menuItem (comp: MenuItem) =
@@ -37,7 +31,7 @@ module Menu =
          | _ -> prop 
 
     let menuDivider (opt: MenuDivider) =
-        opt
+        P.Unmerged opt
         |> P.addProp (P.ClassName "divider")
         |> P.map menuDividerText
         |> P.merge
@@ -66,7 +60,7 @@ module Menu =
         let req, (Button btn) = comp
         let btnOpt, btnChi = btn
         let withClick =
-            btnOpt
+           P.Unmerged btnOpt
             |> P.addProps
                 [ P.ClassName "btn"
                   P.OnClick (onTriggerClicked >> req) ]
@@ -145,7 +139,7 @@ module Menu =
         R.fragment [] 
             [ menuTrigger (dispatch, Button trig)
               menuContainer
-                ([], (Position model.state.Position, IsOpen model.state.IsOpen), 
+                (P.Unmerged [], (Position model.state.Position, IsOpen model.state.IsOpen), 
                  model.children)
               |> Portal.ƒ "menu-container" ]
 

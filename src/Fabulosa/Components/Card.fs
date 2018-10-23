@@ -25,7 +25,7 @@ module Card =
 
     let cardHeader (c: Header) =
         let opt, (Title title, SubTitle subTitle) = c
-        opt
+        Unmerged opt
         |> addProp (ClassName "card-header")
         |> merge
         |> R.div
@@ -41,7 +41,7 @@ module Card =
     let cardBody (c: Body) =
         let opt, chi = c
         if not (List.isEmpty chi) then
-            opt
+            Unmerged opt
             |> addProp (ClassName "card-body")
             |> merge
             |> R.div <| chi
@@ -54,7 +54,7 @@ module Card =
     let cardFooter (c: Footer) =
         let opt, chi = c
         if not (List.isEmpty chi) then
-            opt
+            Unmerged opt
             |> addProp (ClassName "card-footer")
             |> merge
             |> R.div <| chi
@@ -81,7 +81,7 @@ module Card =
 
     let card (comp: Card) =
         let opt, (Image i, Header h, Body b, Footer f) = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "card")
         |> merge
         |> R.div <|

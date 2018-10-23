@@ -65,7 +65,7 @@ module Button =
 
     let private createButton renderer (comp: Button) =
         let opt, chi = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "btn")
         |> map propToClassName
         |> merge
@@ -104,7 +104,7 @@ module ButtonGroup =
 
     let buttonGroup (comp: ButtonGroup) =
         let opt, chi = comp
-        opt
+        Unmerged opt
         |> addProp (ClassName "btn-group")
         |> map propToClassName
         |> merge
