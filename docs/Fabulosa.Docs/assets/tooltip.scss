@@ -1,0 +1,92 @@
+.fab-tooltip {
+  background: rgba(69, 77, 93, .9);
+  border-radius: .1rem;
+  color: #fff;
+  font-size: .7rem;
+  left: 50%;
+  max-width: 320px;
+  padding: .2rem .4rem;
+  pointer-events: none;
+  
+  white-space: pre;
+  z-index: 300;
+  
+  position: fixed;
+  opacity: 0;
+}
+
+.tooltip-active {
+  opacity: 1;
+}
+
+.tooltip-active.tooltip-top {
+  animation: tooltipTop 0.5s;
+}
+
+.tooltip-active.tooltip-bottom {
+  animation: tooltipBottom 0.5s;
+}
+
+.tooltip-active.tooltip-right {
+  animation: tooltipRight 0.5s;
+}
+
+.tooltip-active.tooltip-left {
+  animation: tooltipLeft 0.5s;
+}
+
+@keyframes tooltipTop {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes tooltipBottom {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes tooltipRight {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes tooltipLeft {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+    transform: translateX(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}

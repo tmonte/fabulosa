@@ -61,6 +61,11 @@ module Fable =
                 let addProps (other: HTMLProps) (Unmerged existing) = 
                     other |> List.fold
                         (fun acc prop -> addProp prop acc) (Unmerged existing)
+                
+                let addPropOpt (prop: IHTMLProp option) propList =
+                    match prop with
+                    | Some p -> addProp p propList
+                    | None -> propList
 
                 let merge (unmerged: Unmerged) =
                     let propToClassNames =

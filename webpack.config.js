@@ -64,7 +64,8 @@ var pages = [
     'tab.html',
     'modal.html',
     'tile.html',
-    'toast.html'
+    'toast.html',
+    'tooltip.html'
 ]
 
 // The HtmlWebpackPlugin allows us to use a template for the index.html page
