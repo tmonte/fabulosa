@@ -6,118 +6,48 @@ module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
 open Renderer
+open Fabulosa.Grid
+open Fabulosa.Button
+open Fabulosa.Tooltip
 
-(*** define: modal-sample ***)
-let modal: Modal.T = 
-    (
-        Modal.props, 
-        {
-            Header = (Modal.Header.props, Modal.Header.Children.Text "#Cirão da massa") |> Some
-            Body = [
-                Media.Figure.ƒ 
-                    (Media.Figure.props, {
-                        Image = { Media.Image.props with HTMLProps = [Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] }
-                        Caption = (Media.Caption.props, Media.Caption.Children.Text "Choose your destiny") |> Some
-                    })
-            ]
-            Footer =
-                (Modal.Footer.props, 
-                 [
-                    (Button.props, [R.str "Vote Bozo"])
-                    ({Button.props with Kind = Button.Kind.Primary}, [R.str "Vote Ciro 12"])
-                 ] |> Modal.Footer.Buttons) |> Some
-        }
-    )
-let props, children = modal
 
-let smallModal: Modal.T = { props with Size = Modal.Size.Small }, children
-let largeModal: Modal.T = { props with Size = Modal.Size.Large }, children
+let style = Style [Background "#f8f9fa"]
+(*** define: tooltip-sample ***)
 
-module Container =
-    open Fabulosa.Extensions
-    open Fable.Import
-    open Fable.Import.React
-    module R = Fable.Helpers.React
-    open Fable.Helpers.React.ReactiveComponents
-    open R.Props
-    
-    type State = { Opened: bool}
-    type Message = 
-        | Open
-        | Close
-    
-    type private Dispatch = Message -> unit
-    
-    let private init _ = { Opened = false }
-    
-    let private update message state =
-        match message with 
-        | Open -> { state with Opened = true }
-        | Close -> { state with Opened = false }
-    
-    let private view (model: Model<Modal.T, State>) (dispatch: Dispatch) =
-        let props, children = model.props
-        let props = { props with 
-                        IsOpen = model.state.Opened
-                        OnRequestClose = Some (fun _ -> dispatch Close) }
-        let size = props.Size
-        R.fragment [][
-            Button.ƒ ({Button.props with Kind = Button.Kind.Primary; HTMLProps = [OnClick (fun _ -> dispatch Open)] }, [R.str (sprintf "Open %A Modal" size)]) 
-            Modal.ƒ (props, children)
-        ]
-    
-    let ƒ (content : Modal.T) =
-        R.reactiveCom
-            init
-            update
-            view
-            ""
-            content
-            []
+
+
+let demo = 
+    let tooltipExample orientation =   
+        let tooltipText = sprintf "%A" orientation  
+        let buttonText = sprintf "%A tooltip" orientation  
+        Column ([ Grid.Size 3 ], [
+                tooltip ([Orientation orientation], Content [R.str tooltipText], Children [ button ([ Kind Primary ], [ R.str buttonText ]) ] )
+            ])
+            
+    grid ([],
+          [ Row ([],
+              [ tooltipExample Orientation.Left
+                tooltipExample Orientation.Top
+                tooltipExample Orientation.Bottom
+                tooltipExample Orientation.Right ]) ])
             
 (*** hide ***)
-let style = Style [Background "#f8f9fa"; TextAlign "center"; Padding "20px"]
-let demo = R.div [style] [ 
-        Grid.ƒ
-            (Grid.props,
-             [ Grid.Row.props,
-               [ { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ smallModal]
-                 { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ modal]
-                 { Grid.Column.props with Size = 4; SMSize = 12 },
-                 [Container.ƒ largeModal]
-               ]
-             ])
-    ]
 
 let render () =
-    tryMount "modal-demo" demo
-    tryMount "modal-props-table" (PropTable.propTable typeof<Modal.Props> Modal.props)
-    tryMount "modal-header-props-table" (PropTable.propTable typeof<Modal.Header.Props> Modal.Header.props)
-    tryMount "modal-footer-props-table" (PropTable.propTable typeof<Modal.Footer.Props> Modal.Footer.props)
+    tryMount "tooltip-demo" demo
 (**
 
-<div id="modal">
+<div id="tooltip">
     <h2 class="s-title">Tooltips</h2>
     Tooltips provide context information labels that appear on hover and focus.
 </div>
 
-<div id="modal-props">
-    <h3 class="s-title">Modal Props</h3>
-    <div class="props-table" id="modal-props-table"></div>
-    <h3 class="s-title">Header Props</h3>
-    <div class="props-table" id="modal-header-props-table"></div>
-    <h3 class="s-title">Footer Props</h3>
-    <div class="props-table" id="modal-footer-props-table"></div>
-</div>
 
 <div id="modal-default">
     <h3 class="s-title">Example</h3>
-    Modals come in 3 different sizes:
-    <div class="demo" id="modal-demo"></div>
+    <div class="demo" id="tooltip-demo"></div>
 </div>
 *)
 
-(*** include: modal-sample ***)
+(*** include: tooltip-sample ***)
 

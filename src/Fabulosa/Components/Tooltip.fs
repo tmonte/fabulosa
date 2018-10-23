@@ -85,11 +85,12 @@ module Tooltip =
             let opt, TooltipContent.Content children = tooltip
             
             opt
-            |> addProps 
+            |> Unmerged
+            |> Unmerged.addProps 
                 [ ClassName "fab-tooltip"  
-                    
                   positionClassName (orientation opt) ]
-            |> addPropOpt (opt |> reference|> Option.map (fun x -> upcast x))
+            |> Unmerged.addPropOpt (opt |> reference|> Option.map (fun x -> upcast x))
+            |> merge
             |> R.span
             <| children
         
@@ -123,7 +124,7 @@ module Tooltip =
             let mutable targetElement = None
             let mutable tooltipElement = None  
 
-            let padding = 4                
+            let padding = 10                
                 
             let bottomPosition (target: BoundingRect) (tooltip: BoundingRect) =
                 let horizontalCenter = target.Left + (target.Width / 2) - (tooltip.Width / 2)
@@ -181,16 +182,17 @@ module Tooltip =
                 |> ignore 
                 
             member this.basetooltipProps () =
-                this.props.HTMLProps
-                |> addPropOpt (hoverClassName this.state.Hover)
-                |> addProps 
+                Unmerged this.props.HTMLProps
+                |> Unmerged.addPropOpt (hoverClassName this.state.Hover)
+                |> Unmerged.addProps 
                   [ this.state.Style
                     Ref setTooltipRef
                     Orientation this.props.Orientation ]
+                |> merge
             
             override this.render() =
                 R.fragment [] 
-                    [ R.span [Ref setTargetRef; OnMouseEnter this.onMouseEnter; OnMouseLeave this.onMouseLeave] this.children
+                    [ R.span [Ref setTargetRef; OnMouseEnter this.onMouseEnter; OnMouseLeave this.onMouseLeave; Style [Display "inline-block"]] this.children
                       BaseTooltip.baseTooltip (this.basetooltipProps(), this.props.TooltipContent)
                       |> Portal.ƒ "tooltip-portal"]
             

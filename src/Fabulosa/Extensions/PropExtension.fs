@@ -57,11 +57,14 @@ module Fable =
 
                 let addProp (prop: IHTMLProp) (htmlProps: HTMLProps) =
                     Unmerged (prop :: htmlProps)
-
+                
                 let addProps (other: HTMLProps) (existing: HTMLProps) = 
                     other |> List.fold
                         (fun (Unmerged acc) prop -> addProp prop acc) (Unmerged existing)
-
+                
+                let addPropToUnmerged (prop: IHTMLProp) (Unmerged htmlProps) =
+                    prop :: htmlProps |> Unmerged      
+                
                 let merge (unmerged: Unmerged) =
                     let propToClassNames =
                         List.choose htmlAttrs
@@ -90,3 +93,18 @@ module Fable =
                 let map (mapping: IHTMLProp -> IHTMLProp) (unmerged: Unmerged) =
                     let (Unmerged props) = unmerged
                     List.map mapping props |> Unmerged
+
+                module Unmerged =
+                    let flip f a b = f b a
+                
+                    let addProp (prop: IHTMLProp) (Unmerged propList) =
+                        prop :: propList |> Unmerged     
+                    
+                    let addPropOpt (prop: IHTMLProp option) propList =
+                        match prop with
+                        | Some p -> addProp p propList
+                        | None -> propList
+                        
+                    let addProps (other: HTMLProps) (propList: Unmerged) = 
+                        other
+                        |> List.fold (flip addProp) propList
