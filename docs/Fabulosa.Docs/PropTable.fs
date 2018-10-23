@@ -5,7 +5,7 @@ module PropTable =
     open FSharp.Reflection
     module R = Fable.Helpers.React
     open R.Props
-    open Fabulosa
+    open Fabulosa.Table
     
     let flip f a b = f b a
     
@@ -88,29 +88,18 @@ module PropTable =
 
     let toTableRow rowValue =
         let (col1, col2) = rowValue
-        (Table.Row.props,
-         [ Table.Row.Child.Column
-             (Table.Column.props, [col1])
-           Table.Row.Child.Column
-              ({ Table.Column.props with
-                   HTMLProps = [ Style [ WhiteSpace "pre" ] ] },
-                 [col2]) ])
+        Row ([],
+         [ Column ([], [col1])
+           Column ([ Style [ WhiteSpace "pre" ] ], [ col2 ]) ])
 
     let renderTable rowValues =
-        Table.ƒ
-            ({ Table.props with
-                 Kind = Table.Kind.Striped },
-             [ Table.Child.Head
-                 (Table.Head.props,
-                  [ (Table.Row.props,
-                     [ Table.Row.Child.TitleColumn
-                         (Table.TitleColumn.props,
-                          [R.str "Name"])
-                       Table.Row.Child.TitleColumn
-                           (Table.TitleColumn.props,
-                            [R.str "Type"]) ]) ])
-               Table.Child.Body
-                  (Table.Body.props,
+        table
+            ([ Kind Striped ],
+             [ Head ([],
+                 [ Row ([],
+                     [ TitleColumn ([], [R.str "Name"])
+                       TitleColumn ([], [R.str "Type"]) ]) ])
+               Body ([],
                    (rowValues |> List.map toTableRow)) ])
 
     let propTable aType obj = getRecordPropFields aType obj |> renderTable 
