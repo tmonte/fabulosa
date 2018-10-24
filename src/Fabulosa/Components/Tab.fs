@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Tab =
 
     open Fabulosa.Extensions
@@ -8,71 +7,47 @@ module Tab =
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
-    module Item =
+    type TabItemOptional =
+        | Active
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Active: bool }
+    type TabItem =
+        HTMLProps * ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type T = Props * ReactElement list
+    let private itemPropToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? TabItemOptional as opt ->
+            match opt with
+            | Active -> className "active"
+        | _ -> prop
 
-        let props =
-            { Props.HTMLProps = []
-              Props.Active = false }
+    let tabItem ((opt, chi): TabItem) =
+        Unmerged opt
+        |> addProp (ClassName "tab-item")
+        |> map itemPropToClassName
+        |> merge
+        |> R.li <| chi
 
-        let private active =
-            function
-            | true -> "active"
-            | false -> ""
-            >> ClassName
-              
-        let ƒ (item: T) =
-            let props, children = item
-            props.HTMLProps
-            |> addPropsOld
-                [ ClassName "tab-item"
-                  active props.Active ]
-            |> R.li <| children
+    type TabOptional =
+        | Block
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps
-          Action: (ReactElement list) option
-          Block: bool }
+    type TabChild =
+        Item of TabItem
 
-    [<RequireQualifiedAccess>]
-    type T<'Item> = Props * 'Item list
+    type Tab = HTMLProps * TabChild list
 
-    let props =
-        { Props.HTMLProps = []
-          Props.Action = None
-          Props.Block = false }
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? TabOptional as opt ->
+            match opt with
+            | Block -> className "tab-block"
+        | _ -> prop
 
-    let private renderAction =
-        function
-        | Some action ->
-            R.li
-                [ ClassName "tab-item tab-action" ]
-                action
-        | None -> R.ofOption None
-
-    let private block =
-        function
-        | true -> "tab-block"
-        | false -> ""
-        >> ClassName
-
-    let build<'Item> itemƒ (tab: T<'Item>) =
-        let props, children = tab
-        props.HTMLProps
-        |> addPropsOld
-            [ ClassName "tab"
-              block props.Block ]
+    let tab ((opt, chi): Tab) =
+        Unmerged opt
+        |> addProp (ClassName "tab")
+        |> map propToClassName
+        |> merge
         |> R.ul
-        <| (List.map itemƒ children) @
-           [ renderAction props.Action ]
-
-    let ƒ = build Item.ƒ
+        <| (List.map (fun (Item item) -> tabItem item) chi)

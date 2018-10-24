@@ -27,7 +27,9 @@ module Menu =
          | :? MenuDividerOptional as opt ->
              match opt with
              | Text txt ->
-                 P.Data ("content", txt) :> P.IHTMLProp
+                 ([] |> List.cast<P.IHTMLProp>)
+                  @ [ P.Data ("content", txt) ]
+                 |> List.head
          | _ -> prop 
 
     let menuDivider (opt: MenuDivider) =

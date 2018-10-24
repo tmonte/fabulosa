@@ -1,101 +1,53 @@
 ﻿module TablePage
 
-open Fabulosa
-open Fabulosa.Docs
+open Fabulosa.Table
 module R = Fable.Helpers.React
 open Fable.Import.React
 open Renderer
 
 let bolso =
-    [ Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Jair" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Bolsonaro" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "melhorjair@procanada.com" ]) ]
+    [ Column ([], [ R.str "Jair" ])
+      Column ([], [ R.str "Bolsonaro" ])
+      Column ([], [ R.str "melhorjair@procanada.com" ]) ]
 let michel =
-    [ Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Michel" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Temer" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "temquemanterissoai@vampiro.com" ]) ]
+    [ Column ([], [ R.str "Michel" ])
+      Column ([], [ R.str "Temer" ])
+      Column ([], [ R.str "temquemanterissoai@vampiro.com" ]) ]
 (*** define: table-columns-sample ***)
 let donald =
-    [ Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Donald" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "Trump" ])
-      Table.Row.Child.Column
-        (Table.Column.props,
-         [ R.str "wall@mexico.com" ]) ]
+    [ Column ([], [ R.str "Donald" ])
+      Column ([], [ R.str "Trump" ])
+      Column ([], [ R.str "wall@mexico.com" ]) ]
 
 let titles =
-    [ Table.Row.Child.TitleColumn
-        (Table.TitleColumn.props,
-         [ R.str "First Name" ])
-      Table.Row.Child.TitleColumn
-        (Table.TitleColumn.props,
-         [ R.str "Last Name" ])
-      Table.Row.Child.TitleColumn
-        (Table.TitleColumn.props,
-         [ R.str "Email" ]) ]
-(*** define: table-row-sample ***)
-let row =
-    Table.Row.ƒ (Table.Row.props, [])
-(*** hide ***)
-let createRow columns =
-    (Table.Row.props, columns)
+    [ TitleColumn ([], [ R.str "First Name" ])
+      TitleColumn ([], [ R.str "Last Name" ])
+      TitleColumn ([], [ R.str "Email" ]) ]
 (*** define: table-row-active-sample ***)
-let active =
-    Table.Row.ƒ
-        ({ Table.Row.props with
-             Active = true }, [])
+let active = Row ([ Active ], bolso)
 (*** define: table-head-sample ***)
-let head =
-    Table.Child.Head
-        (Table.Head.props,
-         [ (Table.Row.props, titles) ])
+let head = Head ([], [ Row ([], titles) ])
 (*** define: table-body-sample ***)
 let body =
-    Table.Child.Body
-        (Table.Body.props,
-         [ createRow bolso
-           createRow michel
-           createRow donald ])
+    Body ([],
+       [ active
+         Row ([], michel)
+         Row ([], donald) ])
 (*** define: table-default-sample ***)
-let table =
-    Table.ƒ
-        (Table.props, [head; body])
+let def = table ([], [head; body])
 (*** define: table-striped-sample ***)
-let striped =
-    Table.ƒ
-        ({ Table.props with
-             Kind = Table.Kind.Striped },
-         [ head; body ])
+let striped = table ([ Kind Striped ], [ head; body ])
 (*** define: table-hover-sample ***)
-let hover =
-    Table.ƒ
-        ({ Table.props with
-             Kind = Table.Kind.Hover },
-         [ head; body ])
+let hover = table ([ Kind Hover ], [ head; body ])
 (*** hide ***)
 let render () =
-    tryMount "table-default-demo" table
+    tryMount "table-default-demo" def
     tryMount "table-striped-demo" striped
     tryMount "table-hover-demo" hover
-    tryMount "table-props-table"
-        (PropTable.propTable typeof<Table.Props> Table.props)
-    tryMount "table-row-props-table"
-        (PropTable.propTable typeof<Table.Row.Props> Table.Row.props)
+    //tryMount "table-props-table"
+    //    (PropTable.propTable typeof<Table.Props> Table.props)
+    //tryMount "table-row-props-table"
+        //(PropTable.propTable typeof<Table.Row.Props> Table.Row.props)
 (**
 
 <div id="table">
@@ -228,26 +180,8 @@ The table row
 <div id="table-row-default">
 
 <h3 class="s-title">
-    Row default
+    Rows can be acivated 
 </h3>
-
-The default setting for rows
-
-*)
-
-(*** include: table-row-sample ***)
-
-(**
-
-</div>
-
-<div id="table-row-active">
-
-<h3 class="s-title">
-    Row Active
-</h3>
-
-Rows can be acivated
 
 *)
 
