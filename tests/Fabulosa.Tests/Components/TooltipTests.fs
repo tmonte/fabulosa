@@ -7,7 +7,7 @@ open R.Props
 open Expect
 open ReactNode
 
-[<FTests>]
+(*[<FTests>]
 let tests =
     testList "Tooltip.Content" [
         test "renders with text" {
@@ -39,4 +39,4 @@ let tests =
             |> hasClass "tooltip tooltip-left"
             
         }
-    ]
+    ]*)

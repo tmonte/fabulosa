@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Table =
 
     open Fable.Import.React
@@ -8,198 +7,98 @@ module Table =
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
-    module Column =
+    type TableColumn = HTMLProps * ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
+    let tableColumn ((opt, chi): TableColumn) =
+        R.td opt chi
 
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
+    type TableTitleColumn = HTMLProps * ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    let tableTitleColumn ((opt, chi): TableTitleColumn) =
+        R.th opt chi
 
-        let props =
-            { Props.HTMLProps = [] }
+    type TableRowOptional =
+        | Active
+        interface IHTMLProp
 
-        let ƒ (column: T) =
-            let props, children = column
-            props.HTMLProps
-            |> R.td <| children
+    type TableRowChild =
+        | Column of TableColumn
+        | TitleColumn of TableTitleColumn
 
-        let render = ƒ
+    type TableRowChildren =
+        TableRowChild list
 
-    [<RequireQualifiedAccess>]
-    module TitleColumn =
+    type TableRow =
+        HTMLProps * TableRowChildren
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
+    let private rowPropToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? TableRowOptional as opt ->
+            match opt with
+            | Active -> className "active"
+        | _ -> prop
+        
+    let tableRow ((opt, chi): TableRow) =
+        Unmerged opt
+        |> map rowPropToClassName
+        |> merge
+        |> R.tr
+        <| List.map
+            (function
+             | Column col -> tableColumn col
+             | TitleColumn col -> tableTitleColumn col)
+            chi
 
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
+    type TableHeadOrBodyChild =
+        Row of TableRow
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type TableHead =
+        HTMLProps * TableHeadOrBodyChild list
 
-        let props =
-            { Props.HTMLProps = [] }
+    let tableHead ((opt, chi): TableHead) =
+        R.thead
+            opt
+            (List.map (fun (Row row) -> tableRow row) chi)
+            
+    type TableBody =
+        HTMLProps * TableHeadOrBodyChild list
 
-        let ƒ (titleColumn: T) =
-            let props, children = titleColumn
-            props.HTMLProps
-            |> R.th <| children
+    let tableBody ((opt, chi): TableBody) =
+        R.tbody
+            opt
+            (List.map (fun (Row row) -> tableRow row) chi)
 
-        let render = ƒ
+    type TableKind =
+        | Striped
+        | Hover
 
-    [<RequireQualifiedAccess>]
-    module Row =
+    type TableOptional =
+        | Kind of TableKind
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Active = bool
+    type TableChild =
+        | Head of TableHead
+        | Body of TableBody
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { Active: Active
-              HTMLProps: HTMLProps }
+    type Table =
+        HTMLProps * TableChild list
 
-        [<RequireQualifiedAccess>]
-        type Child<'Column, 'TitleColumn> =
-        | Column of 'Column
-        | TitleColumn of 'TitleColumn
+    let private tablePropToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? TableOptional as opt ->
+            match opt with
+            | Kind Striped -> className "table-striped"
+            | Kind Hover -> className "table-hover"
+        | _ -> prop
 
-        [<RequireQualifiedAccess>]
-        type Children<'Column, 'TitleColumn> =
-            Child<'Column, 'TitleColumn> list
-
-        [<RequireQualifiedAccess>]
-        type T<'Column, 'TitleColumn> =
-            Props * Children<'Column, 'TitleColumn>
-
-        let props =
-            { Props.Active = false
-              Props.HTMLProps = [] }
-
-        let private active =
-            function
-            | true -> "active"
-            | false -> ""
-            >> ClassName
-
-        let private columns =
-            function
-            | Child.Column column -> Column.ƒ column
-            | Child.TitleColumn column -> TitleColumn.ƒ column
-
-        let build columnƒ titleColumnƒ (row: T<'Column, 'TitleColumn>) =
-            let props, children = row
-            props.HTMLProps
-            |> addPropOld (active props.Active)
-            |> R.tr
-            <| List.map
-                (function
-                 | Child.Column column -> columnƒ column
-                 | Child.TitleColumn column -> titleColumnƒ column)
-                children
-
-        let ƒ = build Column.ƒ TitleColumn.ƒ
-
-    [<RequireQualifiedAccess>]
-    module Head =
-
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-
-        [<RequireQualifiedAccess>]
-        type Children<'Row> = 'Row list
-
-        [<RequireQualifiedAccess>]
-        type T<'Row> = Props * Children<'Row>
-
-        let props =
-            { Props.HTMLProps = [] }
-
-        let build rowƒ (head: T<'Row>) =
-            let props, children = head
-            props.HTMLProps
-            |> R.thead
-            <| List.map rowƒ children
-
-        let ƒ = build Row.ƒ
-
-    [<RequireQualifiedAccess>]
-    module Body =
-
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-
-        [<RequireQualifiedAccess>]
-        type Children<'Row> = 'Row list
-
-        [<RequireQualifiedAccess>]
-        type T<'Row> = Props * Children<'Row>
-
-        let props =
-            { Props.HTMLProps = [] }
-
-        let build rowƒ (body: T<'Row>) =
-            let props, children = body
-            props.HTMLProps
-            |> R.tbody
-            <| List.map rowƒ children
-
-        let ƒ = build Row.ƒ
-
-    [<RequireQualifiedAccess>]
-    type Kind =
-    | Striped
-    | Hover
-    | Unset
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Kind: Kind
-          HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Child<'Head, 'Body> =
-    | Head of 'Head
-    | Body of 'Body
-
-    [<RequireQualifiedAccess>]
-    type Children<'Head, 'Body> =
-        Child<'Head, 'Body> list
-
-    [<RequireQualifiedAccess>]
-    type T<'Head, 'Body> =
-        Props * Children<'Head, 'Body>
-
-    let props =
-        { Props.Kind = Kind.Unset
-          Props.HTMLProps = [] }
-
-    let private kind =
-        function
-        | Kind.Striped -> "table-striped"
-        | Kind.Hover -> "table-hover"
-        | Kind.Unset -> ""
-        >> ClassName
-
-    let build headƒ bodyƒ (table: T<'Head, 'Body>) =
-        let props, children = table
-        props.HTMLProps
-        |> addPropsOld
-            [ ClassName "table"
-              kind props.Kind ]
+    let table ((opt, chi): Table) =
+        Unmerged opt
+        |> addProp (ClassName "table")
+        |> map tablePropToClassName
+        |> merge
         |> R.table
         <| List.map
             (function
-             | Child.Head head -> headƒ head
-             | Child.Body body -> bodyƒ body)
-            children
-
-    let ƒ = build Head.ƒ Body.ƒ
+             | Head head -> tableHead head
+             | Body body -> tableBody body)
+            chi

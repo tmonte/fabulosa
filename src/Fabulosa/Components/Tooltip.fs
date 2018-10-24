@@ -86,10 +86,10 @@ module Tooltip =
             
             opt
             |> Unmerged
-            |> Unmerged.addProps 
+            |> addProps 
                 [ ClassName "fab-tooltip"  
                   positionClassName (orientation opt) ]
-            |> Unmerged.addPropOpt (opt |> reference|> Option.map (fun x -> upcast x))
+            |> addPropOpt (opt |> reference|> Option.map (fun x -> upcast x))
             |> merge
             |> R.span
             <| children
@@ -183,8 +183,8 @@ module Tooltip =
                 
             member this.basetooltipProps () =
                 Unmerged this.props.HTMLProps
-                |> Unmerged.addPropOpt (hoverClassName this.state.Hover)
-                |> Unmerged.addProps 
+                |> addPropOpt (hoverClassName this.state.Hover)
+                |> addProps 
                   [ this.state.Style
                     Ref setTooltipRef
                     Orientation this.props.Orientation ]
