@@ -38,12 +38,10 @@ module Tooltip =
         fun (prop: IHTMLProp) ->
             match prop with
             | :? TooltipOptional as opt ->
-                match opt with
-                | Orientation ori ->
-                    Some (ori)
-                | _ -> None
+                let (Orientation ori) = opt
+                Some ori
             | _ -> None
-        |> pick      
+        |> pick
         
     [<RequireQualifiedAccess>]
     module BaseTooltip =

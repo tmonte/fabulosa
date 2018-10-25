@@ -1,31 +1,24 @@
 ﻿module StepPage
 
-open Fabulosa
+open Fabulosa.Step
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
 open Fable.Import.React
 open Renderer
-open Microsoft.FSharp.Core
 
 (*** define: step-default-sample ***)
-let step =
-    Step.ƒ
-        (Step.props,
-         [ (Step.Item.props,
-            [ R.str "Step 1" ])
-           ({ Step.Item.props with
-                Active = true },
-            [ R.str "Step 2" ])
-           (Step.Item.props,
-            [ R.str "Step 3" ]) ])
+let def =
+    step ([],
+      [ Item ([], [ R.str "Step 1" ])
+        Item ([ Active ], [ R.str "Step 2" ])
+        Item ([], [ R.str "Step 3" ]) ])
 (*** hide ***)
 let render () =
-    tryMount "step-default-demo" step
-    tryMount "step-props-table"
-        (PropTable.propTable typeof<Step.Props> Step.props)
-    tryMount "step-item-props-table"
-        (PropTable.propTable typeof<Step.Item.Props> Step.Item.props)
+    tryMount "step-default-demo" def
+    //tryMount "step-props-table"
+    //    (PropTable.propTable typeof<Step.Props> Step.props)
+    //tryMount "step-item-props-table"
+        //(PropTable.propTable typeof<Step.Item.Props> Step.Item.props)
 (**
 
 <div id="step">

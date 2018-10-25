@@ -7,56 +7,46 @@ module Step =
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
-    module Item =
+    type StepItemOptional =
+        | Active
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Active: bool }
+    type StepItem =
+        HTMLProps * ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type Children = ReactElement list
+    let private hasActive (prop: IHTMLProp) =
+        match prop with
+        | :? StepItemOptional as opt ->
+            match opt with
+            | Active -> true
+        | _ -> false
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    let private itemPropToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? StepItemOptional as opt ->
+            match opt with
+            | Active -> className "active"
+        | _ -> prop
 
-        let private active =
-            function
-            | true -> "active"
-            | false -> ""
-            >> ClassName
+    let stepItem ((opt, chi): StepItem) =
+        let withActive, withoutActive =
+            List.partition hasActive opt
+        Unmerged withActive
+        |> addProp (ClassName "step-item")
+        |> map itemPropToClassName
+        |> merge
+        |> R.li
+        <| [ R.a withoutActive chi ]
 
-        let props =
-            { Props.HTMLProps = []
-              Props.Active = false }
+    type StepChild =
+        Item of StepItem
 
-        let ƒ (item: T) =
-            let props, children = item
-            R.li
-                ([] |> addPropsOld
-                    [ ClassName "step-item"
-                      active props.Active ])
-                [ R.a props.HTMLProps children ]
+    type Step =
+        HTMLProps * StepChild list
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Item> = 'Item list
-
-    [<RequireQualifiedAccess>]
-    type T<'Item> = Props * Children<'Item>
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let build itemƒ (step: T<'Item>) =
-        let props, children = step
-        props.HTMLProps
-        |> addPropOld (ClassName "step")
+    let step ((opt, chi): Step) =
+        Unmerged opt
+        |> addProp (ClassName "step")
+        |> merge
         |> R.div
-        <| Seq.map itemƒ children
-
-    let ƒ = build Item.ƒ
+        <| Seq.map (fun (Item item) -> stepItem item) chi

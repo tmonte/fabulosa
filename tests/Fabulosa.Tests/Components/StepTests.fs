@@ -1,66 +1,47 @@
 ﻿module StepTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Step
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
-
 
 [<Tests>]
 let tests =
     testList "Step tests" [
 
         test "Step default" {
-           Step.ƒ
-               (Step.props, [])
+            step ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "step"
         }
 
         test "Step html props" {
-            Step.ƒ
-                ({ Step.props with
-                     HTMLProps =
-                       [ ClassName "custom" ] },
-                 [])
+            step ([ P.ClassName "custom" ], [])
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
         test "Step children" {
-            let step1 =
-                (Step.Item.props,
-                 [ R.str "Step 1" ])
-            let step2 =
-                ({ Step.Item.props with
-                     Active = true },
-                 [ R.str "Step 2" ])
-            let step3 =
-                (Step.Item.props,
-                 [ R.str "Step 3" ])
-            Step.ƒ
-                (Step.props,
-                 [ step1; step2; step3 ])
+            let step1 = ([], [ R.str "Step 1" ])
+            let step2 = Item ([ Active ], [ R.str "Step 2" ])
+            let (Item t2) = step2
+            let step3 = ([], [ R.str "Step 3" ])
+            step ([],[ Item step1; step2; Item step3 ])
             |> ReactNode.unit
-            |>! hasChild 1 (Step.Item.ƒ step1 |> ReactNode.unit)
-            |>! hasChild 1 (Step.Item.ƒ step2 |> ReactNode.unit)
-            |> hasChild 1 (Step.Item.ƒ step3 |> ReactNode.unit)
+            |>! hasChild 1 (stepItem step1 |> ReactNode.unit)
+            |>! hasChild 1 (stepItem t2 |> ReactNode.unit)
+            |> hasChild 1 (stepItem step3 |> ReactNode.unit)
         }
 
         test "Step item defaults" {
-            Step.Item.ƒ
-                (Step.Item.props,
-                 [ R.str "Step" ])
+            stepItem ([], [ R.str "Step" ])
             |> ReactNode.unit
             |> hasUniqueClass "step-item"
         }
 
         test "Step item active" {
-            Step.Item.ƒ
-                ({ Step.Item.props with
-                     Active = true },
-                 [ R.str "Step" ])
+            stepItem ([ Active ], [ R.str "Step" ])
             |> ReactNode.unit
             |> hasClass "active"
         }
