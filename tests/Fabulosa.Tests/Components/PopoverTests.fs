@@ -1,10 +1,10 @@
 module PopoverTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Popover
 open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 
@@ -13,59 +13,39 @@ let tests =
     testList "Popover tests" [
 
         test "Popover default" {
-           Popover.ƒ
-               (Popover.props,
-                { Trigger = []
-                  Content = [] })
+            popover ([], (Trigger [], Content []))
             |> ReactNode.unit
             |> hasUniqueClass "popover"
         }
 
         test "Popover html props" {
-            Popover.ƒ
-                ({ Popover.props with
-                     HTMLProps =
-                       [ ClassName "custom" ] },
-                 { Trigger = []
-                   Content = [] })
+            popover ([ P.ClassName "custom" ], (Trigger [], Content []))
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
         test "Popover left" {
-            Popover.ƒ
-                ({ Popover.props with
-                     Position = Popover.Position.Left },
-                 { Trigger = []
-                   Content = [] })
+            popover ([ Position Left ], (Trigger [], Content []))
             |> ReactNode.unit
             |> hasClass "popover-left"
         }
 
         test "Popover trigger" {
-            let trigger = [ button ([], [ R.str "Button" ]) ]
-            Popover.ƒ
-                (Popover.props,
-                 { Trigger = trigger
-                   Content = [] })
+            let trigger = button ([], [ R.str "Button" ])
+            popover ([], (Trigger [ trigger ], Content []))
             |> ReactNode.unit
-            |> hasChild 1 (Popover.Trigger.ƒ trigger |> ReactNode.unit)
+            |> hasChild 1 (trigger |> ReactNode.unit)
         }
 
         test "Popover content" {
             let content =
-                [ R.div
-                    [ ClassName "my-content" ]
-                    [ R.str "Some content here..." ] ]
-            Popover.ƒ
-                (Popover.props,
-                 { Trigger = []
-                   Content = content })
+                R.div
+                    [ P.ClassName "my-content" ]
+                    [ R.str "Some content here..." ]
+            popover ([], (Trigger [], Content [ content ]))
             |> ReactNode.unit
-            |> hasChild 1 (Popover.Content.ƒ content |> ReactNode.unit)
-            Popover.Content.ƒ content
-            |> ReactNode.unit
-            |> hasUniqueClass "popover-container"
+            |>! hasChild 1 (content |> ReactNode.unit)
+            |> hasDescendentClass "popover-container"
         }
 
     ]

@@ -1,27 +1,23 @@
 module PopoverPage
 
-open Fabulosa
-open Fabulosa.Docs
+open Fabulosa.Popover
 open Fabulosa.Button
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Renderer
 open Microsoft.FSharp.Core
 
 (*** define: popover-default-sample ***)
-let popover =
-    Popover.ƒ
-        (Popover.props,
-         { Trigger =
-             [ button ([], [ R.str "Popover" ]) ]
-           Content =
-             [ CardPage.def ] })
+let def =
+    popover ([ Position Right ],
+        (Trigger [ button ([], [ R.str "Popover" ]) ],
+         Content [ CardPage.def ]))
 (*** hide ***)
 let render () =
-    tryMount "popover-default-demo" popover
-    tryMount "popover-props-table"
-        (PropTable.propTable typeof<Popover.Props> Popover.props)
+    tryMount "popover-default-demo" def
+    //tryMount "popover-props-table"
+        //(PropTable.propTable typeof<Popover.Props> Popover.props)
 (**
 
 <div id="popover">
