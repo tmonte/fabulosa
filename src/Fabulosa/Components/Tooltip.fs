@@ -36,7 +36,6 @@ module Tooltip =
     
     let private orientation =
         fun (prop: IHTMLProp) ->
-            printf "YOOOOlo %A" prop
             match prop with
             | :? TooltipOptional as opt ->
                 let (Orientation ori) = opt
@@ -50,6 +49,9 @@ module Tooltip =
         open Fable.Import.React
         open Fabulosa.Extensions
         open Extensions.Fable.Helpers.React.Props
+        open Fable.Import
+        open Fable.Import
+        open Fable.Import
         open Fable.Import
         
         type BaseTooltipOptional =
@@ -84,14 +86,9 @@ module Tooltip =
                 match prop with
                 | :? BaseTooltipOptional as opt ->
                     match opt with
-                    | Orientation o ->
-                        match o with 
-                        | Orientation.Top -> Some o
-                        | Orientation.Bottom -> Some o
-                        | Orientation.Right -> Some o
-                        | Orientation.Left -> Some o
-                    | _ -> None
-                | _ -> None
+                    | Orientation o -> Some o                        
+                    | _ -> printf "yolo"; None
+                | _ -> printf "yolo 2 %A" (prop.GetType()) ; None 
             |> pick
             
         let orientationClass orientation = 
@@ -104,7 +101,10 @@ module Tooltip =
             
         let baseTooltip (tooltip: BaseTooltip) =
             let opt, TooltipContent.Content children = tooltip
-            
+
+            let x = (opt |> orientation ) 
+            let y = x         
+
             opt
             |> Unmerged
             |> addProps 
