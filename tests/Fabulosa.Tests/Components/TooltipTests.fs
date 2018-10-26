@@ -6,37 +6,38 @@ module R = Fable.Helpers.React
 open R.Props
 open Expect
 open ReactNode
+open Fabulosa.Tooltip
+open Fabulosa.Tooltip.BaseTooltip
 
-(*[<FTests>]
+[<FTests>]
 let tests =
-    testList "Tooltip.Content" [
-        test "renders with text" {
-            let child =  R.str "Eine kleine narcht musik"
+    testList "BaseTooltip" [
+        test "renders with child" {
+            let child =  R.str "Pele >>> Maradona"
             
-            Tooltip.Content.ƒ (Tooltip.props, Tooltip.Content.Children.Elements [ child ]) 
+            baseTooltip ([], Content  [child])
             |> ReactNode.unit
-            |>! hasUniqueClass "tooltip"
+            |>! hasClass "fab-tooltip tooltip-top"
             |> hasChild 1 (child |> ReactNode.unit)
         }
         
         test "renders different positions" {
-            let child =  R.str "Eine kleine narcht musik"
+            let content = Content [ R.str "Maradona > Messi" ]
             
-            Tooltip.Content.ƒ ({ Tooltip.props with Orientation = Tooltip.Orientation.Top }, Tooltip.Content.Children.Elements [ child ]) 
+            baseTooltip ([Orientation Top], content) 
             |> ReactNode.unit
-            |> hasUniqueClass "tooltip"
+            |> hasClass "fab-tooltip tooltip-top"
             
-            Tooltip.Content.ƒ ({ Tooltip.props with Orientation = Tooltip.Orientation.Right }, Tooltip.Content.Children.Elements [ child ]) 
+            baseTooltip ([Orientation Bottom], content) 
             |> ReactNode.unit
-            |> hasClass "tooltip tooltip-right"
+            |> hasClass "fab-tooltip tooltip-bottom"
             
-            Tooltip.Content.ƒ ({ Tooltip.props with Orientation = Tooltip.Orientation.Bottom }, Tooltip.Content.Children.Elements [ child ]) 
+            baseTooltip ([Orientation Left], content) 
             |> ReactNode.unit
-            |> hasClass "tooltip tooltip-bottom"
-
-            Tooltip.Content.ƒ ({ Tooltip.props with Orientation = Tooltip.Orientation.Left }, Tooltip.Content.Children.Elements [ child ]) 
-            |> ReactNode.unit
-            |> hasClass "tooltip tooltip-left"
+            |> hasClass "fab-tooltip tooltip-left"
             
+            baseTooltip ([Orientation Right], content) 
+            |> ReactNode.unit
+            |> hasClass "fab-tooltip tooltip-right"
         }
-    ]*)
+    ]
