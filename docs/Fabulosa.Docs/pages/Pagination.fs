@@ -1,6 +1,6 @@
 ﻿module PaginationPage
 
-open Fabulosa
+open Fabulosa.Pagination
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open R.Props
@@ -10,31 +10,28 @@ open Renderer
 open Microsoft.FSharp.Core
 
 (*** define: pagination-default-sample ***)
-let props =
-    { Pagination.Item.props with 
-        OnPageChanged = fun page -> console.log page }
+let req = OnPageChanged (fun page -> console.log page)
 
 let pages =
     seq { 1 .. 9 }
     |> Seq.map
          (fun n ->
-            if n = 5 then { props with Active = true }, string n
-            else props, string n)
+            if n = 5 then Item ([ Active ], req, Text (string n))
+            else Item ([], req, Text (string n)))
     |> Seq.toList
 
-let pagination =
-    Pagination.ƒ
-        (Pagination.props,
-         [ props, "Prev" ]
-           @ pages @
-         [ props, "Next" ])
+let def =
+    pagination
+        ([],
+         Item ([], req, Text "Prev")
+         :: pages @ [ Item ([], req, Text "Next") ])
 (*** hide ***)
 let render () =
-    tryMount "pagination-default-demo" pagination
-    tryMount "pagination-props-table"
-        (PropTable.propTable typeof<Pagination.Props> Pagination.props)
-    tryMount "page-item-props-table"
-        (PropTable.propTable typeof<Pagination.Item.Props> Pagination.Item.props)
+    tryMount "pagination-default-demo" def
+    //tryMount "pagination-props-table"
+    //    (PropTable.propTable typeof<Pagination.Props> Pagination.props)
+    //tryMount "page-item-props-table"
+        //(PropTable.propTable typeof<Pagination.Item.Props> Pagination.Item.props)
 (**
 
 <div id="pagination">

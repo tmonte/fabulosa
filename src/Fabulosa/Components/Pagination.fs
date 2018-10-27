@@ -8,88 +8,65 @@ module Pagination =
     module R = Fable.Helpers.React
     open R.Props
 
-    module Item =
+    type PaginationItemOptional =
+        | Active
+        | Disabled
+        interface IHTMLProp
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Active: bool
-              Disabled: bool
-              OnPageChanged: int -> unit }
+    type PaginationItemRequired =
+        | OnPageChanged of (int -> unit)
 
-        [<RequireQualifiedAccess>]
-        type Children = string
+    type PaginationItemChildren =
+        Text of string
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type PaginationItem =
+        HTMLProps * PaginationItemRequired * PaginationItemChildren
 
-        let private (|Int|_|) str =
-           match System.Int32.TryParse(str) with
-           | (true, int) -> Some int
-           | _ -> None
+    let private (|Int|_|) str =
+       match System.Int32.TryParse(str) with
+       | (true, int) -> Some int
+       | _ -> None
 
-        let onClick (e: MouseEvent) =
-            let element = e.currentTarget :?> Browser.Element
-            match element.innerHTML with
-            | Int value -> value
-            | value ->
-                match value with
-                | "Prev" -> -2
-                | "Next" -> -1
-                | _ -> -99
+    let private onClick (e: MouseEvent) =
+        let element = e.currentTarget :?> Browser.Element
+        match element.innerHTML with
+        | Int value -> value
+        | value ->
+            match value with
+            | "Prev" -> -2
+            | "Next" -> -1
+            | _ -> -99
 
-        let private active =
-            function
-            | true -> "active"
-            | false -> ""
-            >> ClassName
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? PaginationItemOptional as opt ->
+            match opt with
+            | Active -> className "active"
+            | Disabled -> className "disabled"
+        | _ -> prop
 
-        let private disabled =
-            function
-            | true -> "disabled"
-            | false -> ""
-            >> ClassName
+    let paginationItem ((opt, (OnPageChanged pc), (Text txt)): PaginationItem) =
+        Unmerged opt
+        |> addProp (ClassName "page-item")
+        |> map propToClassName
+        |> merge
+        |> R.li
+        <| [ R.a
+               [ OnClick (onClick >> pc)
+                 Href "#" ]
+               [ R.str txt ] ]
 
-        let props =
-            { Props.HTMLProps = []
-              Props.OnPageChanged = fun _ -> ()
-              Props.Active = false
-              Props.Disabled = false }
+    type PaginationChild =
+        | Item of PaginationItem
 
-        let build (item: T) =
-            let props, children = item
-            let onPageChanged =
-                onClick >> props.OnPageChanged
-            let anchor =
-                R.a
-                    [ OnClick onPageChanged; Href "#" ]
-                    [ R.str children ]
-            props.HTMLProps
-            |> addPropsOld
-                [ ClassName "page-item"
-                  active props.Active
-                  disabled props.Disabled ]
-            |> R.li <| [ anchor ]
+    type Pagination =
+        HTMLProps * PaginationChild list
 
-        let ƒ = build
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Item> = 'Item list
-
-    [<RequireQualifiedAccess>]
-    type T<'Item> = Props * Children<'Item>
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let build itemƒ (pagination: T<'Item>) =
-        let props, children = pagination
-        props.HTMLProps
-        |> addPropOld (ClassName "pagination")
-        |> R.ul <| Seq.map itemƒ children
-
-    let ƒ = build Item.ƒ
+    let pagination ((opt, chi): Pagination) =
+        Unmerged opt
+        |> addProp (ClassName "pagination")
+        |> merge
+        |> R.ul
+        <| Seq.map
+            (fun (Item item) -> paginationItem item)
+            chi

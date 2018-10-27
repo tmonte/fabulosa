@@ -1,6 +1,7 @@
 ﻿module PanelPage
 
 open Fabulosa
+open Fabulosa.Panel
 open Fabulosa.Docs
 open Fabulosa.Button
 module R = Fable.Helpers.React
@@ -47,18 +48,16 @@ let footer =
                        [ P.Placeholder "Say Hello!" ] }) ]) ]
 
 (*** define: panel-default-sample ***)
-let panel =
-    Panel.ƒ
-        (Panel.props,
-         { Header = Some header
-           Nav = None
-           Body = Some body
-           Footer = Some footer })
+let def =
+    panel ([],
+      [ Header ([], [ Title "Comments" ])
+        Body ([], body)
+        Footer ([], footer) ])
 (*** hide ***)
 let render () =
-    tryMount "panel-default-demo" (R.div [ P.Style [ P.CSSProp.Width "50%" ] ] [ panel ])
-    tryMount "panel-props-table"
-        (PropTable.propTable typeof<Panel.Props> Panel.props)
+    tryMount "panel-default-demo" (R.div [ P.Style [ P.CSSProp.Width "50%" ] ] [ def ])
+    //tryMount "panel-props-table"
+        //(PropTable.propTable typeof<Panel.Props> Panel.props)
 (**
 
 <div id="panel">

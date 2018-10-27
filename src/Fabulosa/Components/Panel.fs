@@ -1,100 +1,106 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Panel =
 
     open Fabulosa.Extensions
+    open Fabulosa.Tab
+    open Fabulosa.Pagination
+    open Fabulosa.Breadcrumb
     module R = Fable.Helpers.React
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
-    module Header =
+    type PanelHeaderChild =
+        | Title of string
+        | Subtitle of string
+        | Elements of ReactElement list
 
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
+    type PanelHeaderChildren =
+        PanelHeaderChild list
 
-        let ƒ (header: T) =
-            R.div
-                [ ClassName "panel-header" ]
-                [ R.div [ ClassName "panel-title h6"] header ]
+    type PanelHeader =
+        HTMLProps * PanelHeaderChildren
 
-    [<RequireQualifiedAccess>]
-    module Nav =
-
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
-
-        let ƒ (nav: T) =
-            R.div
-                [ ClassName "panel-nav" ]
-                nav
-
-    [<RequireQualifiedAccess>]
-    module Body =
-
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
-
-        let ƒ (body: T) =
-            R.div
-                [ ClassName "panel-body" ]
-                body
-
-    [<RequireQualifiedAccess>]
-    module Footer =
-
-        [<RequireQualifiedAccess>]
-        type T = ReactElement list
-
-        let ƒ (footer: T) =
-            R.div
-                [ ClassName "panel-footer" ]
-                footer
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Children<'Header, 'Nav, 'Body, 'Footer> =
-        { Header: 'Header option
-          Nav: 'Nav option
-          Body: 'Body option
-          Footer: 'Footer option }
-
-    [<RequireQualifiedAccess>]
-    type T<'Header, 'Nav, 'Body, 'Footer> =
-        Props * Children<'Header, 'Nav, 'Body, 'Footer>
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let children =
-        { Children.Header = None
-          Children.Nav = None
-          Children.Body = None
-          Children.Footer = None }
-
-    let private child render =
+    let panelHeaderChildren =
         function
-        | Some elements ->
-            render elements
-        | None -> R.ofOption None
+        | Title title ->
+            R.div
+                [ ClassName "panel-subtitle" ]
+                [ R.str title ]
+        | Subtitle subtitle ->
+            R.div
+                [ ClassName "panel-subtitle" ]
+                [ R.str subtitle ]
+        | Elements elements ->
+            R.fragment [] elements
 
-    let build
-        headerƒ
-        navƒ
-        bodyƒ
-        footerƒ
-        (panel: T<'Header, 'Nav, 'Body, 'Footer>) =
-        let rops, children = panel
-        props.HTMLProps
-        |> addPropOld (ClassName "panel")
+    let panelHeader ((opt, chi): PanelHeader) =
+        Unmerged opt
+        |> addProp (ClassName "panel-header")
+        |> merge
         |> R.div
-        <| [ child headerƒ children.Header
-             child navƒ children.Nav
-             child bodyƒ children.Body
-             child footerƒ children.Footer ]
+        <| [ R.div
+               [ ClassName "panel-title h6"]
+               (Seq.map panelHeaderChildren chi) ]
 
-    let ƒ = build Header.ƒ Nav.ƒ Body.ƒ Footer.ƒ
+    type PanelNavChild =
+        | Breadcrumb of Breadcrumb
+        | Pagination of Pagination
+        | Tab of Tab
+
+    type PanelNav =
+        HTMLProps * PanelNavChild
+
+    let private panelNavChild =
+        function
+        | Breadcrumb bc -> breadcrumb bc
+        | Pagination pg -> pagination pg
+        | Tab tb -> tab tb
+
+    let panelNav ((opt, chi): PanelNav) =
+        Unmerged opt
+        |> addProp (ClassName "panel-nav")
+        |> merge
+        |> R.div
+        <| [ panelNavChild chi ]
+
+    type PanelBody =
+        HTMLProps * ReactElement list
+
+    let panelBody ((opt, chi): PanelBody) =
+        Unmerged opt
+        |> addProp (ClassName "panel-body")
+        |> merge
+        |> R.div <| chi
+
+    type PanelFooter =
+        HTMLProps * ReactElement list
+
+    let panelFooter ((opt, chi): PanelFooter) =
+        Unmerged opt
+        |> addProp (ClassName "panel-footer")
+        |> merge
+        |> R.div <| chi
+
+    type PanelChild =
+        | Header of PanelHeader
+        | Nav of PanelNav
+        | Body of PanelBody
+        | Footer of PanelFooter
+
+    type Panel =
+        HTMLProps * PanelChild list
+
+    let private panelChild =
+        function
+        | Header header -> panelHeader header
+        | Nav nav -> panelNav nav
+        | Body body -> panelBody body
+        | Footer footer -> panelFooter footer
+
+    let panel ((opt, chi): Panel) =
+        Unmerged opt
+        |> addProp (ClassName "panel")
+        |> merge
+        |> R.div
+        <| Seq.map panelChild chi

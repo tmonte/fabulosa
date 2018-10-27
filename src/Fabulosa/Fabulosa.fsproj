@@ -38,11 +38,11 @@
     <Compile Include="Components/Navbar.fs" />
     <Compile Include="Components/PageNav.fs" />
     <Compile Include="Components/Pagination.fs" />
+    <Compile Include="Components/Tab.fs" />
     <Compile Include="Components/Panel.fs" />
     <Compile Include="Components/Popover.fs" />
     <Compile Include="Components/Responsive.fs" />
     <Compile Include="Components/Step.fs" />
-    <Compile Include="Components/Tab.fs" />
     <Compile Include="Components/Table.fs" />
     <Compile Include="Components/Tag.fs" />
     <Compile Include="Components/Tile.fs" />
