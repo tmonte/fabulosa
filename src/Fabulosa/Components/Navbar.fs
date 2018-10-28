@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Navbar =
 
     open Fable.Import.React
@@ -8,86 +7,48 @@ module Navbar =
     module R = Fable.Helpers.React
     open R.Props
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: IHTMLProp list }
+    type NavbarSection = HTMLProps * ReactElement list
 
-    [<RequireQualifiedAccess>]
-    module Section =
+    let navbarSection ((opt, chi): NavbarSection) =
+        Unmerged opt
+        |> addProp (ClassName "navbar-section")
+        |> merge
+        |> R.section <| chi
 
-        [<RequireQualifiedAccess>]
-        type T = Props * ReactElement list
+    type NavbarCenter = HTMLProps * ReactElement list
 
-        let ƒ (section: T) =
-            let props, children = section
-            props.HTMLProps
-            |> addPropOld (ClassName "navbar-section")
-            |> R.section <| children
+    let navbarCenter ((opt, chi): NavbarCenter) =
+        Unmerged opt
+        |> addProp (ClassName "navbar-center")
+        |> merge
+        |> R.section <| chi
 
-        let render = ƒ
+    type NavbarBrand = HTMLProps * ReactElement list
 
-    [<RequireQualifiedAccess>]
-    module Center =
+    let navbarBrand ((opt, chi): NavbarBrand) =
+        Unmerged opt
+        |> addProp (ClassName "navbar-brand")
+        |> merge
+        |> R.a <| chi
 
-        [<RequireQualifiedAccess>]
-        type T = Props * ReactElement list
+    type NavbarChild =
+    | Brand of NavbarBrand
+    | Section of NavbarSection
+    | Center of NavbarCenter
 
-        let ƒ (center: T) =
-            let props, children = center
-            props.HTMLProps
-            |> addPropOld (ClassName "navbar-center")
-            |> R.section <| children
+    type Navbar = HTMLProps * NavbarChild list
 
-        let render = ƒ
-
-    [<RequireQualifiedAccess>]
-    module Brand =
-
-        [<RequireQualifiedAccess>]
-        type T = Props * ReactElement list
-
-        let ƒ (brand: T) =
-            let props, children = brand
-            props.HTMLProps
-            |> addPropOld (ClassName "navbar-brand")
-            |> R.a <| children
-
-        let render = ƒ
-
-    [<RequireQualifiedAccess>]
-    type Child<'Brand, 'Section, 'Center> =
-    | Brand of 'Brand
-    | Section of 'Section
-    | Center of 'Center
-
-    [<RequireQualifiedAccess>]
-    type private Children<'Brand, 'Section, 'Center> =
-        Child<'Brand, 'Section, 'Center> list
-
-    let props =
-        { Props.HTMLProps = [] }
-        
-    [<RequireQualifiedAccess>]
-    type T<'Brand, 'Section, 'Center> =
-        Props * Children<'Brand, 'Section, 'Center>
-
-    let build
-        brandƒ
-        sectionƒ
-        centerƒ
-        (navbar: T<'Brand, 'Section, 'Center>) =
-        let props, children = navbar
-        props.HTMLProps
-        |> addPropOld (ClassName "navbar")
+    let navbar ((opt, chi): Navbar) =
+        Unmerged opt
+        |> addProp (ClassName "navbar")
+        |> merge
         |> R.header
         <| Seq.map
             (function
-             | Child.Brand brand ->
-                 brandƒ brand
-             | Child.Section section ->
-                 sectionƒ section
-             | Child.Center center ->
-                 centerƒ center)
-            children
-
-    let ƒ = build Brand.ƒ Section.ƒ Center.ƒ
+             | Brand brand ->
+                 navbarBrand brand
+             | Section section ->
+                 navbarSection section
+             | Center center ->
+                 navbarCenter center)
+            chi

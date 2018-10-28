@@ -1,6 +1,6 @@
 ﻿module NavbarPage
 
-open Fabulosa
+open Fabulosa.Navbar
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Fable.Import.React
@@ -8,24 +8,18 @@ open R.Props
 open Renderer
 
 (*** define: navbar-sample ***)
-let navbar =
-    Navbar.ƒ
-        (Navbar.props,
-         [ Navbar.Child.Section
-             (Navbar.props,
-              [ R.a [ ClassName "btn btn-link"] [ R.str "Left 1" ]
-                R.a [ ClassName "btn btn-link"] [ R.str "Left 2" ]])
-           Navbar.Child.Center
-             (Navbar.props,
-              [ R.a [ ClassName "btn btn-link"] [ R.str "Center" ] ])
-           Navbar.Child.Section
-              (Navbar.props,
-               [ R.a [ ClassName "btn btn-link"] [ R.str "Right" ] ]) ])
+let def =
+    navbar ([],
+      [ Section ([],
+          [ R.a [ ClassName "btn btn-link"] [ R.str "Left 1" ]
+            R.a [ ClassName "btn btn-link"] [ R.str "Left 2" ] ])
+        Center ([], [ R.a [ ClassName "btn btn-link"] [ R.str "Center" ] ])
+        Section ([], [ R.a [ ClassName "btn btn-link"] [ R.str "Right" ] ]) ])
 (*** hide ***)
 let render () =
-    tryMount "navbar-demo" navbar
-    tryMount "navbar-props-table"
-        (PropTable.propTable typeof<Navbar.Props> Navbar.props)
+    tryMount "navbar-demo" def
+    //tryMount "navbar-props-table"
+        //(PropTable.propTable typeof<Navbar.Props> Navbar.props)
 (**
 
 <div id="navbar">

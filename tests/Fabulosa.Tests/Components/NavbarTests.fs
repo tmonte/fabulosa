@@ -2,38 +2,60 @@
 
 open Expecto
 open Expect
-open Fabulosa
+open Fabulosa.Navbar
+module R = Fable.Helpers.React
+open R.Props
 
 [<Tests>]
 let tests =
     testList "Navbar tests" [
 
         test "Navbar header default" {
-            Navbar.ƒ
-                ( Navbar.props, [] )
+            navbar ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "navbar"
         }
 
+        test "Navbar header html props" {
+            navbar ([ ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
+
         test "Navbar section default" {
-            Navbar.Section.ƒ
-                ( Navbar.props, [] )
+            navbarSection ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "navbar-section"
         }
 
+        test "Navbar section html props" {
+            navbarSection ([ ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
+
         test "Navbar center default" {
-            Navbar.Center.ƒ
-                ( Navbar.props, [] )
+            navbarCenter ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "navbar-center"
         }
 
+        test "Navbar center html props" {
+            navbarCenter ([ ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
+
         test "Navbar brand default" {
-            Navbar.Brand.ƒ
-                ( Navbar.props, [] )
+            navbarBrand ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "navbar-brand"
+        }
+
+        test "Navbar brand html props" {
+            navbarBrand ([ ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
         }
 
     ]
