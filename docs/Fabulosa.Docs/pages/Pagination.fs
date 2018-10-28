@@ -3,28 +3,28 @@
 open Fabulosa.Pagination
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Fable.Import.JS
 open Renderer
 open Microsoft.FSharp.Core
 
 (*** define: pagination-default-sample ***)
-let req = OnPageChanged (fun page -> console.log page)
+let pagCh = OnPageChanged (fun page -> console.log page)
 
 let pages =
     seq { 1 .. 9 }
     |> Seq.map
          (fun n ->
-            if n = 5 then Item ([ Active ], req, Text (string n))
-            else Item ([], req, Text (string n)))
+            if n = 5 then Item ([ Active ], (pagCh, Value n), Text (string n))
+            else Item ([], (pagCh, Value n), Text (string n)))
     |> Seq.toList
 
 let def =
     pagination
         ([],
-         Item ([], req, Text "Prev")
-         :: pages @ [ Item ([], req, Text "Next") ])
+         Item ([], (pagCh, Value -2), Text "Prev")
+         :: pages @ [ Item ([], (pagCh, Value -1), Text "Next") ])
 (*** hide ***)
 let render () =
     tryMount "pagination-default-demo" def

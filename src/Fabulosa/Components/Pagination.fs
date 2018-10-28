@@ -6,21 +6,27 @@ module Pagination =
     open Fabulosa.Extensions
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
     type PaginationItemOptional =
         | Active
         | Disabled
-        interface IHTMLProp
+        interface P.IHTMLProp
+
+    type OnPageChanged =
+        | OnPageChanged of (int -> unit)
+
+    type Value =
+        | Value of int
 
     type PaginationItemRequired =
-        | OnPageChanged of (int -> unit)
+        OnPageChanged * Value
 
     type PaginationItemChildren =
         Text of string
 
     type PaginationItem =
-        HTMLProps * PaginationItemRequired * PaginationItemChildren
+        P.HTMLProps * PaginationItemRequired * PaginationItemChildren
 
     let private (|Int|_|) str =
        match System.Int32.TryParse(str) with
@@ -28,44 +34,41 @@ module Pagination =
        | _ -> None
 
     let private onClick (e: MouseEvent) =
-        let element = e.currentTarget :?> Browser.Element
-        match element.innerHTML with
+        let element = e.currentTarget :?> Browser.HTMLElement
+        match element.getAttribute "value" with
         | Int value -> value
-        | value ->
-            match value with
-            | "Prev" -> -2
-            | "Next" -> -1
-            | _ -> -99
+        | _ -> -99
 
-    let private propToClassName (prop: IHTMLProp) =
+    let private propToClassName (prop: P.IHTMLProp) =
         match prop with
         | :? PaginationItemOptional as opt ->
             match opt with
-            | Active -> className "active"
-            | Disabled -> className "disabled"
+            | Active -> P.className "active"
+            | Disabled -> P.className "disabled"
         | _ -> prop
 
-    let paginationItem ((opt, (OnPageChanged pc), (Text txt)): PaginationItem) =
-        Unmerged opt
-        |> addProp (ClassName "page-item")
-        |> map propToClassName
-        |> merge
+    let paginationItem ((opt, (OnPageChanged pc, Value v), (Text txt)): PaginationItem) =
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "page-item")
+        |> P.map propToClassName
+        |> P.merge
         |> R.li
         <| [ R.a
-               [ OnClick (onClick >> pc)
-                 Href "#" ]
+               [ P.OnClick (onClick >> pc)
+                 P.Data ("value", v)
+                 P.Href "#" ]
                [ R.str txt ] ]
 
     type PaginationChild =
         | Item of PaginationItem
 
     type Pagination =
-        HTMLProps * PaginationChild list
+        P.HTMLProps * PaginationChild list
 
     let pagination ((opt, chi): Pagination) =
-        Unmerged opt
-        |> addProp (ClassName "pagination")
-        |> merge
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "pagination")
+        |> P.merge
         |> R.ul
         <| Seq.map
             (fun (Item item) -> paginationItem item)

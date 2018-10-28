@@ -1,9 +1,9 @@
 module PaginationTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Pagination
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 open Foq
 
@@ -16,82 +16,89 @@ let mockClickable text =
         .Property(fun x -> <@ x.currentTarget @>)
         .Returns(mockElement)
 
-
 [<Tests>]
 let tests =
     testList "Pagination tests" [
 
-        //test "Pagination default" {
-        //   Pagination.ƒ
-        //       (Pagination.props, [])
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "pagination"
-        //}
+        test "Pagination default" {
+            pagination ([], [])
+            |> ReactNode.unit
+            |> hasUniqueClass "pagination"
+        }
 
-        //test "Pagination html props" {
-        //    Pagination.ƒ
-        //        ({ Pagination.props with
-        //             HTMLProps = [ ClassName "custom" ] }, [])
-        //    |> ReactNode.unit
-        //    |> hasClass "custom"
-        //}
+        test "Pagination html props" {
+            pagination
+                ([ P.ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
 
-        //test "Pagination prev and next" {
-        //    let prev = Pagination.Item.props, "Prev"
-        //    let next = Pagination.Item.props, "Next"
-        //    Pagination.ƒ
-        //        (Pagination.props,
-        //         [ prev; next ])
-        //    |> ReactNode.unit
-        //    |>! hasChild 1 (Pagination.Item.ƒ prev |> ReactNode.unit)
-        //    |> hasChild 1 (Pagination.Item.ƒ next |> ReactNode.unit)
-        //}
+        test "Pagination prev and next" {
+            let fn _ = ()
+            let prev = [], (OnPageChanged fn, Value -1), (Text "Prev")
+            let next = [], (OnPageChanged fn, Value 0), (Text "Prev")
+            pagination ([], [ Item prev; Item next ])
+            |> ReactNode.unit
+            |>! hasChild 1 (paginationItem prev |> ReactNode.unit)
+            |> hasChild 1 (paginationItem next |> ReactNode.unit)
+        }
 
-        //test "Pagination some pages" {
-        //    let pages =
-        //        seq { 1 .. 10 }
-        //        |> Seq.map
-        //           (fun n ->
-        //               Pagination.Item.props, "1")
-        //        |> List.ofSeq
-        //    Pagination.ƒ
-        //        (Pagination.props, pages)
-        //    |> ReactNode.unit
-        //    |> hasChild 10 (Pagination.Item.ƒ (List.head pages) |> ReactNode.unit)
-        //}
+        test "Pagination some pages" {
+            let fn _ = ()
+            let item = ([], (OnPageChanged fn, Value 1), Text "1")
+            let pages =
+                seq { 1 .. 10 }
+                |> Seq.map
+                   (fun n -> Item item)
+                |> List.ofSeq
+            pagination
+                ([], pages)
+            |> ReactNode.unit
+            |> hasChild 10 (paginationItem item |> ReactNode.unit)
+        }
 
-        //test "Pagination item defaults" {
-        //    Pagination.Item.ƒ
-        //        (Pagination.Item.props, "Next")
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "page-item"
-        //}
+        test "Pagination item defaults" {
+            let fn _ = ()
+            paginationItem
+                ([], (OnPageChanged fn, Value 1), Text "Next")
+            |> ReactNode.unit
+            |> hasUniqueClass "page-item"
+        }
 
-        //test "Pagination item disabled" {
-        //    Pagination.Item.ƒ
-        //        ({ Pagination.Item.props with
-        //             Disabled = true }, "Next")
-        //    |> ReactNode.unit
-        //    |> hasClass "disabled"
-        //}
+        test "Pagination item disabled" {
+            let fn _ = ()
+            paginationItem
+                ([ Disabled ], (OnPageChanged fn, Value 1), Text "Next")
+            |> ReactNode.unit
+            |> hasClass "disabled"
+        }
 
-        //test "Pagination item active" {
-        //    Pagination.Item.ƒ
-        //        ({ Pagination.Item.props with
-        //             Active = true }, "Next")
-        //    |> ReactNode.unit
-        //    |> hasClass "active"
-        //}
+        test "Pagination item active" {
+            let fn _ = ()
+            paginationItem
+                ([ Active ], (OnPageChanged fn, Value 1), Text "Next")
+            |> ReactNode.unit
+            |> hasClass "active"
+        }
 
-        //test "Pagination page changed" {
-        //    let page = Pagination.Item.onClick (mockClickable "Prev")
-        //    Expect.equal page -2 "Should return -2 for prev"
-        //    let page = Pagination.Item.onClick (mockClickable "Next")
-        //    Expect.equal page -1 "Should return -2 for prev"
-        //    seq { 1 .. 10 }
-        //    |> Seq.iter (fun n ->
-        //        let page = Pagination.Item.onClick (mockClickable (string n))
-        //        Expect.equal page n "Should return the clicked page")
-        //}
+        test "Pagination page changed" {
+            let fn page =
+                Expect.equal page 1 "Should click on the 'Next' link"
+            let element =
+                pagination ([],
+                    [ Item ([ Active ], (OnPageChanged fn, Value 1), Text "Next") ])
+                |> ReactNode.unit
+                |> ReactNode.descendentProps
+            let onClick (prop: P.IProp) =
+                match prop with
+                | :? P.DOMAttr as attr ->
+                    match attr with
+                    | P.OnClick fn -> Some fn
+                    | _ -> None
+                | _ -> None
+            match Seq.tryPick onClick element with
+            | Some fn -> fn (mockClickable "element")
+            | None -> ()
+        }
 
     ]

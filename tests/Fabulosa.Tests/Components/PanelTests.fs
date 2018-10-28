@@ -1,9 +1,10 @@
 ﻿module PanelTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.Tab
+open Fabulosa.Panel
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 
@@ -11,64 +12,54 @@ open Expect
 let tests =
     testList "Panel tests" [
 
-        //test "Panel default" {
-        //   Panel.ƒ
-        //       (Panel.props, Panel.children)
-        //    |> ReactNode.unit
-        //    |> hasUniqueClass "panel"
-        //}
+        test "Panel default" {
+            panel ([], [])
+            |> ReactNode.unit
+            |> hasUniqueClass "panel"
+        }
 
-        //test "Panel html props" {
-        //    Panel.ƒ
-        //        ({ Panel.props with
-        //             HTMLProps =
-        //               [ ClassName "custom" ] },
-        //         Panel.children)
-        //    |> ReactNode.unit
-        //    |> hasClass "custom"
-        //}
+        test "Panel html props" {
+            panel ([ P.ClassName "custom" ], [])
+            |> ReactNode.unit
+            |> hasClass "custom"
+        }
 
-        //test "Panel header" {
-        //    let header = [ R.str "Header" ]
-        //    Panel.ƒ
-        //        (Panel.props,
-        //         { Panel.children with
-        //             Header = Some header })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Panel.Header.ƒ header |> ReactNode.unit)
-        //    Panel.Header.ƒ header
-        //    |> ReactNode.unit
-        //    |> hasDescendentClass "panel-title h6"
-        //}
+        test "Panel header" {
+            let header = ([], [ Title "Comments" ])
+            panel ([], [ Header header ])
+            |> ReactNode.unit
+            |> hasChild 1 (panelHeader header |> ReactNode.unit)
+            panelHeader header
+            |> ReactNode.unit
+            |> hasDescendentClass "panel-title"
+        }
 
-        //test "Panel nav" {
-        //    let nav = [ R.str "Nav" ]
-        //    Panel.ƒ
-        //        (Panel.props,
-        //         { Panel.children with
-        //             Nav = Some nav })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Panel.Nav.ƒ nav |> ReactNode.unit)
-        //}
+        test "Panel nav" {
+            let nav = [ R.str "Nav" ]
+            let child = ([], [ Item ([], [ R.a [] [ R.str "Tab 1" ] ]) ])
+            panel ([], [ Nav ([], (Tab child)) ])
+            |> ReactNode.unit
+            |> hasChild 1 (tab child |> ReactNode.unit)
+        }
 
-        //test "Panel body" {
-        //    let body = [ R.str "Body" ]
-        //    Panel.ƒ
-        //        (Panel.props,
-        //         { Panel.children with
-        //             Body = Some body })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Panel.Body.ƒ body |> ReactNode.unit)
-        //}
+        test "Panel body" {
+            let body = ([], [ R.str "Body" ])
+            panel ([], [ Body body ])
+            |> ReactNode.unit
+            |> hasChild 1 (panelBody body |> ReactNode.unit)
+            panelBody body
+            |> ReactNode.unit
+            |> hasDescendentClass "panel-body"
+        }
 
-        //test "Panel footer" {
-        //    let footer = [ R.str "Footer" ]
-        //    Panel.ƒ
-        //        (Panel.props,
-        //         { Panel.children with
-        //             Footer = Some footer })
-        //    |> ReactNode.unit
-        //    |> hasChild 1 (Panel.Footer.ƒ footer |> ReactNode.unit)
-        //}
+        test "Panel footer" {
+            let footer = ([], [ R.str "Footer" ])
+            panel ([], [ Footer footer ])
+            |> ReactNode.unit
+            |> hasChild 1 (panelFooter footer |> ReactNode.unit)
+            panelFooter footer
+            |> ReactNode.unit
+            |> hasDescendentClass "panel-footer"
+        }
 
     ]
