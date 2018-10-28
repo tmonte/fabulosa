@@ -4,64 +4,32 @@ module rec Nav =
 
     open Fabulosa.Extensions
     open Fable.Helpers.React.Props
-    open Fable.Import.React
     module R = Fable.Helpers.React
 
-    [<RequireQualifiedAccess>]
-    module Item =
+    type NavItemChild =
+        Text of string
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Href: string }
+    type NavItem =
+        HTMLProps * NavItemChild
 
-        [<RequireQualifiedAccess>]
-        type Children = string
+    let navItem ((opt, (Text txt)): NavItem) =
+        R.li
+            [ ClassName "nav-item" ]
+            [ R.a opt [ R.str txt ] ]
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type NavChild =
+    | Item of NavItem
+    | Nav of HTMLProps * NavChild seq
 
-        let props =
-            { Props.HTMLProps = []
-              Props.Href = "#" }
+    type Nav = HTMLProps * NavChild seq
 
-        let ƒ (item: T) =
-            let props, children = item
-            R.li
-                [ ClassName "nav-item" ]
-                [ R.a
-                    [ Href props.Href ]
-                    [ R.str children ] ]
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
-    type Child<'Item> =
-    | Item of 'Item
-    | Nav of Props * Child<'Item> seq
-              
-    [<RequireQualifiedAccess>]
-    type Children<'Item> = Child<'Item> seq
-
-    [<RequireQualifiedAccess>]
-    type T<'Item> = Props * Children<'Item>
-
-    let props =
-        { Props.HTMLProps = [] }
-
-    let build itemƒ (nav: T<'Item>) =
-        let props, children = nav
-        props.HTMLProps
-        |> addPropOld (ClassName "nav")
+    let nav ((opt, chi): Nav) =
+        Unmerged opt
+        |> addProp (ClassName "nav")
+        |> merge
         |> R.ul
         <| Seq.map
             (function
-             | Child.Item props ->
-                 itemƒ props
-             | Child.Nav (props, children) ->
-                 build itemƒ (props, children))
-             children
-
-    let ƒ: T<Item.T> -> ReactElement = build Item.ƒ
+             | Item item -> navItem item
+             | Nav (sOpt, sChi) -> nav (sOpt, sChi))
+            chi

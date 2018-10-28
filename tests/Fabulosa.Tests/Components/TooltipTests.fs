@@ -9,7 +9,7 @@ open ReactNode
 open Fabulosa.Tooltip
 open Fabulosa.Tooltip.BaseTooltip
 
-[<FTests>]
+[<Tests>]
 let tests =
     testList "BaseTooltip" [
         test "renders with child" {

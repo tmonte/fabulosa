@@ -49,7 +49,7 @@ let tests =
             |> hasChild 1 (panelBody body |> ReactNode.unit)
             panelBody body
             |> ReactNode.unit
-            |> hasDescendentClass "panel-body"
+            |> hasUniqueClass "panel-body"
         }
 
         test "Panel footer" {
@@ -59,7 +59,7 @@ let tests =
             |> hasChild 1 (panelFooter footer |> ReactNode.unit)
             panelFooter footer
             |> ReactNode.unit
-            |> hasDescendentClass "panel-footer"
+            |> hasUniqueClass "panel-footer"
         }
 
     ]

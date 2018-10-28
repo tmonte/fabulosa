@@ -1,6 +1,6 @@
 ﻿module NavPage
 
-open Fabulosa
+open Fabulosa.Nav
 open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
@@ -8,24 +8,18 @@ open R.Props
 open Fable.Import.React
                 
 (*** define: nav-default-sample ***)
-let nav =
-    Nav.ƒ
-        (Nav.props,
-         [ Nav.Child.Item
-             (Nav.Item.props,"Item One")
-           Nav.Child.Nav
-             (Nav.props,
-              [ Nav.Child.Item
-                  (Nav.Item.props, "Item One Nested") ])
-           Nav.Child.Item
-             (Nav.Item.props,"Item Two") ])
+let def =
+    nav ([],
+      [ Item ([], Text "Item One")
+        Nav ([], [ Item ([], Text "Item One Nested") ])
+        Item ([], Text "Item Two") ])
 (*** hide ***)
 let render () =
-    tryMount "nav-default-demo" nav
-    tryMount "nav-props-table"
-        (PropTable.propTable typeof<Nav.Props> Nav.props)
-    tryMount "nav-item-props-table"
-        (PropTable.propTable typeof<Nav.Item.Props> Nav.Item.props)
+    tryMount "nav-default-demo" def
+    //tryMount "nav-props-table"
+    //    (PropTable.propTable typeof<Nav.Props> Nav.props)
+    //tryMount "nav-item-props-table"
+        //(PropTable.propTable typeof<Nav.Item.Props> Nav.Item.props)
 (**
 
 <div id="navs">

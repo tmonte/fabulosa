@@ -35,7 +35,7 @@ module Pagination =
 
     let private onClick (e: MouseEvent) =
         let element = e.currentTarget :?> Browser.HTMLElement
-        match element.getAttribute "value" with
+        match element.getAttribute "data-value" with
         | Int value -> value
         | _ -> -99
 

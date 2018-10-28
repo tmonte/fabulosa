@@ -7,11 +7,11 @@ module P = R.Props
 open Expect
 open Foq
 
-let mockClickable text =
+let mockClickable page =
     let mockElement =
-        Mock<Fable.Import.Browser.Element>
-            .Property(fun x -> <@ x.innerHTML @>)
-            .Returns(text)
+        Mock<Fable.Import.Browser.HTMLElement>
+            .Property(fun x -> <@ x.getAttribute "data-value" @>)
+            .Returns(page)
     Mock<Fable.Import.React.MouseEvent>
         .Property(fun x -> <@ x.currentTarget @>)
         .Returns(mockElement)
@@ -97,7 +97,7 @@ let tests =
                     | _ -> None
                 | _ -> None
             match Seq.tryPick onClick element with
-            | Some fn -> fn (mockClickable "element")
+            | Some fn -> fn (mockClickable "1")
             | None -> ()
         }
 
