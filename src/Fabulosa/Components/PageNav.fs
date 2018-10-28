@@ -5,76 +5,52 @@ module PageNav =
     open Fabulosa.Extensions
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { HTMLProps: HTMLProps }
-
-    [<RequireQualifiedAccess>]
     type Action =
-    | Link of string
-    | OnPageChanged of (int -> unit)
+        | Link of string
+        | OnPageChanged of (MouseEvent -> unit)
 
-    [<RequireQualifiedAccess>]
-    type Item =
-        { Title: string
-          SubTitle: string
-          Action: Action }
+    type Title =
+        Title of string
 
-    [<RequireQualifiedAccess>]
-    type Children =
-        { Prev: Item option
-          Next: Item option }
+    type Subtitle =
+        Subtitle of string
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
+    type PageNavItem =
+        P.HTMLProps * (Title * Subtitle * Action)
 
-    let props =
-        { Props.HTMLProps = [] }
+    type PageNavChild =
+        | Prev of PageNavItem
+        | Next of PageNavItem
 
-    let children =
-        { Children.Prev = Some
-            { Item.Title = ""
-              Item.SubTitle = "Previous"
-              Item.Action = Action.Link "" }
-          Children.Next = Some
-            { Item.Title = ""
-              Item.SubTitle = "Next"
-              Item.Action = Action.Link "" } }
+    type PageNav = P.HTMLProps * PageNavChild list
 
-    let action kind (item: Item): HTMLProps =
-        match item.Action with
-        | Action.Link href ->
-            [ Href href ]
-        | Action.OnPageChanged fn ->
-            [ OnClick
-                (fun _ ->
-                    if kind = "prev" then
-                        fn -2
-                    else fn -1) ]
+    let private action =
+        function
+        | Link href -> [ (P.Href href) :> P.IHTMLProp ]
+        | OnPageChanged fn -> [ (P.OnClick fn) :> P.IHTMLProp ]
 
-    let private child kind (item: Item option) =
-        match item with
-        | Some item ->
-            R.li
-                [ ClassName ("page-item page-" + kind) ]
-                [ R.a
-                    (action kind item)
-                    [ R.div
-                        [ ClassName "page-item-subtitle" ]
-                        [ R.str item.SubTitle ]
-                      R.div
-                        [ ClassName "page-item-title h5" ]
-                        [ R.str item.Title ] ] ]
-        | None -> R.ofOption None
+    let pageNavItem kind ((opt, (Title t, Subtitle st, act))) =
+        R.li
+            [ P.ClassName ("page-item page-" + kind) ]
+            [ R.a
+                (action act)
+                [ R.div
+                    [ P.ClassName "page-item-subtitle" ]
+                    [ R.str st ]
+                  R.div
+                    [ P.ClassName "page-item-title h5" ]
+                    [ R.str t ] ] ]
 
-    let build (pageNav: T) =
-        let props, children = pageNav
-        props.HTMLProps
-        |> addPropOld (ClassName "pagination")
+    let private pageNavChild =
+        function
+        | Prev prev -> pageNavItem "prev" prev
+        | Next next -> pageNavItem "next" next
+
+    let pageNav ((opt, chi): PageNav) =
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "pagination")
+        |> P.merge
         |> R.ul
-        <| [ child "prev" children.Prev
-             child "next" children.Next ]
-
-    let ƒ = build
+        <| Seq.map pageNavChild chi

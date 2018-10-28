@@ -1,9 +1,9 @@
 ﻿module PageNavTests
 
 open Expecto
-open Fabulosa
+open Fabulosa.PageNav
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 open Foq
 
@@ -16,38 +16,32 @@ let mockClickable text =
         .Property(fun x -> <@ x.currentTarget @>)
         .Returns(mockElement)
 
-
 [<Tests>]
 let tests =
     testList "PageNav tests" [
 
         test "PageNav default" {
-           PageNav.ƒ
-               (PageNav.props, PageNav.children)
+            pageNav ([], [])
             |> ReactNode.unit
             |> hasUniqueClass "pagination"
         }
 
         test "PageNav html props" {
-            PageNav.ƒ
-                ({ PageNav.props with
-                     HTMLProps = [ ClassName "custom" ] },
-                 PageNav.children)
+            pageNav ([ P.ClassName "custom" ], [])
             |> ReactNode.unit
             |> hasClass "custom"
         }
 
         test "PageNav children" {
-            PageNav.ƒ
-                (PageNav.props,
-                 { Prev = Some
-                     { SubTitle = "Previous"
-                       Title = "Page 1"
-                       Action = PageNav.Action.Link "" }
-                   Next = Some
-                     { SubTitle = "Next"
-                       Title = "Page 3"
-                       Action = PageNav.Action.Link "" } })
+            pageNav ([],
+              [ Prev ([],
+                  (Title "Page 1",
+                   Subtitle "Previous",
+                   Link ""))
+                Next ([],
+                  (Title "Page 3",
+                   Subtitle "Next",
+                   Link "")) ])
             |> ReactNode.unit
             |>! hasOrderedDescendentClass 1
                  "page-item page-prev page-item page-next"
@@ -55,13 +49,11 @@ let tests =
         }
 
         test "PageNav next only" {
-            PageNav.ƒ
-                (PageNav.props,
-                 { Prev = None
-                   Next = Some
-                     { SubTitle = "Next"
-                       Title = "Page 3"
-                       Action = PageNav.Action.Link "" } })
+            pageNav ([],
+              [ Next ([],
+                  (Title "Page 3",
+                   Subtitle "Next",
+                   Link "")) ])
             |> ReactNode.unit
             |>! hasOrderedDescendentClass 1
                  "page-item page-next page-item-subtitle page-item-title"
@@ -69,27 +61,26 @@ let tests =
         }
 
         test "PageNav item click" {
+            let event = mockClickable "element"
             let props =
-                PageNav.ƒ
-                    (PageNav.props,
-                     { Prev = None
-                       Next = Some
-                         { SubTitle = "Next"
-                           Title = "Page 3"
-                           Action = PageNav.Action.OnPageChanged
-                             (fun page ->
-                                Expect.equal page -1 "Should click on the 'Next' link") } })
+                pageNav ([],
+                  [ Next ([],
+                      (Title "Next",
+                       Subtitle "Page 3",
+                       OnPageChanged
+                         (fun actual ->
+                            Expect.equal actual event "Should click on the 'Next' link"))) ])
                 |> ReactNode.unit
                 |> ReactNode.descendentProps
-            let onClick (prop: IProp) =
+            let onClick (prop: P.IProp) =
                 match prop with
-                | :? DOMAttr as attr ->
+                | :? P.DOMAttr as attr ->
                     match attr with
-                    | OnClick fn -> Some fn
+                    | P.OnClick fn -> Some fn
                     | _ -> None
                 | _ -> None
             match Seq.tryPick onClick props with
-            | Some fn -> fn (mockClickable "element")
+            | Some fn -> fn event
             | None -> ()
         }
 

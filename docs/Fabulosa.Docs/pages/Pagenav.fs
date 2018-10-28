@@ -1,31 +1,30 @@
 ﻿module PageNavPage
 
-open Fabulosa
+open Fabulosa.PageNav
 open Fabulosa.Docs
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Fable.Import.React
 open Fable.Import.JS
 open Renderer
 open Microsoft.FSharp.Core
 
 (*** define: pagenav-default-sample ***)
-let pagenav =
-    PageNav.ƒ
-        (PageNav.props,
-         { Prev = Some
-             { SubTitle = "Previous"
-               Title = "Page 1"
-               Action = PageNav.Action.Link "" }
-           Next = Some
-             { SubTitle = "Next"
-               Title = "Page 3"
-               Action = PageNav.Action.Link "" } })
+let def =
+    pageNav ([],
+      [ Prev ([],
+          (Title "Page 1",
+           Subtitle "Previous",
+           Link ""))
+        Next ([],
+          (Title "Page 3",
+           Subtitle "Next",
+           Link "")) ])
 (*** hide ***)
 let render () =
-    tryMount "pagenav-default-demo" pagenav
-    tryMount "pagenav-props-table"
-        (PropTable.propTable typeof<PageNav.Props> PageNav.props)
+    tryMount "pagenav-default-demo" def
+    //tryMount "pagenav-props-table"
+        //(PropTable.propTable typeof<PageNav.Props> PageNav.props)
 (**
 
 <div id="pagenav">
