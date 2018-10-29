@@ -1,6 +1,5 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Responsive =
 
     open Fabulosa.Extensions
@@ -8,54 +7,41 @@ module Responsive =
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
     type Size =
-    | XS
-    | SM
-    | MD
-    | LG
-    | XL
-    | Unset
+        | XS
+        | SM
+        | MD
+        | LG
+        | XL
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Hide: Size
-          Show: Size }
+    type ResponsiveOptional =
+        | Hide of Size
+        | Show of Size
+        interface IHTMLProp
 
-    [<RequireQualifiedAccess>]
-    type T = Props * ReactElement list
+    type Responsive = HTMLProps * ReactElement list
 
-    let props =
-        { Props.Hide = Size.Unset
-          Props.Show = Size.Unset }
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? ResponsiveOptional as opt ->
+            match opt with
+            | Hide XS -> "hide-xs"
+            | Hide SM -> "hide-sm"
+            | Hide MD -> "hide-md"
+            | Hide LG -> "hide-lg"
+            | Hide XL -> "hide-xl"
+            | Show XS -> "show-xs"
+            | Show SM -> "show-sm"
+            | Show MD -> "show-md"
+            | Show LG -> "show-lg"
+            | Show XL -> "show-xl"
+            |> className
+        | _ -> prop
 
-    let private hide =
-        function
-        | Size.XS -> "hide-xs"
-        | Size.SM -> "hide-sm"
-        | Size.MD -> "hide-md"
-        | Size.LG -> "hide-lg"
-        | Size.XL -> "hide-xl"
-        | Size.Unset -> ""
-        >> ClassName
-
-    let private show =
-        function
-        | Size.XS -> "show-xs"
-        | Size.SM -> "show-sm"
-        | Size.MD -> "show-md"
-        | Size.LG -> "show-lg"
-        | Size.XL -> "show-xl"
-        | Size.Unset -> ""
-        >> ClassName
-
-    let build (responsive: T) =
-        let props, children = responsive
-        []
-        |> addPropsOld
-            [ ClassName "responsive"
-              hide props.Hide
-              show props.Show ]
-        |> R.span <| children
-
-    let ƒ = build
+    let responsive ((opt, chi): Responsive) =
+        Unmerged opt
+        |> addProp (ClassName "responsive")
+        |> map propToClassName
+        |> merge
+        |> R.span <| chi
+        
