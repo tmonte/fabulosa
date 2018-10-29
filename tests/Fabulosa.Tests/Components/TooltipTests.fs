@@ -24,19 +24,19 @@ let tests =
         test "renders different positions" {
             let content = Content [ R.str "Maradona > Messi" ]
             
-            baseTooltip ([Orientation Top], content) 
+            baseTooltip ([BaseOrientation Top], content) 
             |> ReactNode.unit
             |> hasClass "fab-tooltip tooltip-top"
             
-            baseTooltip ([Orientation Bottom], content) 
+            baseTooltip ([BaseOrientation Bottom], content) 
             |> ReactNode.unit
             |> hasClass "fab-tooltip tooltip-bottom"
             
-            baseTooltip ([Orientation Left], content) 
+            baseTooltip ([BaseOrientation Left], content) 
             |> ReactNode.unit
             |> hasClass "fab-tooltip tooltip-left"
             
-            baseTooltip ([Orientation Right], content) 
+            baseTooltip ([BaseOrientation Right], content) 
             |> ReactNode.unit
             |> hasClass "fab-tooltip tooltip-right"
         }

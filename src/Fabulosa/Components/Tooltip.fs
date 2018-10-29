@@ -36,7 +36,6 @@ module Tooltip =
     
     let private orientation =
         fun (prop: IHTMLProp) ->
-            printf "YOOOOlo %A" prop
             match prop with
             | :? TooltipOptional as opt ->
                 let (Orientation ori) = opt
@@ -51,10 +50,13 @@ module Tooltip =
         open Fabulosa.Extensions
         open Extensions.Fable.Helpers.React.Props
         open Fable.Import
+        open Fable.Import
+        open Fable.Import
+        open Fable.Import
         
         type BaseTooltipOptional =
             | Reference of (Browser.Element -> unit)
-            | Orientation of Orientation
+            | BaseOrientation of Orientation
             interface IHTMLProp
         
         type BaseTooltip = HTMLProps * TooltipContent
@@ -84,14 +86,9 @@ module Tooltip =
                 match prop with
                 | :? BaseTooltipOptional as opt ->
                     match opt with
-                    | Orientation o ->
-                        match o with 
-                        | Orientation.Top -> Some o
-                        | Orientation.Bottom -> Some o
-                        | Orientation.Right -> Some o
-                        | Orientation.Left -> Some o
+                    | BaseOrientation o -> Some o                        
                     | _ -> None
-                | _ -> None
+                | _ -> None 
             |> pick
             
         let orientationClass orientation = 
@@ -104,7 +101,7 @@ module Tooltip =
             
         let baseTooltip (tooltip: BaseTooltip) =
             let opt, TooltipContent.Content children = tooltip
-            
+
             opt
             |> Unmerged
             |> addProps 
@@ -208,7 +205,7 @@ module Tooltip =
                 |> addProps 
                   [ this.state.Style
                     Ref setTooltipRef
-                    Orientation this.props.Orientation ]
+                    BaseTooltip.BaseOrientation this.props.Orientation ]
                 |> merge
             
             override this.render() =
