@@ -56,7 +56,7 @@ module Tooltip =
         
         type BaseTooltipOptional =
             | Reference of (Browser.Element -> unit)
-            | Orientation of Orientation
+            | BaseOrientation of Orientation
             interface IHTMLProp
         
         type BaseTooltip = HTMLProps * TooltipContent
@@ -86,7 +86,7 @@ module Tooltip =
                 match prop with
                 | :? BaseTooltipOptional as opt ->
                     match opt with
-                    | Orientation o -> Some o                        
+                    | BaseOrientation o -> Some o                        
                     | _ -> printf "yolo"; None
                 | _ -> printf "yolo 2 %A" (prop.GetType()) ; None 
             |> pick
@@ -208,7 +208,7 @@ module Tooltip =
                 |> addProps 
                   [ this.state.Style
                     Ref setTooltipRef
-                    Orientation this.props.Orientation ]
+                    BaseTooltip.BaseOrientation this.props.Orientation ]
                 |> merge
             
             override this.render() =
