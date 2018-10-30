@@ -50,9 +50,6 @@ module Tooltip =
         open Fabulosa.Extensions
         open Extensions.Fable.Helpers.React.Props
         open Fable.Import
-        open Fable.Import
-        open Fable.Import
-        open Fable.Import
         
         type BaseTooltipOptional =
             | Reference of (Browser.Element -> unit)
@@ -81,15 +78,17 @@ module Tooltip =
                 | _ -> None
             |> pick      
       
-        let private orientation =
+        let private newOrientation =
             fun (prop: IHTMLProp) ->
                 match prop with
                 | :? BaseTooltipOptional as opt ->
                     match opt with
-                    | BaseOrientation o -> Some o                        
+                    | BaseOrientation Orientation.Top -> className "tooltip-top" |> Some                        
+                    | BaseOrientation Orientation.Left -> className "tooltip-left" |> Some                        
+                    | BaseOrientation Orientation.Right -> className "tooltip-right" |> Some                        
+                    | BaseOrientation Orientation.Bottom -> className "tooltip-bottom" |> Some                        
                     | _ -> None
-                | _ -> None 
-            |> pick
+                | _ -> None
             
         let orientationClass orientation = 
             match orientation with 
@@ -99,14 +98,23 @@ module Tooltip =
             | Some Orientation.Left -> className "tooltip-left"
             | None -> className "tooltip-top"
             
+        let private newMapp =
+            fun (prop: IHTMLProp) ->
+                match prop with
+                | :? BaseTooltipOptional as opt ->
+                    match opt with
+                    | BaseOrientation o -> Some o                        
+                    | _ -> None
+                | _ -> None 
+            |> pick
+            
         let baseTooltip (tooltip: BaseTooltip) =
             let opt, TooltipContent.Content children = tooltip
 
             opt
             |> Unmerged
-            |> addProps 
-                [ ClassName "fab-tooltip" 
-                  opt |> orientation |> orientationClass ]
+            |> addProps [ ClassName "fab-tooltip"]
+            |> addOptionOrElse newOrientation (ClassName "tooltip-top")
             |> addPropOpt (opt |> reference |> Option.map (fun x -> upcast x))
             |> merge
             |> R.span

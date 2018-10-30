@@ -6,6 +6,7 @@ module Card =
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
+    open Fabulosa.Media.Image
 
     type Text = string
 
@@ -71,7 +72,7 @@ module Card =
         Footer of Footer
 
     type CardImage =
-        Image of Media.Image.Props
+        Image of Image
 
     type CardChildren =
         CardImage * CardHeader * CardBody * CardFooter
@@ -86,6 +87,6 @@ module Card =
         |> merge
         |> R.div <|
         [ cardHeader h
-          R.div [ ClassName "card-image" ] [ Media.Image.ƒ i ]
+          R.div [ ClassName "card-image" ] [ image i ]
           cardBody b
           cardFooter f ]

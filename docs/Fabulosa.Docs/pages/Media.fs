@@ -6,19 +6,17 @@ open Fabulosa.Docs
 open R.Props
 open Fable.Import.React
 open Renderer
+open Fabulosa.Media.Image
 
 (*** define: media-img-responsive-demo ***)
-let image =
-    Media.Image.ƒ
-        { Media.Image.props with 
-            HTMLProps =
-              [ Src "https://goo.gl/krg6x5 " ] }
+let demo =
+    image [ Src "https://goo.gl/krg6x5 " ]
 (*** hide ***)
 
 let imageContainer containerWidth =
     R.div
         [ Style [ Width containerWidth ] ]
-        [ image ]
+        [ demo ]
 
 let style =
     Style
@@ -28,38 +26,21 @@ let style =
 
 (*** define: media-img-fit-contain-demo ***)
 let contain =
-    Media.Image.ƒ
-        { Media.Image.props with 
-            Kind = Media.Image.Kind.Contain
-            HTMLProps =
-              [ Src "https://goo.gl/krg6x5"; style ] }
+    image [ Kind Contain
+            Src "https://goo.gl/krg6x5"
+            style ] 
 (*** define: media-img-fit-cover-demo ***)
 let cover =
-    Media.Image.ƒ
-        { Media.Image.props with
-            Kind =  Media.Image.Kind.Cover 
-            HTMLProps =
-              [ Src "https://goo.gl/krg6x5"; style ] }
-(*** define: figure-demo ***)
-let figure =
-    Media.Figure.ƒ
-        (Media.Figure.props,
-         { Image =
-             { Media.Image.props with
-                 Kind =  Media.Image.Kind.Cover 
-                 HTMLProps =
-                   [ Src "https://goo.gl/krg6x5"; style ] }  
-           Caption = Some
-             (Media.Caption.props,
-              Media.Caption.Children.Text
-                "Ciro Gomes Presidente 2018") })
+    image [ Kind Cover 
+            Src "https://goo.gl/krg6x5"
+            style ] 
+
 (*** hide ***)
 let src = "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm"
+open Fabulosa.Media.Video
 (*** define: video-demo ***)
-let video =
-    Media.Video.ƒ
-        { Media.Video.props with
-            Kind = Media.Video.Kind.Source src }
+let videoDemo =
+    video ([], Kind (Source src) )
 
 let frame =
     R.iframe
@@ -69,9 +50,8 @@ let frame =
           AllowFullScreen true ] []
 
 let youtube =
-    Media.Video.ƒ
-        ({ Media.Video.props with 
-             Kind = Media.Video.Kind.Embedded frame })
+    video ([], Kind (Embedded frame) )
+    
 (*** hide ***)
 let render () =
     tryMount "media-img-responsive-demo-a" (imageContainer "5rem")
@@ -80,16 +60,16 @@ let render () =
     tryMount "media-img-fit-contain-demo" contain
     tryMount "media-img-fit-cover-demo" cover
     tryMount "media-img-props-table"
-        (PropTable.propTable typeof<Media.Image.Props> Media.Image.props)
+        (PropTable.unionPropTable typeof<Media.Image.ImageOptional>)
     tryMount "figure-props-table"
-        (PropTable.propTable typeof<Media.Figure.Props> Media.Figure.props)
-    tryMount "figure-demo" figure
-    tryMount "caption-props-table"
-        (PropTable.propTable typeof<Media.Caption.Props> Media.Caption.props)
-    tryMount "video-demo" video
+        (PropTable.unionPropTable typeof<Media.Figure.FigureOptional>)
+//    tryMount "figure-demo" figure
+//    tryMount "caption-props-table"
+//        (PropTable.propTable typeof<Media.Caption.Props> Media.Caption.props)
+    tryMount "video-demo" videoDemo
     tryMount "youtube-demo" youtube
     tryMount "video-props-table"
-        (PropTable.propTable typeof<Media.Video.Props> Media.Video.props)
+        (PropTable.unionPropTable typeof<Media.Video.VideoOptional>)
 (**
 <div id="media">
 

@@ -6,188 +6,140 @@ open Fabulosa
 module R = Fable.Helpers.React
 open Fable.Import.React
 open R.Props
+open Fabulosa.Media.Caption
+open Fabulosa.Media.Image
 
 [<Tests>]
 let captionTest =
-    testList "Caption tests" [
-
-        test "Caption should be a react html node when defaults are provided" {
-            Media.Caption.ƒ
-                (Media.Caption.props, Media.Caption.children)
-            |> ReactNode.unit
-            |>! hasClass "figure-caption text-center"
-            |> hasText "Caption" 
+    testList "Caption" [
+        test "should display text" {            
+           let text = "Pele is the King!"
+           caption ([], Text text)
+           |> ReactNode.unit
+           |> hasText text
         }
 
-        test "Caption should have html props" {
-            Media.Caption.ƒ
-                ({ Media.Caption.props with
-                     HTMLProps = [ Id "offside-is-a-crime" ] },
-                 Media.Caption.children)
+        test "should have html props" {
+            caption ([ Id "offside-is-a-crime" ], Text "Pele")
             |> ReactNode.unit
-            |>! hasClass "figure-caption text-center"
-            |>! hasProp (Id "offside-is-a-crime")
-            |> hasText "Caption"
+            |> hasProp (Id "offside-is-a-crime")
+        }
+        
+        test "should have default alignment to be center" {
+            caption ([], Text "Text")
+            |> ReactNode.unit
+            |> hasClass "figure-caption text-center"
         }
 
-        test "Caption should have text alignment set to input" {
-            Media.Caption.ƒ
-                ({ Media.Caption.props with
-                     Direction = Media.Caption.Direction.Center },
-                 Media.Caption.children)
+        test "should have text alignment set to input" {
+            caption ([Direction Center], Text "Text")
             |> ReactNode.unit
             |> hasClass "figure-caption text-center"
 
-            Media.Caption.ƒ
-                ({ Media.Caption.props with
-                     Direction = Media.Caption.Direction.Left },
-                 Media.Caption.children)
+            caption ([Direction Left], Text "Text")
             |> ReactNode.unit
             |> hasClass "figure-caption text-left"
 
-            Media.Caption.ƒ
-                ({ Media.Caption.props with
-                     Direction = Media.Caption.Direction.Right },
-                 Media.Caption.children)
+            caption ([Direction Right], Text "Text")
             |> ReactNode.unit
             |> hasClass "figure-caption text-right"
         }
 
-        test "Caption should display custom text" {
-            let text = "Pele is the King!"
+        test "Caption should display react elements" {
+            let child = R.div [] [ R.str "Super custom stuff" ]
 
-            Media.Caption.ƒ
-                (Media.Caption.props,
-                 Media.Caption.Children.Text text)
+            caption ([], Elements [ child ])
             |> ReactNode.unit
-            |> hasText text
+            |> hasChild 1 (child |> ReactNode.unit)
         }
     ] 
 
 [<Tests>]
 let imageTest =
     testList "Image tests" [
-
         test "Image should be a react html node when defaults are provided" {
-            Media.Image.ƒ
-                Media.Image.props
+            image []
             |> ReactNode.unit
             |> hasUniqueClass "img-responsive"
         }
 
         test "Image should be respond to different kinds" {
-            Media.Image.ƒ
-                { Media.Image.props with
-                    Kind = Media.Image.Kind.Responsive }
+            image [Kind Responsive]
             |> ReactNode.unit
             |> hasUniqueClass "img-responsive"
 
-            Media.Image.ƒ
-                { Media.Image.props with
-                    Kind = Media.Image.Kind.Contain }
+            image [Kind Contain]
             |> ReactNode.unit
             |> hasUniqueClass "img-fit-contain"
 
-            Media.Image.ƒ
-                { Media.Image.props with
-                    Kind = Media.Image.Kind.Cover } 
+            image [Kind Cover] 
             |> ReactNode.unit
             |> hasUniqueClass "img-fit-cover"
         }
     ]
-
+    
+open Fabulosa.Media.Figure
 [<Tests>]
 let figureTests =
     testList "Figure tests" [
-
         test "Figure should display defaults" {               
-            let image =
-                Media.Image.ƒ
-                    Media.Image.props
-                |> ReactNode.unit
-
-            Media.Figure.ƒ
-                (Media.Figure.props,
-                 Media.Figure.children)
+            let imageData = []
+            let imageElement = image imageData |> ReactNode.unit
+            let aFigure = figure ([], Image imageData )
+             
+            aFigure 
             |> ReactNode.unit
             |>! hasUniqueClass "figure"
-            |> hasChild 1 image 
+            |> hasChild 1 imageElement
         }
 
+
         test "Figure should have html props" {
-            Media.Figure.ƒ
-                ({ Media.Figure.props with
-                    HTMLProps = [ Id "messi-argentina.jpg" ] },
-                 Media.Figure.children)
+            figure ([Id "messi.jpg"], Image [])            
             |> ReactNode.unit 
-            |> hasProp (Id "messi-argentina.jpg") 
+            |> hasProp (Id "messi.jpg") 
         }
        
         test "Figure does contain props" {
-            let expectedCaption =
-                Media.Caption.props,
-                Media.Caption.Children.Text "Ronaldo 9"
-
-            let expectedImageProps =
-                { Media.Image.props with
-                    Kind = Media.Image.Kind.Cover }
-
-            let caption =
-                Media.Caption.ƒ
-                    expectedCaption
-                |> ReactNode.unit
-
-            let image =
-                Media.Image.ƒ
-                    expectedImageProps
-                |> ReactNode.unit
-
-            Media.Figure.ƒ
-                (Media.Figure.props,
-                 { Caption = Some expectedCaption
-                   Image = expectedImageProps })
+            let captionData = ([], Text "My Caption")
+            let imageData = [Src "some-source" :> IHTMLProp] 
+            
+            figure ([ Caption captionData ], Image (imageData))
+                
             |> ReactNode.unit
             |>! hasUniqueClass "figure"
-            |>! hasChild 1 caption
-            |> hasChild 1 image
+            |>! hasChild 1 (caption captionData |> ReactNode.unit)
+            |> hasChild 1 (image imageData |> ReactNode.unit)
         }
     ]
 
+open Fabulosa.Media.Video
 [<Tests>]
 let videoTests =
     testList "Video tests" [
         test "should display defaults" {
-            Media.Video.ƒ
-                Media.Video.props
+            video ([], Kind (Source "learn-javascrip"))
             |> ReactNode.unit
             |>! hasClass "video-responsive video-responsive-16-9"
-            |> hasProp (Src "")
+            |> hasProp (Src "learn-javascrip")
         }
+        
         test "should display different ratios" {
-            Media.Video.ƒ
-                { Media.Video.props with
-                    Ratio = Media.Video.Ratio.Ratio16x9 }
+            video ([Ratio Ratio16x9], Kind (Source ""))
             |> ReactNode.unit
             |> hasClass "video-responsive video-responsive-16-9"
 
-            Media.Video.ƒ
-                { Media.Video.props with
-                    Ratio = Media.Video.Ratio.Ratio4x3 }
+            video ([Ratio Ratio4x3], Kind (Source ""))
             |> ReactNode.unit
             |> hasClass "video-responsive video-responsive-4-3"
 
-            Media.Video.ƒ
-                { Media.Video.props with
-                    Ratio = Media.Video.Ratio.Ratio1x1 }
+            video ([Ratio Ratio1x1], Kind (Source ""))
             |> ReactNode.unit
             |> hasClass "video-responsive video-responsive-1-1"
         }
         
         test "should render source video " {
-            Media.Video.ƒ
-                { Media.Video.props with
-                    Kind = Media.Video.Kind.Source
-                        "https://video.webm"}
+            video ([], Kind (Source "https://video.webm"))
             |> ReactNode.unit
             |>! hasClass "video-responsive video-responsive-16-9"
             |> hasProp (Src "https://video.webm")
@@ -201,9 +153,7 @@ let videoTests =
                       HTMLAttr.Width 560
                       HTMLAttr.Height 315 ]
                     []
-            Media.Video.ƒ
-                { Media.Video.props with
-                    Kind = Media.Video.Kind.Embedded youtubeVideo }
+            video ([], Kind (Embedded youtubeVideo))
             |> ReactNode.unit
             |>! hasClass "video-responsive video-responsive-16-9"
             |> hasChild 1 (youtubeVideo |> ReactNode.unit)

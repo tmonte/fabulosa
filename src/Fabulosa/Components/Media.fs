@@ -1,193 +1,155 @@
 ﻿namespace Fabulosa
 
 module Media =
-
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
     open R.Props
     open Fable.Import.React
 
-    [<RequireQualifiedAccess>]
     module Caption =
-
-        [<RequireQualifiedAccess>]
         type Direction =
-        | Left
-        | Center
-        | Right
+            | Left
+            | Center
+            | Right
 
-        [<RequireQualifiedAccess>]
+        type CaptionOptional =
+            | Direction of Direction
+            interface IHTMLProp
+        
         type Children =
-        | Text of string
-        | Elements of ReactElement list
-
-        [<RequireQualifiedAccess>]
-        type Props =
-            { Direction: Direction
-              HTMLProps: HTMLProps }
-
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
-
-        let props =
-            { Props.Direction =
-                Direction.Center
-              Props.HTMLProps = [] }
-              
-        let children =
-            Children.Text "Caption"
-
-        let private direction =
-            function 
-            | Direction.Left -> "text-left"
-            | Direction.Center -> "text-center"
-            | Direction.Right -> "text-right"
-            >> ClassName
-
+            | Text of string
+            | Elements of ReactElement list            
+        
+        type Caption = HTMLProps * Children
+        
         let private renderChildren =
             function
-            | Children.Text text ->
-                [ R.str text ]
-            | Children.Elements elements ->
-                elements
+            | Text text -> [ R.str text ]
+            | Elements elements -> elements
 
-        let ƒ (caption: T) =
+        let private direction (prop: IHTMLProp) =
+            match prop with
+            | :? CaptionOptional as opt ->
+                match opt with
+                | Direction Left -> className "text-left" |> Some
+                | Direction Right -> className "text-right" |> Some
+                | Direction Center -> className "text-center" |> Some
+            | _ -> None
+        
+        let caption (caption: Caption) =
             let props, children = caption
-            props.HTMLProps
-            |> addPropsOld
-                [ ClassName "figure-caption"
-                  direction props.Direction ]
+            
+            props
+            |> Unmerged
+            |> addProps [ ClassName "figure-caption"]
+            |> addOptionOrElse direction (ClassName "text-center")
+            |> merge
             |> R.figcaption
             <| renderChildren children
-    
-        let render = ƒ
-
+ 
     module Image =
-
-        [<RequireQualifiedAccess>]
         type Kind =
         | Responsive
         | Contain
         | Cover
 
-        [<RequireQualifiedAccess>]
-        type Props =
-            { Kind: Kind
-              HTMLProps: IHTMLProp list }
-
-        [<RequireQualifiedAccess>]
-        type T = Props
-
-        let props =
-            { Props.Kind = Kind.Responsive
-              Props.HTMLProps = [] }
-
-        let private kind =
-            function 
-            | Kind.Responsive -> "img-responsive"
-            | Kind.Contain -> "img-fit-contain"
-            | Kind.Cover -> "img-fit-cover"
-            >> ClassName
-
-        let ƒ (image: T) =
-            image.HTMLProps 
-            |> addPropOld (kind image.Kind)
+        type ImageOptional =
+            | Kind of Kind
+            interface IHTMLProp
+            
+        type Image = HTMLProps
+            
+        let private kind (prop: IHTMLProp) =
+            match prop with
+            | :? ImageOptional as opt ->
+                match opt with
+                | Kind Responsive -> className "img-responsive" |> Some
+                | Kind Contain -> className "img-fit-contain" |> Some
+                | Kind Cover -> className "img-fit-cover" |> Some
+            | _ -> None
+        
+        let image (image: Image) = 
+            image
+            |> Unmerged
+            |> addOptionOrElse kind (ClassName "img-responsive")
+            |> merge
             |> R.img
-    
-        let render = ƒ
-    
+                
     module Figure =
-
-        [<RequireQualifiedAccess>]
         type Kind =
         | Responsive
         | Contain
         | Cover
         
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps }
-
-        [<RequireQualifiedAccess>]
-        type Children =
-            { Image: Image.T
-              Caption: Caption.T option }
-
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
-
-        let props =
-            { Props.HTMLProps = [] }
-
-        let children =
-            { Children.Image = Image.props
-              Children.Caption = None }
-
-        let private caption =
-            function
-            | Some caption -> Caption.ƒ caption
-            | None -> R.ofOption None
-
-        let ƒ (figure: T) =
-            let props, children = figure
-            props.HTMLProps
-            |> addPropOld (ClassName "figure")
-            |> R.figure
-            <| [ Image.ƒ children.Image
-                 caption children.Caption ]    
+        type FigureOptional = 
+            | Caption of Caption.Caption
+            interface IHTMLProp
             
-        let render = ƒ
+        type FigureChildren =
+            | Image of Image.Image
+            
+        type Figure = HTMLProps * FigureChildren        
+
+        let private caption (prop: IHTMLProp) =
+            match prop with
+            | :? FigureOptional as opt ->
+                match opt with
+                | Caption caption -> Caption.caption caption |> Some
+            | _ -> None
+        
+        let figure (figure: Figure) =
+            let props, (Image children) = figure
+            props
+            |> Unmerged
+            |> addProp (ClassName "figure")
+            |> merge
+            |> R.figure
+            <| [ Image.image children
+                 List.tryPick caption props |> R.ofOption ]   
 
     module Video =
-
-        [<RequireQualifiedAccess>]
         type Ratio =
         | Ratio16x9
         | Ratio4x3
         | Ratio1x1
 
-        [<RequireQualifiedAccess>]
         type Kind =
         | Embedded of ReactElement
         | Source of string
+                
+        type VideoOptional =
+            | Ratio of Ratio
+            interface IHTMLProp
+
+        type VideoRequired = | Kind of Kind
+
+        type Video = HTMLProps * VideoRequired
         
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: HTMLProps
-              Ratio: Ratio
-              Kind: Kind }
-
-        [<RequireQualifiedAccess>]
-        type T = Props
-
-        let props =
-            { Props.HTMLProps = []
-              Props.Ratio = Ratio.Ratio16x9
-              Props.Kind = Kind.Source "" }
-
-        let private ratio =
-            function 
-            | Ratio.Ratio16x9 -> "video-responsive-16-9"
-            | Ratio.Ratio4x3 -> "video-responsive-4-3"
-            | Ratio.Ratio1x1 -> "video-responsive-1-1"
-            >> ClassName
+        let private ratio (prop: IHTMLProp) =
+            match prop with
+            | :? VideoOptional as opt ->
+                match opt with
+                | Ratio Ratio16x9 -> className "video-responsive-16-9" |> Some
+                | Ratio Ratio4x3 -> className "video-responsive-4-3" |> Some
+                | Ratio Ratio1x1 -> className "video-responsive-1-1" |> Some
+            | _ -> None
 
         let private container =
             function
-            | Kind.Source source ->
-                R.video, [Src source], []
+            | Source source ->
+                R.video, [Src source :> IHTMLProp], []
             | Kind.Embedded element ->
                 R.iframe, [], [element]
-
-        let ƒ (video: T) =
-            let (parent, props, children) =
-                container video.Kind
-
-            video.HTMLProps
-            |> List.append (props |> List.cast)
-            |> addPropsOld
-                [ ClassName "video-responsive"
-                  ratio video.Ratio ]
-            |> parent <| children
+  
+        let video (video: Video) = 
+            let (props, (Kind kind)) = video
+            let container, containerProps, children = (container kind)
             
-        let render = ƒ
+            props
+            |> Unmerged
+            |> addProps containerProps
+            |> addProp (ClassName "video-responsive")
+            |> addOptionOrElse ratio (ClassName "video-responsive-16-9")
+            |> merge
+            |> container
+            <| children

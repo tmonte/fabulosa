@@ -11,9 +11,7 @@ open Renderer
 (*** define: card-default-sample ***)
 let def =
     card ([],
-      (Image
-         { Media.Image.props with
-             HTMLProps = [ P.Src "assets/macos-sierra-2.jpg" ] },
+      (Image ([P.Src "assets/macos-sierra-2.jpg"]),
        Header ([], (Title "Apple", SubTitle "Hardware and software")),
        Body ([],
          [ R.p [] [ R.str "To make a contribution to

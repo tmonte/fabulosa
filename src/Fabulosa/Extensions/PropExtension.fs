@@ -66,6 +66,12 @@ module Fable =
                     match prop with
                     | Some p -> addProp p propList
                     | None -> propList
+                
+                let addOptionOrElse (get: IHTMLProp -> IHTMLProp option) (orElse: IHTMLProp) (unmerged: Unmerged) =
+                    let (Unmerged props) = unmerged
+                    match List.tryPick get props with 
+                    | Some result ->  addProp result unmerged 
+                    | None -> addProp orElse unmerged
 
                 let merge (unmerged: Unmerged) =
                     let propToClassNames =
@@ -95,3 +101,6 @@ module Fable =
                 let map (mapping: IHTMLProp -> IHTMLProp) (unmerged: Unmerged) =
                     let (Unmerged props) = unmerged
                     List.map mapping props |> Unmerged
+                    
+                
+                    
