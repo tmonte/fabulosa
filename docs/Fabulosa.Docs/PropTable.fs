@@ -97,7 +97,7 @@ module PropTable =
             ([ Kind Striped ],
              [ Head ([],
                  [ Row ([],
-                     [ TitleColumn ([], [R.str "Name"])
+                     [ TitleColumn ([ Style [ Width "150px"]], [R.str "Name"])
                        TitleColumn ([], [R.str "Type"]) ]) ])
                Body ([],
                    (rowValues |> List.map toTableRow)) ])

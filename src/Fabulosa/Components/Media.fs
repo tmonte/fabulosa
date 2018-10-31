@@ -114,7 +114,7 @@ module Media =
         | Ratio1x1
 
         type Kind =
-        | Embedded of ReactElement
+        | Frame
         | Source of string
                 
         type VideoOptional =
@@ -137,9 +137,8 @@ module Media =
         let private container =
             function
             | Source source ->
-                R.video, [Src source :> IHTMLProp], []
-            | Kind.Embedded element ->
-                R.iframe, [], [element]
+                R.video, [Src source :> IHTMLProp; AutoPlay true :> IHTMLProp], []
+            | Frame -> R.iframe, [], []
   
         let video (video: Video) = 
             let (props, (Kind kind)) = video

@@ -8,6 +8,7 @@ module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
 open Renderer
+open Fabulosa.Media.Figure
 
 let button1: Button = ([], [R.str "Vote Bozo"])
 
@@ -18,11 +19,8 @@ let modal: Modal.T =
         {
             Header = (Modal.Header.props, Modal.Header.Children.Text "#Cirão da massa") |> Some
             Body = [
-                Media.Figure.ƒ 
-                    (Media.Figure.props, {
-                        Image = { Media.Image.props with HTMLProps = [P.Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] }
-                        Caption = (Media.Caption.props, Media.Caption.Children.Text "Choose your destiny") |> Some
-                    })
+                figure ( [ Caption ([], Media.Caption.Children.Text "Choose your destiny" ) ], 
+                          Image [P.Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] )                
             ]
             Footer =
                 (Modal.Footer.props, 

@@ -6,18 +6,19 @@ open Fabulosa.Docs
 open R.Props
 open Fable.Import.React
 open Renderer
+open Fabulosa.Media.Figure
 open Fabulosa.Media.Image
 
 (*** define: media-img-responsive-demo ***)
 let demo =
     image [ Src "https://goo.gl/krg6x5 " ]
-(*** hide ***)
 
 let imageContainer containerWidth =
     R.div
         [ Style [ Width containerWidth ] ]
         [ demo ]
 
+(*** hide ***)
 let style =
     Style
         [ Background "#f8f9fa"
@@ -38,22 +39,26 @@ let cover =
 (*** hide ***)
 let src = "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm"
 open Fabulosa.Media.Video
+
 (*** define: video-demo ***)
 let videoDemo =
     video ([], Kind (Source src) )
 
-let frame =
-    R.iframe
+let youtube =
+    video (
         [ HTMLAttr.Width 560
           HTMLAttr.Height 315
           Src "https://www.youtube.com/embed/6AgiQWk4kqA"
-          AllowFullScreen true ] []
-
-let youtube =
-    video ([], Kind (Embedded frame) )
+          AllowFullScreen true ],
+          Kind Frame ) 
+    
+(*** define: figure-demo ***)
+let figureDemo = 
+    figure ([Caption ([], Fabulosa.Media.Caption.Text "Who controls the past controls the future: who controls the present controls the past.")], 
+             Image [Src "https://wallpaper-house.com/data/out/10/wallpaper2you_385583.jpg"])
     
 (*** hide ***)
-let render () =
+let render () = 
     tryMount "media-img-responsive-demo-a" (imageContainer "5rem")
     tryMount "media-img-responsive-demo-b" (imageContainer "12rem")
     tryMount "media-img-responsive-demo-c" (imageContainer "18rem")
@@ -63,9 +68,9 @@ let render () =
         (PropTable.unionPropTable typeof<Media.Image.ImageOptional>)
     tryMount "figure-props-table"
         (PropTable.unionPropTable typeof<Media.Figure.FigureOptional>)
-//    tryMount "figure-demo" figure
-//    tryMount "caption-props-table"
-//        (PropTable.propTable typeof<Media.Caption.Props> Media.Caption.props)
+    tryMount "figure-demo" figureDemo
+    tryMount "caption-props-table"
+        (PropTable.unionPropTable typeof<Media.Caption.CaptionOptional> )
     tryMount "video-demo" videoDemo
     tryMount "youtube-demo" youtube
     tryMount "video-props-table"
@@ -177,7 +182,7 @@ with the parent sizes.
   </div>
 </div>
 
-*)
+**)
 
 (*** include: media-img-fit-cover-demo ***)
 
@@ -186,46 +191,36 @@ with the parent sizes.
 </div>
 
 <div id="video">
-
-<h3 class="s-title">
-    Video
-</h3>
-
-A container for video elements
-
+    <h3 class="s-title">Video</h3>
+    A container for video elements
 </div>
 
 <div id="video-props">
-
-<h4 class="s-title">
-    Video Props
-</h4>
-
-<div class="props-table" id="video-props-table"></div>
-
+    <h4 class="s-title">Video Props</h4>
+    <div class="props-table" id="video-props-table"></div>
 </div>
 
 <div id="video-examples">
-
-<h4 class="s-title">
-    Video Examples
-</h4>
-
-<div class="demo">
-    <div class="columns">
-        <div class="column col-6 col-mx-auto">
-             <div id="video-demo"></div>
+    <h4 class="s-title">Video Examples</h4>
+    <div class="demo">
+        <div class="columns">
+            <div class="column col-6 col-mx-auto">
+                 <div id="video-demo"></div>
+            </div>
         </div>
-    </div>
-    <div class="columns">
-        <div class="column col-6 col-mx-auto">
-             <div id="youtube-demo"></div>
+        <div class="columns">
+            <div class="column col-6 col-mx-auto">
+                 <div id="youtube-demo"></div>
+            </div>
         </div>
-    </div>
+    </div>    
 </div>
 
-</div>
+**)
 
+(*** include: video-demo ***)
+
+(**
 <div id="figure">
 
 <h3 class="s-title">
@@ -280,4 +275,4 @@ as metadata about the image.
 
 </div>
 
-*)
+**)
