@@ -153,7 +153,11 @@ let videoTests =
                       HTMLAttr.Width 560
                       HTMLAttr.Height 315 ]
                     []
-            video ([], Kind (Embedded youtubeVideo))
+            video ([ Src "https://www.youtube.com/embed/7DbslbKsQSk"
+                     AllowFullScreen true
+                     HTMLAttr.Width 560
+                     HTMLAttr.Height 315],
+                     Kind (Frame))
             |> ReactNode.unit
             |>! hasClass "video-responsive video-responsive-16-9"
             |> hasChild 1 (youtubeVideo |> ReactNode.unit)

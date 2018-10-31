@@ -7,6 +7,8 @@ open Fabulosa.Button
 module R = Fable.Helpers.React
 module P = R.Props
 open Expect
+open Fable.Helpers.React.Props
+open Fabulosa.Card
 
 [<Tests>]
 let tests =
@@ -19,9 +21,7 @@ let tests =
                   the world by making tools for the mind
                   that advance humankind." ] ])
             let footer = ([], [ button ([], [ R.str "Purchase" ]) ])
-            let image =
-                { Media.Image.props with
-                    HTMLProps = [ P.Src "assets/macos-sierra-2.jpg" ] }
+            let image = [ P.Src "assets/macos-sierra-2.jpg" :> IHTMLProp ]
             card ([],
               (Image image,
                Header header,
@@ -30,7 +30,7 @@ let tests =
             |> ReactNode.unit
             |>! hasUniqueClass "card"
             |>! hasOrderedDescendentClass 1 "card-header card-title card-subtitle card-image card-body card-footer"
-            |>! hasChild 1 (Media.Image.ƒ image |> ReactNode.unit)
+            |>! hasChild 1 (Media.Image.image image |> ReactNode.unit)
             |>! hasChild 1 (cardHeader header |> ReactNode.unit)
             |>! hasChild 1 (cardBody body |> ReactNode.unit)
             |> hasChild 1 (cardFooter footer |> ReactNode.unit)

@@ -134,21 +134,28 @@ module Media =
                 | Ratio Ratio1x1 -> className "video-responsive-1-1" |> Some
             | _ -> None
 
-        let private container =
-            function
-            | Source source ->
-                R.video, [Src source :> IHTMLProp; AutoPlay true :> IHTMLProp], []
-            | Frame -> R.iframe, [], []
-  
-        let video (video: Video) = 
-            let (props, (Kind kind)) = video
-            let container, containerProps, children = (container kind)
-            
+        let private videoTag props source =
             props
             |> Unmerged
-            |> addProps containerProps
+            |> addProp (Src source)
             |> addProp (ClassName "video-responsive")
             |> addOptionOrElse ratio (ClassName "video-responsive-16-9")
             |> merge
-            |> container
-            <| children
+            |> R.video
+            <| []
+            
+        let private frameTag (props: HTMLProps ) =
+            [ ClassName "video-responsive" :> IHTMLProp]
+            |> Unmerged
+            |> addOptionOrElse ratio (ClassName "video-responsive-16-9")
+            |> merge 
+            |> R.div
+            <| [ R.iframe props [] ]                   
+  
+        let video (video: Video) = 
+            let (props, (Kind kind)) = video
+            
+            match kind with 
+            | Source source -> videoTag props source
+            | Frame -> frameTag props
+           
