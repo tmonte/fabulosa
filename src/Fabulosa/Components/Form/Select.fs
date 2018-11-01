@@ -1,101 +1,49 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Select =
 
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
-    module Option =
-        
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: IHTMLProp list }
+    type SelectOption = P.HTMLProps * FabulosaText
 
-        [<RequireQualifiedAccess>]
-        type Children = string
+    let selectOption ((opt, (Text txt)): SelectOption) =
+        R.option opt [ R.str txt ]
 
-        [<RequireQualifiedAccess>]
-        type T = Props * Children
+    type SelectOptionGroupChild =
+        | Option of SelectOption
 
-        let props =
-            { Props.HTMLProps = [] }
+    type SelectOptionGroup =
+        P.HTMLProps * SelectOptionGroupChild list
 
-        let build (option: T) =
-            let props, children = option
-            props.HTMLProps
-            |> R.option
-            <| [ R.str children ]
+    let selectOptionGroup ((opt, chi): SelectOptionGroup) =
+        R.optgroup opt (Seq.map (fun (Option opt) -> selectOption opt) chi)
 
-        let ƒ = build
+    type SelectChild =
+        | Group of SelectOptionGroup
+        | Option of SelectOption
 
-    module OptionGroup =
-    
-        [<RequireQualifiedAccess>]
-        type Props =
-            { HTMLProps: IHTMLProp list }
+    type Select =
+        P.HTMLProps * SelectChild list
 
-        [<RequireQualifiedAccess>]
-        type T<'Option> = Props * 'Option list
+    let private propToClassName (prop: P.IHTMLProp) =
+        match prop with
+        | :? FabulosaFormSize as opt ->
+            match opt with
+            | Size Small -> "select-sm"
+            | Size Large -> "select-lg"
+            |> P.className
+        | _ -> prop
 
-        let props =
-            { Props.HTMLProps = [] }
-
-        let build optionƒ (optionGroup: T<'Option>) =
-            let props, children = optionGroup
-            props.HTMLProps
-            |> R.optgroup
-            <| Seq.map optionƒ children
-
-        let ƒ = build Option.ƒ
-
-    [<RequireQualifiedAccess>]
-    type Size =
-    | Small
-    | Large
-    | Unset
-
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Size: Size
-          HTMLProps: IHTMLProp list }
-
-    [<RequireQualifiedAccess>]
-    type Child<'Group, 'Option> =
-    | Group of 'Group
-    | Option of 'Option
-
-    [<RequireQualifiedAccess>]
-    type Children<'Group, 'Option> =
-        Child<'Group, 'Option> list
-
-    [<RequireQualifiedAccess>]
-    type T<'Group, 'Option> =
-        Props * Children<'Group, 'Option>
-
-    let props =
-        { Props.Size = Size.Unset
-          Props.HTMLProps = [] }
-
-    let private size =
-        function
-        | Size.Small -> "select-sm"
-        | Size.Large -> "select-lg"
-        | Size.Unset -> ""
-        >> ClassName
-
-    let build groupƒ optionƒ (select: T<'Group, 'Option>) =
-        let props, children = select
-        props.HTMLProps
-        |> addPropsOld
-            [ ClassName "form-select"
-              size props.Size ]
+    let select ((opt, chi): Select) =
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "form-select")
+        |> P.map propToClassName
+        |> P.merge
         |> R.select
         <| Seq.map
             (function
-             | Child.Group group -> groupƒ group
-             | Child.Option option -> optionƒ option)
-            children
-
-    let ƒ = build OptionGroup.ƒ Option.ƒ
+             | Group g -> selectOptionGroup g
+             | Option o -> selectOption o)
+            chi

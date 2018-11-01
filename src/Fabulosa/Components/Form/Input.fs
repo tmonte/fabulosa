@@ -1,192 +1,129 @@
 ﻿namespace Fabulosa
 
-[<RequireQualifiedAccess>]
 module Input =
 
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
-    [<RequireQualifiedAccess>]
-    type Size =
-    | Small
-    | Large
-    | Unset
+    type Input = P.HTMLProps
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Size: Size
-          HTMLProps: IHTMLProp list }
+    let private propToClassName (prop: P.IHTMLProp) =
+        match prop with
+        | :? FabulosaFormSize as opt ->
+            match opt with
+            | Size Small -> "input-sm"
+            | Size Large -> "input-lg"
+            |> P.className
+        | _ -> prop
 
-    [<RequireQualifiedAccess>]
-    type T = Props
-
-    let props =
-        { Props.Size = Size.Unset
-          Props.HTMLProps = [] }
-
-    let private size =
-        function
-        | Size.Small -> "input-sm"
-        | Size.Large -> "input-lg"
-        | Size.Unset -> ""
-
-    let ƒ (input: T) =
-        input.HTMLProps
-        |> addPropsOld
-            [ ClassName "form-input"
-              ClassName <| size input.Size ]
+    let input (opt: Input) =
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "form-input")
+        |> P.map propToClassName
+        |> P.merge
         |> R.input
 
-    let render = ƒ
-
-[<RequireQualifiedAccess>]
 module IconInput =
 
     open Fabulosa.Icon
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
+    open Input
 
-    [<RequireQualifiedAccess>]
-    type Position =
-    | Left
-    | Right
+    type IconInputChildInput =
+        | Input of Input
 
-    [<RequireQualifiedAccess>]
-    type Props =
-        { Position: Position
-          HTMLProps: IHTMLProp list }
+    type private IconInputChildIconChild =
+        | Icon of Icon
 
-    [<RequireQualifiedAccess>]
-    type Children =
-        { Input: Input.T
-          Icon: Icon }
+    type IconInputChildIcon =
+        | LeftIcon of Icon
+        | RightIcon of Icon
 
-    [<RequireQualifiedAccess>]
-    type T = Props * Children
+    type IconInput = P.HTMLProps * (IconInputChildIcon * IconInputChildInput)
 
-    let props =
-        { Props.Position = Position.Left
-          Props.HTMLProps = [] }
-
-    let private position =
+    let private childToClassName =
         function
-        | Position.Left -> "has-icon-left"
-        | Position.Right -> "has-icon-right"
+        | LeftIcon li -> "has-icon-left"
+        | RightIcon ri -> "has-icon-right"
+        >> P.className
 
-    let build (iconInput: T) =
-        let props, children = iconInput
-        let containerClasses =
-            [ position props.Position ]
-            |> String.concat " "
-        let iconOpt, iconReq = children.Icon
-        let iconT =
-            (iconOpt |> addPropOld (ClassName "form-icon"), iconReq)
-        R.div [ClassName containerClasses]
-            [ Input.ƒ children.Input
-              icon iconT ]
+    let private iconChild =
+        function
+        | LeftIcon li -> li
+        | RightIcon ri -> ri
 
-    let ƒ = build
+    let iconInput ((opt, (icn, (Input inp))): IconInput) =
+        let className = childToClassName icn
+        let (icnOpt, icnReq) = iconChild icn
+        let icn = 
+            (P.Unmerged icnOpt
+            |> P.addProp (P.ClassName "form-icon")
+            |> P.merge, icnReq)
+        R.div [ className ]
+            [ input inp
+              icon icn ]
 
-[<RequireQualifiedAccess>]
 module InputGroup =
 
     open Fabulosa.Extensions
     open Fabulosa.Button
     module R = Fable.Helpers.React
     open R.Props
+    open Input
+    open Fabulosa.Select
+    
+    type InputGroupAddonRight =
+        | OptButton of Button option
 
-    [<RequireQualifiedAccess>]
-    module GroupButton =
+    type InputGroupAddonLeft =
+        | OptText of string option
+        
+    type InputGroupChild =
+        | Input of Input
+        | Select of Select
 
-        [<RequireQualifiedAccess>]
-        type T = Button
+    type InputGroup =
+        HTMLProps * (InputGroupAddonLeft * InputGroupChild list * InputGroupAddonRight)
 
-        let ƒ (groupButton: T) =
-            let props, children = groupButton
+    let private btn =
+        function
+        | OptButton (Some (opt, chi)) ->
             button
-                (props |> addPropOld (ClassName "input-group-btn"),
-                 children)
+                (Unmerged opt
+                |> addProp (ClassName "input-group-btn")
+                |> merge, chi)
+        | _ -> R.ofOption None
 
-    [<RequireQualifiedAccess>]
-    type AddonRight<'Button> =
-    | Button of 'Button
-    | Unset
-
-    [<RequireQualifiedAccess>]
-    type AddonLeft =
-    | Text of string
-    | Unset
-
-    [<RequireQualifiedAccess>]
-    type Props<'Button> =
-        { AddonRight: AddonRight<'Button>
-          AddonLeft: AddonLeft
-          Inline: bool
-          HTMLProps: IHTMLProp list }
-
-    [<RequireQualifiedAccess>]
-    type Child<'Input, 'Select> =
-        | Input of 'Input
-        | Select of 'Select
-
-    [<RequireQualifiedAccess>]
-    type Children<'Input, 'Select> =
-        Child<'Input, 'Select> list
-
-    [<RequireQualifiedAccess>]
-    type T<'Input, 'Select, 'Button> =
-        Props<'Button> * Children<'Input, 'Select>
-
-    let props =
-        { Props.AddonRight = AddonRight.Unset
-          Props.AddonLeft = AddonLeft.Unset
-          Props.Inline = false
-          Props.HTMLProps = [] }
-
-    let private button buttonƒ =
+    let private txt =
         function
-        | AddonRight.Button button ->
-            buttonƒ button
-            |> Some
-        | AddonRight.Unset -> None
-
-    let private text =
-        function
-        | AddonLeft.Text text ->
+        | OptText (Some text) ->
             R.span
                 [ ClassName "input-group-addon" ]
                 [ R.str text ]
-            |> Some
-        | AddonLeft.Unset -> None
+        | _ -> R.ofOption None
 
-    let private groupInline =
-        function
-        | true -> "input-inline"
-        | false -> ""
-        >> ClassName
+    let private propToClassName (prop: IHTMLProp) =
+        match prop with
+        | :? FabulosaFormInline as opt ->
+            match opt with
+            | Inline -> className "input-inline"
+        | _ -> prop
 
-    let build
-        inputƒ
-        selectƒ
-        buttonƒ
-        (inputGroup: T<'Input, 'Select, 'Button>) =
-        let props, children = inputGroup
-        let containerProps =
-            props.HTMLProps
-            |> addPropsOld
-                [ ClassName "input-group"
-                  groupInline props.Inline ]
-        R.div containerProps
-            [ text props.AddonLeft |> R.ofOption
-              R.fragment
-                []
-                (Seq.map
-                    (function
-                     | Child.Input input -> inputƒ input
-                     | Child.Select select -> selectƒ select)
-                     children)
-              button buttonƒ props.AddonRight |> R.ofOption ]
-
-    let ƒ = build Input.ƒ Select.ƒ GroupButton.ƒ
+    let inputGroup ((opt, (addl, chi, addr)): InputGroup) =
+        Unmerged opt
+        |> addProp (ClassName "input-group")
+        |> map propToClassName
+        |> merge
+        |> R.div
+        <| [ txt addl
+             R.fragment
+               []
+               (Seq.map
+                  (function
+                   | Input i -> input i
+                   | Select s -> select s)
+                  chi)
+             btn addr ]
