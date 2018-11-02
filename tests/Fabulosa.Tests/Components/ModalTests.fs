@@ -7,55 +7,49 @@ module R = Fable.Helpers.React
 module P = R.Props
 open Expect
 open ReactNode
+open Fabulosa.Modal.Header
+
 
 [<Tests>]
 let headerTests =
     testList "Modal Header tests" [
-        test "renders with text" {
-            let child = R.div [P.ClassName "modal-title h5"] [R.str "Ciro 12"] |> ReactNode.unit 
-            let header = Modal.Header.props, Modal.Header.Children.Text "Ciro 12"
+        test "renders with text" {        
+            let headerText = "Quem tem por que viver pode suportar quase qualquer como."
+            let child = R.div [P.ClassName "modal-title h5"] [R.str headerText] |> ReactNode.unit 
             
-            header
-            |> Modal.Header.ƒ 
+            header ([], Text headerText) 
             |> ReactNode.unit
             |> hasChild 1 child
         }
         
         test "renders with element" {
-            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Wie man mit dem Hammer philosophiert"]
             let child = complexChildContent |> ReactNode.unit 
-            let header = Modal.Header.props, Modal.Header.Children.Elements [complexChildContent]
         
-            header
-            |> Modal.Header.ƒ
+            header ([], Elements [ complexChildContent ])
             |> ReactNode.unit
             |> hasChild 1 child
         }
         
         test "renders props" {
-            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Wie man mit dem Hammer philosophiert"]
             let child = complexChildContent |> ReactNode.unit 
-            let props = { Modal.Header.props with HTMLProps = [P.Id "hello-world"] } 
-            let header = props, Modal.Header.Children.Elements [complexChildContent]
-        
-            header
-            |> Modal.Header.ƒ 
+            header ([P.Id "hello-world"], Elements [ complexChildContent ])
             |> ReactNode.unit
             |>! hasProp (P.Id "hello-world")
             |> hasChild 1 child
         }
     ]
-
+    
+open Fabulosa.Modal.Footer
 [<Tests>]
 let footerTests =    
     testList "Modal Footer" [
         test "renders with element" {
-            let content = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
+            let content = R.div [P.ClassName "h1"] [R.str  "Wie man mit dem Hammer philosophiert"]
             let child = content |> ReactNode.unit 
-            let footer = Modal.Footer.props, Modal.Footer.Children.Elements [content] 
         
-            footer
-            |> Modal.Footer.ƒ 
+            footer ([], Elements [content])
             |> ReactNode.unit
             |>! hasUniqueClass "modal-footer"
             |> hasChild 1 child
@@ -68,10 +62,8 @@ let footerTests =
             ]
             let primaryButton = buttons.[0] |> button |> ReactNode.unit 
             let linkButton = buttons.[1] |> button |> ReactNode.unit 
-            let footer = Modal.Footer.props, Modal.Footer.Children.Buttons buttons
         
-            footer
-            |> Modal.Footer.ƒ 
+            footer ([], Buttons buttons)
             |> ReactNode.unit
             |>! hasUniqueClass "modal-footer"
             |>! hasChild 1 primaryButton
@@ -79,26 +71,27 @@ let footerTests =
         }
         
         test "renders props" {
-            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Cirão da Massa"]
+            let complexChildContent = R.div [P.ClassName "h1"] [R.str  "trotzdem Ja zum Leben sagen"]
             let child = complexChildContent |> ReactNode.unit 
-            let props = { Modal.Footer.props with HTMLProps = [P.Id "hello-world"] } 
-            let footer = props, Modal.Footer.Children.Elements [complexChildContent]
-        
-            footer
-            |> Modal.Footer.ƒ 
+                    
+            footer ([P.Id "hello-world"], Elements [complexChildContent])
             |> ReactNode.unit
             |>! hasProp (P.Id "hello-world")
             |> hasChild 1 child
         }
     ]
     
+open Fabulosa.Modal
 [<Tests>]
 let modalTests =    
     testList "Modal" [
-        test "renders default props" {
-              let modal = (Modal.props, Modal.children) |> Modal.ƒ |> ReactNode.unit
+        test "does not render empty modal" {
+            Expect.isNull (modal ([], (Header None, Body [], Footer None))) "Should be null"
+        }
 
-              modal
+        test "renders default props" {
+              modal ([Open true], (Header None, Body [], Footer None))
+              |> ReactNode.unit
               |>! hasClass "modal active"
               |>! hasDescendentClass "modal-overlay modal-container modal-body"
               |>! hasNoDescendentClass "modal-header modal-footer"
@@ -106,11 +99,9 @@ let modalTests =
         }
         
         test "renders props" {
-            let props =  { Modal.props with HTMLProps = [P.Id "pele"] }
-            (props, Modal.children)
-            |> Modal.ƒ
+             modal ([Open true; P.Id "socrates"], (Header None, Body [R.str ""], Footer None))
             |> ReactNode.unit
-            |>! hasProp (P.Id "pele")
+            |>! hasProp (P.Id "socrates")
             |>! hasClass "modal active"
             |>! hasDescendentClass "modal-container"
             |>! hasDescendentClass "modal-body"
@@ -122,11 +113,7 @@ let modalTests =
             let overlay = R.a [P.ClassName "modal-overlay"; P.OnClick happyFunction] []
             let buttonClose = R.a [P.ClassName "btn btn-clear float-right"; P.OnClick happyFunction] []
 
-            let props =
-                { Modal.props with
-                    OnRequestClose = happyFunction |> Some }
-            (props, Modal.children)
-            |> Modal.ƒ
+            modal ([Open true; OnRequestClose happyFunction], (Header None, Body [], Footer None))
             |> ReactNode.unit
             |>! hasClass "modal active"
             |>! hasChild 1 (overlay |> ReactNode.unit)
@@ -138,46 +125,47 @@ let modalTests =
         }
         
         test "configures size" {
-            let propsSmall =  { Modal.props with Size = Modal.Size.Small }
-            let propsMedium =  { Modal.props with Size = Modal.Size.Medium }
-            let propsLarge =  { Modal.props with Size = Modal.Size.Large }
+            let children = (Header None, Body [], Footer None)
             
-            (propsSmall, Modal.children)
-            |> Modal.ƒ
+            modal ([Open true; Size Small], children)
             |> ReactNode.unit
             |> hasClass "modal active modal-sm"
             
-            (propsMedium, Modal.children)
-            |> Modal.ƒ
+            modal ([Open true; Size Medium], children)
             |> ReactNode.unit 
             |> hasClass "modal active"
             
-            (propsLarge, Modal.children)
-            |> Modal.ƒ 
+            modal ([Open true; Size Large], children) 
             |> ReactNode.unit 
             |> hasClass "modal active modal-lg"
         }
         
         test "renders body contents" {
-            let babyLookAtThisBody = R.str "I work out!"
-            let children = { Modal.children with Body = [babyLookAtThisBody] }
+            let body = R.str "I love this body. I work out!"
             
-            (Modal.props, children)
-            |> Modal.ƒ  
+            modal ([Open true], (Header None, Body [body], Footer None))  
             |> ReactNode.unit
-            |> hasChild 1 (babyLookAtThisBody |> ReactNode.unit)
+            |> hasChild 1 (body |> ReactNode.unit)
         }
         
         test "renders header contents" {
-            let headerConfig = Modal.Header.props, (Modal.Header.Text "Ciro 12")
-            let headerChild = headerConfig |> Modal.Header.ƒ |> ReactNode.unit
-            let children = { Modal.children with Header = Some headerConfig }
+            let headerElement = [], Text "Tudo que sei é que nada sei."
+            let headerChild = header headerElement
             
-            (Modal.props, children)
-            |> Modal.ƒ  
+            modal ([Open true], (Header ( Some headerElement), Body [], Footer None))
             |> ReactNode.unit
             |>! hasDescendentClass "modal-header"
-            |> hasChild 1 headerChild
+            |> hasChild 1 (headerChild |> ReactNode.unit)
+        }
+        
+        test "renders footer contents" {
+            let footerElement = [], Footer.Elements [R.str "Tudo que sei é que nada sei."]
+            let footerChild = footer footerElement
+            
+            modal ([Open true], (Header None, Body [], Footer (Some footerElement)))
+            |> ReactNode.unit
+            |>! hasDescendentClass "modal-footer"
+            |> hasChild 1 (footerChild |> ReactNode.unit)
         }
     ]
     
