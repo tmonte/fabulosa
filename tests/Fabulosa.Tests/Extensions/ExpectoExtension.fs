@@ -41,8 +41,6 @@ module Expect
         let interssect = Set.intersect actual expected
         Expect.isEmpty interssect (sprintf "Found classes when not supposed to find them. Actual [%A] Expected [%A]" actual expected)
     
-//        Expect.throws test (sprintf "Found classes [%s] when not supposed to find them." expectedClassName)
-
     let hasOrderedDescendentClass multiplier (expected: string) (node: ReactNode.T) =
         let multiplied = String.replicate multiplier (expected + " ")
         let actual, expectedClasses = parseDescendent multiplied node

@@ -78,7 +78,7 @@ module Tooltip =
                 | _ -> None
             |> pick      
       
-        let private newOrientation =
+        let private orientation =
             fun (prop: IHTMLProp) ->
                 match prop with
                 | :? BaseTooltipOptional as opt ->
@@ -90,31 +90,13 @@ module Tooltip =
                     | _ -> None
                 | _ -> None
             
-        let orientationClass orientation = 
-            match orientation with 
-            | Some Orientation.Top -> className "tooltip-top"
-            | Some Orientation.Bottom -> className "tooltip-bottom"
-            | Some Orientation.Right -> className "tooltip-right"
-            | Some Orientation.Left -> className "tooltip-left"
-            | None -> className "tooltip-top"
-            
-        let private newMapp =
-            fun (prop: IHTMLProp) ->
-                match prop with
-                | :? BaseTooltipOptional as opt ->
-                    match opt with
-                    | BaseOrientation o -> Some o                        
-                    | _ -> None
-                | _ -> None 
-            |> pick
-            
         let baseTooltip (tooltip: BaseTooltip) =
             let opt, TooltipContent.Content children = tooltip
 
             opt
             |> Unmerged
             |> addProps [ ClassName "fab-tooltip"]
-            |> addOptionOrElse newOrientation (ClassName "tooltip-top")
+            |> addOptionOrElse orientation (ClassName "tooltip-top")
             |> addPropOpt (opt |> reference |> Option.map (fun x -> upcast x))
             |> merge
             |> R.span
