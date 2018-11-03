@@ -50,9 +50,12 @@ let tests =
         }
 
         test "Option group default" {
-            selectOptionGroup ([], [ SelectOptionGroupChild.Option ([], Text "Option")])
+            selectOptionGroup ([],
+                [ Option ([], Text "Option")
+                  Group ([], [ Option ([], Text "Nested") ]) ])
             |> ReactNode.unit
-            |> hasChild 1 (selectOption ([], Text "Option") |> ReactNode.unit)
+            |>! hasChild 1 (selectOption ([], Text "Option") |> ReactNode.unit)
+            |> hasChild 1 (selectOption ([], Text "Nested") |> ReactNode.unit)
         }
 
         test "Option group html props" {

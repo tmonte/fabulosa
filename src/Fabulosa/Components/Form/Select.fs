@@ -1,6 +1,6 @@
 ﻿namespace Fabulosa
 
-module Select =
+module rec Select =
 
     open Fabulosa.Extensions
     module R = Fable.Helpers.React
@@ -15,14 +15,19 @@ module Select =
         | Option of SelectOption
 
     type SelectOptionGroup =
-        P.HTMLProps * SelectOptionGroupChild list
-
-    let selectOptionGroup ((opt, chi): SelectOptionGroup) =
-        R.optgroup opt (Seq.map (fun (Option opt) -> selectOption opt) chi)
+        P.HTMLProps * SelectChild list
 
     type SelectChild =
         | Group of SelectOptionGroup
         | Option of SelectOption
+
+    let selectOptionGroup ((opt, chi): SelectOptionGroup) =
+        R.optgroup opt
+            (Seq.map
+                (function
+                | Option opt -> selectOption opt
+                | Group grp -> selectOptionGroup grp)
+                chi)
 
     type Select =
         P.HTMLProps * SelectChild list
