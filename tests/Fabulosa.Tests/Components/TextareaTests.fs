@@ -3,6 +3,7 @@
 open Expecto
 open Expect
 open Fabulosa
+open Fabulosa.Textarea
 module R = Fable.Helpers.React
 open R.Props
 
@@ -10,22 +11,18 @@ open R.Props
 let tests =
     testList "Textarea tests" [
 
-        //test "Textarea default" {
-        //    Textarea.ƒ
-        //        (Textarea.props, "Text")
-        //    |> ReactNode.unit
-        //    |>! hasUniqueClass "form-input"
-        //    |> hasText "Text"
-        //}
+        test "Textarea default" {
+            textarea ([], Text "Text")
+            |> ReactNode.unit
+            |>! hasUniqueClass "form-input"
+            |> hasText "Text"
+        }
 
-        //test "Textarea html props" {
-        //    Textarea.ƒ
-        //        ({ Textarea.props with
-        //             HTMLProps = [ ClassName "custom" ] },
-        //         "Text")
-        //    |> ReactNode.unit
-        //    |>! hasClass "custom"
-        //    |> hasText "Text"
-        //}
+        test "Textarea html props" {
+            textarea ([ ClassName "custom" ], Text "Text")
+            |> ReactNode.unit
+            |>! hasClass "custom"
+            |> hasText "Text"
+        }
 
     ]

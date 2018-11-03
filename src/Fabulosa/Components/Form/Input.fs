@@ -56,15 +56,18 @@ module IconInput =
         | RightIcon ri -> ri
 
     let iconInput ((opt, (icn, (Input inp))): IconInput) =
-        let className = childToClassName icn
         let (icnOpt, icnReq) = iconChild icn
+        let className = childToClassName icn
         let icn = 
             (P.Unmerged icnOpt
             |> P.addProp (P.ClassName "form-icon")
             |> P.merge, icnReq)
-        R.div [ className ]
-            [ input inp
-              icon icn ]
+        P.Unmerged opt
+        |> P.addProp className
+        |> P.merge
+        |> R.div
+        <| [ input inp
+             icon icn ]
 
 module InputGroup =
 

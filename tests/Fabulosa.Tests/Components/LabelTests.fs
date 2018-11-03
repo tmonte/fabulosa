@@ -2,47 +2,38 @@
 
 open Expecto
 open Fabulosa
+open Fabulosa.Label
 module R = Fable.Helpers.React
-open R.Props
+module P = R.Props
 open Expect
 
 [<Tests>]
 let tests =
     testList "Label tests" [
 
-        //test "Label default" {
-        //    Label.ƒ (Label.props, "Label")
-        //    |> ReactNode.unit
-        //    |>! hasUniqueClass "form-label"
-        //    |> hasText "Label"
-        //}
+        test "Label default" {
+            label ([], Text "Label")
+            |> ReactNode.unit
+            |>! hasUniqueClass "form-label"
+            |> hasText "Label"
+        }
 
-        //test "Label size small" {
-        //    Label.ƒ
-        //        ({ Label.props with
-        //             Size = Label.Size.Small },
-        //         "Label")
-        //    |> ReactNode.unit
-        //    |> hasClass "label-sm"
-        //}
+        test "Label size small" {
+            label ([ Size Small ], Text "Label")
+            |> ReactNode.unit
+            |> hasClass "label-sm"
+        }
 
-        //test "Label size large" {
-        //    Label.ƒ
-        //        ({ Label.props with
-        //             Size = Label.Size.Large },
-        //         "Label")
-        //    |> ReactNode.unit
-        //    |> hasClass "label-lg"
-        //}
+        test "Label size large" {
+            label ([ Size Large ], Text "Label")
+            |> ReactNode.unit
+            |> hasClass "label-lg"
+        }
        
-        //test "Label html props" {
-        //    Label.ƒ
-        //        ({ Label.props with
-        //             HTMLProps =
-        //               [ ClassName "custom" ] },
-        //         "Label")
-        //    |> ReactNode.unit
-        //    |> hasClass "form-label custom"
-        //}
+        test "Label html props" {
+            label ([ P.ClassName "custom" ], Text "Label")
+            |> ReactNode.unit
+            |> hasClass "form-label custom"
+        }
 
     ]
