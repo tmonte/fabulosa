@@ -9,98 +9,92 @@ module P = R.Props
 open Fable.Import.React
 open Renderer
 open Fabulosa.Media.Figure
+open Fabulosa.Modal
+open Fabulosa.Button
 
-let button1: Button = ([], [R.str "Vote Bozo"])
+let button1: Button = ([], [R.str "Click me!"])
 
-// (*** define: modal-sample ***)
-// let modal: Modal.T = 
-//     (
-//         Modal.props, 
-//         {
-//             Header = (Modal.Header.props, Modal.Header.Children.Text "#Cirão da massa") |> Some
-//             Body = [
-//                 figure ( [ Caption ([], Media.Caption.Children.Text "Choose your destiny" ) ], 
-//                           Image [P.Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] )                
-//             ]
-//             Footer =
-//                 (Modal.Footer.props, 
-//                  [
-//                     button1
-//                     ([ Button.Kind Primary ], [R.str "Vote Ciro 12"])
-//                  ] |> Modal.Footer.Buttons) |> Some
-//         }
-//     )
-// let props, children = modal
-
-// let smallModal: Modal.T = { props with Size = Modal.Size.Small }, children
-// let largeModal: Modal.T = { props with Size = Modal.Size.Large }, children
-
-// module Container =
-//     open Fabulosa.Extensions
-//     open Fable.Import
-//     open Fable.Import.React
-//     module R = Fable.Helpers.React
-//     open Fable.Helpers.React.ReactiveComponents
-//     module P = R.Props
+(*** define: modal-sample ***)
+let header = (Some ([], Text "A quote"))
+let body = 
+    [ figure ( [ Caption ([], Media.Caption.Children.Text "Choose your destiny" ) ], 
+                Image [P.Src "https://multimidia.gazetadopovo.com.br/media/info/posicionamento-economico.png?12"] )   
+      Typography.blockquote [] [R.str "History repeats itself, first as tragedy, second as farce."] ]
+let footer = Some ( [], Buttons [ button1 ] ) 
+      
+let smallModal: Modal = 
+    [], 
+    ( Header header, 
+      Body body, 
+      Footer footer ) 
     
-//     type State = { Opened: bool}
-//     type Message = 
-//         | Open
-//         | Close
+module Container =
+    open Fabulosa.Extensions
+    open Fable.Import
+    open Fable.Import.React
+    module R = Fable.Helpers.React
+    open Fable.Helpers.React.ReactiveComponents
+    module P = R.Props
     
-//     type private Dispatch = Message -> unit
+    type State = { Opened: bool}
+    type Message = 
+        | Open
+        | Close
     
-//     let private init _ = { Opened = false }
+    type private Dispatch = Message -> unit
     
-//     let private update message state =
-//         match message with 
-//         | Open -> { state with Opened = true }
-//         | Close -> { state with Opened = false }
+    let private init _ = { Opened = false }
     
-//     let private view (model: Model<Modal.T, State>) (dispatch: Dispatch) =
-//         let props, children = model.props
-//         let props = { props with 
-//                         IsOpen = model.state.Opened
-//                         OnRequestClose = Some (fun _ -> dispatch Close) }
-//         let size = props.Size
-//         R.fragment [][
-//             button ([ Button.Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
-//             Modal.ƒ (props, children)
-//         ]
+    let private update message state =
+        match message with 
+        | Open -> { state with Opened = true }
+        | Close -> { state with Opened = false }
     
-//     let ƒ (content : Modal.T) =
-//         R.reactiveCom
-//             init
-//             update
-//             view
-//             ""
-//             content
-//             []
+    let private view (model: Model<Modal, State>) (dispatch: Dispatch) =
+        
+        let modalData = 
+            model.props 
+            |> Modal.setOpen model.state.Opened
+            |> Modal.setOnRequestClose (fun _ -> dispatch Close)
+        
+        R.fragment [][
+            button ([ Button.Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" 5)]) 
+            modal modalData
+        ]
+    
+    let container (content : Modal) =
+        R.reactiveCom
+            init
+            update
+            view
+            ""
+            content
+            []
             
-// (*** hide ***)
-// let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
-// let demo = R.div [style] [ 
-//         grid
-//             ([],
-//              [ Row
-//                  ([],
-//                   [ Column
-//                       ([ Size 4; SMSize 12 ],
-//                        [ Container.ƒ smallModal ])
-//                     Column
-//                       ([ Size 4; SMSize 12 ],
-//                        [ Container.ƒ modal ])
-//                     Column
-//                       ([ Size 4; SMSize 12 ],
-//                        [ Container.ƒ largeModal ]) ]) ])
-//     ]
+(*** hide ***)
+let style = P.Style [P.Background "#f8f9fa"; P.TextAlign "center"; P.Padding "20px"]
+let demo = R.div [style] [ 
+        grid
+            ([],
+             [ Row
+                 ([],
+                  [ Column
+                      ([ Grid.Size 4; SMSize 12 ],
+                       [ Container.container smallModal ])
+                    Column
+                      ([ Grid.Size 4; SMSize 12 ],
+                       [  ])
+                    Column
+                      ([ Grid.Size 4; SMSize 12 ],
+                       [  ]) ]) ])
+    ]
 
-let render () = ()
-//     tryMount "modal-demo" demo
-//     tryMount "modal-props-table" (PropTable.propTable typeof<Modal.Props> Modal.props)
-//     tryMount "modal-header-props-table" (PropTable.propTable typeof<Modal.Header.Props> Modal.Header.props)
-//     tryMount "modal-footer-props-table" (PropTable.propTable typeof<Modal.Footer.Props> Modal.Footer.props)
-// (**
+let render () =
+    tryMount "modal-demo" demo
+//    tryMount "modal-props-table" (PropTable.propTable typeof<Modal.Props> Modal.props)
+//    tryMount "modal-header-props-table" (PropTable.propTable typeof<Modal.Header.Props> Modal.Header.props)
+//    tryMount "modal-footer-props-table" (PropTable.propTable typeof<Modal.Footer.Props> Modal.Footer.props)
+(**
 
 // <div id="modal">
 //     <h2 class="s-title">Modal</h2>

@@ -9,43 +9,44 @@ module Modal =
     open Fable.Import.React
     open Extensions.Fable.Helpers.React.Props
     
-    module Header =
-        type HeaderChildren =
+    type HeaderChildren =
         | Elements of ReactElement list
         | Text of string
-                
-        type Header = HTMLProps * HeaderChildren 
-                
-        let header (header: Header) = 
-            let props, children = header
-            let children =
-                match children with 
-                | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
-                | Elements e -> [R.div [ClassName "modal-title"] e]
-            R.span props children
-
-    module Footer =
-        type FooterChildren =
+        
+    type FooterChildren =
         | Elements of ReactElement list
         | Buttons of Button list
+    
+    type HeaderData = HTMLProps * HeaderChildren    
+    type FooterData = HTMLProps * FooterChildren
+            
+    type ModalHeader =
+        | Header of HeaderData option
         
-        type Footer = HTMLProps * FooterChildren
-        
-        let footer (footer: Footer) =
-            let props, children = footer
-            let children =
-                match children with
-                | Elements e -> e
-                | Buttons b -> b |> List.map button 
-         
-            props
-            |> Unmerged
-            |> addProp (ClassName "modal-footer")
-            |> merge
-            |> R.div 
-            <| children
-    open Header
-    open Footer
+    type ModalFooter =
+        | Footer of FooterData option
+    
+    let header (header: HeaderData) =
+        let props, children = header
+        let children =
+            match children with 
+            | Text t -> [R.div [ClassName "modal-title h5"] [R.str t]]
+            | HeaderChildren.Elements e -> [R.div [ClassName "modal-title"] e]
+        R.span props children
+
+    let footer (footer: FooterData) =
+        let props, children = footer
+        let children =
+            match children with
+            | Elements e -> e
+            | Buttons b -> b |> List.map button 
+     
+        props
+        |> Unmerged
+        |> addProp (ClassName "modal-footer")
+        |> merge
+        |> R.div 
+        <| children
     
     type Size =
     | Small
@@ -53,26 +54,13 @@ module Modal =
     | Large
     
     type OnClose = MouseEvent -> unit
-    
-    type Props = {
-        HTMLProps: IHTMLProp list
-        OnRequestClose: OnClose option
-        Size: Size
-        IsOpen: bool
-    }
-    
+   
     type ModalOptional =
         | OnRequestClose of OnClose
         | Size of Size
         | Open of bool
         interface IHTMLProp
-   
-    type ModalHeader =
-        | Header of Header option
-        
-    type ModalFooter =
-        | Footer of Footer option
-        
+           
     type ModalBody = 
         | Body of ReactElement list 
     
@@ -88,10 +76,10 @@ module Modal =
         |> R.a
         <| []
     
-    let ƒheader header (onRequestClose: IHTMLProp option) =
-        match header, onRequestClose with 
-        | Some h, Some onClick -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; onClick] []; Header.header h] |> Some
-        | Some h, None -> R.div [ClassName "modal-header"] [ Header.header h] |> Some
+    let ƒheader headerData (onRequestClose: IHTMLProp option) =
+        match headerData, onRequestClose with 
+        | Some h, Some onClick -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; onClick] []; header h] |> Some
+        | Some h, None -> R.div [ClassName "modal-header"] [ header h] |> Some
         | None, Some onClick -> R.div [ClassName "modal-header"] [R.a [ClassName "btn btn-clear float-right"; onClick] []] |> Some
         | None, None -> None
         
@@ -110,14 +98,18 @@ module Modal =
             | _ -> None
         |> List.tryPick
     
-    let private isOpen =
-        fun (prop: IHTMLProp) ->
-            match prop with
-            | :? ModalOptional as opt ->
-                match opt with
-                | Open o -> Some o                        
+    let private isOpen props =
+        let getOpenValue =
+            fun (prop: IHTMLProp) ->
+                match prop with
+                | :? ModalOptional as opt ->
+                    match opt with
+                    | Open o -> Some o                        
+                    | _ -> None
                 | _ -> None
-            | _ -> None
+        props
+        |> List.tryPick getOpenValue
+        |> Option.defaultValue false 
     
     let private size =
         fun (prop: IHTMLProp) ->
@@ -135,8 +127,8 @@ module Modal =
         let (Header header), (Body body), (Footer footer) = children
         let onRequestClose = onRequestClose props
         
-        match List.tryPick isOpen props with 
-        | Some true ->
+        match isOpen props with 
+        | true ->
             props
             |> Unmerged
             |> addProp (ClassName "modal active")
@@ -151,5 +143,37 @@ module Modal =
                     ƒfooter footer |> R.ofOption
                 ]
             ] |> Portal.ƒ "modal-portal"
-        | Some false
-        | None -> null
+        | false -> null
+    
+    let addProps props (modal: Modal) =
+        let props, children = modal
+        let props: HTMLProps = 
+            props
+            |> Unmerged
+            |> addProps props
+            |> merge
+            
+        props, children
+    
+    let setOpen newValue (modal: Modal)  =
+        let props, children = modal
+        let props: HTMLProps = 
+            props
+            |> Unmerged
+            |> addProp (Open newValue)
+            |> merge
+            
+        props, children
+    
+    let setOnRequestClose newValue (modal: Modal)  =
+        let props, children = modal
+        let props: HTMLProps = 
+            props
+            |> Unmerged
+            |> addProp (OnRequestClose newValue)
+            |> merge
+            
+        props, children
+        
+
+    

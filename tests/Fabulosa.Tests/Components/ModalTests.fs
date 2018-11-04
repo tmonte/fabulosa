@@ -7,7 +7,7 @@ module R = Fable.Helpers.React
 module P = R.Props
 open Expect
 open ReactNode
-open Fabulosa.Modal.Header
+open Fabulosa.Modal
 
 
 [<Tests>]
@@ -26,7 +26,7 @@ let headerTests =
             let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Wie man mit dem Hammer philosophiert"]
             let child = complexChildContent |> ReactNode.unit 
         
-            header ([], Elements [ complexChildContent ])
+            header ([], HeaderChildren.Elements [ complexChildContent ])
             |> ReactNode.unit
             |> hasChild 1 child
         }
@@ -34,14 +34,13 @@ let headerTests =
         test "renders props" {
             let complexChildContent = R.div [P.ClassName "h1"] [R.str  "Wie man mit dem Hammer philosophiert"]
             let child = complexChildContent |> ReactNode.unit 
-            header ([P.Id "hello-world"], Elements [ complexChildContent ])
+            header ([P.Id "hello-world"], HeaderChildren.Elements [ complexChildContent ])
             |> ReactNode.unit
             |>! hasProp (P.Id "hello-world")
             |> hasChild 1 child
         }
     ]
     
-open Fabulosa.Modal.Footer
 [<Tests>]
 let footerTests =    
     testList "Modal Footer" [
@@ -159,7 +158,7 @@ let modalTests =
         }
         
         test "renders footer contents" {
-            let footerElement = [], Footer.Elements [R.str "Tudo que sei é que nada sei."]
+            let footerElement = [], Elements [R.str "Tudo que sei é que nada sei."]
             let footerChild = footer footerElement
             
             modal ([Open true], (Header None, Body [], Footer (Some footerElement)))
