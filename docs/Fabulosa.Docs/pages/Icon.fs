@@ -15,7 +15,7 @@ let render () =
     tryMount "icon-demo" def
     tryMount "icon-size-demo" x4
     tryMount "icon-params-table"
-        (PropTable.compTable
+        (PropTable.paramTable
             (Some typeof<IconOptional>)
             (Some typeof<IconRequired>)
             None)

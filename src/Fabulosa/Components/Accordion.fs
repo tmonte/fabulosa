@@ -6,11 +6,10 @@ module Accordion =
     open Fabulosa.Icon
     open Fable.Import.React
     module R = Fable.Helpers.React
-    open R.Props
+    module P = R.Props
 
-    type AccordionItemOptional =
-        | Icon of Icon
-        interface IHTMLProp
+    type AccordionIcon =
+        | OptIcon of (Icon option)
 
     type AccordionHeader =
         | Header of string
@@ -19,55 +18,46 @@ module Accordion =
         | Body of (ReactElement list)
 
     type AccordionItemChildren =
-        AccordionHeader * AccordionBody
+        AccordionIcon * AccordionHeader * AccordionBody
 
     type AccordionItem =
-        HTMLProps * AccordionItemChildren
+        P.HTMLProps * AccordionItemChildren
 
-    let private someIcon (optional: IHTMLProp) =
-        match optional with
-        | :? AccordionItemOptional as prop ->
-            match prop with
-            | Icon props -> Some props
-        | _ -> None
+    let private createIcon icn =
+        match icn with
+        | Some (opt, req) -> 
+            icon (P.Unmerged opt
+            |> P.addProp (P.ClassName "mr-1")
+            |> P.merge, req)
+        | None ->
+            icon ([ P.ClassName "mr-1" ], Kind ArrowRight)
 
-    let private createIcon opt =
-        opt
-        |> List.tryPick someIcon
-        |> Option.orElse (Some ([], Icon.Kind ArrowRight))
-        |> Option.map (fun (iconOpt, iconReq) ->
-             (Unmerged iconOpt
-              |> addProp (ClassName "mr-1")
-              |> merge, iconReq))
-        |> Option.get
-
-    let private item ((opt, (Header header, Body body)): AccordionItem) =
-        let icn = createIcon opt
-        R.details
-            [ ClassName "accordion" ]
-            [ R.summary
-                [ ClassName "accordion-header" ]
-                [ icon icn
-                  R.RawText "\n"
-                  R.str header ]
-              R.div
-                [ ClassName "accordion-body" ]
-                [ R.ul
-                     [ ClassName "menu menu-nav"] 
-                     [ R.li
-                        [ ClassName "menu-item" ]
-                        body ] ] ]
+    let private accordionItem ((opt, (OptIcon icn, Header hdr, Body bod)): AccordionItem) =
+        P.Unmerged opt
+        |> P.addProp (P.ClassName "accordion")
+        |> P.merge
+        |> R.details
+        <| [ R.summary
+               [ P.ClassName "accordion-header" ]
+               [ createIcon icn
+                 R.RawText "\n"
+                 R.str hdr ]
+             R.div
+               [ P.ClassName "accordion-body" ]
+               [ R.ul
+                   [ P.ClassName "menu menu-nav"]
+                   [ R.li
+                       [ P.ClassName "menu-item" ] bod ] ] ]
 
     type AccordionChild =
         Item of AccordionItem
     
     type Accordion =
-        HTMLProps * AccordionChild list
+        P.HTMLProps * AccordionChild list
 
-    let accordion (comp: Accordion) =
-        let opt, chi = comp
+    let accordion ((opt, chi): Accordion) =
         R.div
             opt
             (Seq.map
-               (fun (Item itm) -> item itm)
+               (fun (Item item) -> accordionItem item)
                chi)

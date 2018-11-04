@@ -1,47 +1,50 @@
 ﻿module AccordionPage
 
-open Fabulosa.Accordion
 open Fabulosa.Icon
+open Fabulosa.Accordion
 open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Renderer
 
 (*** define: accordion-sample ***)
-let element =
+let def =
     accordion ([],
       [ Item ([],
-          (Header "Header One",
+          (OptIcon None,
+           Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ]))
         Item ([],
-          (Header "Header One",
+          (OptIcon None,
+           Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ])) ])
 (*** define: accordion-custom-sample ***)
 let custom =
     accordion ([],
-      [ Item ([ Icon ([], Kind Forward) ],
-          (Header "Header One",
+      [ Item ([],
+          (OptIcon (Some ([], Kind Forward)),
+           Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ] ))
-        Item ([ Icon ([], Kind Back) ],
-          (Header "Header One",
+        Item ([],
+          (OptIcon (Some ([], Kind Back)),
+           Header "Header One",
            Body
              [ R.a [] [ R.str "Item One" ]
                R.a [] [ R.str "Item Two" ] ])) ])
 (*** hide ***)
 let render () =
-    tryMount "accordion-demo" element
+    tryMount "accordion-demo" def
     tryMount "accordion-custom-demo" custom
-    tryMount "accordion-item-header-table"
-        (PropTable.unionPropTable typeof<AccordionHeader>)
-    tryMount "accordion-item-body-table"
-        (PropTable.unionPropTable typeof<AccordionBody>)
-    tryMount "accordion-item-optional-table"
-        (PropTable.unionPropTable typeof<AccordionItemOptional>)
+    tryMount "accordion-item-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<AccordionItemChildren>))
 (**
 
 <div id="accordions">
@@ -90,33 +93,13 @@ Accordions accept icon props for a custom icon.
 
 </div>
 
-<div id="accordion-item-header">
+<div id="accordion-item-params">
 
 <h3 class="s-title">
-    Item header
+    Item Parameters
 </h3>
 
-<div class="props-table" id="accordion-item-header-table"></div>
-
-</div>
-
-<div id="accordion-item-body">
-
-<h3 class="s-title">
-    Item body
-</h3>
-
-<div class="props-table" id="accordion-item-body-table"></div>
-
-</div>
-
-<div id="accordion-item-optional">
-
-<h3 class="s-title">
-    Item optional props
-</h3>
-
-<div class="props-table" id="accordion-item-optional-table"></div>
+<div class="props-table" id="accordion-item-params-table"></div>
 
 </div>
 

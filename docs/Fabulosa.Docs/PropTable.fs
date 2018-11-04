@@ -127,7 +127,7 @@ module rec PropTable =
 
     let unionPropTable union = getUnionPropFields union "None" |> renderTable
 
-    let compTable optType reqType chiType =
+    let paramTable optType reqType chiType =
         let fields (typ: System.Type option) (kind: string) =
             match typ with
             | Some t -> getFields kind t

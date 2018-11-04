@@ -24,7 +24,7 @@ let render () =
     tryMount "badge-button-demo" button
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-params-table"
-        (PropTable.compTable
+        (PropTable.paramTable
             (None)
             (Some typeof<FabulosaValue>)
             (Some typeof<BadgeChildren>))

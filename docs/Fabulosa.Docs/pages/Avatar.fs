@@ -32,10 +32,11 @@ let render () =
     tryMount "avatar-lg-demo" large
     tryMount "avatar-xl-demo" extraLarge
     tryMount "avatar-presence-demo" presence
-    tryMount "avatar-props-table"
-        (PropTable.unionPropTable typeof<AvatarChildren>)
-    tryMount "avatar-optional-props-table"
-        (PropTable.unionPropTable typeof<AvatarOptional>)
+    tryMount "avatar-params-table"
+        (PropTable.paramTable
+            (Some typeof<AvatarOptional>)
+            None
+            (Some typeof<AvatarChildren>))
 (**
 <div id="avatars">
 
@@ -130,20 +131,10 @@ Avatar can have a presence indicator.
 <div id="avatar-optional-props">
 
 <h3 class="s-title">
-    Optional props
+    Parameters
 </h3>
 
-<div class="props-table" id="avatar-optional-props-table"></div>
-
-</div>
-
-<div id="avatar-props">
-
-<h3 class="s-title">
-    Child options
-</h3>
-
-<div class="props-table" id="avatar-props-table"></div>
+<div class="props-table" id="avatar-params-table"></div>
 
 </div>
 
