@@ -111,16 +111,24 @@ module Modal =
         |> List.tryPick getOpenValue
         |> Option.defaultValue false 
     
-    let private size =
-        fun (prop: IHTMLProp) ->
-            match prop with
-            | :? ModalOptional as opt ->
-                match opt with
-                | Size Small -> className "modal-sm" |> Some                        
-                | Size Medium -> className "modal-md" |> Some                        
-                | Size Large -> className "modal-lg" |> Some                        
-                | _ -> None
-            | _ -> None
+    let private sizeClass =
+        function
+        | Small -> ClassName "modal-sm"                        
+        | Medium -> ClassName "modal-md"                        
+        | Large -> ClassName "modal-lg"                        
+    
+    let size (props: HTMLProps) =
+         let getSize =
+             fun (prop: IHTMLProp) ->
+                 match prop with
+                 | :? ModalOptional as opt ->
+                     match opt with
+                     | Size s -> Some s                        
+                     | _ -> None
+                 | _ -> None
+         props
+         |> List.tryPick getSize
+         |> Option.defaultValue Medium 
     
     let modal (modal: Modal) =
         let props, children = modal
@@ -132,7 +140,7 @@ module Modal =
             props
             |> Unmerged
             |> addProp (ClassName "modal active")
-            |> addOptionOrElse size (ClassName "modal-md")
+            |> addProp (props |> size |> sizeClass)
             |> merge
             |> R.div 
             <| [
@@ -145,12 +153,12 @@ module Modal =
             ] |> Portal.ƒ "modal-portal"
         | false -> null
     
-    let addProps props (modal: Modal) =
+    let addProps (p : HTMLProps) (modal: Modal) =
         let props, children = modal
         let props: HTMLProps = 
             props
             |> Unmerged
-            |> addProps props
+            |> addProps p
             |> merge
             
         props, children

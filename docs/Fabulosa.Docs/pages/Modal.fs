@@ -22,7 +22,7 @@ let body =
       Typography.blockquote [] [R.str "History repeats itself, first as tragedy, second as farce."] ]
 let footer = Some ( [], Buttons [ button1 ] ) 
       
-let smallModal: Modal = 
+let modalData: Modal = 
     [], 
     ( Header header, 
       Body body, 
@@ -50,19 +50,22 @@ module Container =
         | Open -> { state with Opened = true }
         | Close -> { state with Opened = false }
     
-    let private view (model: Model<Modal, State>) (dispatch: Dispatch) =
+    let private view (model: Model<Modal * Size, State>) (dispatch: Dispatch) =
+        let props, size = model.props
         
         let modalData = 
-            model.props 
-            |> Modal.setOpen model.state.Opened
-            |> Modal.setOnRequestClose (fun _ -> dispatch Close)
-        
+            props
+            |> Modal.addProps 
+                [ Modal.Open model.state.Opened 
+                  Size size  
+                  OnRequestClose (fun _ -> dispatch Close) ]
+                
         R.fragment [][
-            button ([ Button.Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" 5)]) 
+            button ([ Button.Kind Primary; P.OnClick (fun _ -> dispatch Open) ], [R.str (sprintf "Open %A Modal" size)]) 
             modal modalData
         ]
     
-    let container (content : Modal) =
+    let container (content : Modal * Size) =
         R.reactiveCom
             init
             update
@@ -80,20 +83,20 @@ let demo = R.div [style] [
                  ([],
                   [ Column
                       ([ Grid.Size 4; SMSize 12 ],
-                       [ Container.container smallModal ])
+                       [ Container.container (modalData, Small) ])
                     Column
                       ([ Grid.Size 4; SMSize 12 ],
-                       [  ])
+                       [ Container.container (modalData, Medium)  ])
                     Column
                       ([ Grid.Size 4; SMSize 12 ],
-                       [  ]) ]) ])
+                       [ Container.container (modalData, Large)  ]) ]) ])
     ]
 
 let render () =
     tryMount "modal-demo" demo
-//    tryMount "modal-props-table" (PropTable.propTable typeof<Modal.Props> Modal.props)
-//    tryMount "modal-header-props-table" (PropTable.propTable typeof<Modal.Header.Props> Modal.Header.props)
-//    tryMount "modal-footer-props-table" (PropTable.propTable typeof<Modal.Footer.Props> Modal.Footer.props)
+    tryMount "modal-props-table" (PropTable.unionPropTable typeof<Modal.Modal>)
+    tryMount "modal-header-props-table"  (PropTable.unionPropTable typeof<Modal.ModalHeader>)
+    tryMount "modal-footer-props-table"  (PropTable.unionPropTable typeof<ModalFooter>)
 (**
 
 // <div id="modal">
