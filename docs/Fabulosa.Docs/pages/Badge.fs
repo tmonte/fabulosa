@@ -23,10 +23,11 @@ let render () =
     tryMount "badge-span-demo" span
     tryMount "badge-button-demo" button
     tryMount "badge-avatar-demo" avatar
-    //tryMount "badge-props-table"
-        //(PropTable.unionPropTable typeof<BadgeRequired>)
-    tryMount "badge-child-table"
-        (PropTable.unionPropTable typeof<BadgeChildren>)
+    tryMount "badge-params-table"
+        (PropTable.compTable
+            (None)
+            (Some typeof<FabulosaValue>)
+            (Some typeof<BadgeChildren>))
 (**
 <div id="badges">
 
@@ -83,23 +84,13 @@ of the button and avatar components.
 
 </div>
 
-<div id="badge-props">
+<div id="badge-params">
 
 <h3 class="s-title">
-    Required props
+    Parameters
 </h3>
 
-<div class="props-table" id="badge-props-table"></div>
-
-</div>
-
-<div id="badge-props">
-
-<h3 class="s-title">
-    Child options
-</h3>
-
-<div class="props-table" id="badge-child-table"></div>
+<div class="props-table" id="badge-params-table"></div>
 
 </div>
 

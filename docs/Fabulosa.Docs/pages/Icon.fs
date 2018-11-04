@@ -14,10 +14,11 @@ let x4 = icon ([ Size X4 ], Kind Upload)
 let render () =
     tryMount "icon-demo" def
     tryMount "icon-size-demo" x4
-    tryMount "icon-props-table"
-        (PropTable.unionPropTable typeof<IconRequired>)
-    tryMount "icon-optional-props-table"
-        (PropTable.unionPropTable typeof<IconOptional>)
+    tryMount "icon-params-table"
+        (PropTable.compTable
+            (Some typeof<IconOptional>)
+            (Some typeof<IconRequired>)
+            None)
 
 (**
 
@@ -70,23 +71,13 @@ Icons can have doubled, tripled, or quadrupled sizes
 
 </div>
 
-<div id="icon-props">
+<div id="icon-params">
 
 <h3 class="s-title">
-    Required props
+    Parameters
 </h3>
 
-<div class="props-table" id="icon-props-table"></div>
-
-</div>
-
-<div id="icon-optional-props">
-
-<h3 class="s-title">
-    Optional props
-</h3>
-
-<div class="props-table" id="icon-optional-props-table"></div>
+<div class="props-table" id="icon-params-table"></div>
 
 </div>
 
