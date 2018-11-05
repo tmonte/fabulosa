@@ -64,17 +64,17 @@ let render () =
     tryMount "media-img-responsive-demo-c" (imageContainer "18rem")
     tryMount "media-img-fit-contain-demo" contain
     tryMount "media-img-fit-cover-demo" cover
-    tryMount "media-img-props-table"
-        (PropTable.unionPropTable typeof<Media.Image.ImageOptional>)
-    tryMount "figure-props-table"
-        (PropTable.unionPropTable typeof<Media.Figure.FigureOptional>)
-    tryMount "figure-demo" figureDemo
-    tryMount "caption-props-table"
-        (PropTable.unionPropTable typeof<Media.Caption.CaptionOptional> )
-    tryMount "video-demo" videoDemo
-    tryMount "youtube-demo" youtube
-    tryMount "video-props-table"
-        (PropTable.unionPropTable typeof<Media.Video.VideoOptional>)
+    // tryMount "media-img-props-table"
+    //     (PropTable.unionPropTable typeof<Media.Image.ImageOptional>)
+    // tryMount "figure-props-table"
+    //     (PropTable.unionPropTable typeof<Media.Figure.FigureOptional>)
+    // tryMount "figure-demo" figureDemo
+    // tryMount "caption-props-table"
+    //     (PropTable.unionPropTable typeof<Media.Caption.CaptionOptional> )
+    // tryMount "video-demo" videoDemo
+    // tryMount "youtube-demo" youtube
+    // tryMount "video-props-table"
+    //     (PropTable.unionPropTable typeof<Media.Video.VideoOptional>)
 (**
 <div id="media">
     <h2 class="s-title">Media</h2>

@@ -22,20 +22,32 @@ module rec PropTable =
     let (|Union|_|) = typeMatches FSharpType.IsUnion
 
     let (|Tuple|_|) = typeMatches FSharpType.IsTuple
+
+    let (|List|_|) (systemType: System.Type) =
+        match systemType.Name.Contains "FSharpList" with
+        | true -> Some "list"
+        | false -> None
+
+    let (|Option|_|) (systemType: System.Type) =
+        match systemType.Name.Contains "FSharpOption" with
+        | true -> Some "option"
+        | false -> None
     
     let rec systemTypeName (aType: System.Type) =
-        let appendMap = ["FSharpList`1", "list"; "FSharpOption`1", "option"] |> Map.ofList        
-        let (|APPENDABLE|_|) (aType: System.Type) =
-           match Map.tryFind aType.Name appendMap with 
-           | Some appendableName -> Some appendableName
-           | _ -> None
         match aType with 
-            | APPENDABLE appendableName->
+            | (List strType) | (Option strType) ->
                 aType.GenericTypeArguments
                 |> List.ofArray
                 |> List.map systemTypeName
-                |> flip List.append [appendableName]
+                |> flip List.append [ strType ]
                 |> List.reduce (fun x -> (fun y -> x + " " + y))
+            | Tuple tuple ->
+                tuple
+                |> FSharpType.GetTupleElements
+                |> Array.map systemTypeName
+                |> List.ofArray
+                |> String.concat " * "
+                |> (fun str -> "(" + str + ")")
             | option when option.Name = "FSharpFunc`2" -> 
                 option.GenericTypeArguments
                 |> List.ofArray
@@ -52,6 +64,7 @@ module rec PropTable =
             |> Array.map systemTypeName
             |> List.ofArray
             |> String.concat " * "
+            |> (fun str -> "(" + str + ")")
         | Union propType ->
             let cases = FSharpType.GetUnionCases propType
             let more =

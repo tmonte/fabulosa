@@ -17,14 +17,21 @@ let element =
 (*** hide ***)
 let render () =
     tryMount "breadcrumbs-demo" element
-    tryMount "breadcrumb-children-table"
-        (PropTable.unionPropTable typeof<BreadcrumbChildren>)
-    //tryMount "breadcrumb-text-children-table"
-        //(PropTable.unionPropTable typeof<BreadcrumbItemChildren>)
-    tryMount "breadcrumb-link-required-table"
-        (PropTable.unionPropTable typeof<BreadcrumbLinkRequired>)
-    //tryMount "breadcrumb-link-children-table"
-        //(PropTable.unionPropTable typeof<BreadcrumbItemChildren>)
+    tryMount "breadcrumb-params-table"
+        (PropTable.paramTable
+            (Some typeof<BreadcrumbOptional>)
+            None
+            (Some typeof<BreadcrumbChildren>))
+    tryMount "breadcrumb-string-params-table"
+        (PropTable.paramTable
+            (Some typeof<BreadcrumbTextOptional>)
+            None
+            (Some typeof<FabulosaText>))
+    tryMount "breadcrumb-link-params-table"
+        (PropTable.paramTable
+            None
+            (Some typeof<BreadcrumbLinkRequired>)
+            (Some typeof<FabulosaText>))
 (**
 
 <div id="breadcrumbs">
@@ -54,43 +61,33 @@ hierarchies to indicate current location.
 
 (**
 
-<div id="breadcrumb-children">
+<div id="breadcrumb-params">
 
 <h3 class="s-title">
-    Breadcrumb children
+    Parameters
 </h3>
 
-<div class="props-table" id="breadcrumb-children-table"></div>
+<div class="props-table" id="breadcrumb-params-table"></div>
 
 </div>
 
-<div id="breadcrumb-text-children">
+<div id="breadcrumb-string-params">
 
 <h3 class="s-title">
-    Breadcrumb text children
+    Text Parameters
 </h3>
 
-<div class="props-table" id="breadcrumb-text-children-table"></div>
+<div class="props-table" id="breadcrumb-string-params-table"></div>
 
 </div>
 
-<div id="breadcrumb-link-required-children">
+<div id="breadcrumb-link-params">
 
 <h3 class="s-title">
-    Breadcrumb link required props
+    Link Parameters
 </h3>
 
-<div class="props-table" id="breadcrumb-link-required-table"></div>
-
-</div>
-
-<div id="breadcrumb-link-children">
-
-<h3 class="s-title">
-    Breadcrumb link children
-</h3>
-
-<div class="props-table" id="breadcrumb-link-children-table"></div>
+<div class="props-table" id="breadcrumb-link-params-table"></div>
 
 </div>
 

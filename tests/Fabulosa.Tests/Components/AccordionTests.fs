@@ -15,15 +15,17 @@ let tests =
         test "Accordion default" {
             accordion ([],
               [ Item ([],
-                  (Header "Header One",
+                  (OptIcon None,
+                   Header "Header One",
+                   Body
+                     [ R.a [] [ R.str "Item One" ]
+                       R.a [] [ R.str "Item Two" ] ] ))
+                Item ([],
+                   (OptIcon None,
+                    Header "Header One",
                     Body
                       [ R.a [] [ R.str "Item One" ]
-                        R.a [] [ R.str "Item Two" ] ] ))
-                Item ([],
-                   (Header "Header One",
-                     Body
-                       [ R.a [] [ R.str "Item One" ]
-                         R.a [] [ R.str "Item Two" ] ] )) ])
+                        R.a [] [ R.str "Item Two" ] ] )) ])
             |> ReactNode.unit
             |> hasOrderedDescendentClass 2 "accordion accordion-header accordion-body"
         }
@@ -32,13 +34,15 @@ let tests =
             let opt, req = ([], Kind Forward)
             let rendered = (P.Unmerged opt |> P.addProp (P.ClassName "mr-1") |> P.merge, req)
             accordion ([],
-              [ Item ([ Icon (opt, req) ],
-                  (Header "Header One",
+              [ Item ([],
+                  (OptIcon (Some (opt, req)),
+                   Header "Header One",
                    Body
                      [ R.a [] [ R.str "Item One" ]
                        R.a [] [ R.str "Item Two" ] ]))
-                Item ([ Icon (opt, req) ],
-                  (Header "Header One",
+                Item ([],
+                  (OptIcon (Some (opt, req)),
+                   Header "Header One",
                    Body
                      [ R.a [] [ R.str "Item One" ]
                        R.a [] [ R.str "Item Two" ] ])) ])

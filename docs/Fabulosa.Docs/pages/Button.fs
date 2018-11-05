@@ -51,8 +51,8 @@ let render () =
     tryMount "button-disabled-demo" disabled
     tryMount "button-active-demo" active
     tryMount "button-loading-demo" loading
-    tryMount "button-props-table"
-        (PropTable.unionPropTable typeof<ButtonOptional>)
+    // tryMount "button-props-table"
+    //     (PropTable.unionPropTable typeof<ButtonOptional>)
 (**
 
 <div id="buttons">

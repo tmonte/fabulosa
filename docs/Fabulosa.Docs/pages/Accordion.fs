@@ -40,6 +40,11 @@ let custom =
 let render () =
     tryMount "accordion-demo" def
     tryMount "accordion-custom-demo" custom
+    tryMount "accordion-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<AccordionChild>))
     tryMount "accordion-item-params-table"
         (PropTable.paramTable
             None
@@ -90,6 +95,16 @@ Accordions accept icon props for a custom icon.
 (*** include: accordion-custom-sample ***)
 
 (**
+
+</div>
+
+<div id="accordion-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="accordion-params-table"></div>
 
 </div>
 

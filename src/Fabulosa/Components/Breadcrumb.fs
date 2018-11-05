@@ -33,13 +33,11 @@ module Breadcrumb =
         |> P.merge
         |> R.div
         <| [ R.str txt ]
-
-    type BreadcrumbElementsOptional = P.HTMLProps
     
     type BreadcrumbElementsChildren = ReactElement list
 
     type BreadcrumbElements =
-        BreadcrumbElementsOptional * BreadcrumbElementsChildren
+        P.HTMLProps * BreadcrumbElementsChildren
 
     let breadcrumbElements ((opt, chi): BreadcrumbElements) =
         P.Unmerged opt

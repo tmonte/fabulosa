@@ -26,8 +26,16 @@ let render () =
     tryMount "bar-small-demo" small
     tryMount "bar-item-tooltip-demo" tooltip
     tryMount "bar-item-multiple-demo" multiple
-    tryMount "bar-optional-table"
-        (PropTable.unionPropTable typeof<BarOptional>)
+    tryMount "bar-params-table"
+        (PropTable.paramTable
+            (Some typeof<BarOptional>)
+            None
+            (Some typeof<BarChild>))
+    tryMount "bar-item-params-table"
+        (PropTable.paramTable
+            (Some typeof<BarItemOptional>)
+            (Some typeof<FabulosaValue>)
+            None)
 (**
 
 <div id="bars">
@@ -115,13 +123,23 @@ Bar can also have multiple items
 
 </div>
 
-<div id="bar-optional">
+<div id="bar-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="bar-optional-table"></div>
+<div class="props-table" id="bar-params-table"></div>
+
+</div>
+
+<div id="bar-item-params">
+
+<h3 class="s-title">
+    Item Parameters
+</h3>
+
+<div class="props-table" id="bar-item-params-table"></div>
 
 </div>
 

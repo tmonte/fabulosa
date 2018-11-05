@@ -117,10 +117,10 @@ Target.create "Watch" (fun _ ->
     //runFable "webpack-dev-server"
     let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/pages")
     let changes (changed: FileChange seq) =
-        let status =
-            if Environment.isMacOS
-            then FileStatus.Created
-            else FileStatus.Changed
+        let status = FileStatus.Changed
+            // if Environment.isMacOS
+            // then FileStatus.Created
+            // else FileStatus.Changed
         let created =
             Seq.tryFind
                 (fun file -> file.Status = status)
