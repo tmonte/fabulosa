@@ -2,6 +2,7 @@
 
 open Fabulosa.Menu
 open Fabulosa.Icon
+open Fabulosa.Docs
 open Renderer
 module R = Fable.Helpers.React
 open Fable.Import.React
@@ -18,7 +19,11 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "menu-default-demo" def
-
+    tryMount "menu-params-table"
+        (PropTable.paramTable
+            None
+            (Some typeof<MenuRequired>)
+            (Some typeof<MenuChild>))
 (**
 
 <div id="menus">
@@ -29,6 +34,16 @@ let render () =
 
 Menus are vertical list of links or
 buttons for actions and navigation.
+
+</div>
+
+<div id="menu-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="menu-params-table"></div>
 
 </div>
 

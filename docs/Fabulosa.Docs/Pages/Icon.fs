@@ -35,6 +35,16 @@ folder to your web <head> to have these CSS icons.
 
 </div>
 
+<div id="icon-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="icon-params-table"></div>
+
+</div>
+
 <div id="kind">
 
 <h3 class="s-title">
@@ -68,16 +78,6 @@ Icons can have doubled, tripled, or quadrupled sizes
 (*** include: icon-size-sample ***)
 
 (**
-
-</div>
-
-<div id="icon-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
-
-<div class="props-table" id="icon-params-table"></div>
 
 </div>
 

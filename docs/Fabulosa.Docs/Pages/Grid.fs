@@ -31,6 +31,28 @@ let small =
       [ Row ([],
           [ Column ([ Size 4; SMSize 12 ], [ R.div [ style ] [ R.str "First Column" ] ])
             Column ([ Size 8; SMSize 12 ], [ R.div [ style ] [ R.str "Second Column" ] ]) ]) ])
+(*** hide ***)
+let render () =
+    tryMount "grid-demo" def
+    tryMount "row-gapless-demo" gapless
+    tryMount "row-oneline-demo" oneline
+    tryMount "column-demo" small
+    tryMount "grid-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<GridChild>))
+    tryMount "row-params-table"
+        (PropTable.paramTable
+            (Some typeof<GridRowOptional>)
+            None
+            (Some typeof<GridRowChild>))
+    tryMount "column-params-table"
+        (PropTable.paramTable
+            (Some typeof<GridColumnOptional>)
+            None
+            None)
+
 (**
 
 <div id="grid">
@@ -43,15 +65,7 @@ A flexbox based responsive grid system with 12 columns.
 
 </div>
 
-<div id="grid-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="grid-props-table"></div>
-
-</div>
+<div class="props-table" id="grid-params-table"></div>
 
 <div id="grid-sample">
 
@@ -79,7 +93,7 @@ The default setting for grid
 
 Rows can be Gapless and OneLine
 
-<div class="props-table" id="row-props-table"></div>
+<div class="props-table" id="row-params-table"></div>
 
 <div class="demo">
     <div id="row-gapless-demo"></div>
@@ -102,7 +116,7 @@ Rows can be Gapless and OneLine
 
 Columns can have different resposive sizes (Resize the page to view different sizes)
 
-<div class="props-table" id="column-props-table"></div>
+<div class="props-table" id="column-params-table"></div>
 
 <div class="demo">
     <div id="column-demo"></div>
@@ -117,13 +131,3 @@ Columns can have different resposive sizes (Resize the page to view different si
 </div>
 
 *)
-
-(*** hide ***)
-let render () =
-    tryMount "grid-demo" def
-    tryMount "row-gapless-demo" gapless
-    tryMount "row-oneline-demo" oneline
-    tryMount "column-demo" small
-    //tryMount "grid-props-table" (PropTable.propTable typeof<Grid.Props> [])
-    //tryMount "row-props-table" (PropTable.propTable typeof<Row.Props> Row.props)
-    //tryMount "column-props-table" (PropTable.propTable typeof<Column.Props> Column.props)
