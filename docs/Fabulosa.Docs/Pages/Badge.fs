@@ -25,7 +25,7 @@ let render () =
     tryMount "badge-avatar-demo" avatar
     tryMount "badge-params-table"
         (PropTable.paramTable
-            (None)
+            None
             (Some typeof<FabulosaValue>)
             (Some typeof<BadgeChildren>))
 (**
@@ -36,6 +36,16 @@ let render () =
 </h2>
 
 Badges are often used as unread number indicators.
+
+</div>
+
+<div id="badge-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="badge-params-table"></div>
 
 </div>
 
@@ -81,16 +91,6 @@ of the button and avatar components.
 (*** include: badge-button-avatar-sample ***)
 
 (**
-
-</div>
-
-<div id="badge-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
-
-<div class="props-table" id="badge-params-table"></div>
 
 </div>
 

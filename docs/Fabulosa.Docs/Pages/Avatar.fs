@@ -48,6 +48,16 @@ Avatars are user profile pictures.
 
 </div>
 
+<div id="avatar-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="avatar-params-table"></div>
+
+</div>
+
 <div id="avatar-initial">
 
 <h3 class="s-title">
@@ -125,16 +135,6 @@ Avatar can have a presence indicator.
 (*** include: avatar-presence-sample ***)
 
 (**
-
-</div>
-
-<div id="avatar-optional-props">
-
-<h3 class="s-title">
-    Parameters
-</h3>
-
-<div class="props-table" id="avatar-params-table"></div>
 
 </div>
 

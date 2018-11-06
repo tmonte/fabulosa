@@ -22,10 +22,10 @@ let tests =
                 button (btnOpt, btnReq)
             empty
                 ([],
-                 (Icon (icnOpt, icnReq),
-                  Title "Title",
-                  Subtitle "Subtitle",
-                  Action [ action ]))
+                 [ Icon (icnOpt, icnReq)
+                   Title "Title"
+                   Subtitle "Subtitle"
+                   Action [ action ] ])
             |> ReactNode.unit
             |>! hasChild 1 icon
             |>! hasChild 1 (action |> ReactNode.unit)

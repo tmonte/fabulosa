@@ -59,30 +59,26 @@ module Card =
         else
             R.ofOption None
 
-    type CardHeader =
-        Header of Header
+    type CardChild =
+        | Header of Header
+        | Body of Body
+        | Footer of Footer
+        | Image of Image
 
-    type CardBody =
-        Body of Body
-
-    type CardFooter =
-        Footer of Footer
-
-    type CardImage =
-        Image of Image
-
-    type CardChildren =
-        CardImage * CardHeader * CardBody * CardFooter
+    type CardChildren = CardChild list
         
     type Card =
         HTMLProps * CardChildren
 
-    let card ((opt, (Image i, Header h, Body b, Footer f)): Card) =
+    let card ((opt, chi): Card) =
         Unmerged opt
         |> addProp (ClassName "card")
         |> merge
-        |> R.div <|
-        [ cardHeader h
-          R.div [ ClassName "card-image" ] [ image i ]
-          cardBody b
-          cardFooter f ]
+        |> R.div
+        <| Seq.map
+            (function
+            | Header hdr -> cardHeader hdr
+            | Image img -> R.div [ ClassName "card-image" ] [ image img ]
+            | Body bod -> cardBody bod
+            | Footer ftr -> cardFooter ftr)
+            chi

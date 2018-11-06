@@ -29,35 +29,32 @@ module Empty =
 
     type Action = ReactElement list
 
-    type EmptyIcon =
-        Icon of Icon
-
-    type EmptyTitle =
-        Title of Title
-
-    type EmptySubtitle =
-        Subtitle of Subtitle
-
-    type EmptyAction =
-        Action of Action
+    type EmptyChild =
+        | Icon of Icon
+        | Title of Title
+        | Subtitle of Subtitle
+        | Action of Action
 
     let emptyAction (comp: Action) =
         R.div
             [ P.ClassName "empty-action" ]
             comp
 
-    type EmptyChildren =
-        EmptyIcon * EmptyTitle * EmptySubtitle * EmptyAction
+    type EmptyChildren = EmptyChild list
 
     type Empty =
         P.HTMLProps * EmptyChildren
 
-    let empty ((opt, (Icon i, Title t, Subtitle s, Action a)): Empty) =
+    let empty ((opt, chi): Empty) =
         P.Unmerged opt
         |> P.addProp (P.ClassName "empty")
         |> P.merge
-        |> R.div <|
-        [ emptyIcon i
-          emptyTitle t
-          emptySubtitle s
-          emptyAction a ]
+        |> R.div
+        <| Seq.map
+            (function
+            | Icon icn -> emptyIcon icn
+            | Title ttl -> emptyTitle ttl
+            | Subtitle stt -> emptySubtitle stt
+            | Action act -> emptyAction act)
+            chi
+        

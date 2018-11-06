@@ -3,6 +3,7 @@
 open Fabulosa.Empty
 open Fabulosa.Button
 open Fabulosa.Icon
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -12,15 +13,18 @@ open Renderer
 let def =
     empty
         ([],
-         (Icon ([], Kind Mail),
-          Title "You have no new messages",
-          Subtitle "Click the button to start a conversation",
-          Action [ button ([], [ R.str "Send a message" ]) ] ))
+         [ Icon ([], Kind Mail)
+           Title "You have no new messages"
+           Subtitle "Click the button to start a conversation"
+           Action [ button ([], [ R.str "Send a message" ]) ] ])
 (*** hide ***)
 let render () =
     tryMount "empty-default-demo" def
-    //tryMount "empty-props-table"
-        //(PropTable.unionPropTable typeof<EmptyChildren>)
+    tryMount "empty-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<EmptyChild>))
 (**
 
 <div id="empty">
@@ -29,19 +33,19 @@ let render () =
     Empty states
 </h2>
 
-Empty states/blank slates are commonly used
+Empty states/blank states are commonly used
 as placeholders for first time use, empty
 data and error screens.
 
 </div>
 
-<div id="empty-props">
+<div id="empty-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="empty-props-table"></div>
+<div class="props-table" id="empty-params-table"></div>
 
 </div>
 

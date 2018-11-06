@@ -4,6 +4,7 @@ open Fabulosa.Icon
 open Fabulosa.Accordion
 open Fabulosa.Docs
 module R = Fable.Helpers.React
+module P = R.Props
 open Renderer
 
 (*** define: accordion-sample ***)
@@ -62,6 +63,26 @@ Accordions are used to toggle sections of content.
 
 </div>
 
+<div id="accordion-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="accordion-params-table"></div>
+
+</div>
+
+<div id="accordion-item-params">
+
+<h3 class="s-title">
+    Item Parameters
+</h3>
+
+<div class="props-table" id="accordion-item-params-table"></div>
+
+</div>
+
 <div id="accordion-default">
 
 <h3 class="s-title">
@@ -95,26 +116,6 @@ Accordions accept icon props for a custom icon.
 (*** include: accordion-custom-sample ***)
 
 (**
-
-</div>
-
-<div id="accordion-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
-
-<div class="props-table" id="accordion-params-table"></div>
-
-</div>
-
-<div id="accordion-item-params">
-
-<h3 class="s-title">
-    Item Parameters
-</h3>
-
-<div class="props-table" id="accordion-item-params-table"></div>
 
 </div>
 

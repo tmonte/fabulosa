@@ -23,13 +23,12 @@ let tests =
             let footer = ([], [ button ([], [ R.str "Purchase" ]) ])
             let image = [ P.Src "assets/macos-sierra-2.jpg" :> IHTMLProp ]
             card ([],
-              (Image image,
-               Header header,
-               Body body,
-               Footer footer))
+              [ Image image
+                Header header
+                Body body
+                Footer footer ])
             |> ReactNode.unit
             |>! hasUniqueClass "card"
-            |>! hasOrderedDescendentClass 1 "card-header card-title card-subtitle card-image card-body card-footer"
             |>! hasChild 1 (Media.Image.image image |> ReactNode.unit)
             |>! hasChild 1 (cardHeader header |> ReactNode.unit)
             |>! hasChild 1 (cardBody body |> ReactNode.unit)

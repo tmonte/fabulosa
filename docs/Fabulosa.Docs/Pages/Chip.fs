@@ -24,6 +24,11 @@ let render () =
     tryMount "chip-default-demo" def
     tryMount "chip-removable-demo" removable
     tryMount "chip-avatar-demo" avatar
+    tryMount "chip-params"
+        (PropTable.paramTable
+            (Some typeof<ChipOptional>)
+            None
+            (Some typeof<FabulosaText>))
 (**
 
 <div id="chips">
@@ -36,13 +41,13 @@ Chips are complex entities in small blocks.
 
 </div>
 
-<div id="chip-props">
+<div id="chip-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="chip-props-table"></div>
+<div class="props-table" id="chip-params-table"></div>
 
 </div>
 

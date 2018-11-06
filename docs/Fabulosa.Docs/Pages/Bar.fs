@@ -51,6 +51,26 @@ and input range elements.
 
 </div>
 
+<div id="bar-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="bar-params-table"></div>
+
+</div>
+
+<div id="bar-item-params">
+
+<h3 class="s-title">
+    Item Parameters
+</h3>
+
+<div class="props-table" id="bar-item-params-table"></div>
+
+</div>
+
 <div id="bar-default">
 
 <h3 class="s-title">
@@ -120,26 +140,6 @@ Bar can also have multiple items
 (*** include: bar-item-multiple-sample ***)
 
 (**
-
-</div>
-
-<div id="bar-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
-
-<div class="props-table" id="bar-params-table"></div>
-
-</div>
-
-<div id="bar-item-params">
-
-<h3 class="s-title">
-    Item Parameters
-</h3>
-
-<div class="props-table" id="bar-item-params-table"></div>
 
 </div>
 

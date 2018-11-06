@@ -4,6 +4,7 @@ module R = Fable.Helpers.React
 open R.Props
 open Fable.Import.React
 open Fabulosa
+open Fabulosa.Docs
 open Fabulosa.Group
 open Fabulosa.Select
 open Fabulosa.Extensions.Fable.Helpers.React.Props
@@ -85,21 +86,61 @@ let validation =
 (*** hide ***)
 let render () =
     tryMount "form-input-demo" input
+    tryMount "form-input-params-table"
+        (PropTable.paramTable
+            (Some typeof<FabulosaFormSize>)
+            None
+            None)
     tryMount "form-select-demo" select
+    tryMount "form-select-params-table"
+        (PropTable.paramTable
+            (Some typeof<FabulosaFormSize>)
+            None
+            (Some typeof<SelectChild>))
     tryMount "form-textarea-demo" textarea
+    tryMount "form-textarea-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<FabulosaText>))
     tryMount "form-radio-demo" radio
+    tryMount "form-radio-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<FabulosaText>))
     tryMount "form-checkbox-demo" checkbox
+    tryMount "form-checkbox-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<FabulosaText>))
     tryMount "form-switch-demo" switch
+    tryMount "form-switch-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<FabulosaText>))
     tryMount "form-sizes-demo" sizes
     tryMount "form-validation-demo" validation
+    tryMount "form-validation-params-table"
+        (PropTable.paramTable
+            (Some typeof<ValidationOptional>)
+            None
+            (Some typeof<ValidationChild>))
     tryMount "form-input-group-demo" inputGroup
+    tryMount "form-input-group-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<InputGroupChild>))
 (**
+
+<div class="forms-page-container">
 
 <div id="forms">
 
-<h2 class="s-title">
-    Forms
-</h2>
+<h2 class="s-title">Forms</h2>
 
 Forms provide the most common control styles
 used in forms, including input, textarea,
@@ -109,15 +150,17 @@ select, checkbox, radio and switch.
 
 <div id="checkbox">
 
-<h3 class="s-title">
-    Checkbox
-</h3>
+<h3 class="s-title">Checkbox</h3>
 
 The default checkbox component for a form.
 
-<div class="demo">
-    <span id="form-checkbox-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-checkbox-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-checkbox-demo"></div>
 
 *)
 
@@ -129,15 +172,17 @@ The default checkbox component for a form.
 
 <div id="input">
 
-<h3 class="s-title">
-    Input
-</h3>
+<h3 class="s-title">Input</h3>
 
 The default input component for a form.
 
-<div class="demo">
-    <span id="form-input-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-input-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-input-demo"></div>
 
 *)
 
@@ -149,15 +194,17 @@ The default input component for a form.
 
 <div id="inputgroup">
 
-<h3 class="s-title">
-    Input Group
-</h3>
+<h3 class="s-title">Input Group</h3>
 
 Component for grouping different kinds of input.
 
-<div class="demo">
-    <span id="form-input-group-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-input-group-params-table"></div>
+
+<h4>Example</h2>
+
+<div class="demo" id="form-input-group-demo"></div>
 
 *)
 
@@ -169,15 +216,17 @@ Component for grouping different kinds of input.
 
 <div id="radio">
 
-<h3 class="s-title">
-    Radio
-</h3>
+<h3 class="s-title">Radio</h3>
 
 The default radio component for a form.
 
-<div class="demo">
-    <span id="form-radio-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-radio-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-radio-demo"></div>
 
 *)
 
@@ -189,15 +238,17 @@ The default radio component for a form.
 
 <div id="select">
 
-<h3 class="s-title">
-    Select
-</h3>
+<h3 class="s-title">Select</h3>
 
 The default select component for a form.
 
-<div class="demo">
-    <span id="form-select-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-select-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-select-demo"></div>
 
 *)
 
@@ -209,15 +260,11 @@ The default select component for a form.
 
 <div id="sizes">
 
-<h3 class="s-title">
-    Sizes
-</h3>
+<h3 class="s-title">Sizes</h3>
 
 Input, select and label components can be Small or Large.
 
-<div class="demo">
-    <span id="form-sizes-demo"></span>
-</div>
+<div class="demo" id="form-sizes-demo"></div>
 
 *)
 
@@ -235,9 +282,13 @@ Input, select and label components can be Small or Large.
 
 A switch component for forms.
 
-<div class="demo">
-    <span id="form-switch-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-switch-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-switch-demo"></div>
 
 *)
 
@@ -249,15 +300,17 @@ A switch component for forms.
 
 <div id="textarea">
 
-<h3 class="s-title">
-    Textarea
-</h3>
+<h3 class="s-title">Textarea</h3>
 
 The default textarea component for a form.
 
-<div class="demo">
-    <span id="form-textarea-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-textarea-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-textarea-demo"></div>
 
 *)
 
@@ -275,14 +328,21 @@ The default textarea component for a form.
 
 Validation component for forms.
 
-<div class="demo">
-    <span id="form-validation-demo"></span>
-</div>
+<h4>Parameters</h4>
+
+<div class="props-table" id="form-validation-params-table"></div>
+
+<h4>Example</h4>
+
+<div class="demo" id="form-validation-demo"></div>
+
 *)
 
 (*** include: form-validation-sample ***)
 
 (**
+
+</div>
 
 </div>
 

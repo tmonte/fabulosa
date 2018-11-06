@@ -7,7 +7,7 @@
 var CONFIG = {
     indexHtmlTemplate: './docs/Fabulosa.Docs/index.html',
     fsharpEntry: './docs/Fabulosa.Docs/Fabulosa.Docs.fsproj',
-    cssEntry: './docs/Fabulosa.Docs/assets/styles.scss',
+    cssEntry: './docs/Fabulosa.Docs/Assets/styles.scss',
     outputDir: './output',
     assetsDir: './docs/Fabulosa.Docs',
     devServerPort: 4200,

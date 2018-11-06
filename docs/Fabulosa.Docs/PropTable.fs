@@ -7,6 +7,7 @@ module rec PropTable =
     open Fable.Helpers.React.Props
     open Fabulosa.Table
     module R = Fable.Helpers.React
+    module P = R.Props
         
     let flip f a b = f b a
     
