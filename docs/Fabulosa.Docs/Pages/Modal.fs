@@ -94,9 +94,9 @@ let demo = R.div [style] [
 
 let render () =
     tryMount "modal-demo" demo
-    tryMount "modal-props-table" (PropTable.unionPropTable typeof<Modal.Modal>)
-    tryMount "modal-header-props-table"  (PropTable.unionPropTable typeof<Modal.ModalHeader>)
-    tryMount "modal-footer-props-table"  (PropTable.unionPropTable typeof<ModalFooter>)
+    // tryMount "modal-props-table" (PropTable.unionPropTable typeof<Modal.Modal>)
+    // tryMount "modal-header-props-table"  (PropTable.unionPropTable typeof<Modal.ModalHeader>)
+    // tryMount "modal-footer-props-table"  (PropTable.unionPropTable typeof<ModalFooter>)
 (**
 
 

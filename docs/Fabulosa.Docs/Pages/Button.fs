@@ -37,6 +37,8 @@ let active = button ([ State Button.Active ], [ R.str "Active" ])
 
 let loading = button ([ State Loading ], [ R.str "-------" ])
 (*** hide ***)
+type Definition = Button of Button
+
 let render () =
     tryMount "button-default-demo" def
     tryMount "button-primary-demo" primary
@@ -51,13 +53,16 @@ let render () =
     tryMount "button-disabled-demo" disabled
     tryMount "button-active-demo" active
     tryMount "button-loading-demo" loading
-    // tryMount "button-props-table"
-    //     (PropTable.unionPropTable typeof<ButtonOptional>)
+    tryMount "button-definition"
+        (PropTable.definition typeof<Definition>)
+    tryMount "button-params-table"
+        (PropTable.paramTable
+            (Some typeof<ButtonOptional>)
+            None
+            None)
 (**
 
 <div id="buttons">
-
-<div id="alt"></div>
 
 <h2 class="s-title">
     Buttons
@@ -65,6 +70,26 @@ let render () =
 
 Buttons include simple button styles for
 actions in different types and sizes.
+
+<div id="button-def">
+
+<h4>Definition</h4>
+
+<div id="button-definition"></div>
+
+</div>
+
+</div>
+
+<div id="button-params">
+
+<h3 class="s-title">
+    Parameters
+</h3>
+
+<div class="props-table" id="button-params-table"></div>
+
+</div>
 
 </div>
 
@@ -168,16 +193,6 @@ Buttons can have states of SquaredAction and RoundAction.
 (*** include: button-state-sample ***)
 
 (**
-
-</div>
-
-<div id="button-props">
-
-<h3 class="s-title">
-    Optional Props
-</h3>
-
-<div class="props-table" id="button-props-table"></div>
 
 </div>
 

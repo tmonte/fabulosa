@@ -15,8 +15,12 @@ let element =
           Link ([], Href "#", Text "Link")
           Elements ([], [ R.str "Hey: "; R.a [] [ R.str "Jude" ] ]) ])
 (*** hide ***)
+type Definition = Breadcrumb of Breadcrumb
+
 let render () =
     tryMount "breadcrumbs-demo" element
+    tryMount "breadcrumb-definition"
+        (PropTable.definition typeof<Definition>)
     tryMount "breadcrumb-params-table"
         (PropTable.paramTable
             (Some typeof<BreadcrumbOptional>)
@@ -43,23 +47,15 @@ let render () =
 Breadcrumbs are used as navigational
 hierarchies to indicate current location.
 
-</div>
+<div id="breadcrumb-def">
 
-<div id="breadcrumb-example">
+<h4>Definition</h4>
 
-<h3 class="s-title">
-    Example
-</h3>
-
-<div id="breadcrumbs-demo"></div>
+<div id="breadcrumb-definition"></div>
 
 </div>
 
-*)
-
-(*** include: breadcrumbs-demo ***)
-
-(**
+</div>
 
 <div id="breadcrumb-params">
 
@@ -91,4 +87,16 @@ hierarchies to indicate current location.
 
 </div>
 
+<div id="breadcrumb-example">
+
+<h3 class="s-title">
+    Example
+</h3>
+
+<div id="breadcrumbs-demo"></div>
+
+</div>
+
 *)
+
+(*** include: breadcrumbs-demo ***)

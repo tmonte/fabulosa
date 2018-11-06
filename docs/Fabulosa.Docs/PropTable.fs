@@ -145,8 +145,23 @@ module rec PropTable =
             match typ with
             | Some t -> getFields kind t
             | None -> []
-        (fields optType "Optional" )
+        (fields optType "IHTMLProp" )
         @ (fields reqType "Required")
         @ (fields chiType "Children")
         |> renderTable
+
+    let definition compType =
+        let name, def, _ =
+            getFields "" compType
+            |> List.head
+        R.p [ Style [
+            Padding "10px"
+            Background "#fafaff"
+            Color "#5755d9"
+            FontFamily "\"SF Mono\", \"Segoe UI Mono\",\"Roboto Mono\",Menlo,Courier,monospace"
+            FontSize "10pt"
+            FontWeight "100"] ] [
+            R.span [ Style [ TextTransform "lowercase" ] ] [ name ]
+            R.str " "
+            R.span [] [ def ] ]
         
