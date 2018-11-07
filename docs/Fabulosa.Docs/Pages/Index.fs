@@ -59,9 +59,15 @@ There are two main things you can expect to find inside of each module:
  - the component type definition
  
 The rendering function takes only one parameter that is the type and returns a ReactElement.
+Thus, in the button module, one will find the button function with the following type:
 
-let buttonData
-let renderedElement = button 
+let button: Button -> ReactElement
+
+and it can be used like:
+
+let buttonData: Button = ([ Kind Primary ], [ R.str "Default" ])
+let renderedElement: ReactElement = button buttonData
+
 
 <h3>The Types</h3>
 Every Component in Fabulosa can be defined in term of its type. So, a button component will have a Type 
