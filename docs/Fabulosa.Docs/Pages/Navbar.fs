@@ -18,8 +18,12 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "navbar-demo" def
-    //tryMount "navbar-props-table"
-        //(PropTable.propTable typeof<Navbar.Props> Navbar.props)
+    tryMount "navbar-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<NavbarChild>))
+        
 (**
 
 <div id="navbar">
@@ -37,13 +41,13 @@ evenly distributed in the container.
 
 </div>
 
-<div id="navbar-props">
+<div id="navbar-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="navbar-props-table"></div>
+<div class="props-table" id="navbar-params-table"></div>
 
 </div>
 

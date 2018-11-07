@@ -12,19 +12,29 @@ open Microsoft.FSharp.Core
 (*** define: pagenav-default-sample ***)
 let def =
     pageNav ([],
-      [ Prev ([],
-          (Title "Page 1",
-           Subtitle "Previous",
-           Link ""))
-        Next ([],
-          (Title "Page 3",
-           Subtitle "Next",
-           Link "")) ])
+      (Prev
+         (Some ([],
+            (Title "Page 1",
+             Subtitle "Previous",
+             Link ""))),
+       Next
+         (Some([],
+            (Title "Page 3",
+             Subtitle "Next",
+             Link "")))))
 (*** hide ***)
 let render () =
     tryMount "pagenav-default-demo" def
-    //tryMount "pagenav-props-table"
-        //(PropTable.propTable typeof<PageNav.Props> PageNav.props)
+    tryMount "pagenav-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<PageNavChildren>))
+    tryMount "pagenav-item-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<PageNavItemChildren>))
 (**
 
 <div id="pagenav">
@@ -38,13 +48,23 @@ previous and next pages only.
 
 </div>
 
-<div id="pagenav-props">
+<div id="pagenav-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="pagenav-props-table"></div>
+<div class="props-table" id="pagenav-params-table"></div>
+
+</div>
+
+<div id="pagenav-item-params">
+
+<h3 class="s-title">
+    Item Parameters
+</h3>
+
+<div class="props-table" id="pagenav-item-params-table"></div>
 
 </div>
 

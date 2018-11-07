@@ -17,14 +17,20 @@ module PageNav =
     type Subtitle =
         Subtitle of string
 
+    type PageNavItemChildren = Title * Subtitle * Action
+
     type PageNavItem =
-        P.HTMLProps * (Title * Subtitle * Action)
+        P.HTMLProps * PageNavItemChildren
 
-    type PageNavChild =
-        | Prev of PageNavItem
-        | Next of PageNavItem
+    type PageNavPrev =
+        | Prev of (PageNavItem option)
 
-    type PageNav = P.HTMLProps * PageNavChild list
+    type PageNavNext =
+        | Next of (PageNavItem option)
+
+    type PageNavChildren = PageNavPrev * PageNavNext
+
+    type PageNav = P.HTMLProps * PageNavChildren
 
     let private action =
         function
@@ -32,9 +38,11 @@ module PageNav =
         | OnPageChanged fn -> [ (P.OnClick fn) :> P.IHTMLProp ]
 
     let pageNavItem kind ((opt, (Title t, Subtitle st, act))) =
-        R.li
-            [ P.ClassName ("page-item page-" + kind) ]
-            [ R.a
+        P.Unmerged opt
+        |> P.addProp (P.ClassName ("page-item page-" + kind))
+        |> P.merge
+        |> R.li
+        <| [ R.a
                 (action act)
                 [ R.div
                     [ P.ClassName "page-item-subtitle" ]
@@ -43,14 +51,14 @@ module PageNav =
                     [ P.ClassName "page-item-title h5" ]
                     [ R.str t ] ] ]
 
-    let private pageNavChild =
-        function
-        | Prev prev -> pageNavItem "prev" prev
-        | Next next -> pageNavItem "next" next
-
-    let pageNav ((opt, chi): PageNav) =
+    let pageNav ((opt, (Prev prv, Next nxt)): PageNav) =
         P.Unmerged opt
         |> P.addProp (P.ClassName "pagination")
         |> P.merge
-        |> R.ul
-        <| Seq.map pageNavChild chi
+        |> R.ul <|
+        [ prv
+          |> Option.map (pageNavItem "prev")
+          |> R.ofOption
+          nxt
+          |> Option.map (pageNavItem "next")
+          |> R.ofOption ]

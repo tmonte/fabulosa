@@ -148,7 +148,7 @@ module rec PropTable =
             | None -> []
         (fields optType "IHTMLProp" )
         @ (fields reqType "Required")
-        @ (fields chiType "Children")
+        @ (fields chiType "Child")
         |> renderTable
 
     let definition compType =

@@ -17,10 +17,16 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "nav-default-demo" def
-    //tryMount "nav-props-table"
-    //    (PropTable.propTable typeof<Nav.Props> Nav.props)
-    //tryMount "nav-item-props-table"
-        //(PropTable.propTable typeof<Nav.Item.Props> Nav.Item.props)
+    tryMount "nav-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<NavChild>))
+    tryMount "nav-item-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<FabulosaText>))
 (**
 
 <div id="navs">
@@ -34,23 +40,23 @@ for navigation lists
 
 </div>
 
-<div id="nav-props">
+<div id="nav-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="nav-props-table"></div>
+<div class="props-table" id="nav-params-table"></div>
 
 </div>
 
-<div id="nav-item-props">
+<div id="nav-item-params">
 
 <h3 class="s-title">
-    Item Props
+    Item Parameters
 </h3>
 
-<div class="props-table" id="nav-item-props-table"></div>
+<div class="props-table" id="nav-item-params-table"></div>
 
 </div>
 

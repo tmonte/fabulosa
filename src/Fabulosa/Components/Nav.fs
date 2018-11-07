@@ -14,11 +14,13 @@ module rec Nav =
             [ ClassName "nav-item" ]
             [ R.a opt [ R.str txt ] ]
 
+    type NavChildren = NavChild list
+
+    type Nav = HTMLProps * NavChildren
+
     type NavChild =
     | Item of NavItem
-    | Nav of HTMLProps * NavChild seq
-
-    type Nav = HTMLProps * NavChild seq
+    | Nav of Nav
 
     let nav ((opt, chi): Nav) =
         Unmerged opt

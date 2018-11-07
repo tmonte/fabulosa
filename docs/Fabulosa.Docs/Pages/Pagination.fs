@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Pagination
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -28,10 +29,16 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "pagination-default-demo" def
-    //tryMount "pagination-props-table"
-    //    (PropTable.propTable typeof<Pagination.Props> Pagination.props)
-    //tryMount "page-item-props-table"
-        //(PropTable.propTable typeof<Pagination.Item.Props> Pagination.Item.props)
+    tryMount "pagination-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<PaginationChild>))
+    tryMount "pagination-item-params-table"
+        (PropTable.paramTable
+            (Some typeof<PaginationItemOptional>)
+            (Some typeof<PaginationItemRequired>)
+            None)
 (**
 
 <div id="pagination">
@@ -46,33 +53,13 @@ that gives you the clicked page
 
 </div>
 
-<div id="pagination-props">
+<div id="pagination-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="pagination-props-table"></div>
-
-</div>
-
-<div id="pagination-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-A simple pagination component that shows all pages.
-If you want collapsed pages, just add disabled items
-you can use the disabled prop.
-
-<div class="demo" id="pagination-default-demo"></div>
-
-*)
-
-(*** include: pagination-default-sample ***)
-
-(**
+<div class="props-table" id="pagination-params-table"></div>
 
 </div>
 
@@ -86,13 +73,32 @@ Page items are child elements for pagination
 
 </div>
 
-<div id="page-item-props">
+<div id="pagination-item-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="page-item-props-table"></div>
+<div class="props-table" id="pagination-item-params-table"></div>
+
+</div>
+
+<div id="pagination-default">
+
+<h3 class="s-title">
+    Default
+</h3>
+
+A simple pagination component that shows all pages.
+If you want collapsed pages you can use the disabled prop.
+
+<div class="demo" id="pagination-default-demo"></div>
+
+*)
+
+(*** include: pagination-default-sample ***)
+
+(**
 
 </div>
 
