@@ -1,6 +1,8 @@
 module IndexPage
 
+
 open Fable.Import.React
+open Fabulosa.Media.Image
 open Fabulosa.Button
 open Fabulosa.Tooltip
 module R = Fable.Helpers.React
@@ -14,7 +16,8 @@ type ChildrenTuple = unit
 //Could refer the actual types, but this is just easier for docs purposes.
 type HTMLProps = unit 
 type IHTMLProp = interface end 
-   
+type RequiredProps = unit
+type Children = unit   
 
 (*** define: anchor ***)
 let fabulous =
@@ -45,6 +48,18 @@ type Tooltip = HTMLProps * TooltipContent * TooltipChildren
 type TooltipOptional =
     | Orientation of Orientation
     interface IHTMLProp
+
+(*** define: required-props ***)
+type MyComponentType = OptionalProps * RequiredProps * Children
+
+(*** define: missing-required-props ***)
+type MySecondComponentType = OptionalProps * Children
+
+(*** define: children-example ***)
+type FigureChildren =
+    | Image of Image
+            
+type Figure = HTMLProps * FigureChildren
 
 (**
 <div id="intro">
@@ -141,10 +156,14 @@ where HTMLProps is alias to IHTMLProp list. On top of that, all of the <b>option
 #### Required Props
 
 Required props are defined as tuple that sits in between the list of optional props and the children. 
-<code>type MyComponentType = OptionalProps * RequiredProps * Children</code>
+*)
+(*** include: required-props ***)
+(**
 
 In case a component has no required props, the component interface will be composed of a tuple of only 2 items
-<code>type MyComponentType = OptionalProps * Children</code>
+*)
+(*** include: missing-required-props ***)
+(**
 
 #### Children
 
@@ -152,12 +171,9 @@ The biggest difference in fabulosa and other libraries is arguably the way we tr
 Most importantly, they will reference internal types over ReactElements as much as possible. The main diffence we we get by doing this is the fact that we believe in the manipulation of the data in destination components and we don't believe that that is easily achievable after componets are rendered. On the other hand, manipulating data is straight forward.
 Let's take the Figure type for example
 
-<code>
-type FigureChildren =
-    | Image of Image
-            
-type Figure = HTMLProps * FigureChildren
-</code>   
+*)
+(*** include: children-example ***)
+(**
 
 Making the dependency of Figure on Image and not a ReactElement, allows us a few things:
 - Guarantee that it is a image that gets rendered
