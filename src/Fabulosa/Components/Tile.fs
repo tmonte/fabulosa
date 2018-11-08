@@ -54,7 +54,7 @@ module Tile =
     type Action =
         Action of TileAction
 
-    type private TileChildren =
+    type TileChildren =
         Content * Action
 
     type private Tile =

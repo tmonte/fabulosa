@@ -52,8 +52,11 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "panel-default-demo" (R.div [ P.Style [ P.CSSProp.Width "50%" ] ] [ def ])
-    //tryMount "panel-props-table"
-        //(PropTable.propTable typeof<Panel.Props> Panel.props)
+    tryMount "panel-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<PanelChild>))
 (**
 
 <div id="panel">
@@ -67,13 +70,13 @@ auto-expand content section
 
 </div>
 
-<div id="panel-props">
+<div id="panel-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="panel-props-table"></div>
+<div class="props-table" id="panel-params-table"></div>
 
 </div>
 

@@ -2,6 +2,7 @@ module PopoverPage
 
 open Fabulosa.Popover
 open Fabulosa.Button
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -16,8 +17,11 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "popover-default-demo" def
-    //tryMount "popover-props-table"
-        //(PropTable.propTable typeof<Popover.Props> Popover.props)
+    tryMount "popover-params-table"
+        (PropTable.paramTable
+            (Some typeof<PopoverOptional>)
+            None
+            (Some typeof<PopoverChildren>))
 (**
 
 <div id="popover">
@@ -30,13 +34,13 @@ Popovers are small overlay content containers
 
 </div>
 
-<div id="popover-props">
+<div id="popover-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="popover-props-table"></div>
+<div class="props-table" id="popover-params-table"></div>
 
 </div>
 

@@ -3,6 +3,7 @@
 open Fabulosa
 open Fabulosa.Badge
 open Fabulosa.Tab
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
@@ -19,8 +20,11 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "tab-default-demo" def
-    //tryMount "tab-props-table"
-        //(PropTable.propTable typeof<Tab.Props> Tab.props)
+    tryMount "tab-params-table"
+        (PropTable.paramTable
+            (Some typeof<TabOptional>)
+            None
+            (Some typeof<TabChild>))
 (**
 
 <div id="tab">
@@ -33,13 +37,13 @@ Tabs enable quick switch between different views
 
 </div>
 
-<div id="tab-props">
+<div id="tab-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="tab-props-table"></div>
+<div class="props-table" id="tab-params-table"></div>
 
 </div>
 

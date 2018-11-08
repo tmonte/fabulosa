@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Table
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Fable.Import.React
 open Renderer
@@ -45,10 +46,16 @@ let render () =
     tryMount "table-default-demo" def
     tryMount "table-striped-demo" striped
     tryMount "table-hover-demo" hover
-    //tryMount "table-props-table"
-    //    (PropTable.propTable typeof<Table.Props> Table.props)
-    //tryMount "table-row-props-table"
-        //(PropTable.propTable typeof<Table.Row.Props> Table.Row.props)
+    tryMount "table-params-table"
+        (PropTable.paramTable
+            (Some typeof<TableOptional>)
+            None
+            (Some typeof<TableChild>))
+    tryMount "table-row-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<TableRowChild>))
 (**
 
 <div id="table">
@@ -62,13 +69,23 @@ for tables and data sets.
 
 </div>
 
-<div id="table-props">
+<div id="table-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="table-props-table"></div>
+<div class="props-table" id="table-params-table"></div>
+
+</div>
+
+<div id="table-row-params">
+
+<h3 class="s-title">
+    Row Parameters
+</h3>
+
+<div class="props-table" id="table-row-params-table"></div>
 
 </div>
 

@@ -19,8 +19,11 @@ let showLarge =
 let render () =
     tryMount "responsive-demo-hide" hideSmall
     tryMount "responsive-demo-show" showLarge
-    //tryMount "navbar-props-table"
-        //(PropTable.propTable typeof<Responsive.Props> Responsive.props)
+    tryMount "responsive-params-table"
+        (PropTable.paramTable
+            (Some typeof<ResponsiveOptional>)
+            None
+            None)
 (**
 
 <div id="responsive">
@@ -35,13 +38,13 @@ visibility utilities.
 
 </div>
 
-<div id="responsive-props">
+<div id="responsive-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="navbar-props-table"></div>
+<div class="props-table" id="responsive-params-table"></div>
 
 </div>
 

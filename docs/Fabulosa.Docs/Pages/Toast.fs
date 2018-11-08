@@ -1,6 +1,7 @@
 ﻿module ToastPage
 
 open Fabulosa
+open Fabulosa.Docs
 open Fabulosa.Button
 open Fabulosa.Toast
 module R = Fable.Helpers.React
@@ -80,8 +81,11 @@ let demo view  =
 let render () =
     tryMount "toast-default-demo" <| demo defaultView
     tryMount "toast-primary-demo" <| demo primaryView
-    //tryMount "toast-props-table"
-        //(PropTable.propTable typeof<Toast.Props> Toast.props)
+    tryMount "toast-params-table"
+        (PropTable.paramTable
+            (Some typeof<ToastOptional>)
+            None
+            (Some typeof<FabulosaText>))
 (**
 
 <div id="toast">
@@ -95,13 +99,13 @@ or information to users
 
 </div>
 
-<div id="toast-props">
+<div id="toast-params">
 
 <h3 class="s-title">
-    Props
+    Paramaters
 </h3>
 
-<div class="props-table" id="toast-props-table"></div>
+<div class="props-table" id="toast-params-table"></div>
 
 </div>
 

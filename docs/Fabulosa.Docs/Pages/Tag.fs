@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Tag
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 module P = R.Props
 open Renderer
@@ -39,8 +40,11 @@ let roundedDemo =
         [ R.div [] [ rounded ] ]
 
 let render () =
-    //tryMount "tag-props-table"
-        //(PropTable.propTable typeof<Tag.Props> Tag.props)
+    tryMount "tag-params-table"
+        (PropTable.paramTable
+            (Some typeof<TagOptional>)
+            None
+            (Some typeof<FabulosaText>))
     tryMount "tag-color-demo" colorDemo
     tryMount "tag-rounded-demo" roundedDemo
 (**
@@ -56,13 +60,13 @@ Spectre.css [Labels](https://picturepan2.github.io/spectre/elements.html#labels)
 
 </div>
 
-<div id="props">
+<div id="tag-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div id="tag-props-table"></div>
+<div class="props-table" id="tag-params-table"></div>
 
 </div>
 

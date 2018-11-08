@@ -1,5 +1,6 @@
 ﻿module TilePage
 
+open Fabulosa.Docs
 open Fabulosa.Tile
 open Fabulosa.Button
 open Fabulosa.Icon
@@ -33,8 +34,11 @@ let compact =
 let render () =
     tryMount "tile-default-demo" def
     tryMount "tile-compact-demo" compact
-    //tryMount "tile-props-table"
-        //(PropTable.propTable typeof<Tile.Props> Tile.props)
+    tryMount "tile-params-table"
+        (PropTable.paramTable
+            (Some typeof<TileOptional>)
+            None
+            (Some typeof<TileChildren>))
 (**
 
 <div id="tile">
@@ -47,13 +51,13 @@ Tiles are repeatable or embeddable information blocks
 
 </div>
 
-<div id="tile-props">
+<div id="tile-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="tile-props-table"></div>
+<div class="props-table" id="tile-params-table"></div>
 
 </div>
 

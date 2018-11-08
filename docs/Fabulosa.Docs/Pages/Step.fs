@@ -2,6 +2,7 @@
 
 open Fabulosa
 open Fabulosa.Step
+open Fabulosa.Docs
 module R = Fable.Helpers.React
 open Fable.Import.React
 open Renderer
@@ -15,10 +16,11 @@ let def =
 (*** hide ***)
 let render () =
     tryMount "step-default-demo" def
-    //tryMount "step-props-table"
-    //    (PropTable.propTable typeof<Step.Props> Step.props)
-    //tryMount "step-item-props-table"
-        //(PropTable.propTable typeof<Step.Item.Props> Step.Item.props)
+    tryMount "step-params-table"
+        (PropTable.paramTable
+            None
+            None
+            (Some typeof<StepChild>))
 (**
 
 <div id="step">
@@ -32,13 +34,13 @@ sequence of task steps
 
 </div>
 
-<div id="step-props">
+<div id="step-params">
 
 <h3 class="s-title">
-    Props
+    Parameters
 </h3>
 
-<div class="props-table" id="step-props-table"></div>
+<div class="props-table" id="step-params-table"></div>
 
 </div>
 
@@ -58,26 +60,6 @@ and an active step
 (*** include: step-default-sample ***)
 
 (**
-
-</div>
-
-<div id="step-item">
-
-<h2 class="s-title">
-    Step Item
-</h2>
-
-Step items are child elements for steps
-
-</div>
-
-<div id="step-item-props">
-
-<h3 class="s-title">
-    Props
-</h3>
-
-<div class="props-table" id="step-item-props-table"></div>
 
 </div>
 
