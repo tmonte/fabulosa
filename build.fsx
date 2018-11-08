@@ -52,7 +52,7 @@ Target.create "Clean" (fun _ ->
     ++ "output"
     |> Shell.cleanDirs
     let docs = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs");
-    deleteFiles (Path.Combine(docs, "pages")) "*.fsx" false
+    deleteFiles (Path.Combine(docs, "Pages")) "*.fsx" false
     deleteFiles docs "*.html" false
 )
 
@@ -74,7 +74,7 @@ let generateDocs file =
         | None -> "*.fs"
     let source = __SOURCE_DIRECTORY__
     let docs = Path.Combine(source, "docs/Fabulosa.Docs")
-    let pages = Path.Combine(docs, "pages")
+    let pages = Path.Combine(docs, "Pages")
     let hide = "(*** hide ***)\n"
     let scriptImports = """
 #r "Facades/netstandard"
@@ -93,7 +93,7 @@ let generateDocs file =
     try 
         FSFormatting.createDocs(fun _ -> {
             FSFormatting.defaultLiterateArguments with
-                Source = Path.Combine(docs, "pages")
+                Source = Path.Combine(docs, "Pages")
                 Template = Path.Combine(docs, "assets/template.html")
                 OutputDirectory = docs
                 LayoutRoots = [docs]
@@ -115,7 +115,7 @@ Target.create "YarnInstall" (fun _ ->
 
 Target.create "Watch" (fun _ ->
     //runFable "webpack-dev-server"
-    let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/pages")
+    let pages = Path.Combine(__SOURCE_DIRECTORY__, "docs/Fabulosa.Docs/Pages")
     let changes (changed: FileChange seq) =
         let status = FileStatus.Changed
             // if Environment.isMacOS

@@ -79,7 +79,7 @@
         "build": true,
         "output": true,
         "docs/Fabulosa.Docs/*.html": true,
-        "docs/Fabulosa.Docs/pages/*.fsx": true,
+        "docs/Fabulosa.Docs/Pages/*.fsx": true,
         "**/*.userprefs": true,
         "**/*.dll.mdb": true,
         "**/*.exe.mdb": true,
