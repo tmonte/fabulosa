@@ -94,7 +94,7 @@ let generateDocs file =
         FSFormatting.createDocs(fun _ -> {
             FSFormatting.defaultLiterateArguments with
                 Source = Path.Combine(docs, "Pages")
-                Template = Path.Combine(docs, "assets/template.html")
+                Template = Path.Combine(docs, "Assets/template.html")
                 OutputDirectory = docs
                 LayoutRoots = [docs]
                 ProjectParameters = [("", "")]

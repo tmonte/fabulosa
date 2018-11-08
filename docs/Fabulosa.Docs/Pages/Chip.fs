@@ -18,7 +18,7 @@ let fn _ = console.log "removed"
 
 let removable = chip ([ OnRemove fn ], Text "Chip")
 (*** define: chip-avatar-sample ***)
-let avatar = chip ([ Avatar (Url "assets/avatar-1.png") ], Text "Chip")
+let avatar = chip ([ Avatar (Url "Assets/avatar-1.png") ], Text "Chip")
 (*** hide ***)
 let render () =
     tryMount "chip-default-demo" def

@@ -16,7 +16,7 @@ let span = badge ([], Value 2, Span ([], [ R.str "Text" ]))
 (*** define: badge-button-avatar-sample ***)
 let button = badge ([], Value 3, Button ([], [ R.str "Button" ]))
 
-let avatar = badge ([], Value 4, Avatar ([ Size Large ], Url "assets/avatar-1.png"))
+let avatar = badge ([], Value 4, Avatar ([ Size Large ], Url "Assets/avatar-1.png"))
 (*** hide ***)
 let render () =
     tryMount "badge-div-demo" div

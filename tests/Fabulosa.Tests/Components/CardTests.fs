@@ -21,7 +21,7 @@ let tests =
                   the world by making tools for the mind
                   that advance humankind." ] ])
             let footer = ([], [ button ([], [ R.str "Purchase" ]) ])
-            let image = [ P.Src "assets/macos-sierra-2.jpg" :> IHTMLProp ]
+            let image = [ P.Src "Assets/macos-sierra-2.jpg" :> IHTMLProp ]
             card ([],
               [ Image image
                 Header header

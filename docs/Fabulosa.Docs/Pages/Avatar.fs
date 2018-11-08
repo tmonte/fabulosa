@@ -9,7 +9,7 @@ open Renderer
 (*** define: avatar-initial-sample ***)
 let def = avatar ([], Initial "FA")
 (*** define: avatar-source-sample ***)
-let source = avatar ([], Url "assets/avatar-1.png")
+let source = avatar ([], Url "Assets/avatar-1.png")
 (*** define: avatar-sizes-sample ***)
 let extraSmall = avatar ([ Size ExtraSmall ], Initial "FA")
 (*** hide ***)
@@ -21,7 +21,7 @@ let large = avatar ([ Size Large ], Initial "FA")
 
 let extraLarge = avatar ([ Size ExtraLarge ], Initial "FA")
 (*** define: avatar-presence-sample ***)
-let presence = avatar ([ Presence Online ], Url "assets/avatar-1.png")
+let presence = avatar ([ Presence Online ], Url "Assets/avatar-1.png")
 (*** hide ***)
 let render () =
     tryMount "avatar-initial-demo" def

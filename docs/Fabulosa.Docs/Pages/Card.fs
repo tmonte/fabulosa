@@ -14,7 +14,7 @@ open Renderer
 let def =
     card ([],
       [ Header ([], (Title "Apple", SubTitle "Hardware and software"))
-        Image ([P.Src "assets/macos-sierra-2.jpg"])
+        Image ([P.Src "Assets/macos-sierra-2.jpg"])
         Body ([],
           [ R.p [] [ R.str "To make a contribution to
               the world by making tools for the mind
