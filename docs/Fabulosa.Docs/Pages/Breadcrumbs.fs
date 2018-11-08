@@ -36,55 +36,33 @@ let render () =
 
 <div id="breadcrumbs">
 
-<h2 class="s-title">
-    Breadcrumbs
-</h2>
+<h2 class="s-title">Breadcrumbs</h2>
 
 Breadcrumbs are used as navigational
 hierarchies to indicate current location.
 
-</div>
-
-<div id="breadcrumb-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="breadcrumb-params-table"></div>
 
-</div>
-
-<div id="breadcrumb-string-params">
-
-<h3 class="s-title">
-    Text Parameters
-</h3>
+#### Text Parameters
 
 <div class="props-table" id="breadcrumb-string-params-table"></div>
 
-</div>
-
-<div id="breadcrumb-link-params">
-
-<h3 class="s-title">
-    Link Parameters
-</h3>
+#### Link Parameters
 
 <div class="props-table" id="breadcrumb-link-params-table"></div>
 
-</div>
+#### Example
 
-<div id="breadcrumb-example">
+A breadcrumb with different kinds of children
 
-<h3 class="s-title">
-    Example
-</h3>
+<div class="demo" id="breadcrumbs-demo"></div>
 
-<div id="breadcrumbs-demo"></div>
+*)
+(*** include: breadcrumbs-demo ***)
+(**
 
 </div>
 
 *)
-
-(*** include: breadcrumbs-demo ***)

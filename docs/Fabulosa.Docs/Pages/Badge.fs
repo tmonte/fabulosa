@@ -29,31 +29,18 @@ let render () =
             (Some typeof<FabulosaValue>)
             (Some typeof<BadgeChildren>))
 (**
+
 <div id="badges">
 
-<h2 class="s-title">
-    Badge
-</h2>
+<h2 class="s-title">Badge</h2>
 
 Badges are often used as unread number indicators.
 
-</div>
-
-<div id="badge-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="badge-params-table"></div>
 
-</div>
-
-<div id="divorspan">
-
-<h3 class="s-title">
-    Div or Span
-</h3>
+#### Div or Span
 
 Badges can be rendered on top
 of div or span elements.
@@ -65,18 +52,10 @@ of div or span elements.
 </div>
 
 *)
-
 (*** include: badge-div-span-sample ***)
-
 (**
 
-</div>
-
-<div id="buttonoravatar">
-
-<h3 class="s-title">
-    Button or Avatar
-</h3>
+#### Button or Avatar
 
 Badges can also be render on top
 of the button and avatar components.
@@ -87,9 +66,7 @@ of the button and avatar components.
 </div>
 
 *)
-
 (*** include: badge-button-avatar-sample ***)
-
 (**
 
 </div>

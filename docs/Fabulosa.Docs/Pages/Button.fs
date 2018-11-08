@@ -60,32 +60,16 @@ let render () =
 
 <div id="buttons">
 
-<h2 class="s-title">
-    Buttons
-</h2>
+<h2 class="s-title">Buttons</h2>
 
 Buttons include simple button styles for
 actions in different types and sizes.
 
-</div>
-
-<div id="button-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="button-params-table"></div>
 
-</div>
-
-</div>
-
-<div id="kinds">
-
-<h3 class="s-title">
-    Kinds
-</h3>
+#### Kinds
 
 Buttons can have kinds Default, Primary or Link.
 
@@ -94,19 +78,12 @@ Buttons can have kinds Default, Primary or Link.
     <span id="button-primary-demo"></span>
     <span id="button-link-demo"></span>
 </div>
+
 *)
-
 (*** include: button-kind-sample ***)
-
 (**
 
-</div>
-
-<div id="sizes">
-
-<h3 class="s-title">
-    Sizes
-</h3>
+#### Sizes
 
 Buttons can have sizes Small or Large.
 
@@ -115,19 +92,12 @@ Buttons can have sizes Small or Large.
     <span id="button-medium-demo"></span>
     <span id="button-large-demo"></span>
 </div>
+
 *)
-
 (*** include: button-size-sample ***)
-
 (**
 
-</div>
-
-<div id="colors">
-
-<h3 class="s-title">
-    Colors
-</h3>
+#### Colors
 
 Buttons can have colors for Success and Error.
 
@@ -135,19 +105,12 @@ Buttons can have colors for Success and Error.
     <span id="button-success-demo"></span>
     <span id="button-error-demo"></span>
 </div>
+
 *)
-
 (*** include: button-color-sample ***)
-
 (**
 
-</div>
-
-<div id="formats">
-
-<h3 class="s-title">
-    Formats
-</h3>
+#### Formats
 
 Buttons can have formats of SquaredAction and RoundAction.
 
@@ -155,19 +118,12 @@ Buttons can have formats of SquaredAction and RoundAction.
     <span id="button-squared-demo"></span>
     <span id="button-round-demo"></span>
 </div>
+
 *)
-
 (*** include: button-format-sample ***)
-
 (**
 
-</div>
-
-<div id="states">
-
-<h3 class="s-title">
-    States
-</h3>
+#### States
 
 Buttons can have states of SquaredAction and RoundAction.
 
@@ -176,10 +132,9 @@ Buttons can have states of SquaredAction and RoundAction.
     <span id="button-active-demo"></span>
     <span id="button-loading-demo"></span>
 </div>
+
 *)
-
 (*** include: button-state-sample ***)
-
 (**
 
 </div>

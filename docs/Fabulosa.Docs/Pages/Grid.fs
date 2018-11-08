@@ -52,82 +52,62 @@ let render () =
             (Some typeof<GridColumnOptional>)
             None
             None)
-
 (**
-
 <div id="grid">
-
-<h2 class="s-title">
-    Grid
-</h2>
+<h2 class="s-title">Grid</h2>
 
 A flexbox based responsive grid system with 12 columns.
 
-</div>
-
+<h4>Parameters</h4>
 <div class="props-table" id="grid-params-table"></div>
+<h4>Example</h4>
 
-<div id="grid-sample">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default setting for grid
+A simple grid with default settings.
 
 <div class="demo" id="grid-demo"></div>
-
 *)
-
 (*** include: grid-sample ***)
-
 (**
-
 </div>
 
 <div id="rows">
+<h2 class="s-title">Rows</h2>
 
-<h3 class="s-title">
-    Rows
-</h3>
+Rows are children of the grid.
 
-Rows can be Gapless and OneLine
-
+<h4>Parameters</h4>
 <div class="props-table" id="row-params-table"></div>
+<h4>Example</h4>
+
+Rows can be gapless or one-line. Scroll horizontally
+on the second example to see how one-line works.
 
 <div class="demo">
     <div id="row-gapless-demo"></div>
     <div id="row-oneline-demo"></div>
 </div>
-
 *)
-
 (*** include: row-sample ***)
-
 (**
-
 </div>
 
 <div id="columns">
+<h2 class="s-title">Columns</h2>
 
-<h3 class="s-title">
-    Columns
-</h3>
+Columns are children of the rows.
 
-Columns can have different resposive sizes (Resize the page to view different sizes)
 
+<h4>Parameters</h4>
 <div class="props-table" id="column-params-table"></div>
+<h4>Example</h4>
 
-<div class="demo">
-    <div id="column-demo"></div>
-</div>
+Columns can have different resposive sizes.
+Resize horizontally to a very small size to
+view the columns stack.
 
+<div class="demo"><div id="column-demo"></div></div>
 *)
-
 (*** include: column-sample ***)
-
 (**
-
 </div>
-
 *)

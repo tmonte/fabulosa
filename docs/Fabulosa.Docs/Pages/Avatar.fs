@@ -38,67 +38,38 @@ let render () =
             None
             (Some typeof<AvatarChildren>))
 (**
+
 <div id="avatars">
 
-<h2 class="s-title">
-    Avatars
-</h2>
+<h2 class="s-title">Avatars</h2>
 
 Avatars are user profile pictures.
 
-</div>
-
-<div id="avatar-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="avatar-params-table"></div>
 
-</div>
-
-<div id="avatar-initial">
-
-<h3 class="s-title">
-    Initial
-</h3>
+#### Initial
 
 Avatars can have an Initial prop with name initials instead of images.
 
 <div class="demo" id="avatar-initial-demo"></div>
 
 *)
-
 (*** include: avatar-initial-sample ***)
-
 (**
 
-</div>
-
-<div id="avatar-source">
-
-<h3 class="s-title">
-    Source
-</h3>
+#### Source
 
 Avatars can also have a source image
 
 <div class="demo" id="avatar-source-demo"></div>
 
 *)
-
 (*** include: avatar-source-sample ***)
-
 (**
 
-</div>
-
-<div id="avatar-sizes">
-
-<h3 class="s-title">
-    Sizes
-</h3>
+#### Sizes
 
 Avatar can be ExtraSmall, Small, Medium, Large and ExtraLarge.
 
@@ -116,13 +87,7 @@ Avatar can be ExtraSmall, Small, Medium, Large and ExtraLarge.
 
 (**
 
-</div>
-
-<div id="avatar-presence">
-
-<h3 class="s-title">
-    Presence
-</h3>
+#### Presence
 
 Avatar can have a presence indicator.
 
@@ -131,9 +96,7 @@ Avatar can have a presence indicator.
 </div>
 
 *)
-
 (*** include: avatar-presence-sample ***)
-
 (**
 
 </div>

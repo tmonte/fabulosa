@@ -31,7 +31,7 @@ let render () =
         (PropTable.paramTable
             None
             None
-            (Some typeof<CardChildren>))
+            (Some typeof<CardChild>))
 (**
 
 <div id="cards">

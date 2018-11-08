@@ -55,66 +55,36 @@ let render () =
 
 <div id="accordions">
 
-<h2 class="s-title">
-    Accordions
-</h2>
+<h2 class="s-title">Accordions</h2>
 
 Accordions are used to toggle sections of content.
 
-</div>
-
-<div id="accordion-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="accordion-params-table"></div>
 
-</div>
-
-<div id="accordion-item-params">
-
-<h3 class="s-title">
-    Item Parameters
-</h3>
+#### Item Parameters
 
 <div class="props-table" id="accordion-item-params-table"></div>
 
-</div>
+#### Example
 
-<div id="accordion-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default setting for accordions
+An accordion with default settings.
 
 <div class="demo" id="accordion-demo"></div>
 
 *)
-
 (*** include: accordion-sample ***)
-
 (**
 
-</div>
-
-<div id="accordion-custom">
-
-<h3 class="s-title">
-    Custom Icon
-</h3>
+#### Custom Icon
 
 Accordions accept icon props for a custom icon.
 
 <div class="demo" id="accordion-custom-demo"></div>
 
 *)
-
 (*** include: accordion-custom-sample ***)
-
 (**
 
 </div>

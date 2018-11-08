@@ -40,105 +40,59 @@ let render () =
 
 <div id="bars">
 
-<h2 class="s-title">
-    Bars
-</h2>
+<h2 class="s-title">Bars</h2>
 
 Bars represent the progress of a task or the
 value within the known range. Bars are custom
 components for displaying HTML5 progress, meter
 and input range elements.
 
-</div>
-
-<div id="bar-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="bar-params-table"></div>
 
-</div>
-
-<div id="bar-item-params">
-
-<h3 class="s-title">
-    Item Parameters
-</h3>
+#### Item Parameters
 
 <div class="props-table" id="bar-item-params-table"></div>
 
-</div>
+#### Example
 
-<div id="bar-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default bar
+A bar with default settings.
 
 <div class="demo" id="bar-default-demo"></div>
 
 *)
-
 (*** include: bar-default-sample ***)
-
 (**
 
-</div>
-
-<div id="bar-small">
-
-<h3 class="s-title">
-    Small
-</h3>
+#### Small
 
 A small version of the bar
 
 <div class="demo" id="bar-small-demo"></div>
 
 *)
-
 (*** include: bar-small-sample ***)
-
 (**
 
-</div>
-
-<div id="bar-item-tooltip">
-
-<h3 class="s-title">
-    Tooltips
-</h3>
+#### Tooltips
 
 Bar items can have tooltips
 
 <div class="demo" id="bar-item-tooltip-demo"></div>
 
 *)
-
 (*** include: bar-item-tooltip-sample ***)
-
 (**
 
-</div>
-
-<div id="bar-item-multiple">
-
-<h3 class="s-title">
-    Multiple items
-</h3>
+#### Multiple items
 
 Bar can also have multiple items
 
 <div class="demo" id="bar-item-multiple-demo"></div>
 
 *)
-
 (*** include: bar-item-multiple-sample ***)
-
 (**
 
 </div>
