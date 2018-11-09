@@ -71,54 +71,58 @@ let render () =
     // tryMount "figure-demo" figureDemo
     // tryMount "caption-props-table"
     //     (PropTable.unionPropTable typeof<Media.Caption.CaptionOptional> )
-    // tryMount "video-demo" videoDemo
-    // tryMount "youtube-demo" youtube
-    // tryMount "video-props-table"
+    tryMount "video-demo" videoDemo
+    tryMount "youtube-demo" youtube
+    tryMount "video-props-table"
     //     (PropTable.unionPropTable typeof<Media.Video.VideoOptional>)
 (**
 <div id="media">
-    <h2 class="s-title">Media</h2>
-    Media includes responsive images, figures and video classes.
+<h2 class="s-title">Media</h2>
+
+Media includes responsive images, figures and video classes.
+
 </div>
 
 <div id="images">
-    <h3 class="s-title">Images</h3>
-    Add the ```img-responsive``` class to <img> elements. The images will scale with the parent sizes.
+<h3 class="s-title">Images</h3>
+
+Add the ```img-responsive``` class to <img> elements. The images will scale with the parent sizes.
+
 </div>
 
 <div id="image-props">
-    <h3 class="s-title">Image Props</h3>
-    <div class="props-table" id="media-img-props-table"></div>
+<h3 class="s-title">Image Props</h3>
+<div class="props-table" id="media-img-props-table"></div>
 </div>
 
 <div id="image-responsive">
-    <h4 class="s-title">Image Responsive</h4>
-    <div class="demo">
-        <div class="columns">
-            <div class="column col-4 col-mr-auto">
-                <div class="bg-gray docs-block">container width 5rem</div>
-            </div>
-            <div class="column col-8 col-mx-auto">
-                <div id="media-img-responsive-demo-a"></div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column col-4 col-mr-auto">
-                <div class="bg-gray docs-block">container width 12rem</div>
-            </div>
-            <div class="column col-8 col-mx-auto">
-                <div id="media-img-responsive-demo-b"></div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column col-4 col-mr-auto">
-                <div class="bg-gray docs-block">container width 18rem</div>
-            </div>
-            <div class="column col-8 col-mx-auto">
-                <div id="media-img-responsive-demo-c"></div>
-            </div>
-        </div>
-    </div>
+<h4 class="s-title">Image Responsive</h4>
+<div class="demo">
+<div class="columns">
+<div class="column col-4 col-mr-auto">
+<div class="bg-gray docs-block">container width 5rem</div>
+</div>
+<div class="column col-8 col-mx-auto">
+<div id="media-img-responsive-demo-a"></div>
+</div>
+</div>
+<div class="columns">
+<div class="column col-4 col-mr-auto">
+<div class="bg-gray docs-block">container width 12rem</div>
+</div>
+<div class="column col-8 col-mx-auto">
+<div id="media-img-responsive-demo-b"></div>
+</div>
+</div>
+<div class="columns">
+<div class="column col-4 col-mr-auto">
+<div class="bg-gray docs-block">container width 18rem</div>
+</div>
+<div class="column col-8 col-mx-auto">
+<div id="media-img-responsive-demo-c"></div>
+</div>
+</div>
+</div>
 *)
 (*** include: media-img-responsive-demo ***)
 (**
@@ -127,12 +131,12 @@ let render () =
 
 (**
 <div id="image-contain">
-    <h4 class="s-title">Image Contain</h4>
-    <div class="columns">
-      <div class="column col-6 col-mx-auto">
-        <div id="media-img-fit-contain-demo"></div>
-      </div>
-    </div>
+<h4 class="s-title">Image Contain</h4>
+<div class="columns">
+<div class="column col-6 col-mx-auto">
+<div id="media-img-fit-contain-demo"></div>
+</div>
+</div>
 *)
 (*** include: media-img-fit-contain-demo ***)
 (**
@@ -141,12 +145,12 @@ let render () =
 
 (**
 <div id="image-cover">
-    <h4 class="s-title">Image Cover</h4>
-    <div class="columns">
-      <div class="column col-6 col-mx-auto">
-        <div id="media-img-fit-cover-demo"></div>
-      </div>
-    </div>
+<h4 class="s-title">Image Cover</h4>
+<div class="columns">
+<div class="column col-6 col-mx-auto">
+<div id="media-img-fit-cover-demo"></div>
+</div>
+</div>
 *)
 (*** include: media-img-fit-cover-demo ***)
 (**
@@ -156,29 +160,31 @@ let render () =
 
 (**
 <div id="video">
-    <h3 class="s-title">Video</h3>
-    A container for video elements
+<h3 class="s-title">Video</h3>
+
+A container for video elements
+
 </div>
 
 <div id="video-props">
-    <h4 class="s-title">Video Props</h4>
-    <div class="props-table" id="video-props-table"></div>
+<h4 class="s-title">Video Props</h4>
+<div class="props-table" id="video-props-table"></div>
 </div>
 
 <div id="video-examples">
-    <h4 class="s-title">Video Examples</h4>
-    <div class="demo">
-        <div class="columns">
-            <div class="column col-6 col-mx-auto">
-                 <div id="video-demo"></div>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column col-6 col-mx-auto">
-                 <div id="youtube-demo"></div>
-            </div>
-        </div>
-    </div>    
+<h4 class="s-title">Video Examples</h4>
+<div class="demo">
+<div class="columns">
+<div class="column col-6 col-mx-auto">
+<div id="video-demo"></div>
+</div>
+</div>
+<div class="columns">
+<div class="column col-6 col-mx-auto">
+<div id="youtube-demo"></div>
+</div>
+</div>
+</div>    
 </div>
 **)
 
@@ -186,37 +192,39 @@ let render () =
 
 (**
 <div id="figure">
-    <h3 class="s-title">Figure/Caption</h3>
-    Figure serves as a container for reponsive
-    images and caption. Caption defines the
-    text(or any ReactElement) that is displayed
-    as metadata about the image.
+<h3 class="s-title">Figure/Caption</h3>
+
+Figure serves as a container for reponsive
+images and caption. Caption defines the
+text(or any ReactElement) that is displayed
+as metadata about the image.
+
 </div>
 
 <div id="figure-props">
-    <h4 class="s-title">
-        Figure Props
-    </h4>
-    <div class="props-table" id="figure-props-table"></div>
+<h4 class="s-title">
+Figure Props
+</h4>
+<div class="props-table" id="figure-props-table"></div>
 </div>    
 
 <div id="caption-props">
-    <h4 class="s-title">Caption Props</h4>
-    <div class="props-table" id="caption-props-table"></div>
+<h4 class="s-title">Caption Props</h4>
+<div class="props-table" id="caption-props-table"></div>
 </div>
 
 <div id="figure-examples">
 
 <h4 class="s-title">
-    Figure Example
+Figure Example
 </div>
 
 <div class="demo">
-    <div class="columns">
-        <div class="column col-6 col-mx-auto">
-             <div id="figure-demo"></div>
-        </div>
-    </div>
+<div class="columns">
+<div class="column col-6 col-mx-auto">
+<div id="figure-demo"></div>
+</div>
+</div>
 </div>
 *)
 
