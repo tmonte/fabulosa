@@ -29,38 +29,22 @@ let render () =
 
 <div id="tab">
 
-<h2 class="s-title">
-    Tab
-</h2>
+<h2 class="s-title">Tab</h2>
 
 Tabs enable quick switch between different views
 
-</div>
-
-<div id="tab-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="tab-params-table"></div>
 
-</div>
-
-<div id="tab-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple tab component
 
 <div class="demo" id="tab-default-demo"></div>
 
 *)
-
 (*** include: tab-default-sample ***)
-
 (**
 
 </div>

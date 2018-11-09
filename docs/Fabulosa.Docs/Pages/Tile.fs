@@ -43,57 +43,33 @@ let render () =
 
 <div id="tile">
 
-<h2 class="s-title">
-    Tile
-</h2>
+<h2 class="s-title">Tile</h2>
 
-Tiles are repeatable or embeddable information blocks
+Tiles are repeatable or embeddable information blocks.
 
-</div>
-
-<div id="tile-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="tile-params-table"></div>
 
-</div>
-
-<div id="tile-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple tile component with an icon,
-content and action
+content and action.
 
 <div class="demo" id="tile-default-demo"></div>
 
 *)
-
 (*** include: tile-default-sample ***)
-
 (**
 
-</div>
+#### Compact
 
-<div id="tile-compact">
-
-<h3 class="s-title">
-    Compact
-</h3>
-
-A compact tile
+A compact tile.
 
 <div class="demo" id="tile-compact-demo"></div>
 
 *)
-
 (*** include: tile-compact-sample ***)
-
 (**
 
 </div>

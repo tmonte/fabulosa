@@ -25,30 +25,16 @@ let render () =
 
 <div id="step">
 
-<h2 class="s-title">
-    Step
-</h2>
+<h2 class="s-title">Step</h2>
 
 Steps are progress indicators of a
 sequence of task steps
 
-</div>
-
-<div id="step-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="step-params-table"></div>
 
-</div>
-
-<div id="step-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple step component with three steps
 and an active step
@@ -56,9 +42,7 @@ and an active step
 <div class="demo" id="step-default-demo"></div>
 
 *)
-
 (*** include: step-default-sample ***)
-
 (**
 
 </div>

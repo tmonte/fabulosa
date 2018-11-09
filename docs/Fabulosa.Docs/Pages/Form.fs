@@ -154,18 +154,16 @@ select, checkbox, radio and switch.
 
 The default checkbox component for a form.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-checkbox-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-checkbox-demo"></div>
 
 *)
-
 (*** include: form-checkbox-sample ***)
-
 (**
 
 </div>
@@ -176,18 +174,16 @@ The default checkbox component for a form.
 
 The default input component for a form.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-input-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-input-demo"></div>
 
 *)
-
 (*** include: form-input-sample ***)
-
 (**
 
 </div>
@@ -198,7 +194,7 @@ The default input component for a form.
 
 Component for grouping different kinds of input.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-input-group-params-table"></div>
 
@@ -207,9 +203,7 @@ Component for grouping different kinds of input.
 <div class="demo" id="form-input-group-demo"></div>
 
 *)
-
 (*** include: form-input-group-sample ***)
-
 (**
 
 </div>
@@ -220,18 +214,16 @@ Component for grouping different kinds of input.
 
 The default radio component for a form.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-radio-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-radio-demo"></div>
 
 *)
-
 (*** include: form-radio-sample ***)
-
 (**
 
 </div>
@@ -242,18 +234,16 @@ The default radio component for a form.
 
 The default select component for a form.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-select-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-select-demo"></div>
 
 *)
-
 (*** include: form-select-sample ***)
-
 (**
 
 </div>
@@ -267,9 +257,7 @@ Input, select and label components can be Small or Large.
 <div class="demo" id="form-sizes-demo"></div>
 
 *)
-
 (*** include: form-sizes-sample ***)
-
 (**
 
 </div>
@@ -282,18 +270,16 @@ Input, select and label components can be Small or Large.
 
 A switch component for forms.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-switch-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-switch-demo"></div>
 
 *)
-
 (*** include: form-switch-sample ***)
-
 (**
 
 </div>
@@ -304,18 +290,16 @@ A switch component for forms.
 
 The default textarea component for a form.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-textarea-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-textarea-demo"></div>
 
 *)
-
 (*** include: form-textarea-sample ***)
-
 (**
 
 </div>
@@ -328,18 +312,16 @@ The default textarea component for a form.
 
 Validation component for forms.
 
-<h4>Parameters</h4>
+#### Parameters
 
 <div class="props-table" id="form-validation-params-table"></div>
 
-<h4>Example</h4>
+#### Example
 
 <div class="demo" id="form-validation-demo"></div>
 
 *)
-
 (*** include: form-validation-sample ***)
-
 (**
 
 </div>

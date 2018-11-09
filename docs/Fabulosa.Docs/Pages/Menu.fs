@@ -28,39 +28,26 @@ let render () =
 
 <div id="menus">
 
-<h2 class="s-title">
-    Menus
-</h2>
+<h2 class="s-title">Menus</h2>
 
 Menus are vertical list of links or
 buttons for actions and navigation.
 
-</div>
+The menu is rendered to its own container through
+React Portals.
 
-<div id="menu-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="menu-params-table"></div>
 
-</div>
+#### Example
 
-<div id="menu-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default menu.
+A simple menu with default parametes.
 
 <div class="demo" style="width: 50%" id="menu-default-demo"></div>
 
 *)
-
 (*** include: menu-default-sample ***)
-
 (**
 
 </div>

@@ -10,12 +10,9 @@ open Fabulosa.Grid
 open Fabulosa.Button
 open Fabulosa.Tooltip
 
-
 let style = Style [Background "#f8f9fa"]
+
 (*** define: tooltip-sample ***)
-
-
-
 let demo = 
     let tooltipExample orientation =   
         let tooltipText = sprintf "%A" orientation  
@@ -30,7 +27,6 @@ let demo =
                 tooltipExample Orientation.Top
                 tooltipExample Orientation.Bottom
                 tooltipExample Orientation.Right ]) ])
-            
 (*** hide ***)
 
 let render () =
@@ -38,16 +34,19 @@ let render () =
 (**
 
 <div id="tooltip">
-    <h2 class="s-title">Tooltips</h2>
-    Tooltips provide context information labels that appear on hover and focus.
-</div>
 
+<h2 class="s-title">Tooltips</h2>
 
-<div id="modal-default">
-    <h3 class="s-title">Example</h3>
-    <div class="demo" id="tooltip-demo"></div>
-</div>
+Tooltips provide context information labels that appear on hover and focus.
+
+#### Example
+
+<div class="demo" id="tooltip-demo"></div>
+
 *)
-
 (*** include: tooltip-sample ***)
+(**
 
+</div>
+
+*)

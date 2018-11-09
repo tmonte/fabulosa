@@ -90,48 +90,26 @@ let render () =
 
 <div id="toast">
 
-<h2 class="s-title">
-    Toast
-</h2>
+<h2 class="s-title">Toast</h2>
 
 Toasts are used to show alert
 or information to users
 
-</div>
-
-<div id="toast-params">
-
-<h3 class="s-title">
-    Paramaters
-</h3>
+#### Paramaters
 
 <div class="props-table" id="toast-params-table"></div>
 
-</div>
-
-<div id="toast-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple toast component with all defaults.
 
 <div class="demo" id="toast-default-demo"></div>
 
 *)
-
 (*** include: toast-default-sample ***)
-
 (**
 
-</div>
-
-<div id="toast-primary">
-
-<h3 class="s-title">
-    Primary & Closeable
-</h3>
+#### Primary & Closeable
 
 A toast with primary color
 that you can close
@@ -139,9 +117,7 @@ that you can close
 <div class="demo" id="toast-primary-demo"></div>
 
 *)
-
 (*** include: toast-primary-sample ***)
-
 (**
 
 </div>

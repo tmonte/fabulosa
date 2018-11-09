@@ -29,42 +29,26 @@ let render () =
 
 <div id="empty">
 
-<h2 class="s-title">
-    Empty states
-</h2>
+<h2 class="s-title">Empty states</h2>
 
 Empty states/blank states are commonly used
 as placeholders for first time use, empty
 data and error screens.
 
-</div>
-
-<div id="empty-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="empty-params-table"></div>
 
-</div>
+#### Example
 
-<div id="empty-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The empty state component. The icon is size
-is always 3x bigger. Actions can be any
-combination of React Elements.
+The empty state component.
+The icon inside the empty state is always
+3x bigger. Actions can be any combination of React Elements.
 
 <div class="demo" id="empty-default-demo"></div>
 
 *)
-
 (*** include: empty-default-sample ***)
-
 (**
 
 </div>

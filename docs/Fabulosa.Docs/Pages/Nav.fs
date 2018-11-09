@@ -31,49 +31,27 @@ let render () =
 
 <div id="navs">
 
-<h2 class="s-title">
-    Navs
-</h2>
+<h2 class="s-title">Navs</h2>
 
 Navs is the default component
 for navigation lists
 
-</div>
-
-<div id="nav-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="nav-params-table"></div>
 
-</div>
-
-<div id="nav-item-params">
-
-<h3 class="s-title">
-    Item Parameters
-</h3>
+#### Item Parameters
 
 <div class="props-table" id="nav-item-params-table"></div>
 
-</div>
-
-<div id="nav-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 The default nav component.
 
 <div class="demo" style="width: 50%" id="nav-default-demo"></div>
 
 *)
-
 (*** include: nav-default-sample ***)
-
 (**
 
 </div>

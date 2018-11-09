@@ -28,9 +28,7 @@ let render () =
 
 <div id="navbar">
 
-<h2 class="s-title">
-    Navbar
-</h2>
+<h2 class="s-title">Navbar</h2>
 
 The navbar component can include
 logo brand, nav links and buttons,
@@ -39,32 +37,18 @@ those elements. Each section with
 the navbar-section class will be
 evenly distributed in the container.
 
-</div>
-
-<div id="navbar-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="navbar-params-table"></div>
 
-</div>
-
-<div id="default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Default
 
 A simple navbar
 
 <div class="demo" id="navbar-demo"></div>
 
 *)
-
 (*** include: navbar-sample ***)
-
 (**
 
 </div>

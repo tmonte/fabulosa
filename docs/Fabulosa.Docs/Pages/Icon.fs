@@ -24,59 +24,35 @@ let render () =
 
 <div id="icon">
 
-<h2 class="s-title">
-    Icons
-</h2>
+<h2 class="s-title">Icons</h2>
 
 Icons are single-element, responsive
 and pure CSS icons. You can include
 spectre-icons.css located in the dist
 folder to your web <head> to have these CSS icons.
 
-</div>
-
-<div id="icon-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="icon-params-table"></div>
 
-</div>
-
-<div id="kind">
-
-<h3 class="s-title">
-    Kind
-</h3>
+#### Kind
 
 The kind of the icon to be shown
 
 <div class="demo" id="icon-demo"></div>
 
 *)
-
 (*** include: icon-sample ***)
-
 (**
 
-</div>
-
-<div id="size">
-
-<h3 class="s-title">
-    Size
-</h3>
+#### Size
 
 Icons can have doubled, tripled, or quadrupled sizes
 
 <div class="demo" id="icon-size-demo"></div>
 
 *)
-
 (*** include: icon-size-sample ***)
-
 (**
 
 </div>

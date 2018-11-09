@@ -61,39 +61,23 @@ let render () =
 
 <div id="panel">
 
-<h2 class="s-title">
-    Panel
-</h2>
+<h2 class="s-title">Panel</h2>
 
 Panels are flexible view container with
 auto-expand content section
 
-</div>
-
-<div id="panel-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="panel-params-table"></div>
 
-</div>
-
-<div id="panel-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple panel component with a header, body, and footer
 
 <div class="demo" id="panel-default-demo"></div>
 
 *)
-
 (*** include: panel-default-sample ***)
-
 (**
 
 </div>

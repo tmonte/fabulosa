@@ -60,167 +60,79 @@ let render () =
 
 <div id="table">
 
-<h2 class="s-title">
-    Table
-</h2>
+<h2 class="s-title">Table</h2>
 
 Tables include default styles
 for tables and data sets.
 
-</div>
-
-<div id="table-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="table-params-table"></div>
 
-</div>
-
-<div id="table-row-params">
-
-<h3 class="s-title">
-    Row Parameters
-</h3>
+#### Row Parameters
 
 <div class="props-table" id="table-row-params-table"></div>
 
-</div>
+#### Example
 
-<div id="table-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default table
+The default table.
 
 <div class="demo" id="table-default-demo"></div>
 
 *)
-
 (*** include: table-default-sample ***)
-
 (**
 
-</div>
+#### Striped
 
-<div id="table-striped">
-
-<h3 class="s-title">
-    Striped
-</h3>
-
-The striped table
+The striped table.
 
 <div class="demo" id="table-striped-demo"></div>
 
 *)
-
 (*** include: table-striped-sample ***)
-
 (**
 
-</div>
+#### Hover
 
-<div id="table-hover">
-
-<h3 class="s-title">
-    Hover
-</h3>
-
-The hover table
+The hover table.
 
 <div class="demo" id="table-hover-demo"></div>
 
 *)
-
 (*** include: table-hover-sample ***)
-
 (**
 
-</div>
+#### Head
 
-<div id="table-head">
-
-<h3 class="s-title">
-    Head
-</h3>
-
-The table head
+The table head.
 
 *)
-
 (*** include: table-head-sample ***)
-
 (**
 
-</div>
+#### Body
 
-<div id="table-head">
-
-<h3 class="s-title">
-    Body
-</h3>
-
-The table body
+The table body.
 
 *)
-
 (*** include: table-body-sample ***)
-
 (**
 
-</div>
+#### Row Active
 
-<div id="table-row">
-
-<h3 class="s-title">
-    Row
-</h3>
-
-The table row
-
-</div>
-
-<div id="table-row-props">
-
-<h3 class="s-title">
-    Row Props
-</h3>
-
-<div class="props-table" id="table-row-props-table"></div>
-
-</div>
-
-<div id="table-row-default">
-
-<h3 class="s-title">
-    Rows can be acivated 
-</h3>
+Rows can have an active status.
 
 *)
-
 (*** include: table-row-active-sample ***)
-
 (**
 
-</div>
+#### Columns
 
-<div id="table-column">
-
-<h3 class="s-title">
-    Columns
-</h3>
-
-Columns can be title columns or default
+Columns can be title columns or default.
 
 *)
-
 (*** include: table-columns-sample ***)
-
 (**
 
 </div>

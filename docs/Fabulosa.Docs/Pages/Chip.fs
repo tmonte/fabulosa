@@ -24,7 +24,7 @@ let render () =
     tryMount "chip-default-demo" def
     tryMount "chip-removable-demo" removable
     tryMount "chip-avatar-demo" avatar
-    tryMount "chip-params"
+    tryMount "chip-params-table"
         (PropTable.paramTable
             (Some typeof<ChipOptional>)
             None
@@ -33,75 +33,43 @@ let render () =
 
 <div id="chips">
 
-<h2 class="s-title">
-    Chips
-</h2>
+<h2 class="s-title">Chips</h2>
 
 Chips are complex entities in small blocks.
 
-</div>
-
-<div id="chip-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="chip-params-table"></div>
 
-</div>
+#### Example
 
-<div id="chip-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default chip.
+A simple chip with some text.
 
 <div class="demo" id="chip-default-demo"></div>
 
 *)
-
 (*** include: chip-default-sample ***)
-
 (**
 
-</div>
+#### Removable
 
-<div id="chip-removable">
-
-<h3 class="s-title">
-    Removable
-</h3>
-
-Chips can include a remove button and action.
+A removable chip.
 
 <div class="demo" id="chip-removable-demo"></div>
 
 *)
-
 (*** include: chip-removable-sample ***)
-
 (**
 
-</div>
-
-<div id="chip-avatar">
-
-<h3 class="s-title">
-    Avatar
-</h3>
+#### Avatar
 
 Chips can also include an avatar.
-The avatar size is always set to small.
+The avatar size when inside the chip is always set to small.
 
 <div class="demo" id="chip-avatar-demo"></div>
 
 *)
-
 (*** include: chip-avatar-sample ***)
-
 (**
 
 </div>

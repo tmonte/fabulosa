@@ -28,31 +28,17 @@ let render () =
 
 <div id="responsive">
 
-<h2 class="s-title">
-    Responsive
-</h2>
+<h2 class="s-title">Responsive</h2>
 
 Spectre provides a neat responsive
 layout grid system and responsive
 visibility utilities.
 
-</div>
-
-<div id="responsive-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="responsive-params-table"></div>
 
-</div>
-
-<div id="responsive-hide-show">
-
-<h3 class="s-title">
-    Hide and Show
-</h3>
+#### Hide and Show
 
 Show or hide elements based
 on the viewport size
@@ -64,9 +50,7 @@ on the viewport size
 </div>
 
 *)
-
 (*** include: responsive-sample ***)
-
 (**
 
 </div>

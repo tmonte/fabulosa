@@ -54,30 +54,38 @@ let render () =
             None)
 (**
 <div id="grid">
+
 <h2 class="s-title">Grid</h2>
 
 A flexbox based responsive grid system with 12 columns.
 
-<h4>Parameters</h4>
+#### Parameters
+
 <div class="props-table" id="grid-params-table"></div>
-<h4>Example</h4>
+
+#### Example
 
 A simple grid with default settings.
 
 <div class="demo" id="grid-demo"></div>
+
 *)
 (*** include: grid-sample ***)
 (**
+
 </div>
 
 <div id="rows">
+
 <h2 class="s-title">Rows</h2>
 
 Rows are children of the grid.
 
-<h4>Parameters</h4>
+#### Parameters
+
 <div class="props-table" id="row-params-table"></div>
-<h4>Example</h4>
+
+#### Example
 
 Rows can be gapless or one-line. Scroll horizontally
 on the second example to see how one-line works.
@@ -86,28 +94,35 @@ on the second example to see how one-line works.
     <div id="row-gapless-demo"></div>
     <div id="row-oneline-demo"></div>
 </div>
+
 *)
 (*** include: row-sample ***)
 (**
+
 </div>
 
 <div id="columns">
+
 <h2 class="s-title">Columns</h2>
 
 Columns are children of the rows.
 
+#### Parameters
 
-<h4>Parameters</h4>
 <div class="props-table" id="column-params-table"></div>
-<h4>Example</h4>
+
+#### Example
 
 Columns can have different resposive sizes.
 Resize horizontally to a very small size to
 view the columns stack.
 
 <div class="demo"><div id="column-demo"></div></div>
+
 *)
 (*** include: column-sample ***)
 (**
+
 </div>
+
 *)

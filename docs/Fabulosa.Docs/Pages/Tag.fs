@@ -50,54 +50,30 @@ let render () =
 (**
 <div id="tags">
 
-<h2 class="s-title">
-    Tags
-</h2>
+<h2 class="s-title">Tags</h2>
 
 Tags are formatted text tags for highlighted,
 informative information. Tags refere to
 Spectre.css [Labels](https://picturepan2.github.io/spectre/elements.html#labels)
 
-</div>
-
-<div id="tag-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="tag-params-table"></div>
 
-</div>
-
-<div id="color">
-
-<h3 class="s-title">
-    Color
-</h3>
+#### Color
 
 <div id="tag-color-demo"></div>
 
 *)
-
 (*** include: tag-color-demo ***)
-
 (**
 
-</div>
-
-<div id="rounded">
-
-<h3 class="s-title">
-    Rounded
-</h3>
+#### Rounded
 
 <div id="tag-rounded-demo"></div>
 
 *)
-
 (*** include: tag-rounded-demo ***)
-
 (**
 
 </div>

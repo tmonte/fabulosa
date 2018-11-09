@@ -26,38 +26,22 @@ let render () =
 
 <div id="popover">
 
-<h2 class="s-title">
-    Popover
-</h2>
+<h2 class="s-title">Popover</h2>
 
-Popovers are small overlay content containers
+Popovers are small overlay content containers.
 
-</div>
-
-<div id="popover-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="popover-params-table"></div>
 
-</div>
+#### Example
 
-<div id="popover-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-A simple popover component that pops up
+A simple popover component that pops upwards.
 
 <div class="demo" id="popover-default-demo"></div>
 
 *)
-
 (*** include: popover-default-sample ***)
-
 (**
 
 </div>

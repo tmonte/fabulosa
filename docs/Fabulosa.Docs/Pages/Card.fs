@@ -36,38 +36,22 @@ let render () =
 
 <div id="cards">
 
-<h2 class="s-title">
-    Cards
-</h2>
+<h2 class="s-title">Cards</h2>
 
 Cards are flexible content containers.
 
-<div id="card-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="card-params-table"></div>
 
-</div>
+#### Example
 
-</div>
-
-<div id="card-default">
-
-<h3 class="s-title">
-    Default
-</h3>
-
-The default card
+A card with default parameters.
 
 <div class="demo" id="card-default-demo"></div>
 
 *)
-
 (*** include: card-default-sample ***)
-
 (**
 
 </div>

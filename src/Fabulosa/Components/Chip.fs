@@ -44,8 +44,22 @@ module Chip =
             | _ -> None
         |> pick
 
+    let private filter (props: P.HTMLProps) =
+        List.filter
+            (fun (prop: P.IHTMLProp) -> 
+                match prop with
+                | :? ChipOptional as opt ->
+                    match opt with
+                    | OnRemove _ -> false
+                    | _ -> true
+                | _ -> true
+            )
+            props
+
     let chip ((opt, (Text text)): Chip) =
-        P.Unmerged opt
+        let filtered = (filter opt)
+        printfn "%A" filtered
+        P.Unmerged filtered
         |> P.addProp (P.ClassName "chip")
         |> P.merge
         |> R.div <|

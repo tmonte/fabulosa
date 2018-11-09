@@ -43,51 +43,25 @@ let render () =
 
 <div id="pagination">
 
-<h2 class="s-title">
-    Pagination
-</h2>
+<h2 class="s-title">Pagination</h2>
 
 The pagination component is fully customizable,
 with props for active, disabled, and a callback
 that gives you the clicked page
 
-</div>
-
-<div id="pagination-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="pagination-params-table"></div>
 
-</div>
-
-<div id="page-item">
-
-<h2 class="s-title">
-    Page Item
-</h2>
+#### Page Item
 
 Page items are child elements for pagination
 
-</div>
-
-<div id="pagination-item-params">
-
-<h3 class="s-title">
-    Parameters
-</h3>
+#### Parameters
 
 <div class="props-table" id="pagination-item-params-table"></div>
 
-</div>
-
-<div id="pagination-default">
-
-<h3 class="s-title">
-    Default
-</h3>
+#### Example
 
 A simple pagination component that shows all pages.
 If you want collapsed pages you can use the disabled prop.
@@ -95,9 +69,7 @@ If you want collapsed pages you can use the disabled prop.
 <div class="demo" id="pagination-default-demo"></div>
 
 *)
-
 (*** include: pagination-default-sample ***)
-
 (**
 
 </div>
