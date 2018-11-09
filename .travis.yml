@@ -7,6 +7,7 @@ install:
   - mono .paket/paket.exe install
 script:
   - bash ./fake.sh build
+  - bash ./deploy.sh $NUGET_KEY
 deploy:
   provider: pages
   skip_cleanup: true

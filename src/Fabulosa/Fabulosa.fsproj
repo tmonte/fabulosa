@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <PackageId>Fabulosa</PackageId>
+    <Title>Fabulosa</Title>
+    <Description>A component library for fable-react based on spectre.css.</Description>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <Version>0.0.51</Version>
+    <Authors>Leandro Miranda</Authors>
+    <Authors>Thomas Monte</Authors>
+    <Company>Fabulosa</Company>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
