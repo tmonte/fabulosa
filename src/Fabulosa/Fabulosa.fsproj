@@ -5,7 +5,7 @@
     <Title>Fabulosa</Title>
     <Description>A component library for fable-react based on spectre.css.</Description>
     <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
-    <Version>0.0.57</Version>
+    <Version>0.0.58</Version>
     <Authors>Leandro Miranda, Thomas Monte</Authors>
     <Company>Fabulosa</Company>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -70,7 +70,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
+    <Content Include="*.fsproj; **\*.fs; **\*.scss" PackagePath="fable\" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
