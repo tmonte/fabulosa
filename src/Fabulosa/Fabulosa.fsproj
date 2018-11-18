@@ -11,6 +11,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Content/Styles/spectre.scss" />
+    <None Include="Content/Styles/spectre-exp.scss" />
+    <None Include="Content/Styles/spectre-icons.scss" />
+    <None Include="Content/Styles/fabulosa-tooltip.scss" />
+    <None Include="Content/Styles/fabulosa.scss" />
     <Compile Include="Types/BoundingRect.fs" />
     <Compile Include="Types/Global.fs" />
     <Compile Include="Extensions/ListExtension.fs" />
