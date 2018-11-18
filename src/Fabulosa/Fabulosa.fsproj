@@ -60,5 +60,8 @@
     <Compile Include="Components/Tooltip.fs" />
     <None Include="paket.references" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
+  </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>
