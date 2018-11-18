@@ -11,11 +11,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Content/Styles/spectre.scss" />
-    <None Include="Content/Styles/spectre-exp.scss" />
-    <None Include="Content/Styles/spectre-icons.scss" />
-    <None Include="Content/Styles/fabulosa-tooltip.scss" />
-    <None Include="Content/Styles/fabulosa.scss" />
     <Compile Include="Types/BoundingRect.fs" />
     <Compile Include="Types/Global.fs" />
     <Compile Include="Extensions/ListExtension.fs" />
@@ -64,6 +59,15 @@
     <Compile Include="Components/Toast.fs" />
     <Compile Include="Components/Tooltip.fs" />
     <None Include="paket.references" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content/Styles/**/*.*" copyToOutput="true">
+      <IncludeInPackage>true</IncludeInPackage>
+      <CopyToOutput>true</CopyToOutput>
+      <BuildAction>Content</BuildAction>
+      <copyToOutput>true</copyToOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="*.fsproj; **\*.fs" PackagePath="fable\" />
