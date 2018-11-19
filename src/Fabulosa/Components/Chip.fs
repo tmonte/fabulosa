@@ -58,7 +58,6 @@ module Chip =
 
     let chip ((opt, (Text text)): Chip) =
         let filtered = (filter opt)
-        printfn "%A" filtered
         P.Unmerged filtered
         |> P.addProp (P.ClassName "chip")
         |> P.merge
