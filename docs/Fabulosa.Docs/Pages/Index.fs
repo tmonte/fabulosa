@@ -2,7 +2,7 @@ module IndexPage
 
 
 open Fable.Import.React
-open Fabulosa.Media.Image
+open Fabulosa.Image
 open Fabulosa.Button
 open Fabulosa.Tooltip
 module R = Fable.Helpers.React

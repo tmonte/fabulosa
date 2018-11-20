@@ -6,7 +6,7 @@ module Card =
     open Fable.Import.React
     module R = Fable.Helpers.React
     open R.Props
-    open Fabulosa.Media.Image
+    open Fabulosa.Image
 
     type Text = string
 

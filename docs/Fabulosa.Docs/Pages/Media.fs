@@ -6,8 +6,7 @@ open Fabulosa.Docs
 open R.Props
 open Fable.Import.React
 open Renderer
-open Fabulosa.Media.Figure
-open Fabulosa.Media.Image
+open Fabulosa.Image
 
 (*** define: media-img-responsive-demo ***)
 let demo =
@@ -38,7 +37,7 @@ let cover =
 
 (*** hide ***)
 let src = "https://interactive-examples.mdn.mozilla.net/media/examples/stream_of_water.webm"
-open Fabulosa.Media.Video
+open Fabulosa.Video
 
 (*** define: video-demo ***)
 let videoDemo =
@@ -51,10 +50,11 @@ let youtube =
           Src "https://www.youtube.com/embed/6AgiQWk4kqA"
           AllowFullScreen true ],
           Kind Frame ) 
-    
+(*** hide ***)
+open Fabulosa.Figure
 (*** define: figure-demo ***)
 let figureDemo = 
-    figure ([Caption ([], Fabulosa.Media.Caption.Text "Who controls the past controls the future: who controls the present controls the past.")], 
+    figure ([Caption ([], Fabulosa.Caption.Text "Who controls the past controls the future: who controls the present controls the past.")], 
              Image [Src "https://wallpaper-house.com/data/out/10/wallpaper2you_385583.jpg"])
     
 (*** hide ***)
@@ -73,7 +73,6 @@ let render () =
     //     (PropTable.unionPropTable typeof<Media.Caption.CaptionOptional> )
     tryMount "video-demo" videoDemo
     tryMount "youtube-demo" youtube
-    tryMount "video-props-table"
     //     (PropTable.unionPropTable typeof<Media.Video.VideoOptional>)
 (**
 <div id="media">

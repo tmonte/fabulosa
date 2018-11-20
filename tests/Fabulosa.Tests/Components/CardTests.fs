@@ -29,7 +29,7 @@ let tests =
                 Footer footer ])
             |> ReactNode.unit
             |>! hasUniqueClass "card"
-            |>! hasChild 1 (Media.Image.image image |> ReactNode.unit)
+            |>! hasChild 1 (Image.image image |> ReactNode.unit)
             |>! hasChild 1 (cardHeader header |> ReactNode.unit)
             |>! hasChild 1 (cardBody body |> ReactNode.unit)
             |> hasChild 1 (cardFooter footer |> ReactNode.unit)

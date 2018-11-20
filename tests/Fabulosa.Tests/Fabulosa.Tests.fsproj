@@ -1,54 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <AssemblyName>Fabulosa.Tests</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="ReactNodeElement.fs" />
-    <Compile Include="ReactNode.fs" />
-    <Compile Include="ReactNodeTests.fs" />
-    <Compile Include="Extensions/ExpectoExtension.fs" />
-    <Compile Include="Components/AccordionTests.fs" />
-    <Compile Include="Components/AvatarTests.fs" />
-    <Compile Include="Components/BadgeTests.fs" />
-    <Compile Include="Components/BarTests.fs" />
-    <Compile Include="Components/BreadcrumbTests.fs" />
-    <Compile Include="Components/ButtonTests.fs" />
-    <Compile Include="Components/CardTests.fs" />
-    <Compile Include="Components/CheckboxTests.fs" />
-    <Compile Include="Components/ChipTests.fs" />
-    <Compile Include="Components/CodeTests.fs" />
-    <Compile Include="Components/EmptyTests.fs" />
-    <Compile Include="Components/GridTests.fs" />
-    <Compile Include="Components/IconTests.fs" />
-    <Compile Include="Components/InputTests.fs" />
-    <Compile Include="Components/LabelTests.fs" />
-    <Compile Include="Components/MediaTests.fs" />
-    <Compile Include="Components/MenuTests.fs" />
-    <Compile Include="Components/ModalTests.fs" />
-    <Compile Include="Components/NavTests.fs" />
-    <Compile Include="Components/NavbarTests.fs" />
-    <Compile Include="Components/PageNavTests.fs" />
-    <Compile Include="Components/PaginationTests.fs" />
-    <Compile Include="Components/PanelTests.fs" />
-    <Compile Include="Components/PopoverTests.fs" />
-    <Compile Include="Components/RadioTests.fs" />
-    <Compile Include="Components/ResponsiveTests.fs" />
-    <Compile Include="Components/SelectTests.fs" />
-    <Compile Include="Components/StepTests.fs" />
-    <Compile Include="Components/SwitchTests.fs" />
-    <Compile Include="Components/TabTests.fs" />
-    <Compile Include="Components/TableTests.fs" />
-    <Compile Include="Components/TagTests.fs" />
-    <Compile Include="Components/TextareaTests.fs" />
-    <Compile Include="Components/TileTests.fs" />
-    <Compile Include="Components/ToastTests.fs" />
-    <Compile Include="Components/TooltipTests.fs" />
-    <Compile Include="Main.fs" />
-    <None Include="paket.references" />
-    <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
-  </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <AssemblyName>Fabulosa.Tests</AssemblyName>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="ReactNodeElement.fs" />
+        <Compile Include="ReactNode.fs" />
+        <Compile Include="ReactNodeTests.fs" />
+        <Compile Include="Extensions/ExpectoExtension.fs" />
+        <Compile Include="Components/AccordionTests.fs" />
+        <Compile Include="Components/AvatarTests.fs" />
+        <Compile Include="Components/BadgeTests.fs" />
+        <Compile Include="Components/BarTests.fs" />
+        <Compile Include="Components/BreadcrumbTests.fs" />
+        <Compile Include="Components/ButtonTests.fs" />
+        <Compile Include="Components/CardTests.fs" />
+        <Compile Include="Components/CheckboxTests.fs" />
+        <Compile Include="Components/ChipTests.fs" />
+        <Compile Include="Components/CodeTests.fs" />
+        <Compile Include="Components/EmptyTests.fs" />
+        <Compile Include="Components/GridTests.fs" />
+        <Compile Include="Components/IconTests.fs" />
+        <Compile Include="Components/InputTests.fs" />
+        <Compile Include="Components/LabelTests.fs" />
+        <Compile Include="Components/MediaTests.fs" />
+        <Compile Include="Components/MenuTests.fs" />
+        <Compile Include="Components/ModalTests.fs" />
+        <Compile Include="Components/NavTests.fs" />
+        <Compile Include="Components/NavbarTests.fs" />
+        <Compile Include="Components/PageNavTests.fs" />
+        <Compile Include="Components/PaginationTests.fs" />
+        <Compile Include="Components/PanelTests.fs" />
+        <Compile Include="Components/PopoverTests.fs" />
+        <Compile Include="Components/RadioTests.fs" />
+        <Compile Include="Components/ResponsiveTests.fs" />
+        <Compile Include="Components/SelectTests.fs" />
+        <Compile Include="Components/StepTests.fs" />
+        <Compile Include="Components/SwitchTests.fs" />
+        <Compile Include="Components/TabTests.fs" />
+        <Compile Include="Components/TableTests.fs" />
+        <Compile Include="Components/TagTests.fs" />
+        <Compile Include="Components/TextareaTests.fs" />
+        <Compile Include="Components/TileTests.fs" />
+        <Compile Include="Components/ToastTests.fs" />
+        <Compile Include="Components/TooltipTests.fs" />
+        <Compile Include="Main.fs" />
+        <None Include="paket.references" />
+        <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
+    </ItemGroup>
+    <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

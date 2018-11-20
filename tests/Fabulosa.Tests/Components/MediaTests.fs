@@ -6,8 +6,8 @@ open Fabulosa
 module R = Fable.Helpers.React
 open Fable.Import.React
 open R.Props
-open Fabulosa.Media.Caption
-open Fabulosa.Media.Image
+open Fabulosa.Caption
+open Fabulosa.Image
 
 [<Tests>]
 let captionTest =
@@ -78,7 +78,7 @@ let imageTest =
         }
     ]
     
-open Fabulosa.Media.Figure
+open Fabulosa.Figure
 [<Tests>]
 let figureTests =
     testList "Figure tests" [
@@ -113,7 +113,7 @@ let figureTests =
         }
     ]
 
-open Fabulosa.Media.Video
+open Fabulosa.Video
 [<Tests>]
 let videoTests =
     testList "Video tests" [

@@ -1,77 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <PackageId>Fabulosa</PackageId>
-    <Title>Fabulosa</Title>
-    <Description>A component library for fable-react based on spectre.css.</Description>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
-    <Version>0.0.59</Version>
-    <Authors>Leandro Miranda, Thomas Monte</Authors>
-    <Company>Fabulosa</Company>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Types/BoundingRect.fs" />
-    <Compile Include="Types/Global.fs" />
-    <Compile Include="Extensions/ListExtension.fs" />
-    <Compile Include="Extensions/SeqExtension.fs" />
-    <Compile Include="Extensions/StringExtension.fs" />
-    <Compile Include="Extensions/OptionExtension.fs" />
-    <Compile Include="Extensions/PropExtension.fs" />
-    <Compile Include="Components/Portal.fs" />
-    <Compile Include="Components/Icon.fs" />
-    <Compile Include="Components/Breadcrumb.fs" />
-    <Compile Include="Components/Button.fs" />
-    <Compile Include="Components/ButtonGroup.fs" />
-    <Compile Include="Components/Media.fs" />
-    <Compile Include="Components/Accordion.fs" />
-    <Compile Include="Components/Avatar.fs" />
-    <Compile Include="Components/Badge.fs" />
-    <Compile Include="Components/Bar.fs" />
-    <Compile Include="Components/Card.fs" />
-    <Compile Include="Components/Chip.fs" />
-    <Compile Include="Components/Code.fs" />
-    <Compile Include="Components/Empty.fs" />
-    <Compile Include="Components/Form/Checkbox.fs" />
-    <Compile Include="Components/Form/Select.fs" />
-    <Compile Include="Components/Form/Input.fs" />
-    <Compile Include="Components/Form/Label.fs" />
-    <Compile Include="Components/Form/Radio.fs" />
-    <Compile Include="Components/Form/Switch.fs" />
-    <Compile Include="Components/Form/Textarea.fs" />
-    <Compile Include="Components/Form/Validation.fs" />
-    <Compile Include="Components/Form/Group.fs" />
-    <Compile Include="Components/Grid.fs" />
-    <Compile Include="Components/Menu.fs" />
-    <Compile Include="Components/Modal.fs" />
-    <Compile Include="Components/Nav.fs" />
-    <Compile Include="Components/Navbar.fs" />
-    <Compile Include="Components/PageNav.fs" />
-    <Compile Include="Components/Pagination.fs" />
-    <Compile Include="Components/Tab.fs" />
-    <Compile Include="Components/Panel.fs" />
-    <Compile Include="Components/Popover.fs" />
-    <Compile Include="Components/Responsive.fs" />
-    <Compile Include="Components/Step.fs" />
-    <Compile Include="Components/Table.fs" />
-    <Compile Include="Components/Tag.fs" />
-    <Compile Include="Components/Tile.fs" />
-    <Compile Include="Components/Typography.fs" />
-    <Compile Include="Components/Toast.fs" />
-    <Compile Include="Components/Tooltip.fs" />
-    <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content/Styles/*.*" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="*.fsproj; **\*.fs; **\*.scss" PackagePath="fable\" />
-  </ItemGroup>
-  <Import Project="..\..\.paket\Paket.Restore.targets" />
+    <PropertyGroup>
+        <PackageId>Fabulosa</PackageId>
+        <Title>Fabulosa</Title>
+        <Description>A component library for fable-react based on spectre.css.</Description>
+        <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+        <Version>0.0.60</Version>
+        <Authors>Leandro Miranda, Thomas Monte</Authors>
+        <Company>Fabulosa</Company>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Types/BoundingRect.fs" />
+        <Compile Include="Types/Global.fs" />
+        <Compile Include="Extensions/ListExtension.fs" />
+        <Compile Include="Extensions/SeqExtension.fs" />
+        <Compile Include="Extensions/StringExtension.fs" />
+        <Compile Include="Extensions/OptionExtension.fs" />
+        <Compile Include="Extensions/PropExtension.fs" />
+        <Compile Include="Components/Portal.fs" />
+        <Compile Include="Components/Icon.fs" />
+        <Compile Include="Components/Breadcrumb.fs" />
+        <Compile Include="Components/Button.fs" />
+        <Compile Include="Components/ButtonGroup.fs" />
+        <Compile Include="Components/Caption.fs" />
+        <Compile Include="Components/Image.fs" />
+        <Compile Include="Components/Figure.fs" />
+        <Compile Include="Components/Video.fs" />
+        <Compile Include="Components/Accordion.fs" />
+        <Compile Include="Components/Avatar.fs" />
+        <Compile Include="Components/Badge.fs" />
+        <Compile Include="Components/Bar.fs" />
+        <Compile Include="Components/Card.fs" />
+        <Compile Include="Components/Chip.fs" />
+        <Compile Include="Components/Code.fs" />
+        <Compile Include="Components/Empty.fs" />
+        <Compile Include="Components/Form/Checkbox.fs" />
+        <Compile Include="Components/Form/Select.fs" />
+        <Compile Include="Components/Form/Input.fs" />
+        <Compile Include="Components/Form/Label.fs" />
+        <Compile Include="Components/Form/Radio.fs" />
+        <Compile Include="Components/Form/Switch.fs" />
+        <Compile Include="Components/Form/Textarea.fs" />
+        <Compile Include="Components/Form/Validation.fs" />
+        <Compile Include="Components/Form/Group.fs" />
+        <Compile Include="Components/Grid.fs" />
+        <Compile Include="Components/Menu.fs" />
+        <Compile Include="Components/Modal.fs" />
+        <Compile Include="Components/Nav.fs" />
+        <Compile Include="Components/Navbar.fs" />
+        <Compile Include="Components/PageNav.fs" />
+        <Compile Include="Components/Pagination.fs" />
+        <Compile Include="Components/Tab.fs" />
+        <Compile Include="Components/Panel.fs" />
+        <Compile Include="Components/Popover.fs" />
+        <Compile Include="Components/Responsive.fs" />
+        <Compile Include="Components/Step.fs" />
+        <Compile Include="Components/Table.fs" />
+        <Compile Include="Components/Tag.fs" />
+        <Compile Include="Components/Tile.fs" />
+        <Compile Include="Components/Typography.fs" />
+        <Compile Include="Components/Toast.fs" />
+        <Compile Include="Components/Tooltip.fs" />
+        <None Include="paket.references" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Content/Styles/*.*" copyToOutput="true">
+            <IncludeInPackage>true</IncludeInPackage>
+            <CopyToOutput>true</CopyToOutput>
+            <BuildAction>Content</BuildAction>
+            <copyToOutput>true</copyToOutput>
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="*.fsproj; **\*.fs; **\*.scss" PackagePath="fable\" />
+    </ItemGroup>
+    <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

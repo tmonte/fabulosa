@@ -8,7 +8,7 @@ module R = Fable.Helpers.React
 module P = R.Props
 open Fable.Import.React
 open Renderer
-open Fabulosa.Media.Figure
+open Fabulosa.Figure
 open Fabulosa.Modal
 open Fabulosa.Button
 
