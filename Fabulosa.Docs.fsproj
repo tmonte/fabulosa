@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Renderer.fs" />
+    <Compile Include="PropTable.fs" />
+    <Compile Include="Pages\Accordion.fs" />
+    <Compile Include="Pages\Avatar.fs" />
+    <Compile Include="Pages\Badge.fs" />
+    <Compile Include="Pages\Bar.fs" />
+    <Compile Include="Pages\Breadcrumbs.fs" />
+    <Compile Include="Pages\Button.fs" />
+    <Compile Include="Pages\Card.fs" />
+    <Compile Include="Pages\Chip.fs" />
+    <Compile Include="Pages\Empty.fs" />
+    <Compile Include="Pages\Form.fs" />
+    <Compile Include="Pages\Grid.fs" />
+    <Compile Include="Pages\Icon.fs" />
+    <Compile Include="Pages\Index.fs" />
+    <Compile Include="Pages\Media.fs" />
+    <Compile Include="Pages\Modal.fs" />
+    <Compile Include="Pages\Menu.fs" />
+    <Compile Include="Pages\Nav.fs" />
+    <Compile Include="Pages\Navbar.fs" />
+    <Compile Include="Pages\Pagenav.fs" />
+    <Compile Include="Pages\Pagination.fs" />
+    <Compile Include="Pages\Panel.fs" />
+    <Compile Include="Pages\Popover.fs" />
+    <Compile Include="Pages\Responsive.fs" />
+    <Compile Include="Pages\Step.fs" />
+    <Compile Include="Pages\Table.fs" />
+    <Compile Include="Pages\Tag.fs" />
+    <Compile Include="Pages\Tab.fs" />
+    <Compile Include="Pages\Tile.fs" />
+    <Compile Include="Pages\Toast.fs" />
+    <Compile Include="Pages\Tooltip.fs" />
+    <None Include="README.md" />
+    <None Include="Assets\logo_1280.svg" />
+    <None Include="Assets\logo_320.svg" />
+    <None Include="Assets\logo_64.svg" />
+    <None Include="Assets\logo_640.svg" />
+    <Content Include="Assets\tooltip.scss" />
+    <None Include="Assets\styles.scss" />
+    <None Include="Assets\template.html" />
+    <None Include="Assets\docs.min.css" />
+    <None Include="Assets\avatar-1.png" />
+    <Compile Include="App.fs" />
+    <None Include="paket.references" />
+    <ProjectReference Include="../../src/Fabulosa/Fabulosa.fsproj" />
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
+</Project>

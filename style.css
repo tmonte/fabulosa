@@ -1,0 +1,281 @@
+.fab-tooltip {
+  background: rgba(69, 77, 93, 0.9);
+  border-radius: .1rem;
+  color: #fff;
+  font-size: .7rem;
+  left: 50%;
+  max-width: 320px;
+  padding: .2rem .4rem;
+  pointer-events: none;
+  white-space: pre;
+  z-index: 300;
+  position: fixed;
+  opacity: 0; }
+
+.tooltip-active {
+  opacity: 1; }
+
+.tooltip-active.tooltip-top {
+  animation: tooltipTop 0.5s; }
+
+.tooltip-active.tooltip-bottom {
+  animation: tooltipBottom 0.5s; }
+
+.tooltip-active.tooltip-right {
+  animation: tooltipRight 0.5s; }
+
+.tooltip-active.tooltip-left {
+  animation: tooltipLeft 0.5s; }
+
+@keyframes tooltipTop {
+  0% {
+    opacity: 0; }
+  10% {
+    opacity: 0;
+    transform: translateY(6px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem); } }
+
+@keyframes tooltipBottom {
+  0% {
+    opacity: 0; }
+  10% {
+    opacity: 0;
+    transform: translateY(-6px); }
+  100% {
+    opacity: 1;
+    transform: translateY(0rem); } }
+
+@keyframes tooltipRight {
+  0% {
+    opacity: 0; }
+  10% {
+    opacity: 0;
+    transform: translateX(-6px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem); } }
+
+@keyframes tooltipLeft {
+  0% {
+    opacity: 0; }
+  10% {
+    opacity: 0;
+    transform: translateX(6px); }
+  100% {
+    opacity: 1;
+    transform: translateX(0rem); } }
+
+html, body {
+  min-height: 100vh; }
+
+.docs-container {
+  min-height: 100vh; }
+
+.docs-content p {
+  margin: 1rem 0rem; }
+
+.form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+select::-ms-expand {
+  display: none; }
+
+.nav {
+  padding: 0.3rem; }
+
+.nav-item a {
+  color: #5b657a;
+  font-size: .65rem;
+  font-weight: 600;
+  text-transform: uppercase; }
+
+.circle {
+  border-radius: 50%; }
+
+.docs-navbar {
+  z-index: 200; }
+
+.s-title {
+  border-bottom: 1px solid #e7e7e7;
+  z-index: 99 !important; }
+
+.docs-grid-page-col {
+  background: #f8f9fa;
+  padding: 4px;
+  text-align: center; }
+
+/* function */
+.f {
+  color: #6f42c1; }
+
+/* identifier */
+.i {
+  color: #005cc5; }
+
+/* comment */
+.c {
+  color: #008000; }
+
+/* inactive code */
+.inactive {
+  color: #808080; }
+
+/* keywords */
+.k {
+  color: #d73a49; }
+
+/* numbers */
+.n {
+  color: #008000; }
+
+/* operators */
+.o {
+  color: #800080; }
+
+/* preprocessor */
+.prep {
+  color: #800080; }
+
+/* string */
+.s {
+  color: #22863A; }
+
+/* line number */
+.l {
+  color: #bbbbbb; }
+
+/* fsi output */
+.fsi {
+  font-style: italic;
+  color: #606060; }
+
+/* omitted */
+.omitted {
+  border: solid 1px #d8d8d8;
+  color: #808080;
+  padding: 0px 0px 1px 0px;
+  background: #fafafa; }
+
+.tip {
+  z-index: 100;
+  font-size: 8pt;
+  padding: 1em;
+  border: none;
+  color: #50596c;
+  box-shadow: 0 0.2rem 0.5rem rgba(69, 77, 93, 0.3);
+  border-radius: 2px;
+  background: #fff;
+  display: none;
+  pointer-events: none; }
+
+pre .fssniplink {
+  font: bold 7.5pt calibry, arial, verdana;
+  position: absolute;
+  bottom: 0.3em;
+  right: 0.3em;
+  color: #a8a8a8; }
+
+.pre {
+  overflow-x: auto;
+  display: block;
+  border-spacing: 0px;
+  margin: 1rem 0rem; }
+
+/* Optionally, also configure how the PRE element and TABLE.PRE look */
+.pre pre {
+  padding: 0px;
+  margin: 0px;
+  border-style: none; }
+
+pre, .pre td {
+  padding: 9.5px;
+  background: #f8f9fa;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  margin: 0px 0px 10px 0px; }
+
+.pre .lines {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-right-style: none;
+  padding-right: 0px; }
+
+.pre .snippet {
+  width: 100%;
+  column-span: all;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-left-style: none;
+  padding-left: 4px; }
+
+code, pre, pre code {
+  line-height: 13pt;
+  background: none !important;
+  border-radius: initial !important;
+  color: initial !important;
+  font-size: 9pt !important;
+  line-height: initial !important;
+  padding: 0; }
+
+.demo {
+  padding: 1rem 0rem; }
+
+summary {
+  user-select: none;
+  cursor: pointer; }
+
+.docs-nav .accordion-header {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 600; }
+
+.props-table {
+  overflow-x: auto;
+  margin-bottom: 1rem; }
+
+.tag-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0; }
+
+.tag-container > div {
+  padding: 20px 0; }
+
+.menu-container {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  z-index: 9999; }
+
+#tile-default-demo p {
+  margin-top: 0rem; }
+
+#tile-compact-demo p {
+  margin-top: 0rem; }
+
+.toast {
+  max-width: 15rem;
+  position: fixed;
+  margin: 0 auto;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999; }
+
+.tab-example {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: .05rem solid #e7e9ed; }
+  .tab-example .tab {
+    border-bottom: none;
+    margin: .2rem 0 0 0; }
+
+.forms-page-container h4 {
+  margin-top: 1em; }
+
+
+/*# sourceMappingURL=style.css.map*/
